@@ -1,0 +1,103 @@
+{% extends 'template/articleTemplate.html' %}
+
+<!-- 引入静态文件 -->
+{% set static = "/" + ctx.app.config.appId + "/public/" %}
+{% set url = "/" +ctx.app.config.appId + "/page/" %}
+
+{% block title %}<$ article.articleTitle $>{% endblock %}
+
+{% block head_toolbar %}
+    <span class="btn pull-left">|</span>
+    <a class="btn pull-left" aria-label="" href="<$ url $>articleEdit?articleId=<$ article.articleId $>&title=<$ article.articleTitle $>">
+        <i class="layui-icon layui-icon-edit"></i> <span class="layui-hide-xs">修改</span>
+    </a>
+    <a class="btn pull-left" aria-label="" href="<$ url $>articleEdit?&title=未命名" target="_blank">
+        <i class="layui-icon layui-icon-add-1"></i> <span class="layui-hide-xs">添加</span>
+    </a>
+    <a class="btn pull-left" aria-label="" href="<$ url $>articleManagement?categoryId=<$ article.categoryId $>">
+        <i class="fa fa-cubes"></i> <span class="layui-hide-xs">管理</span>
+    </a>
+    <!-- 文档目录 -->
+    <div id="toc-container" class='sidebar doc-toc-hide'></div>
+{% endblock %}
+
+{% block content_head %}
+    <h1>
+        <$ article.articleTitle $>
+    </h1>
+    <hr>
+{% endblock %}
+
+{% block page_content %}
+    {% if article.articleCoverImage %}
+        <div class="doc_cover" style="width: 100%; max-height: 280px; display: flex; justify-content: center;">
+            <img title="封面" src="/upload/<$ article.articleCoverImage $>" style="object-fit: cover;">
+        </div>
+    {% endif %}
+    <$ article.articleContentForSeo | safe $>
+  <div id="articleContentHidden" class="articleContentHidden" style="position: absolute; top: -1000px; overflow: hidden; height: 0; width: 0;">
+    <textarea style="display: none;"><$ article.articleContent $></textarea>
+  </div>
+{% endblock %}
+
+{% block doc_bottom_block %}
+    <div class="layui-row layui-col-space20" style="padding-left: 20px;">
+        <span class="doc-bottom-icon">
+            <i class="layui-icon layui-icon-user"></i>
+            <$ article.articleUpdateUsername $>
+        </span>
+        <span tooltip="更新于:<$ article.articleUpdateTime $>" class="doc-bottom-icon">
+            <i class="layui-icon layui-icon-log"></i>
+            <$ article.articleUpdateTime $>
+        </span>
+
+        {% if article.articleTagList %}
+            <i class="fa fa-tag"></i><$ article.articleTagList $>
+        {% endif %}
+
+        <!-- <button id="share" class="doc-bottom-btn" tooltip="转发本文档">
+            <i class="layui-icon layui-icon-share"></i> 转发文档
+        </button> -->
+
+        <!-- <button class="doc-bottom-btn" tooltip="下载文档" id="download_doc">
+            <i class="fa fa-download"></i> 下载文档
+        </button> -->
+    </div>
+{% endblock %}
+
+{% block right_widget %}
+    <a class="editDoc js-toolbar-action" href="javascript:void(0);" title="切换侧边栏"><i class="layui-icon layui-icon-slider"></i></a>
+    <div class="tocMenu" ><i class="fa fa-list"></i></div>
+{% endblock %}
+
+
+{% block custom_script %}
+    <script>
+      initDocRender(1);
+      // 图片放大显示
+      var img_options = {
+        url: 'data-original',
+        fullscreen:false,//全屏
+        rotatable:false,//旋转
+        scalable:false,//翻转
+        button:false,//关闭按钮
+        toolbar:false,
+        title:false,
+      };
+      var img_viewer = new Viewer(document.getElementById('content'), img_options);
+    </script>
+    <script>
+        var layer = layui.layer;
+        var form = layui.form;
+        // 非小屏默认展开文档目录
+        if (window.innerWidth > 1050) {
+            $(".sidebar").toggleClass("doc-toc-hide");
+        }
+        // 切换文档目录显示与否
+        $(".tocMenu").on("click", function () {
+            $(".sidebar").toggleClass("doc-toc-hide");
+        });
+    </script>
+<script src="<$ static $>toc/doctoc.js"></script>
+
+{% endblock %}

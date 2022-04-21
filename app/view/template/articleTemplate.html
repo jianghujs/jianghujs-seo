@@ -1,0 +1,235 @@
+{% set static = "/" + ctx.app.config.appId + "/public/" %}
+{% set url = "/" +ctx.app.config.appId + "/page/" %}
+<!DOCTYPE html>
+<html lang="zh-cn" style="font-size: 15px;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name=renderer content=webkit>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1">
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="Cache-Control" content="max-age=7200" />
+    <!-- <meta name="referrer" content="no-referrer"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="{% block keyword %}{% endblock %}<$ site_keywords $>" />
+    <meta name="description" content="{% block description %}{% endblock %}" />
+    <!-- OGP分享协议开始 -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{% block ogp_title %}{% endblock %}">
+    <meta property="og:description" content="{% block ogp_desc %}{% endblock %}">
+    <meta property="og:image"
+        content="<$ request.scheme $>://<$ request.META.HTTP_HOST $><$ static $>search/mrdoc_logo_300.png">
+    <meta property="og:url" content="<$ request.scheme $>://<$ request.META.HTTP_HOST $><$ request.path_info $>">
+    <!-- OGP分享协议结束 -->
+    <title>{% block title %}{% endblock %} - <$ ctx.app.config.appTitle $></title>
+    <link href="<$ static $>layui/css/layui.css" rel="stylesheet">
+    {% if doc.editor_mode != 4 %}
+    <link rel="stylesheet" href="<$ static $>editor.md/css/editormd.css" />
+    {% endif %}
+    {% if doc.editor_mode == 2 %}
+    <link rel="stylesheet" href="<$ static $>vditor/dist/index.css" />
+    {% endif %}
+    {% if doc.editor_mode == 4 %}
+    <!-- 在线表格 -->
+    <link rel='stylesheet' href="<$ static $>luckysheet/dist/plugins/css/pluginsCss.css" />
+    <link rel='stylesheet' href="<$ static $>luckysheet/dist/plugins/plugins.css" />
+    <link rel='stylesheet' href="<$ static $>luckysheet/dist/css/luckysheet.css" />
+    <link rel='stylesheet'
+        href="<$ static $>luckysheet/dist/assets/iconfont/iconfont.css" />
+    {% endif %}
+    <link href="<$ static $>viewerjs/viewer.min.css" rel="stylesheet">
+    <link rel="icon" href="<$ static $>search/mrdoc_logo_300.png" sizes="192x192" />
+    <link href="<$ static $>mrdoc/mrdoc.css" rel="stylesheet">
+    <link href="<$ static $>mrdoc/mrdoc-docs.css" rel="stylesheet">
+    <link href="<$ static $>iconFont/iconfont.css" rel="stylesheet">
+    <style>
+        { % if img_scale % }
+            .markdown-body p img {
+                max-width: 350px;
+            }
+        { % endif % }
+
+        { % if long_code=='on'% }
+            pre.linenums, .vditor-reset>pre>code {
+                max-height: max-content !important;
+            }
+        { % endif % }
+    </style>
+
+</head>
+
+<body class="big-page">
+    <div class="doc layui-fluid" style="padding-left:0px;">
+        <!-- 左侧目录栏 -->
+        <div class="doc-summary">
+            <!-- 文档搜索 -->
+            <!-- <div id="doc-search-input">
+                <input type="text" name="kw" placeholder="在分类内搜索文档" value="" class="layui-input doc-search-input">
+            </div> -->
+            <!-- 文集名称 -->
+            <div class="project-title">
+                <a href="javascript:;">
+                    <$ article.categoryName $>
+                    <!-- <i class="layui-icon layui-icon-password" title="私密文档"></i> -->
+                </a>
+            </div>
+            <hr>
+            <nav>
+                <ul class="summary">
+                    {% for node in article.articleList %}
+                    <li>
+                        <div style="display:flex;justify-content:space-between;">
+                            {% if not node.isGroup %}
+                                <a href="<$ url $>article/<$ node.articleId $>" title="<$ children.articleTitle $>">
+                                <i class="iconfont mrdoc-icon-wendang"></i> <$ node.articleTitle $></a>
+                            {% endif %}
+                        </div>
+                    </li>
+                    {% endfor %}
+                    <div style="border-bottom: 1px solid #eee; width: 100%; height: 2px;"></div>
+                    {% for node in article.articleList %}
+                    <li>
+                        <div style="display:flex;justify-content:space-between;">
+                            {% if node.isGroup %}
+                                <span title="<$ node.articleTitle $>">
+                                    <i class="layui-icon layui-icon-table"></i> <$ node.articleTitle $>
+                                </span>
+                            {% endif %}
+                        </div>
+                        {% if node.childrenList %}
+                        <ul class="sub-menu">
+                                {% for children in node.childrenList %}
+                                <li>
+                                    <div style="display:flex;justify-content:space-between;">
+                                        <a href="<$ url $>article/<$ children.articleId $>" title="<$ children.articleTitle $>">
+                                        <i class="iconfont mrdoc-icon-wendang"></i> <$ children.articleTitle $></a>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
+        <div class="doc-body">
+            <!-- 文档导航 -->
+            <div class="doc-header" role="navigation">
+                <a class="btn pull-left js-toolbar-action" aria-label="" href="javascript:void(0);" title="切换侧边栏">
+                    <i class="layui-icon layui-icon-slider"></i>
+                </a>
+                <a class="btn pull-left font-small" href="javascript:void(0);" title="缩小字体">
+                    <i class="fa fa-font">-</i>
+                </a>
+                <a class="btn pull-left font-large" href="javascript:void(0);" title="放大字体">
+                    <i class="fa fa-font">+</i>
+                </a>
+                <a class="btn pull-left font-switch" href="javascript:void(0);" title="切换字体类型">
+                    <i class="fa fa-text-height"></i>
+                </a>
+                <!-- 顶部工具栏 -->
+                {% block head_toolbar %}
+                {% endblock %}
+                <a class="btn pull-right" aria-label="" href="<$ url $>pro_list">
+                    <i class="layui-icon layui-icon-home"></i> <span class="layui-hide-xs">首页</span>
+                </a>
+            </div>
+            <!-- 文档主体 -->
+            <div class="doc-body-content">
+                <div class="doc-body-content-div">
+                    {% if project.is_watermark %}
+                    <div id="wm"></div>
+                    {% endif %}
+                    <!-- 文档内容 -->
+                    <div class="doc-content" id="doc-content">
+                        <!-- 标题 -->
+                        <div class="doc-info">
+                            <!-- 页面主体头信息 -->
+                            {% block content_head %}
+                            {% endblock %}
+
+                            <!-- 广告代码开始 -->
+                            {% if debug %}
+                            {% else %}
+                            {% if ad_code %}
+                            <div class="ad-code" id="ad-code-1"></div>
+                            {% endif %}
+                            {% endif %}
+                            <!-- 广告代码结束 -->
+                        </div>
+                        <!-- 标题结束 -->
+                        <!-- 正文开始 -->
+                        <div class="markdown-body" id="content" style="padding: 20px;padding-top: 5px;">
+                            {% block page_content %}
+                            {% endblock %}
+                        </div>
+                        <!-- 正文结束 -->
+                        <div class="markdown-body" style="padding-left: 20px;">
+                            {% block children_content %}
+                            {% endblock %}
+                        </div>
+                    </div>
+                    <hr>
+                    <!-- 分享栏 -->
+                    <div style="color: rgba(0,0,0,.65);padding-bottom: 10px;margin-top: 10px;">
+                        {% block doc_bottom_block %}
+                        {% endblock %}
+                    </div>
+
+                    <!-- 广告代码开始 -->
+                    {% if debug %}
+                    {% else %}
+                    {% if ad_code_2 %}
+                    <div class="ad-code" id="ad-code-2"></div>
+                    {% endif %}
+                    {% endif %}
+                    <!-- 广告代码结束 -->
+
+                    {% block doc_previous_next %}{% endblock %}
+                </div>
+            </div>
+        </div>
+        <div class="fixed-tool-bar">
+            <div class="toTop"><i class="layui-icon layui-icon-up"></i></div>
+            {% block right_widget %} {% endblock %}
+        </div>
+    </div>
+
+    <!-- 转发选项卡模板 -->
+    <div id="share_div" style="display: none;">
+        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+            <ul class="layui-tab-title">
+                <li class="layui-this">手机扫码</li>
+                <li>复制链接</li>
+            </ul>
+            <div class="layui-tab-content" style="height: 100px;">
+                <div class="layui-tab-item layui-show" align='center'>
+                    <p style="font-weight: 700;margin-bottom: 10px;">手机扫一扫转发分享</p>
+                    <div id="url_qrcode"></div>
+                </div>
+                <div class="layui-tab-item" align='center'>
+                    <input type="text" id="copy_crt_url" name="current_url" class="layui-input" /><br>
+                    <button class="layui-btn layui-btn-radius layui-btn-xs" style="background-color: #333;"
+                        id="copy_doc_url""> 复制链接</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="<$ static $>jquery/3.1.1/jquery.min.js"></script>
+    <script src="<$ static $>layui/layui.js"></script>
+    <script src="<$ static $>viewerjs/viewer.min.js"></script>
+    <script src="<$ static $>qrcodejs/qrcode.min.js"></script>
+    <script src="<$ static $>mrdoc/mrdoc-docs.js"></script>
+    <script src="<$ static $>toc/doctoc.js"></script>
+    <script src="<$ static $>iconFont/iconfont.js"></script>
+    <script src="<$ static $>editor.md/lib/purify.min.js"></script>
+    <script src="<$ static $>editor.md/lib/marked.min.js"></script>
+    <script src="<$ static $>editor.md/editormd.js"></script>
+    {% block custom_script %}{% endblock %}
+
+</body>
+
+</html>

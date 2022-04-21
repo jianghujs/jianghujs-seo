@@ -1,0 +1,42 @@
+{% extends 'index.html'%}
+
+{% block vue_template %}
+
+<!-- 3 table 下 article 的单表 crud 页面 -->
+
+
+<v-container class="fullScreen d-flex flex-column pa-xs-0 pa-0">
+  <v-row class="ma-0 pa-xs-4 align-center flex-none pt-0 "
+  :class="{'pa-4': !isMobile, 'pb-0': !isMobile, 'pa-2': isMobile}">
+
+    <v-col cols="12" class="pl-0">
+      Home
+    </v-col>
+  </v-row>  
+</v-container>
+
+{% endblock %}
+{% block vue_body %}
+
+<script type="module">
+  new Vue({
+    el: '#app',
+    template: '#app-template',
+    vuetify: new Vuetify(),
+    data: () => ({
+    }),
+    computed: {
+      isMobile() {
+        return window.innerWidth < 600;
+      },
+    },
+    watch: {},
+    async created() {},
+    mounted() {},
+    methods: {}
+  })
+</script>
+
+<style scoped>
+</style>
+{% endblock %}
