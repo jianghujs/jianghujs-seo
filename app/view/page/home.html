@@ -6,13 +6,23 @@
 
 
 <v-container class="fullScreen d-flex flex-column pa-xs-0 pa-0">
-  <v-row class="ma-0 pa-xs-4 align-center flex-none pt-0 "
-  :class="{'pa-4': !isMobile, 'pb-0': !isMobile, 'pa-2': isMobile}">
+  <v-card v-for="(category, index) in categoryList" :key="index" class="mx-auto" max-width="344" outlined>
+    <v-list-item three-line>
+      <v-list-item-content>
+        <div class="text-overline mb-4">
+          {{category.categoryName}} {{category.count}}
+        </div>
+        <v-list-item-title class="text-h5 mb-1">
+          分类描述
+        </v-list-item-title>
+        
+        <div v-for="(article, articleIndex) in category.articleList" :key="articleIndex">
+          <a :href="'/xuanfeng_admin/page/article/' + article.articleId">{{article.articleTitle}}</a>
+        </div>
+      </v-list-item-content>
+    </v-list-item>
+  </v-card>
 
-    <v-col cols="12" class="pl-0">
-      Home
-    </v-col>
-  </v-row>  
 </v-container>
 
 {% endblock %}
@@ -24,6 +34,7 @@
     template: '#app-template',
     vuetify: new Vuetify(),
     data: () => ({
+      categoryList: [],
     }),
     computed: {
       isMobile() {
@@ -31,9 +42,36 @@
       },
     },
     watch: {},
-    async created() {},
+    async created() {
+      this.getCategoryList();
+    },
     mounted() {},
-    methods: {}
+    methods: {
+      async getCategoryList() {
+        const { data: { appData: { rows } } } = await window.jianghuAxios({
+          data: {
+            appData: {
+              pageId: 'home',
+              actionId: 'selectCategoryList',
+              orderBy: [{ column: 'categoryGroup', order: 'asc' }, { column: 'categoryGroupSort', order: 'asc' }]
+            },
+          }
+        });
+        rows.forEach(row => {
+          const articleIdList = row.articleIdList ? row.articleIdList.split(',') : [];
+          const articleTitleList = row.articleIdList ? row.articleTitleList.split(',') : [];
+          const articleList = [];
+          for (let i = 0; i < articleIdList.length; i++) {
+            articleList.push({
+              articleId: articleIdList[i],
+              articleTitle: articleTitleList[i],
+            })
+          }
+          row.articleList = articleList.slice(0,3);
+        })
+        this.categoryList = rows;
+      },
+    }
   })
 </script>
 

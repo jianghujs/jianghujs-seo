@@ -7,16 +7,16 @@
 {% block title %}<$ article.articleTitle $>{% endblock %}
 
 {% block head_toolbar %}
-    <span class="btn pull-left">|</span>
-    <a class="btn pull-left" aria-label="" href="<$ url $>articleEdit?articleId=<$ article.articleId $>&title=<$ article.articleTitle $>">
+    <!-- <span class="btn pull-left">|</span> -->
+    <!-- <a class="btn pull-left" aria-label="" href="<$ url $>articleEdit?articleId=<$ article.articleId $>&title=<$ article.articleTitle $>">
         <i class="layui-icon layui-icon-edit"></i> <span class="layui-hide-xs">修改</span>
-    </a>
-    <a class="btn pull-left" aria-label="" href="<$ url $>articleEdit?&title=未命名" target="_blank">
+    </a> -->
+    <!-- <a class="btn pull-left" aria-label="" href="<$ url $>articleEdit?&title=未命名" target="_blank">
         <i class="layui-icon layui-icon-add-1"></i> <span class="layui-hide-xs">添加</span>
-    </a>
-    <a class="btn pull-left" aria-label="" href="<$ url $>articleManagement?categoryId=<$ article.categoryId $>">
+    </a> -->
+    <!-- <a class="btn pull-left" aria-label="" href="<$ url $>articleManagement?categoryId=<$ article.categoryId $>">
         <i class="fa fa-cubes"></i> <span class="layui-hide-xs">管理</span>
-    </a>
+    </a> -->
     <!-- 文档目录 -->
     <div id="toc-container" class='sidebar doc-toc-hide'></div>
 {% endblock %}
