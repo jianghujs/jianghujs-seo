@@ -29,11 +29,9 @@
 {% endblock %}
 
 {% block page_content %}
-    {% if article.articleCoverImage %}
-        <div class="doc_cover" style="width: 100%; max-height: 280px; display: flex; justify-content: center;">
-            <img title="封面" src="/upload/<$ article.articleCoverImage $>" style="object-fit: cover;">
-        </div>
-    {% endif %}
+    <!--<div class="doc_cover" style="width: 100%; max-height: 280px; display: flex; justify-content: center;">
+        <img title="封面" src="/upload/<$ article.articleCoverImage $>" style="object-fit: cover;">
+    </div>-->
     <$ article.articleContentForSeo | safe $>
   <div id="articleContentHidden" class="articleContentHidden" style="position: absolute; top: -1000px; overflow: hidden; height: 0; width: 0;">
     <textarea style="display: none;"><$ article.articleContent $></textarea>

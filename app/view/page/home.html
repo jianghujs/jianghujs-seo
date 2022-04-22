@@ -3,25 +3,65 @@
 {% block vue_template %}
 
 <!-- 3 table 下 article 的单表 crud 页面 -->
-
-
-<v-container class="fullScreen d-flex flex-column pa-xs-0 pa-0">
-  <v-card v-for="(category, index) in categoryList" :key="index" class="mx-auto" max-width="344" outlined>
-    <v-list-item three-line>
-      <v-list-item-content>
-        <div class="text-overline mb-4">
-          {{category.categoryName}} {{category.count}}
+<v-container class="fullScreen home-container d-flex flex-column pa-xs-0 pa-0">
+  <v-stepper-header class="home-header-box">
+    <div class="home-header-box-body">
+      <div style="display: inline-block">
+        <img src="https://yun.startalk.tech/index.php/s/JxPejNyea9bn3gB/download" alt="" style="height: 32px; width: auto"/>
+      </div>
+      <div style="display: flex;flex-direction: row;align-items: center">
+        <div class="search-input-inline" style="margin-right: 30px">
+          <v-text-field class="rounded-circle" placeholder="搜索文档" v-model="search" ></v-text-field>
+          <button type="submit" style="position: absolute;top:12px;right: 8px;border: none;background-color: white;">
+            <i class="layui-icon layui-icon-search"></i>
+          </button>
         </div>
-        <v-list-item-title class="text-h5 mb-1">
-          分类描述
-        </v-list-item-title>
-        
-        <div v-for="(article, articleIndex) in category.articleList" :key="articleIndex">
-          <a :href="'/xuanfeng_admin/page/article/' + article.articleId">{{article.articleTitle}}</a>
-        </div>
-      </v-list-item-content>
-    </v-list-item>
-  </v-card>
+        <v-menu offset-y >
+          <template v-slot:activator="{ on, attrs }">
+            <v-chip
+                    class="ma-2"
+                    v-bind="attrs"
+                    v-on="on">
+              游客
+            </v-chip>
+          </template>
+          <v-list>
+            登录
+          </v-list>
+        </v-menu>
+      </div>
+    </div>
+  </v-stepper-header>
+
+  <v-row  class="card-list-box" no-gutters>
+    <v-col
+           v-for="(category, index) in categoryList" :key="index"
+           style="padding: 5px;"
+            cols="12"
+            sm="6"
+            md="4"
+    >
+      <v-card class="card" max-height="170px" height="170px" @click="toArticleDetail(category)">
+        <v-card-subtitle class="pb-0 card-subtitle">
+          {{category.categoryName}}
+          <span>
+          {{category.count}}
+        </span>
+        </v-card-subtitle>
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-title class="article-list">
+              {{category.categoryIntro}}
+            </v-list-item-title>
+            <v-list-item-title class="article-list" v-for="(article, articleIndex) in category.articleList" :key="articleIndex">
+              <a :href="'/xuanfeng_admin/page/article/' + article.articleId">{{article.articleTitle}}</a>
+              <span>{{article.articleUpdateTime}}</span>
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-card>
+    </v-col>
+  </v-row>
 
 </v-container>
 
@@ -34,12 +74,16 @@
     template: '#app-template',
     vuetify: new Vuetify(),
     data: () => ({
-      categoryList: [],
+      categoryAllList: [],
+      search: ''
     }),
     computed: {
       isMobile() {
         return window.innerWidth < 600;
       },
+      categoryList() {
+        return this.categoryAllList.filter(e => e.categoryName.includes(this.search))
+      }
     },
     watch: {},
     async created() {
@@ -47,6 +91,11 @@
     },
     mounted() {},
     methods: {
+      toArticleDetail(category) {
+        if (category.articleList.length) {
+          location.href = '/xuanfeng_admin/page/article/' + category.articleList[0].articleId
+        }
+      },
       async getCategoryList() {
         const { data: { appData: { rows } } } = await window.jianghuAxios({
           data: {
@@ -61,21 +110,107 @@
         rows.forEach(row => {
           const articleIdList = row.articleIdList ? row.articleIdList.split(',') : [];
           const articleTitleList = row.articleIdList ? row.articleTitleList.split(',') : [];
+          const articleUpdateTime = row.articleIdList ? row.articleUpdateTimeList.split(',') : [];
           const articleList = [];
           for (let i = 0; i < articleIdList.length; i++) {
             articleList.push({
               articleId: articleIdList[i],
               articleTitle: articleTitleList[i],
+              articleUpdateTime: articleUpdateTime[i],
             })
           }
           row.articleList = articleList.slice(0,3);
         })
-        this.categoryList = rows;
+        this.categoryAllList = rows;
       },
     }
   })
 </script>
 
 <style scoped>
+  .home-container {
+    padding-top: 0;
+  }
+
+  .home-header-box {
+    border-bottom: 1px solid #ddd;
+    box-shadow: unset;
+    padding: 0 10px;
+  }
+  .home-header-box-body {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+    height: auto;
+    align-items: center;
+  }
+  .card {
+    width: 100%;
+    display: inline-block;
+    flex-grow: 1;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  }
+  .card:hover {
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  }
+  .card-list-box {
+    display: flex;
+    justify-content: space-between;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    padding: 0 5px;
+  }
+  .card-subtitle {
+    font-weight: bolder;
+    height: 42px;
+    line-height: 42px;
+    border-bottom: 1px solid #f6f6f6;
+    color: #333;
+    font-size: 14px;
+  }
+  .card-subtitle span {
+    position: relative;
+    display: inline-block;
+    padding: 0 6px;
+    font-size: 12px;
+    text-align: center;
+    border-radius: 2px;
+    height: 20px;
+    line-height: 18px;
+    border-width: 1px;
+    border-style: solid;
+    background-color: #fff;
+    color: #666;
+  }
+  .article-list {
+    line-height: 18px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: #999;
+  }
+  .article-list a, .article-list span {
+    line-height: 18px;
+    color: #999;
+    text-decoration: none;
+  }
+  .article-list:hover a, .article-list:hover span {
+    color: black;
+  }
+  @media screen and (min-width: 1200px) {
+    .home-container {
+      width: 1170px;
+    }
+  }
+  .search-input-inline {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+  }
+
+
 </style>
 {% endblock %}
