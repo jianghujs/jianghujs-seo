@@ -53,6 +53,7 @@
             appData: {
               pageId: 'home',
               actionId: 'selectCategoryList',
+              where: { categoryPublishStatus: 'public' },
               orderBy: [{ column: 'categoryGroup', order: 'asc' }, { column: 'categoryGroupSort', order: 'asc' }]
             },
           }
