@@ -14,7 +14,7 @@ const eggJianghuPath = path.join(eggJianghuPathTemp, "../");
 module.exports = (appInfo) => {
   assert(appInfo);
 
-  const appId = "xuanfeng_admin";
+  const appId = "openjianghu_seo";
   const uploadDir = path.join(appInfo.baseDir, "upload");
   const downloadBasePath = `/${appId}/upload`;
 

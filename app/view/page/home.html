@@ -1,226 +1,226 @@
-{% extends 'index.html'%}
+{% extends 'template/homeTemplate.html' %}
 
-{% block vue_template %}
-
-<!-- 3 table 下 article 的单表 crud 页面 -->
-<v-container class="fullScreen home-container d-flex flex-column pa-xs-0 pa-0">
-  <v-stepper-header class="home-header-box">
-    <div class="home-header-box-body">
-      <div style="display: inline-block">
-        <img src="https://yun.startalk.tech/index.php/s/JxPejNyea9bn3gB/download" alt="" style="height: 32px; width: auto"/>
-      </div>
-      <div style="display: flex;flex-direction: row;align-items: center">
-        <div class="search-input-inline" style="margin-right: 30px">
-          <v-text-field class="rounded-circle" placeholder="搜索文档" v-model="search" ></v-text-field>
-          <button type="submit" style="position: absolute;top:12px;right: 8px;border: none;background-color: white;">
-            <i class="layui-icon layui-icon-search"></i>
-          </button>
-        </div>
-        <v-menu offset-y >
-          <template v-slot:activator="{ on, attrs }">
-            <v-chip
-                    class="ma-2"
-                    v-bind="attrs"
-                    v-on="on">
-              游客
-            </v-chip>
-          </template>
-          <v-list>
-            登录
-          </v-list>
-        </v-menu>
-      </div>
+<!-- 引入静态文件 -->
+{% set static = "/" + ctx.app.config.appId + "/public/" %}
+{% set url = "/" +ctx.app.config.appId + "/page/" %}
+{% block header %}
+<div class="" style="display:flex;flex-direction:row;justify-content:flex-end;">
+    <!-- LOGO -->
+    <div class="">
+        <a class="logo" href="/">
+            <img src="https://yun.startalk.tech/index.php/s/JxPejNyea9bn3gB/download" style="height: 32px;width: auto;">
+        </a>
     </div>
-  </v-stepper-header>
 
-  <v-row  class="card-list-box" no-gutters>
-    <v-col
-           v-for="(category, index) in categoryList" :key="index"
-           style="padding: 5px;"
-            cols="12"
-            sm="6"
-            md="4"
-    >
-      <v-card class="card" max-height="170px" height="170px" @click="toArticleDetail(category)">
-        <v-card-subtitle class="pb-0 card-subtitle">
-          {{category.categoryName}}
-          <span>
-          {{category.count}}
-        </span>
-        </v-card-subtitle>
-        <v-list-item>
-          <v-list-item-content>
-            <v-list-item-title class="article-list">
-              {{category.categoryIntro}}
-            </v-list-item-title>
-            <v-list-item-title class="article-list" v-for="(article, articleIndex) in category.articleList" :key="articleIndex">
-              <a :href="'/xuanfeng_admin/page/article/' + article.articleId">
-                <v-icon
-                        small
-                >
-                  mdi-calendar-minus
-                </v-icon>
-                {{article.articleTitle}}</a>
-              <span>{{article.articleUpdateTime}}</span>
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-card>
-    </v-col>
-  </v-row>
+    <!-- 自定义的首页菜单 -->
+    <div style="">
+        <ul class="layui-nav">
 
-</v-container>
 
+            <li class="layui-nav-item layui-hide-lg layui-hide-md layui-hide-sm">
+                <a href="javascript:;"><i class="layui-icon layui-icon-more"></i><i
+                        class="layui-icon layui-icon-down layui-nav-more"></i></a>
+                <dl class="layui-nav-child"> <!-- 二级菜单 -->
+
+                </dl>
+            </li>
+            <span class="layui-nav-bar"></span></ul>
+    </div>
+
+    <!-- 右侧固定操作菜单 -->
+    <div style="display:flex;justify-content:flex-end;flex-direction:row;">
+        <!-- 搜索框 -->
+        <div style="margin:12px;" class="layui-hide-xs">
+
+                <input name="type" value="doc" hidden="">
+                <div class="layui-input-inline">
+                    <input class="layui-input mrdoc-search-input" placeholder="搜索文档" name="kw">
+                    <button type="submit" onclick="searchCategory()"
+                            style="position: absolute;top:12px;right: 8px;border: none;background-color: white;">
+                        <i class="layui-icon layui-icon-search"></i>
+                    </button>
+                </div>
+
+        </div>
+        <div class="layui-hide-lg layui-hide-md layui-hide-sm" style="margin:20px;">
+            <a href="/search/">
+                <i class="layui-icon layui-icon-search" style="font-size: 24px;"></i>
+            </a>
+        </div>
+        <!-- 新建文档菜单 -->
+
+        <!-- 用户菜单 -->
+        <!--<div>
+            <ul class="layui-nav">
+
+                <li class="layui-nav-item">
+                    <a href="javascript:void(0);">
+                        <i class="layui-icon layui-icon-username"></i> 游客
+                        <i class="layui-icon layui-icon-down layui-nav-more"></i></a>
+                    <dl class="layui-nav-child">
+
+                        <dd>
+                            <a href="/login/">
+                                <i class="iconfont mrdoc-icon-denglu"></i>
+                                登录
+                            </a>
+                        </dd>
+
+                    </dl>
+                </li>
+
+                <span class="layui-nav-bar"></span></ul>
+        </div>-->
+    </div>
+</div>
 {% endblock %}
-{% block vue_body %}
 
-<script type="module">
-  new Vue({
-    el: '#app',
-    template: '#app-template',
-    vuetify: new Vuetify(),
-    data: () => ({
-      categoryAllList: [],
-      search: ''
-    }),
-    computed: {
-      isMobile() {
-        return window.innerWidth < 600;
-      },
-      categoryList() {
-        return this.categoryAllList.filter(e => e.categoryName.includes(this.search))
-      }
-    },
-    watch: {},
-    async created() {
-      this.getCategoryList();
-    },
-    mounted() {},
-    methods: {
-      toArticleDetail(category) {
-        if (category.articleList.length) {
-          location.href = '/xuanfeng_admin/page/article/' + category.articleList[0].articleId
+{% block form %}
+<!-- 表单风格开始 -->
+<div class="layui-row">
+    <form class="index-control layui-form" style="" lay-filter="filter-project-form">
+        <!-- 文集组筛选框 -->
+        <div class="layui-form-item" style="float: left;">
+            <div class="layui-input-inline" style="width: 200px;">
+                <select name="group" lay-verify="required" id="sel-group">
+                    <option value="">所有文集</option>
+                    <optgroup label="公共文集组">
+
+                    </optgroup>
+
+                </select><div class="layui-unselect layui-form-select"><div class="layui-select-title"><input type="text" placeholder="所有文集" value="" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i></div><dl class="layui-anim layui-anim-upbit layui-select-group"><dd lay-value="" class="layui-select-tips">所有文集</dd><dt>公共文集组</dt></dl></div>
+            </div>
+        </div>
+        <!-- 条件筛选框 -->
+        <div class="layui-form-item" style="float: right;clear:none;">
+            <!-- 筛选开始 -->
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <input type="text" name="kw" id="search-project" placeholder="搜索文集" value="" class="layui-input">
+                </div>
+                <div class="layui-input-inline">
+                    <select name="role" lay-verify="" id="sel-role">
+                        <option value="">筛选</option>
+
+                        <option value="0">公开文集</option>
+                        <option value="3">访问码文集</option>
+
+                    </select><div class="layui-unselect layui-form-select"><div class="layui-select-title"><input type="text" placeholder="筛选" value="" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i></div><dl class="layui-anim layui-anim-upbit"><dd lay-value="" class="layui-select-tips">筛选</dd><dd lay-value="0" class="">公开文集</dd><dd lay-value="3" class="">访问码文集</dd></dl></div>
+                </div>
+                <div class="layui-input-inline">
+                    <select name="sort" lay-verify="" id="sel-sort">
+                        <option value="">排序</option>
+                        <option value="0">时间升序</option>
+                        <option value="1">时间降序</option>
+                    </select><div class="layui-unselect layui-form-select"><div class="layui-select-title"><input type="text" placeholder="排序" value="" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i></div><dl class="layui-anim layui-anim-upbit"><dd lay-value="" class="layui-select-tips">排序</dd><dd lay-value="0" class="">时间升序</dd><dd lay-value="1" class="">时间降序</dd></dl></div>
+                </div>
+            </div>
+            <!-- 筛选结束 -->
+        </div>
+    </form>
+</div>
+<!-- 表单风格结束 -->
+{% endblock %}
+{% block body %}
+<!-- 遍历文集列表 -->
+
+<!-- 网格布局 -->
+
+{% for category in categoryList %}
+<div class="layui-col-md3 layui-col-xs12 project-item ">
+
+    <a onclick="toArticleDetail(this)" data-article="<$ category.articleList[0].articleId if category.articleList.length else 0 $>" target="_blank" title="<$ category.categoryName $>" style="cursor: pointer"> </a>
+    <div class="layui-card">
+        <a onclick="toArticleDetail(this)" style="cursor: pointer" data-article="<$ category.articleList[0].articleId if category.articleList.length else 0 $>" target="_blank" title="<$ category.categoryName $>">
+            <div class="layui-card-header">
+                <p class="layui-elip" style="font-weight: 700;">
+                    <!--                <i class="iconfont mrdoc-icon-totop" title="置顶文集" style="color: red;font-size: 12px;"></i>-->
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#mrdoc-icon-pro-35"></use>
+                    </svg>
+                    <$ category.categoryName $>&nbsp;&nbsp;<span class="layui-badge-rim"><$ category.count $></span>
+                </p>
+            </div>
+        </a>
+        <div class="layui-card-body" style="font-size: 12px;">
+            <a onclick="toArticleDetail(this)" style="cursor: pointer" data-article="<$ category.articleList[0].articleId if category.articleList.length else 0 $>" target="_blank" title="<$ category.categoryName $>">
+                <p class="tooltip layui-word-aux">
+                    <i class="layui-icon layui-icon-speaker"></i>
+
+                    <span class=""><$ category.categoryIntro $>…</span>
+                    <span class="tooltip-content clearfix"><$ category.categoryIntro $></span>
+                </p>
+            </a>
+
+            {% for article in category.articleList %}
+            <p class="layui-word-aux" style="line-height: 18px;">
+                <a href="/<$ ctx.app.config.appId $>/page/article/<$ article.articleId $>/" target="_blank" class="index-doc-link">
+                    <span class="layui-elip" style="display: inline-block;;width: 250px;">
+                        <i class="layui-icon layui-icon-form"></i> <$ article.articleTitle $>
+                    </span>
+                </a>
+                <span style="float: right;"><$ article.articleUpdateTime $></span>
+            </p>
+            {% endfor %}
+
+        </div>
+    </div>
+
+</div>
+{% else %}
+<li>This would display if the 'item' collection were empty</li>
+{% endfor %}
+<!-- 网格布局结束 -->
+{% endblock %}
+{% block page %}
+<div class="layui-box layui-laypage layui-laypage-default">
+    <!-- 上一页 -->
+
+    <a href="javascript:;" class="layui-btn layui-btn-xs layui-btn-disabled">上一页</a>
+
+    <!-- 当前页 -->
+    <span class="layui-laypage-curr">
+                <em class="layui-laypage-em"></em>
+                <em>1/1</em>
+            </span>
+    <!-- 下一页 -->
+
+    <a class="layui-btn layui-btn-xs layui-btn-disabled">下一页</a>
+
+</div>
+{% endblock %}
+
+var category = <$ category $>
+{% block custom_script %}
+<script type="text/javascript">
+    function toArticleDetail(obj) {
+        let articleCount = $(obj).attr('data-article');
+        let app = $('body').attr('data-app');
+        if (articleCount) {
+            location.href = `/${app}/page/article/${articleCount}`;
         }
-      },
-      async getCategoryList() {
-        const { data: { appData: { rows } } } = await window.jianghuAxios({
-          data: {
-            appData: {
-              pageId: 'home',
-              actionId: 'selectCategoryList',
-              where: { categoryPublishStatus: 'public' },
-              orderBy: [{ column: 'categoryGroup', order: 'asc' }, { column: 'categoryGroupSort', order: 'asc' }]
-            },
-          }
-        });
-        rows.forEach(row => {
-          const articleIdList = row.articleIdList ? row.articleIdList.split(',') : [];
-          const articleTitleList = row.articleIdList ? row.articleTitleList.split(',') : [];
-          const articleUpdateTime = row.articleIdList ? row.articleUpdateTimeList.split(',') : [];
-          const articleList = [];
-          for (let i = 0; i < articleIdList.length; i++) {
-            articleList.push({
-              articleId: articleIdList[i],
-              articleTitle: articleTitleList[i],
-              articleUpdateTime: articleUpdateTime[i],
-            })
-          }
-          row.articleList = articleList.slice(0,3);
-        })
-        this.categoryAllList = rows;
-      },
     }
-  })
+    function makeUrl() {
+
+    }
+    function searchCategory() {
+        let keyword = $('.mrdoc-search-input').val();
+        let app = $('body').attr('data-app');
+        if (!keyword) {
+            return
+        }
+        location.href = `/${app}/page/home?keyword=${keyword}`;
+        return false
+    }
+    function updateUrlParam(name) {
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+      var r = window.location.search.substr(1).match(reg); //匹配目标参数
+      if (r === null) {
+        return
+      }
+      $('.mrdoc-search-input').val(unescape(r[2]));
+    }
+
+    updateUrlParam('keyword');
 </script>
-
-<style scoped>
-  .home-container {
-    padding-top: 0;
-  }
-
-  .home-header-box {
-    border-bottom: 1px solid #ddd;
-    box-shadow: unset;
-    padding: 0 10px;
-  }
-  .home-header-box-body {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-content: center;
-    height: auto;
-    align-items: center;
-  }
-  .card {
-    width: 100%;
-    display: inline-block;
-    flex-grow: 1;
-    cursor: pointer;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-  }
-  .card:hover {
-    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-  }
-  .card-list-box {
-    display: flex;
-    justify-content: space-between;
-    align-content: flex-start;
-    flex-wrap: wrap;
-    padding: 0 5px;
-  }
-  .v-card__subtitle, .v-card__text, .v-card__title {
-    padding: 0 10px;
-  }
-  .card-subtitle {
-    font-weight: bolder;
-    height: 42px;
-    line-height: 42px;
-    border-bottom: 1px solid #f6f6f6;
-    color: #333;
-    font-size: 14px;
-  }
-  .card-subtitle span {
-    position: relative;
-    display: inline-block;
-    padding: 0 6px;
-    font-size: 12px;
-    text-align: center;
-    border-radius: 2px;
-    height: 20px;
-    line-height: 18px;
-    border-width: 1px;
-    border-style: solid;
-    background-color: #fff;
-    color: #666;
-  }
-  .article-list {
-    line-height: 18px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    color: #999;
-  }
-  .article-list a, .article-list span {
-    line-height: 18px;
-    color: #999;
-    text-decoration: none;
-    font-size: 12px;
-  }
-  .article-list:hover a, .article-list:hover span {
-    color: black;
-  }
-  @media screen and (min-width: 1200px) {
-    .home-container {
-      width: 1170px;
-    }
-  }
-  .search-input-inline {
-    display: inline-block;
-    vertical-align: middle;
-    position: relative;
-  }
-
-
-</style>
 {% endblock %}

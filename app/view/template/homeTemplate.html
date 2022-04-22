@@ -1,0 +1,141 @@
+{% set static = "/" + ctx.app.config.appId + "/public/" %}
+{% set url = "/" +ctx.app.config.appId + "/page/" %}
+<!DOCTYPE html>
+<html lang="zh-cn" style="font-size: 15px;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name=renderer content=webkit>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1">
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="Cache-Control" content="max-age=7200" />
+    <!-- <meta name="referrer" content="no-referrer"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="{% block keyword %}{% endblock %}<$ site_keywords $>" />
+    <meta name="description" content="{% block description %}{% endblock %}" />
+    <!-- OGP分享协议开始 -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{% block ogp_title %}{% endblock %}">
+    <meta property="og:description" content="{% block ogp_desc %}{% endblock %}">
+    <meta property="og:image"
+        content="<$ request.scheme $>://<$ request.META.HTTP_HOST $><$ static $>search/mrdoc_logo_300.png">
+    <meta property="og:url" content="<$ request.scheme $>://<$ request.META.HTTP_HOST $><$ request.path_info $>">
+    <!-- OGP分享协议结束 -->
+    <title>{% block title %}{% endblock %} - <$ ctx.app.config.appTitle $></title>
+    <link href="<$ static $>layui/css/layui.css" rel="stylesheet">
+
+    <link href="<$ static $>viewerjs/viewer.min.css" rel="stylesheet">
+    <link rel="icon" href="<$ static $>search/mrdoc_logo_300.png" sizes="192x192" />
+    <link href="<$ static $>mrdoc/mrdoc.css" rel="stylesheet">
+    <link href="<$ static $>mrdoc/mrdoc-docs.css" rel="stylesheet">
+    <link href="<$ static $>iconFont/iconfont.css" rel="stylesheet">
+    <style>
+        .layui-nav .layui-this:after, .layui-nav-bar, .layui-nav-tree, .layui-nav-itemed:after {
+            background-color: #333 !important;
+        }
+        .layui-nav .layui-nav-child dd.layui-this a, .layui-nav-child dd.layui-this{
+            background-color: #333 !important;
+        }
+        /* layui分页组件样式 */
+        .layui-laypage .layui-laypage-curr .layui-laypage-em{
+            background-color: #333 !important;
+        }
+        .layui-form-label{
+            width: 30px !important;
+        }
+        .layui-input-block{
+            margin-left: 60px !important;
+        }
+        /* 控制栏表单下拉框样式 */
+        .index-control .layui-input-inline{
+            width: 100px;
+        }
+        .index-control .layui-input{
+            height: 25px;
+            border: none;
+        }
+        .index-control .layui-form-select dl {
+            top: 30px;
+        }
+        .index-control .layui-form-item{
+            margin-bottom: 0px;
+        }
+        /* 文集列表样式 */
+        .project-item-list{
+            /* float: left; */
+            min-width: 0;
+            width: 100vw;
+            height: 120px;
+            /* margin-top: 20px; */
+            /* margin-left: 20px; */
+            margin: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,.055);
+        }
+        /* 文集图标按钮样式 */
+        #project-icon-select{
+            height: 38px !important;
+        }
+        /* 移动端筛选控制栏样式 */
+        @media screen and (max-width: 768px){
+            /* 控制栏样式 */
+            .index-control .layui-form-item .layui-inline{
+                display: flex;
+            }
+            .index-control .layui-form-item .layui-input-inline{
+                display: -webkit-inline-box;
+                float: none;
+                left: -3px;
+                /* width: auto; */
+                margin: 0;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body class="layui-container" data-app="<$ ctx.app.config.appId $>">
+    <div class="layui-header layui-fluid" style="padding-left:0px;">
+        {% block header %}{% endblock %}
+    </div>
+    <div class="layui-container" style="margin-top: 10px;">
+        {% block form %}{% endblock %}
+    </div>
+    <!-- 转发选项卡模板 -->
+    <div class="layui-container project-list-content" style="display:flex;flex-wrap:wrap;">
+
+        {% block body %}{% endblock %}
+    </div>
+    <div class="layui-row project-list-page" style="text-align: center;">
+        {% block page %}{% endblock %}
+    </div>
+    <div class="layui-footer" style="border-top: 1px solid rgb(230, 230, 230); text-align: center; margin-top: 38px; width: 100%; position: absolute; left: 0px; bottom: 0;">
+        <div style="margin-top:10px;padding-bottom: 10px;">
+
+            <a href="/" target="_blank">
+                ©
+            </a><a href="https://mrdoc.pro">开源江湖 2022</a>
+            &nbsp;|&nbsp;
+
+            <a href="https://mrdoc.pro" target="_blank">开源江湖</a>
+            出品 |
+
+            <a href="/sitemap.xml" target="_blank">网站地图</a>
+
+
+        </div>
+    </div>
+    <script src="<$ static $>jquery/3.1.1/jquery.min.js"></script>
+    <script src="<$ static $>layui/layui.js"></script>
+    <script src="<$ static $>viewerjs/viewer.min.js"></script>
+    <script src="<$ static $>toc/doctoc.js"></script>
+    <script src="<$ static $>iconFont/iconfont.js"></script>
+    {% block custom_script %}{% endblock %}
+
+</body>
+
+</html>

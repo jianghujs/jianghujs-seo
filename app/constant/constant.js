@@ -36,6 +36,7 @@ module.exports.tableEnum = Object.freeze({
   // ========================基础 View============================
   _view01_user: "_view01_user",
   view01_article: "view01_article",
+  view01_category: "view01_category",
   // ========================高级 View============================
 });
 
