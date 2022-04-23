@@ -8,9 +8,7 @@ h1,h2,h3{font-size: 14px;}
 ::-webkit-input-placeholder{color: #999}
 
 /* 布局 */
-.site-menu,
 .site-content{min-height: 950px;}
-.site-menu{box-shadow: none; border-left: none;}
 .site-content{padding: 20px 0 10px 20px;}
 
 /* 头部 */
@@ -210,8 +208,6 @@ body .layui-layer-dir .layui-layer-content{padding: 10px;}
 /* 文档 */
 .site-fix{position: fixed; top: 0; bottom: 0; z-index: 666; min-height: 0; overflow: hidden;  background-color: #fff;}
 .site-fix:hover{overflow-y: auto; overflow-x: hidden;}
-.site-menu .layui-menu-body-title .layui-font-gray{padding-left: 10px;}
-.site-menu .layui-menu-body-title .layui-badge-dot{left: 10px;}
 
 
 .site-title{ margin: 30px 0 20px;}
@@ -381,12 +377,10 @@ body .layui-layout-admin .site-demo{padding: 0;}
 
 @media screen and (max-width: 992px) {
 
-  .site-menu{position: fixed; top: 0; bottom: 0; min-height: 0; overflow-y: auto; overflow-x: hidden; z-index: 1000; left: -300px; background-color: #fff;  transition: all .3s;}
 
   .site-tree-mobile{display: block!important; position: fixed; z-index: 16666669; bottom: 15px; left: 15px; width: 50px; height: 50px; line-height: 50px; border-radius: 2px; text-align: center; background-color: #009688; color: #fff;}
   .site-home .site-tree-mobile{display: none!important;}
   .site-mobile .site-tree-mobile{display: none !important;}
-  .site-mobile .site-menu{left: 0;}
   .site-mobile .site-mobile-shade{content: ''; position: fixed; top: 0; bottom: 0; left: 0; right: 0; background-color: rgba(0,0,0,.8); z-index: 999;}
   .site-tree-mobile i{font-size: 20px;}
 

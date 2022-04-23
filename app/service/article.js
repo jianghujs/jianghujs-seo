@@ -33,6 +33,7 @@ class ArticleService extends Service {
       .where({
         categoryId,
       })
+      .whereNot('articlePublishStatus', 'deleted')
       .select();
     articlelist = articlelist.map(
       ({
@@ -60,7 +61,6 @@ class ArticleService extends Service {
       ({ articleGroupName }) => !articleGroupName
     );
     const groupByArticleMap = _.groupBy(groupNameArticlelist, "articleGroupName");
-    console.log(groupByArticleMap);
     const hasGroupNameArticlelist = Object.values(groupByArticleMap).map(list => {
       const { articleGroupName } = list[0];
       return {
@@ -78,6 +78,12 @@ class ArticleService extends Service {
     article.articleList = newArticleList;
 
     const categoryList = await ctx.service.category.getCategoryList();
+    for (const category of categoryList) {
+      category['active'] = '';
+      if (category.articleList.find(e => e.articleId === articleId)) {
+        category['active'] = 'layui-this';
+      }
+    }
     ctx.locals.article = article;
     ctx.locals.categoryList = categoryList;
     return article;

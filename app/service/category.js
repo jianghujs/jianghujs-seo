@@ -26,9 +26,14 @@ class CategoryService extends Service {
 
     let categoryList
     if (keyword) {
-      categoryList = await jianghuKnex(tableEnum.view01_category).where(whereStatus).where('categoryName', 'like', `%${keyword.trim()}%`).select();
+      categoryList = await jianghuKnex(tableEnum.view01_category)
+        .whereNot('articlePublishStatus', 'deleted')
+        .where('categoryName', 'like', `%${keyword.trim()}%`)
+        .select();
     } else {
-      categoryList = await jianghuKnex(tableEnum.view01_category).where(whereStatus).select();
+      categoryList = await jianghuKnex(tableEnum.view01_category)
+        .whereNot('articlePublishStatus', 'deleted')
+        .select();
     }
     categoryList.forEach(row => {
       const articleIdList = row.articleIdList ? row.articleIdList.split(',') : [];

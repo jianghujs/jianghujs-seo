@@ -4,173 +4,27 @@
 {% set static = "/" + ctx.app.config.appId + "/public/" %}
 {% set url = "/" +ctx.app.config.appId + "/page/" %}
 {% block header %}
-<div class="" style="display:flex;flex-direction:row;justify-content:flex-end;">
-    <!-- LOGO -->
-    <div class="">
+    <div class="layui-fluid layui-container " style="height: 100%">
+        <i class="layui-icon header-menu-icon layui-icon-slider layui-show-xs-inline" style="display: none" onclick="showCategory()"></i>
         <a class="logo" href="/">
-            <img src="https://yun.startalk.tech/index.php/s/JxPejNyea9bn3gB/download" style="height: 32px;width: auto;">
+            <img src="https://yun.startalk.tech/index.php/s/JxPejNyea9bn3gB/download" style="width: auto;" alt="layui">
         </a>
-    </div>
+        <div class="layui-hide-xs site-notice"></div>
 
-    <!-- 自定义的首页菜单 -->
-    <div style="">
-        <ul class="layui-nav">
-
-
-            <li class="layui-nav-item layui-hide-lg layui-hide-md layui-hide-sm">
-                <a href="javascript:;"><i class="layui-icon layui-icon-more"></i><i
-                        class="layui-icon layui-icon-down layui-nav-more"></i></a>
-                <dl class="layui-nav-child"> <!-- 二级菜单 -->
-
-                </dl>
+        <ul class="layui-nav layui-hide-xs" id="LAY_NAV_TOP" style="position: absolute">
+            <li class="layui-nav-item layui-this">
+                <a href="/">首&nbsp;&nbsp;页</a>
             </li>
-            <span class="layui-nav-bar"></span></ul>
+            {% for category in categoryList %}
+            <li class="layui-nav-item ">
+                <a href="/<$ ctx.app.config.appId $>/page/article/<$ category.articleList[0].articleId $>/"><$ category.categoryName $></a>
+            </li>
+            {% endfor %}
+            <span class="layui-nav-bar" style="left: 64px; top: 55px; width: 0px; opacity: 0;"></span></ul>
     </div>
-
-    <!-- 右侧固定操作菜单 -->
-    <div style="display:flex;justify-content:flex-end;flex-direction:row;">
-        <!-- 搜索框 -->
-        <div style="margin:12px;" class="layui-hide-xs">
-
-                <input name="type" value="doc" hidden="">
-                <div class="layui-input-inline">
-                    <input class="layui-input mrdoc-search-input" placeholder="搜索文档" name="kw">
-                    <button type="submit" onclick="searchCategory()"
-                            style="position: absolute;top:12px;right: 8px;border: none;background-color: white;">
-                        <i class="layui-icon layui-icon-search"></i>
-                    </button>
-                </div>
-
-        </div>
-        <div class="layui-hide-lg layui-hide-md layui-hide-sm" style="margin:20px;">
-            <a href="/search/">
-                <i class="layui-icon layui-icon-search" style="font-size: 24px;"></i>
-            </a>
-        </div>
-        <!-- 新建文档菜单 -->
-
-        <!-- 用户菜单 -->
-        <!--<div>
-            <ul class="layui-nav">
-
-                <li class="layui-nav-item">
-                    <a href="javascript:void(0);">
-                        <i class="layui-icon layui-icon-username"></i> 游客
-                        <i class="layui-icon layui-icon-down layui-nav-more"></i></a>
-                    <dl class="layui-nav-child">
-
-                        <dd>
-                            <a href="/login/">
-                                <i class="iconfont mrdoc-icon-denglu"></i>
-                                登录
-                            </a>
-                        </dd>
-
-                    </dl>
-                </li>
-
-                <span class="layui-nav-bar"></span></ul>
-        </div>-->
-    </div>
-</div>
 {% endblock %}
 
 {% block form %}
-<!-- 表单风格开始 -->
-<div class="layui-row">
-    <form class="index-control layui-form" style="" lay-filter="filter-project-form">
-        <!-- 文集组筛选框 -->
-        <div class="layui-form-item" style="float: left;">
-            <div class="layui-input-inline" style="width: 200px;">
-                <select name="group" lay-verify="required" id="sel-group">
-                    <option value="">所有文集</option>
-                    <optgroup label="公共文集组">
-
-                    </optgroup>
-
-                </select><div class="layui-unselect layui-form-select"><div class="layui-select-title"><input type="text" placeholder="所有文集" value="" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i></div><dl class="layui-anim layui-anim-upbit layui-select-group"><dd lay-value="" class="layui-select-tips">所有文集</dd><dt>公共文集组</dt></dl></div>
-            </div>
-        </div>
-        <!-- 条件筛选框 -->
-        <div class="layui-form-item" style="float: right;clear:none;">
-            <!-- 筛选开始 -->
-            <div class="layui-inline">
-                <div class="layui-input-inline">
-                    <input type="text" name="kw" id="search-project" placeholder="搜索文集" value="" class="layui-input">
-                </div>
-                <div class="layui-input-inline">
-                    <select name="role" lay-verify="" id="sel-role">
-                        <option value="">筛选</option>
-
-                        <option value="0">公开文集</option>
-                        <option value="3">访问码文集</option>
-
-                    </select><div class="layui-unselect layui-form-select"><div class="layui-select-title"><input type="text" placeholder="筛选" value="" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i></div><dl class="layui-anim layui-anim-upbit"><dd lay-value="" class="layui-select-tips">筛选</dd><dd lay-value="0" class="">公开文集</dd><dd lay-value="3" class="">访问码文集</dd></dl></div>
-                </div>
-                <div class="layui-input-inline">
-                    <select name="sort" lay-verify="" id="sel-sort">
-                        <option value="">排序</option>
-                        <option value="0">时间升序</option>
-                        <option value="1">时间降序</option>
-                    </select><div class="layui-unselect layui-form-select"><div class="layui-select-title"><input type="text" placeholder="排序" value="" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i></div><dl class="layui-anim layui-anim-upbit"><dd lay-value="" class="layui-select-tips">排序</dd><dd lay-value="0" class="">时间升序</dd><dd lay-value="1" class="">时间降序</dd></dl></div>
-                </div>
-            </div>
-            <!-- 筛选结束 -->
-        </div>
-    </form>
-</div>
-<!-- 表单风格结束 -->
-{% endblock %}
-{% block body %}
-<!-- 遍历文集列表 -->
-
-<!-- 网格布局 -->
-
-{% for category in categoryList %}
-<div class="layui-col-md3 layui-col-xs12 project-item ">
-
-    <a onclick="toArticleDetail(this)" data-article="<$ category.articleList[0].articleId if category.articleList.length else 0 $>" target="_blank" title="<$ category.categoryName $>" style="cursor: pointer"> </a>
-    <div class="layui-card">
-        <a onclick="toArticleDetail(this)" style="cursor: pointer" data-article="<$ category.articleList[0].articleId if category.articleList.length else 0 $>" target="_blank" title="<$ category.categoryName $>">
-            <div class="layui-card-header">
-                <p class="layui-elip" style="font-weight: 700;">
-                    <!--                <i class="iconfont mrdoc-icon-totop" title="置顶文集" style="color: red;font-size: 12px;"></i>-->
-                    <svg class="icon" aria-hidden="true">
-                        <use xlink:href="#mrdoc-icon-pro-35"></use>
-                    </svg>
-                    <$ category.categoryName $>&nbsp;&nbsp;<span class="layui-badge-rim"><$ category.count $></span>
-                </p>
-            </div>
-        </a>
-        <div class="layui-card-body" style="font-size: 12px;">
-            <a onclick="toArticleDetail(this)" style="cursor: pointer" data-article="<$ category.articleList[0].articleId if category.articleList.length else 0 $>" target="_blank" title="<$ category.categoryName $>">
-                <p class="tooltip layui-word-aux">
-                    <i class="layui-icon layui-icon-speaker"></i>
-
-                    <span class=""><$ category.categoryIntro $>…</span>
-                    <span class="tooltip-content clearfix"><$ category.categoryIntro $></span>
-                </p>
-            </a>
-
-            {% for article in category.articleList %}
-            <p class="layui-word-aux" style="line-height: 18px;">
-                <a href="/<$ ctx.app.config.appId $>/page/article/<$ article.articleId $>/" target="_blank" class="index-doc-link">
-                    <span class="layui-elip" style="display: inline-block;;width: 250px;">
-                        <i class="layui-icon layui-icon-form"></i> <$ article.articleTitle $>
-                    </span>
-                </a>
-                <span style="float: right;"><$ article.articleUpdateTime $></span>
-            </p>
-            {% endfor %}
-
-        </div>
-    </div>
-
-</div>
-{% else %}
-<li>This would display if the 'item' collection were empty</li>
-{% endfor %}
-<!-- 网格布局结束 -->
 {% endblock %}
 {% block page %}
 <div class="layui-box layui-laypage layui-laypage-default">
@@ -193,6 +47,24 @@
 var category = <$ category $>
 {% block custom_script %}
 <script type="text/javascript">
+  function showCategory() {
+    // $('body').addClass('big-page');
+    layer.open({
+      type: 1,
+      // r表示right,b表示bottom
+      offset: 'lb',
+      // 文集目录
+      title: '文集目录',
+      //
+      // anim 特效 0-平滑放大 1-从上掉落 2-从底部往上滑入 3-从左滑入 4-从左翻转 5-渐显 6-抖动
+      anim: 5,
+      shadeClose: true, //开启遮罩关闭
+      // 第一个参数宽度，第二个参数高度
+      area: ['300px', '100%'],
+      // 内容区 在body中写入<div id="draw">。。。。</div>代码，即弹窗内容
+      content: $("#drawer").html(),
+    })
+  }
     function toArticleDetail(obj) {
         let articleCount = $(obj).attr('data-article');
         let app = $('body').attr('data-app');
@@ -224,3 +96,10 @@ var category = <$ category $>
     updateUrlParam('keyword');
 </script>
 {% endblock %}
+<style>
+    @media screen and (max-width: 768px) {
+        .logo {
+            margin: 0 auto;
+        }
+    }
+</style>

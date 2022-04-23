@@ -1,7 +1,7 @@
 {% extends 'template/articleTemplate.html' %}
 
 {% block header %}
-<div class="layui-fluid" style="height: 100%">
+<div class="layui-fluid layui-container" style="height: 100%">
     <i class="layui-icon header-menu-icon layui-icon-slider layui-show-xs-inline" style="display: none" onclick="showCategory()"></i>
     <a class="logo" href="/">
         <img src="https://yun.startalk.tech/index.php/s/JxPejNyea9bn3gB/download" alt="layui">
@@ -9,8 +9,11 @@
     <div class="layui-hide-xs site-notice"></div>
 
     <ul class="layui-nav layui-hide-xs" id="LAY_NAV_TOP" style="position: absolute">
+        <li class="layui-nav-item">
+            <a href="/">首&nbsp;&nbsp;页</a>
+        </li>
         {% for category in categoryList %}
-        <li class="layui-nav-item ">
+        <li class="layui-nav-item <$ category.active $>">
             <a href="/<$ ctx.app.config.appId $>/page/article/<$ category.articleList[0].articleId $>/"><$ category.categoryName $></a>
         </li>
         {% endfor %}
@@ -83,7 +86,7 @@
 
 {% block right_widget %}
     <div class="editDoc layui-show-xs-inline-block" style="display: none;" onclick="showArticle()"><i class="layui-icon layui-icon-slider"></i></div>
-    <div class="tocMenu" ><i class="fa fa-list"></i></div>
+    <div class="tocMenu layui-hide-xs" ><i class="fa fa-list"></i></div>
 {% endblock %}
 
 
@@ -100,7 +103,7 @@
           title: '文集目录',
           //
           // anim 特效 0-平滑放大 1-从上掉落 2-从底部往上滑入 3-从左滑入 4-从左翻转 5-渐显 6-抖动
-          anim: 3,
+          anim: 5,
           shadeClose: true, //开启遮罩关闭
           // 第一个参数宽度，第二个参数高度
           area: ['300px', '100%'],
@@ -119,7 +122,7 @@
           title: '文章目录',
           //
           // anim 特效 0-平滑放大 1-从上掉落 2-从底部往上滑入 3-从左滑入 4-从左翻转 5-渐显 6-抖动
-          anim: 0,
+          anim: 5,
           shadeClose: true, //开启遮罩关闭
           // 第一个参数宽度，第二个参数高度
           area: ['300px', '100%'],

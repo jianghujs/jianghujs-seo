@@ -88,7 +88,7 @@
 
         }
         div.sidebar {
-            top:61px;
+            top:60px;
             border: 1px solid #ddd;
             background: white;
             overflow: hidden;
@@ -107,18 +107,25 @@
     <div class="layui-header">
         {% block header %}{% endblock %}
     </div>
+    <div id="drawer">
+        <div class="layui-panel site-menu">
+            <ul class="layui-menu layui-menu-lg">
+                <li class="layui-menu-item-group" lay-options="{type: 'group', isAllowSpread: true}">
+                    <ul>
+                        {% for category in categoryList %}
+                        <li class="<$ 'layui-menu-item-checked2' if category.active else '' $>">
+                            <div class="layui-menu-body-title">
+                                <a href="/<$ ctx.app.config.appId $>/page/article/<$ category.articleList[0].articleId $>">
+                                    <span><$ category.categoryName $> </span>
+                                </a>
 
-    <div class="layui-side layui-panel" id="drawer">
-        <ul class="layui-menu" id="demo1">
-            {% for category in categoryList %}
-            <a href="/<$ ctx.app.config.appId $>/page/article/<$ category.articleList[0].articleId $>/">
-                <li lay-options="{id: 100}">
-
-                    <div class="layui-menu-body-title"><$ category.categoryName $></div>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
                 </li>
-            </a>
-            {% endfor %}
-        </ul>
+            </ul>
+        </div>
     </div>
     <div class="doc layui-fluid" style="padding-left:0px;">
         <!-- 左侧目录栏 -->
@@ -131,12 +138,8 @@
                 </div> -->
                 <!-- 文集名称 -->
                 <div class="project-title">
-                    <a href="javascript:;">
-                        <$ article.articleTitle.split('-')[0] $>
-                        <!-- <i class="layui-icon layui-icon-password" title="私密文档"></i> -->
-                    </a>
+                    <$ article.articleTitle.split('-')[0] $>
                 </div>
-                <hr>
                 <nav>
                     <ul class="summary">
                         {% for node in article.articleList %}
