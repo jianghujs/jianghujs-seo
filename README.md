@@ -29,8 +29,8 @@ use openjianghu_seo;
 
 ## 线上
 
-- web: https://app.jhxf.org
-- admin: https://admin.jhxf.org
+- seo: https://openjianghu.org
+- admin: https://admin.openjianghu.org
 
 ## 同步 admin/upload/xx 至 seo/upload/xx
 
