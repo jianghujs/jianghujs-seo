@@ -78,9 +78,10 @@ class ArticleService extends Service {
     article.articleList = newArticleList;
     const categoryList = await ctx.service.category.getCategoryList();
     for (const category of categoryList) {
+      console.log(category.articleIdList)
       if (!category.hasOwnProperty('active')) {
         category['active'] = '';
-        if (category.articleIdList.includes(articleId)) {
+        if (category.articleIdList && category.articleIdList.includes(articleId)) {
           category['active'] = 'layui-this';
         }
       }
