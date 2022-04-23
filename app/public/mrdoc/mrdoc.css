@@ -213,21 +213,30 @@ body, html {
 }
 .doc-summary {
     color: #333;
-    position: fixed;
     /*height: calc(100% - 20px);*/
-    height: calc(100%);
+    height: auto;
     background-color: #fafafa;
     /* border-right: 1px solid #e6e6e6; */
     width:300px;
-    overflow: auto;
+    min-width: 300px;
+    overflow: hidden;
 }
 
+.site-fix .doc-summary {
+    position: fixed;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+.site-fix .doc-summary:hover {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
 .doc-body {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
-    margin-left: 300px;
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
@@ -243,6 +252,9 @@ body, html {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     left:300px;
+}
+.site-fix .doc-ml-300 {
+    margin-left: 300px;
 }
 #doc-search-input {
     padding: 6px;
@@ -343,7 +355,7 @@ li.active > a,li.active > div > a{
     float: left!important;
 }
 
-.big-page .doc-summary{left: -300px;}
+.big-page .doc-summary-parent{left: -300px; position: fixed}
 .big-page .doc-body{margin-left: 0;}
 /* 文集、文档作者、发布时间栏等样式 */
 .project-doc-content-head{

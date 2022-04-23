@@ -60,6 +60,7 @@ class ArticleService extends Service {
       ({ articleGroupName }) => !articleGroupName
     );
     const groupByArticleMap = _.groupBy(groupNameArticlelist, "articleGroupName");
+    console.log(groupByArticleMap);
     const hasGroupNameArticlelist = Object.values(groupByArticleMap).map(list => {
       const { articleGroupName } = list[0];
       return {
@@ -71,10 +72,14 @@ class ArticleService extends Service {
     let newArticleList = hasGroupNameArticlelist.concat(noGroupNameArticlelist);
     newArticleList = _.orderBy(
       newArticleList,
-      ["articleTitle"],
+      ["id"],
       ["asc"]
     );
     article.articleList = newArticleList;
+
+    const categoryList = await ctx.service.category.getCategoryList();
+    ctx.locals.article = article;
+    ctx.locals.categoryList = categoryList;
     return article;
   }
 

@@ -155,15 +155,18 @@ if(window.localStorage.getItem('font-size')){// 字体大小
 $(document).ready(function() {
     // 初始时，“返回顶部”标签隐藏
     $(".toTop").hide();
-    $(".editDoc").hide();
     $(window).scroll(function() {
         // 若滚动的高度，超出指定的高度后，“返回顶部”的标签出现。
         if($(document).scrollTop() >= 140) {
             $(".toTop").show();
-            $(".editDoc").show();
         } else {
             $(".toTop").hide();
-            $(".editDoc").hide();
+        }
+
+        if($(document).scrollTop() >= 60) {
+            $("body").addClass('site-fix');
+        } else {
+            $("body").removeClass('site-fix');
         }
     })
     // 绑定点击事件，实现返回顶部的效果

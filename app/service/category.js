@@ -20,14 +20,15 @@ class CategoryService extends Service {
     const { ctx, app } = this;
     const { jianghuKnex } = app;
     const { keyword } = ctx.request.query;
-    const whereLike = {};
-    const where = '';
+    const whereStatus = {
+      categoryPublishStatus: 'public'
+    };
 
     let categoryList
     if (keyword) {
-      categoryList = await jianghuKnex(tableEnum.view01_category).where('categoryName', 'like', `%${keyword.trim()}%`).select();
+      categoryList = await jianghuKnex(tableEnum.view01_category).where(whereStatus).where('categoryName', 'like', `%${keyword.trim()}%`).select();
     } else {
-      categoryList = await jianghuKnex(tableEnum.view01_category).select();
+      categoryList = await jianghuKnex(tableEnum.view01_category).where(whereStatus).select();
     }
     categoryList.forEach(row => {
       const articleIdList = row.articleIdList ? row.articleIdList.split(',') : [];
