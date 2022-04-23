@@ -217,9 +217,14 @@ body, html {
     height: calc(100vh - 61px);
     background-color: #fafafa;
     /* border-right: 1px solid #e6e6e6; */
-    width:300px;
-    min-width: 300px;
+    width:299px;
+    min-width: 299px;
     overflow: hidden;
+    border-right: 1px solid #ddd;
+}
+.doc-summary:hover {
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .site-fix .doc-summary {

@@ -76,12 +76,13 @@ class ArticleService extends Service {
       ["asc"]
     );
     article.articleList = newArticleList;
-
     const categoryList = await ctx.service.category.getCategoryList();
     for (const category of categoryList) {
-      category['active'] = '';
-      if (category.articleList.find(e => e.articleId === articleId)) {
-        category['active'] = 'layui-this';
+      if (!category.hasOwnProperty('active')) {
+        category['active'] = '';
+        if (category.articleIdList.includes(articleId)) {
+          category['active'] = 'layui-this';
+        }
       }
     }
     ctx.locals.article = article;
