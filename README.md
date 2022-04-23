@@ -29,13 +29,14 @@ use openjianghu_seo;
 
 ## 线上
 
-- web: https://app.jhxf.org
-- admin: https://admin.jhxf.org
+- seo: https://openjianghu.org
+- admin: https://admin.openjianghu.org
 
 ## 同步 admin/upload/xx 至 seo/upload/xx
 
-ln -s /www/wwwroot/md_xuanfeng_admin_v5/upload/articleMaterial /www/wwwroot/md_xuanfeng_app_v5/web/upload/articleMaterial
-ln -s /www/wwwroot/md_xuanfeng_admin_v5/upload/materialRepo /www/wwwroot/md_xuanfeng_app_v5/web/upload/materialRepo
+mkdir /www/wwwroot/openjianghu_seo/upload
+ln -s /www/wwwroot/openjianghu_admin/upload/articleMaterial /www/wwwroot/openjianghu_seo/upload/articleMaterial
+ln -s /www/wwwroot/openjianghu_admin/upload/materialRepo /www/wwwroot/openjianghu_seo/upload/materialRepo
 
 ## 测试环境
 
