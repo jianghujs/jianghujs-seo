@@ -152,6 +152,29 @@
                             </div>
                         </li>
                         {% endfor %}
+                        {% for node in article.articleList %}
+                        <li>
+                            <div style="display:flex;justify-content:space-between;">
+                                {% if node.isGroup %}
+                                <span title="<$ node.articleTitle $>">
+                                    <i class="layui-icon layui-icon-table"></i> <$ node.articleTitle $>
+                                </span>
+                                {% endif %}
+                            </div>
+                            {% if node.childrenList %}
+                            <ul class="sub-menu">
+                                {% for children in node.childrenList %}
+                                <li>
+                                    <div style="display:flex;justify-content:space-between;">
+                                        <a href="<$ url $>article/<$ children.articleId $>" title="<$ children.articleTitle $>">
+                                            <i class="iconfont mrdoc-icon-wendang"></i> <$ children.articleTitle $></a>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                        </li>
+                        {% endfor %}
                     </ul>
                 </nav>
             </div>
