@@ -32,6 +32,11 @@ use openjianghu_seo;
 - web: https://app.jhxf.org
 - admin: https://admin.jhxf.org
 
+## 同步 admin/upload/xx 至 seo/upload/xx
+
+ln -s /www/wwwroot/md_xuanfeng_admin_v5/upload/articleMaterial /www/wwwroot/md_xuanfeng_app_v5/web/upload/articleMaterial
+ln -s /www/wwwroot/md_xuanfeng_admin_v5/upload/materialRepo /www/wwwroot/md_xuanfeng_app_v5/web/upload/materialRepo
+
 ## 测试环境
 
 - web: https://xuanfeng-v5.openjianghu.org
