@@ -20,19 +20,16 @@ class CategoryService extends Service {
     const { ctx, app } = this;
     const { jianghuKnex } = app;
     const { keyword } = ctx.request.query;
-    const whereStatus = {
-      categoryPublishStatus: 'public'
-    };
 
     let categoryList
     if (keyword) {
       categoryList = await jianghuKnex(tableEnum.view01_category)
-        .whereNot('articlePublishStatus', 'deleted')
+        .whereNot('categoryPublishStatus', 'deleted')
         .where('categoryName', 'like', `%${keyword.trim()}%`)
         .select();
     } else {
       categoryList = await jianghuKnex(tableEnum.view01_category)
-        .whereNot('articlePublishStatus', 'deleted')
+        .whereNot('categoryPublishStatus', 'deleted')
         .select();
     }
     categoryList.forEach(row => {
