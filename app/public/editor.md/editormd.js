@@ -4198,7 +4198,7 @@
             echart: true,
             sequenceDiagram: false,
             previewCodeHighlight: true,
-            plugin_path: '/xuanfeng_admin/public/editor.md/lib/'
+            plugin_path: '/openjianghu_seo/public/editor.md/lib/'
         };
 
         editormd.$marked = marked; // 定义 editormd 的 marked 属性 为 marked
@@ -4545,8 +4545,8 @@
     // 使用国外的CDN，加载速度有时会很慢，或者自定义URL
     // You can custom KaTeX load url.
     editormd.katexURL = {
-        css: "/xuanfeng_admin/public/editor.md/lib/katex/katex.min",
-        js: "/xuanfeng_admin/public/editor.md/lib/katex/katex.min",
+        css: "/openjianghu_seo/public/editor.md/lib/katex/katex.min",
+        js: "/openjianghu_seo/public/editor.md/lib/katex/katex.min",
     };
 
     editormd.kaTeXLoaded = false;
