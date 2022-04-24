@@ -44,8 +44,9 @@ ln -s /www/wwwroot/openjianghu_admin/upload/materialRepo /www/wwwroot/openjiangh
 
 ## 测试环境
 
-- web: https://xuanfeng-v5.openjianghu.org
-- admin: https://xuanfeng-admin-v5.openjianghu.org
+- 密思文档版 openjianghu https://temp.openjianghu.org/
+- 新的openjianghu  https://openjianghu.org/
+- openjianghu admin  https://openjianghu.org/openjianghu_admin
 
 ## nginx
 
