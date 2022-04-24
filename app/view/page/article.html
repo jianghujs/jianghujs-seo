@@ -1,12 +1,8 @@
 {% extends 'template/layuiTemplate.html' %}
 
-<!-- 引入静态文件 -->
-{% set static = "/" + ctx.app.config.appId + "/public/" %}
-{% set url = "/" +ctx.app.config.appId + "/page/" %}
-
 {% block title %}<$ article.articleTitle $>{% endblock %}
 
-{% block layui_content %}
+{% block content %}
 <div class="doc layui-fluid" style="padding-left:0px;">
     <!-- 左侧目录栏 -->
     <div class="doc-summary-parent">
@@ -146,74 +142,124 @@
     </div>
 </div>
 
-{% endblock %}
+<script src="<$ static $>viewerjs/viewer.min.js"></script>
+<script src="<$ static $>iconFont/iconfont.js"></script>
+<script src="<$ static $>mrdoc/mrdoc-docs.js"></script>
+<script src="<$ static $>editor.md/lib/purify.min.js"></script>
+<script src="<$ static $>editor.md/lib/marked.min.js"></script>
+<script src="<$ static $>editor.md/editormd.js"></script>
+<script>
+    function showCategory() {
+    // $('body').addClass('big-page');
+    layer.open({
+        type: 1,
+        // r表示right,b表示bottom
+        offset: 'lb',
+        // 文集目录
+        title: '文集目录',
+        //
+        // anim 特效 0-平滑放大 1-从上掉落 2-从底部往上滑入 3-从左滑入 4-从左翻转 5-渐显 6-抖动
+        anim: 5,
+        shadeClose: true, //开启遮罩关闭
+        // 第一个参数宽度，第二个参数高度
+        area: ['300px', '100%'],
+        // 内容区 在body中写入<div id="draw">。。。。</div>代码，即弹窗内容
+        content: $("#drawer").html(),
+    })
+    }
 
+    function showArticle() {
+    // $('body').addClass('big-page');
+    layer.open({
+        type: 1,
+        // r表示right,b表示bottom
+        offset: 'lb',
+        // 文集目录
+        title: '文章目录',
+        //
+        // anim 特效 0-平滑放大 1-从上掉落 2-从底部往上滑入 3-从左滑入 4-从左翻转 5-渐显 6-抖动
+        anim: 5,
+        shadeClose: true, //开启遮罩关闭
+        // 第一个参数宽度，第二个参数高度
+        area: ['300px', '100%'],
+        // 内容区 在body中写入<div id="draw">。。。。</div>代码，即弹窗内容
+        content: $(".doc-summary-parent").html(),
+    })
+    }
+    initDocRender(1);
+    // 图片放大显示
+    var img_options = {
+    url: 'data-original',
+    fullscreen:false,//全屏
+    rotatable:false,//旋转
+    scalable:false,//翻转
+    button:false,//关闭按钮
+    toolbar:false,
+    title:false,
+    };
+    var img_viewer = new Viewer(document.getElementById('content'), img_options);
+</script>
+<script>
+    var layer = layui.layer;
+    var form = layui.form;
+    // 非小屏默认展开文档目录
+    if (window.innerWidth > 1050) {
+        $(".sidebar").toggleClass("doc-toc-hide");
+    }
+    // 切换文档目录显示与否
+    $(".tocMenu").on("click", function () {
+        $(".sidebar").toggleClass("doc-toc-hide");
+    });
+</script>
 
-
-{% block custom_script %}
-    <script>
-    
-      function showCategory() {
-        // $('body').addClass('big-page');
-        layer.open({
-          type: 1,
-          // r表示right,b表示bottom
-          offset: 'lb',
-          // 文集目录
-          title: '文集目录',
-          //
-          // anim 特效 0-平滑放大 1-从上掉落 2-从底部往上滑入 3-从左滑入 4-从左翻转 5-渐显 6-抖动
-          anim: 5,
-          shadeClose: true, //开启遮罩关闭
-          // 第一个参数宽度，第二个参数高度
-          area: ['300px', '100%'],
-          // 内容区 在body中写入<div id="draw">。。。。</div>代码，即弹窗内容
-          content: $("#drawer").html(),
-        })
-      }
-
-      function showArticle() {
-        // $('body').addClass('big-page');
-        layer.open({
-          type: 1,
-          // r表示right,b表示bottom
-          offset: 'lb',
-          // 文集目录
-          title: '文章目录',
-          //
-          // anim 特效 0-平滑放大 1-从上掉落 2-从底部往上滑入 3-从左滑入 4-从左翻转 5-渐显 6-抖动
-          anim: 5,
-          shadeClose: true, //开启遮罩关闭
-          // 第一个参数宽度，第二个参数高度
-          area: ['300px', '100%'],
-          // 内容区 在body中写入<div id="draw">。。。。</div>代码，即弹窗内容
-          content: $(".doc-summary-parent").html(),
-        })
-      }
-      initDocRender(1);
-      // 图片放大显示
-      var img_options = {
-        url: 'data-original',
-        fullscreen:false,//全屏
-        rotatable:false,//旋转
-        scalable:false,//翻转
-        button:false,//关闭按钮
-        toolbar:false,
-        title:false,
-      };
-      var img_viewer = new Viewer(document.getElementById('content'), img_options);
-    </script>
-    <script>
-        var layer = layui.layer;
-        var form = layui.form;
-        // 非小屏默认展开文档目录
-        if (window.innerWidth > 1050) {
-            $(".sidebar").toggleClass("doc-toc-hide");
+<style>
+    .markdown-body p img {
+        max-width: 350px;
+    }
+    pre.linenums, .vditor-reset>pre>code {
+        max-height: max-content !important;
+    }
+    #drawer {
+        color: #333;
+        position: fixed;
+        height: calc(100%);
+        background-color: #fafafa;
+        /* border-right: 1px solid #e6e6e6; */
+        width: 300px;
+        overflow: auto;
+        left: -310px;
+    }
+    /* 移动端筛选控制栏样式 */
+    @media screen and (max-width: 768px){
+        .logo {
+            position: inherit;
+            left: 0;
+            top: 0;
+            margin: 0 auto;
         }
-        // 切换文档目录显示与否
-        $(".tocMenu").on("click", function () {
-            $(".sidebar").toggleClass("doc-toc-hide");
-        });
-    </script>
-    <script src="<$ static $>toc/doctoc.js"></script>
+        .layui-fluid {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+        .header-menu-icon {
+            position: absolute;
+            left: 15px;
+            font-size: 24px;
+        }
+
+    }
+    div.sidebar {
+        top:60px;
+        border: 1px solid #ddd;
+        background: white;
+        overflow: hidden;
+        width: 250px;
+    }
+    div.sidebar:hover {
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+</style>
+<script src="<$ static $>toc/doctoc.js"></script>
 {% endblock %}
