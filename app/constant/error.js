@@ -33,6 +33,10 @@ const errorInfoEnum = Object.freeze({
     errorCode: "article_not_found",
     errorReason: "文章找不到",
   },
+  article_no_access: {
+    errorCode: "article_no_access",
+    errorReason: "无权限访问",
+  },
   material_is_not_file: {
     errorCode: "material_is_not_file",
     errorReason: "所选素材不是文件类型",

@@ -22,19 +22,26 @@ class ArticleService extends Service {
     const { jianghuKnex } = app;
     const articleId = ctx.pathParams && ctx.pathParams[0]
       || this.ctx.request.body.appData.actionData.articleId;
-    const article = await jianghuKnex(tableEnum.article)
-      .where({ articleId })
-      .first();
-    if (!article) {
-      throw new BizError(errorInfoEnum.article_not_found)
-    }
 
-    const { categoryId } = article;
-    // TODO: 判断用户是否已经登录 ===》 articlePublishStatus ['public', 'login']
+
     const articlePublishStatus = [ 'public' ];
     if (userId) {
       articlePublishStatus.push('login');
     }
+
+    const article = await jianghuKnex(tableEnum.article)
+      .whereIn('articlePublishStatus', [ 'public', 'login'])
+      .where({ articleId })
+      .first();
+    if (!article) {
+      return errorInfoEnum.article_not_found
+    }
+    if (article.articlePublishStatus === 'login' && !userId) {
+      article.articleContent = "# <font color='red'>无权限访问</font>";
+      article.articleContentForSeo = "<h1>无权限访问</h1>";
+    }
+
+    const { categoryId } = article;
     let articlelist = await jianghuKnex(tableEnum.view01_article)
       .where({
         categoryId,
