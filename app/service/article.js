@@ -18,6 +18,7 @@ class ArticleService extends Service {
 
   async getArticleAndFillArticles() {
     const { ctx, app } = this;
+    const { userId } = ctx.userInfo;
     const { jianghuKnex } = app;
     const articleId = ctx.pathParams && ctx.pathParams[0]
       || this.ctx.request.body.appData.actionData.articleId;
@@ -29,11 +30,16 @@ class ArticleService extends Service {
     }
 
     const { categoryId } = article;
+    // TODO: 判断用户是否已经登录 ===》 articlePublishStatus ['public', 'login']
+    const articlePublishStatus = [ 'public' ];
+    if (userId) {
+      articlePublishStatus.push('login');
+    }
     let articlelist = await jianghuKnex(tableEnum.view01_article)
       .where({
         categoryId,
       })
-      .whereNot('articlePublishStatus', 'deleted')
+      .whereIn('articlePublishStatus', articlePublishStatus)
       .select();
     articlelist = articlelist.map(
       ({
