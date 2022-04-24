@@ -24,38 +24,19 @@
     <!-- OGP分享协议结束 -->
     <title>{% block title %}{% endblock %} - <$ ctx.app.config.appTitle $></title>
     <link href="<$ static $>layui/css/layui.css" rel="stylesheet">
-    {% if doc.editor_mode != 4 %}
     <link rel="stylesheet" href="<$ static $>editor.md/css/editormd.css" />
-    {% endif %}
-    {% if doc.editor_mode == 2 %}
-    <link rel="stylesheet" href="<$ static $>vditor/dist/index.css" />
-    {% endif %}
-    {% if doc.editor_mode == 4 %}
-    <!-- 在线表格 -->
-    <link rel='stylesheet' href="<$ static $>luckysheet/dist/plugins/css/pluginsCss.css" />
-    <link rel='stylesheet' href="<$ static $>luckysheet/dist/plugins/plugins.css" />
-    <link rel='stylesheet' href="<$ static $>luckysheet/dist/css/luckysheet.css" />
-    <link rel='stylesheet'
-        href="<$ static $>luckysheet/dist/assets/iconfont/iconfont.css" />
-    {% endif %}
+    <!-- <link rel="stylesheet" href="<$ static $>vditor/dist/index.css" /> -->
     <link href="<$ static $>viewerjs/viewer.min.css" rel="stylesheet">
-    <link rel="icon" href="<$ static $>search/mrdoc_logo_300.png" sizes="192x192" />
     <link href="<$ static $>mrdoc/mrdoc.css" rel="stylesheet">
     <link href="<$ static $>mrdoc/mrdoc-docs.css" rel="stylesheet">
     <link href="<$ static $>iconFont/iconfont.css" rel="stylesheet">
     <style>
-        { % if img_scale % }
-            .markdown-body p img {
-                max-width: 350px;
-            }
-        { % endif % }
-
-        { % if long_code=='on'% }
-            pre.linenums, .vditor-reset>pre>code {
-                max-height: max-content !important;
-            }
-        { % endif % }
-
+        .markdown-body p img {
+            max-width: 350px;
+        }
+        pre.linenums, .vditor-reset>pre>code {
+            max-height: max-content !important;
+        }
         #drawer {
             color: #333;
             position: fixed;
@@ -75,7 +56,6 @@
                 margin: 0 auto;
             }
             .layui-fluid {
-                text-align: center;
                 display: flex;
                 flex-direction: row;
                 align-items: center;
@@ -105,7 +85,24 @@
 <body class="big-page">
 
     <div class="layui-header">
-        {% block header %}{% endblock %}
+        <div class="layui-fluid layui-container" style="height: 100%">
+            <i class="layui-icon header-menu-icon layui-icon-slider layui-show-xs-inline" style="display: none" onclick="showCategory()"></i>
+            <a class="logo" href="/">
+                <img src="https://yun.startalk.tech/index.php/s/JxPejNyea9bn3gB/download" alt="layui">
+            </a>
+            <div class="layui-hide-xs site-notice"></div>
+        
+            <ul class="layui-nav layui-hide-xs" id="LAY_NAV_TOP" style="position: absolute">
+                <li class="layui-nav-item">
+                    <a href="/">首&nbsp;&nbsp;页</a>
+                </li>
+                {% for category in categoryList %}
+                <li class="layui-nav-item <$ category.active $>">
+                    <a href="/<$ ctx.app.config.appId $>/page/article/<$ category.articleList[0].articleId $>/"><$ category.categoryName $></a>
+                </li>
+                {% endfor %}
+                <span class="layui-nav-bar" style="left: 64px; top: 55px; width: 0px; opacity: 0;"></span></ul>
+        </div>
     </div>
     <div id="drawer">
         <div class="layui-panel site-menu">

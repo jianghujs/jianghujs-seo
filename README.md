@@ -1,5 +1,9 @@
 # openjianghu
 
+## 风格
+
+- [参考](https://layui.itze.cn/)
+
 ## 配置
 
 1. npm install
