@@ -37,7 +37,7 @@ class ArticleService extends Service {
       return errorInfoEnum.article_not_found
     }
     if (article.articlePublishStatus === 'login' && !userId) {
-      article.articleContent = "# <font color='red'>无权限访问</font>";
+      article.articleContent = "# 无权限访问";
       article.articleContentForSeo = "<h1>无权限访问</h1>";
     }
 
