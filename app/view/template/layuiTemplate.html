@@ -1,6 +1,7 @@
 {% set appId = ctx.app.config.appId %}
+{% set adminUrl = ctx.app.config.adminUrl %}
 {% set static = "/" + appId + "/public/" %}
-{% set url = "/" + appId + "/page/" %}
+{% set pageUrl = "/" + appId + "/page" %}
 <!DOCTYPE html>
 <html lang="zh-cn" style="font-size: 15px;">
 
@@ -21,7 +22,7 @@
     <meta property="og:description" content="{% block ogp_desc %}{% endblock %}">
     <meta property="og:image"
         content="<$ request.scheme $>://<$ request.META.HTTP_HOST $><$ static $>search/mrdoc_logo_300.png">
-    <meta property="og:url" content="<$ request.scheme $>://<$ request.META.HTTP_HOST $><$ request.path_info $>">
+    <meta property="og:pageUrl" content="<$ request.scheme $>://<$ request.META.HTTP_HOST $><$ request.path_info $>">
     <!-- OGP分享协议结束 -->
     <title>{% block title %}{% endblock %} - <$ ctx.app.config.appTitle $></title>
     <link href="<$ static $>layui/css/layui.css" rel="stylesheet">
@@ -47,7 +48,7 @@
                 <img src="https://yun.startalk.tech/index.php/s/JxPejNyea9bn3gB/download" alt="layui">
             </a>
             <div class="layui-hide-xs site-notice"></div>
-        
+
             <ul class="layui-nav layui-hide-xs" id="LAY_NAV_TOP" style="position: absolute">
                 <li class="layui-nav-item">
                     <a href="/">首&nbsp;&nbsp;页</a>
@@ -57,22 +58,49 @@
                     <a href="/<$ ctx.app.config.appId $>/page/article/<$ category.articleList[0].articleId $>/"><$ category.categoryName $></a>
                 </li>
                 {% endfor %}
-                <!-- TODO: ui 优化 -->
-                <li class="layui-nav-item" style="width: 120px;">
+                <li class="layui-nav-item">
                     {% if userInfo.username %}
-                        <a href="javascript:void(0);">
-                            <$ userInfo.username $>
-                        </a>
+                    <a href="javascript:void(0);">
+                        <i class="layui-icon layui-icon-friends"></i> 
+                        <span class="layui-hide-xs"> <$ userInfo.username $> </span>
+                    <i class="layui-icon layui-icon-down layui-nav-more"></i></a>
+                    <dl class="layui-nav-child layui-anim layui-anim-upbit">
+                        
+                        <dd>
+                            <a href="<$ adminUrl $>" title="进入站点后台管理">
+                                <i class="layui-icon layui-icon-console layui-hide-md"></i>
+                                <span class="layui-hide-xs">进入后台</span>
+                            </a>
+                        </dd>
+                        <!-- <dd>
+                            <a href="javascript:void(0);" onclick="changePwd('4','m3611F' )" title="修改登录密码">
+                                <i class="layui-icon layui-icon-password layui-hide-md"></i>
+                                <span class="layui-hide-xs">修改密码</span>
+                            </a>
+                        </dd> -->
+                        <dd>
+                            <a href="javascript:void(0);" onclick="logout()" title="退出登录">
+                                <i class="layui-icon layui-icon-logout layui-hide-md"></i>
+                                <span class="layui-hide-xs">退出登录</span>
+                            </a>
+                        </dd>
+                    </dl>
                     {% else %}
-                        <a href="<$ url $>login">
-                            <i class="iconfont mrdoc-icon-denglu"></i>登录
-                        </a>
+                    <a href="javascript:void(0);">
+                        <i class="layui-icon layui-icon-username"></i> 游客
+                        <i class="layui-icon layui-icon-down layui-nav-more"></i></a>
+                        <dl class="layui-nav-child layui-anim layui-anim-upbit">
+                            <dd>
+                                <a href="<$ pageUrl $>/login">
+                                    <i class="iconfont mrdoc-icon-denglu"></i>
+                                    登录
+                                </a>
+                            </dd>
+                            
+                        </dl>
+                    </a>   
                     {% endif %}
-                </li>
-                <li class="layui-nav-item" style="width: 120px;">
-                    <a href="javascript:void(0);" onclick="logout()">
-                        登出
-                    </a>
+ 
                 </li>
             </ul>
         </div>
@@ -105,6 +133,10 @@
                 location.reload();
             }, 360)
         }
+        //注意：导航 依赖 element 模块，否则无法进行功能性操作
+        layui.use('element', function(){
+            const element = layui.element;
+        });
     </script>
 
     {% block content %}{% endblock %}

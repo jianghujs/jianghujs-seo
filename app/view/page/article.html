@@ -22,7 +22,7 @@
                     <li>
                         <div style="display:flex;justify-content:space-between;">
                             {% if not node.isGroup %}
-                            <a href="<$ url $>article/<$ node.articleId $>" title="<$ children.articleTitle $>">
+                            <a href="<$ pageUrl $>/article/<$ node.articleId $>" title="<$ children.articleTitle $>">
                                 <i class="iconfont mrdoc-icon-wendang"></i> <$ node.articleTitle $></a>
                             {% endif %}
                         </div>
@@ -42,7 +42,7 @@
                             {% for children in node.childrenList %}
                             <li>
                                 <div style="display:flex;justify-content:space-between;">
-                                    <a href="<$ url $>article/<$ children.articleId $>" title="<$ children.articleTitle $>">
+                                    <a href="<$ pageUrl $>/article/<$ children.articleId $>" title="<$ children.articleTitle $>">
                                         <i class="iconfont mrdoc-icon-wendang"></i> <$ children.articleTitle $></a>
                                 </div>
                             </li>
@@ -72,7 +72,7 @@
             </a>
             <!-- 顶部工具栏 -->
             <div id="toc-container" class='sidebar doc-toc-hide layui-hide-xs'></div>
-            <!--<a class="btn pull-right" aria-label="" href="<$ url $>home">
+            <!--<a class="btn pull-right" aria-label="" href="<$ pageUrl $>/home">
                 <i class="layui-icon layui-icon-home"></i> <span class="layui-hide-xs">首页</span>
             </a>-->
         </div>
