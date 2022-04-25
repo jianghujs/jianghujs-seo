@@ -5,7 +5,7 @@ const path = require('path');
 module.exports = appInfo => {
 
   return {
-    adminUrl: 'https://openjianghu.org/openjianghu_admin',
+    adminUrl: 'https://openjianghu.org/admin',
     static: {
       maxAge: 0,
       buffer: false,
