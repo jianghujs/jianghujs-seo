@@ -27,7 +27,7 @@ module.exports = (appInfo) => {
     indexPage: `/${appId}/page/home`,
     loginPage: `/${appId}/page/login`,
     helpPage: `/${appId}/page/help`,
-    adminUrl: 'http://127.0.0.1:8306',
+    adminUrl: 'http://127.0.0.1:8306/admin',
     uploadDir,
     uploadDirConfig: [
       "/articleMaterial",
