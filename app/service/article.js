@@ -18,14 +18,15 @@ class ArticleService extends Service {
 
   async getArticleAndFillArticles() {
     const { ctx, app } = this;
-    const { userId } = ctx.userInfo;
+    const { user } = ctx.userInfo;
+    const userStatusIsActive = user && user.userId && user.userStatus === 'active';
     const { jianghuKnex } = app;
     const articleId = ctx.pathParams && ctx.pathParams[0]
       || this.ctx.request.body.appData.actionData.articleId;
 
 
     const articlePublishStatus = [ 'public' ];
-    if (userId) {
+    if (userStatusIsActive) {
       articlePublishStatus.push('login');
     }
 
@@ -36,7 +37,7 @@ class ArticleService extends Service {
     if (!article) {
       return errorInfoEnum.article_not_found
     }
-    if (article.articlePublishStatus === 'login' && !userId) {
+    if (article.articlePublishStatus === 'login' && !userStatusIsActive) {
       article.articleContent = "# 无权限访问";
       article.articleContentForSeo = "<h1>无权限访问</h1>";
     }
@@ -91,7 +92,6 @@ class ArticleService extends Service {
     article.articleList = newArticleList;
     const categoryList = await ctx.service.category.getCategoryList();
     for (const category of categoryList) {
-      console.log(category.articleIdList)
       if (!category.hasOwnProperty('active')) {
         category['active'] = '';
         if (category.articleIdList && category.articleIdList.includes(articleId)) {
