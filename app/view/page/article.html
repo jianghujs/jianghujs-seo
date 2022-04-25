@@ -97,10 +97,7 @@
 
                     </div>
                     <!-- 正文开始 -->
-                    <div class="markdown-body" id="content">
-                        <!--<div class="doc_cover" style="width: 100%; max-height: 280px; display: flex; justify-content: center;">
-                            <img title="封面" src="/upload/<$ article.articleCoverImage $>" style="object-fit: cover;">
-                        </div>-->
+                    <div class="markdown-body editormd-preview-container" id="content">
                         <$ article.articleContentForSeo | safe $>
                         <div id="articleContentHidden" class="articleContentHidden" style="position: absolute; top: -1000px; overflow: hidden; height: 0; width: 0;">
                             <textarea style="display: none;"><$ article.articleContent $></textarea>
@@ -201,6 +198,29 @@
     div.sidebar:hover {
         overflow-x: hidden;
         overflow-y: auto;
+    }
+
+    #editorMdContainer pre {
+        font-size: 16px !important;
+    }
+
+    #baseinfo_diff_body pre {
+        font-size: 16px !important;
+    }
+    #baseinfo_diff_body .CodeMirror-merge {
+        height: 100%;
+    }
+    #baseinfo_diff_body .CodeMirror-merge .CodeMirror {
+        height: 100%;
+    }
+    #diff_body pre {
+        font-size: 16px !important;
+    }
+    #diff_body .CodeMirror-merge {
+        height: 100%;
+    }
+    #diff_body .CodeMirror-merge .CodeMirror {
+        height: 100%;
     }
 </style>
 <script src="<$ static $>toc/doctoc.js"></script>
