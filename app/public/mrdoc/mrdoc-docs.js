@@ -48,7 +48,7 @@ tagCurrentDoc = function(){
                 }
             })
             // 目录的当前文档滚动于目录顶端
-            this.scrollIntoView({ behavior: 'auto', block: "start" });
+            this.scrollIntoView({ behavior: 'auto', block: "center" });
         } else {
             // console.log(lochref,mehref)
             $me.closest("li").removeClass("active");
@@ -389,7 +389,7 @@ function initDocRender(mode){
             atLink          : false, // 禁用@链接
             htmlDecode      : "link,style,base,script", // 过滤部分HTML标签
         });
-    }else if(mode == 2){
+    } else if(mode == 2) {
         var md_content = $("#content textarea").val()
         Vditor.preview(document.getElementById('content'),md_content,
         {

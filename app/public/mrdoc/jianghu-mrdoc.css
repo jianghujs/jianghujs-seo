@@ -213,6 +213,10 @@ body, html {
     flex: 1;
     box-sizing: border-box;
     min-width: 0;
+    padding: 0;
+    height: calc(100vh - 61px);
+    max-height: calc(100vh - 61px);
+    overflow: hidden;
 }
 .project-title{
     font-size: 20px;
@@ -261,6 +265,8 @@ body, html {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     left:300px;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 .site-fix .doc-ml-300 {
     margin-left: 300px;
@@ -861,9 +867,6 @@ input#doc-name,input#doctemp-name{
         opacity: .5;
         left: 150%;
     }
-    }
-    .doc {
-        padding: 0;
     }
     .doc-body {
         padding: 0 20px;
