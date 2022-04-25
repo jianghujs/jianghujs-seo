@@ -3,7 +3,7 @@
 {% block title %}<$ article.articleTitle $>{% endblock %}
 
 {% block content %}
-<div class="doc layui-fluid" style="padding-left:0px;">
+<div class="doc layui-fluid">
     <!-- 左侧目录栏 -->
     <div class="doc-summary-parent">
 
@@ -74,7 +74,7 @@
                 <i class="layui-icon layui-icon-edit"></i> <span class="layui-hide-xs">修改</span>
             </a>
             <!-- 顶部工具栏 -->
-            <div id="toc-container" class='sidebar doc-toc-hide layui-hide-xs'></div>
+            <div id="toc-container" class='sidebar doc-toc-hide'></div>
             <!--<a class="btn pull-right" aria-label="" href="<$ pageUrl $>/home">
                 <i class="layui-icon layui-icon-home"></i> <span class="layui-hide-xs">首页</span>
             </a>-->
@@ -97,7 +97,7 @@
 
                     </div>
                     <!-- 正文开始 -->
-                    <div class="markdown-body" id="content" style="padding: 20px;padding-top: 5px;">
+                    <div class="markdown-body" id="content">
                         <!--<div class="doc_cover" style="width: 100%; max-height: 280px; display: flex; justify-content: center;">
                             <img title="封面" src="/upload/<$ article.articleCoverImage $>" style="object-fit: cover;">
                         </div>-->
@@ -110,38 +110,17 @@
                     <div class="markdown-body" style="padding-left: 20px;"></div>
                 </div>
                 <hr>
-                <!-- 分享栏 -->
-                <div style="color: rgba(0,0,0,.65);padding-bottom: 10px;margin-top: 10px;">
-                    <div class="layui-row layui-col-space20" style="padding-left: 20px;">
-                        <span class="doc-bottom-icon">
-                            <i class="layui-icon layui-icon-user"></i>
-                            <$ article.articleUpdateUsername $>
-                        </span>
-                        <span tooltip="更新于:<$ article.articleUpdateTime $>" class="doc-bottom-icon">
-                            <i class="layui-icon layui-icon-log"></i>
-                            <$ article.articleUpdateTime $>
-                        </span>
-                
-                        {% if article.articleTagList %}
-                            <i class="fa fa-tag"></i><$ article.articleTagList $>
-                        {% endif %}
-                
-                        <!-- <button id="share" class="doc-bottom-btn" tooltip="转发本文档">
-                            <i class="layui-icon layui-icon-share"></i> 转发文档
-                        </button> -->
-                
-                        <!-- <button class="doc-bottom-btn" tooltip="下载文档" id="download_doc">
-                            <i class="fa fa-download"></i> 下载文档
-                        </button> -->
-                    </div>
-                </div>
             </div>
         </div>
     </div>
     <div class="fixed-tool-bar">
         <div class="toTop layui-hide-xs-inline-block"><i class="layui-icon layui-icon-up"></i></div>
-        <div class="editDoc layui-show-xs-inline-block" style="display: none;" onclick="showArticle()"><i class="layui-icon layui-icon-slider"></i></div>
-        <div class="tocMenu layui-hide-xs" ><i class="fa fa-list"></i></div>
+        <div class="editDoc layui-show-xs-inline-block" style="display: none;text-align: center;width: auto" onclick="showArticle()">
+            <button class="layui-btn layui-btn-radius">文章</button>
+        </div>
+        <div class="tocMenu" style="text-align: center;width: auto">
+            <button class="layui-btn layui-btn-radius">大纲</button>
+        </div>
     </div>
 </div>
 
@@ -152,42 +131,31 @@
 <script src="<$ static $>editor.md/lib/marked.min.js"></script>
 <script src="<$ static $>editor.md/editormd.js"></script>
 <script>
-    function showCategory() {
-    // $('body').addClass('big-page');
-    layer.open({
-        type: 1,
-        // r表示right,b表示bottom
-        offset: 'lb',
-        // 文集目录
-        title: '文集目录',
-        //
-        // anim 特效 0-平滑放大 1-从上掉落 2-从底部往上滑入 3-从左滑入 4-从左翻转 5-渐显 6-抖动
-        anim: 5,
-        shadeClose: true, //开启遮罩关闭
-        // 第一个参数宽度，第二个参数高度
-        area: ['300px', '100%'],
-        // 内容区 在body中写入<div id="draw">。。。。</div>代码，即弹窗内容
-        content: $("#drawer").html(),
-    })
+  $(function () {
+    function getTop() {
+      const top = $('.doc-summary').find('list.active').offset().top;
+      console.log(top)
+      $('.doc-summary').scrollTop(top-65);
     }
-
+    getTop()
+  })
+    // 展示左侧目录
     function showArticle() {
-    // $('body').addClass('big-page');
-    layer.open({
-        type: 1,
-        // r表示right,b表示bottom
-        offset: 'lb',
-        // 文集目录
-        title: '文章目录',
-        //
-        // anim 特效 0-平滑放大 1-从上掉落 2-从底部往上滑入 3-从左滑入 4-从左翻转 5-渐显 6-抖动
-        anim: 5,
-        shadeClose: true, //开启遮罩关闭
-        // 第一个参数宽度，第二个参数高度
-        area: ['300px', '100%'],
-        // 内容区 在body中写入<div id="draw">。。。。</div>代码，即弹窗内容
-        content: $(".doc-summary-parent").html(),
-    })
+        layer.open({
+            type: 1,
+            // r表示right,b表示bottom
+            offset: 'lb',
+            // 文集目录
+            title: '目录',
+            //
+            // anim 特效 0-平滑放大 1-从上掉落 2-从底部往上滑入 3-从左滑入 4-从左翻转 5-渐显 6-抖动
+            anim: 5,
+            shadeClose: true, //开启遮罩关闭
+            // 第一个参数宽度，第二个参数高度
+            area: ['300px', '100%'],
+            // 内容区 在body中写入<div id="draw">。。。。</div>代码，即弹窗内容
+            content: $(".doc-summary-parent").html(),
+        })
     }
     initDocRender(1);
     // 图片放大显示
@@ -221,36 +189,6 @@
     }
     pre.linenums, .vditor-reset>pre>code {
         max-height: max-content !important;
-    }
-    #drawer {
-        color: #333;
-        position: fixed;
-        height: calc(100%);
-        background-color: #fafafa;
-        /* border-right: 1px solid #e6e6e6; */
-        width: 300px;
-        overflow: auto;
-        left: -310px;
-    }
-    /* 移动端筛选控制栏样式 */
-    @media screen and (max-width: 768px){
-        .logo {
-            position: inherit;
-            left: 0;
-            top: 0;
-            margin: 0 auto;
-        }
-        .layui-fluid {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-        }
-        .header-menu-icon {
-            position: absolute;
-            left: 15px;
-            font-size: 24px;
-        }
-
     }
     div.sidebar {
         top:60px;

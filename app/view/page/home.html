@@ -3,251 +3,117 @@
 {% block title %}首页{% endblock %}
 
 {% block content %}
-<div class="site-banner">
-  <div class="site-banner-bg" style1="background-image: url(//res.layui.why-studio.ml/static/images/layui/banner/autumn.jpg?v=66); background-size: cover;">
-  </div>
-  <div class="site-banner-main">
-      <div class="site-zfj">
-          <i class="layui-icon" style="color: #fff; color: rgba(255,255,255,.6);">&#xe609;</i>
-      </div>
-      <div class="layui-anim site-desc">
-          <p class="web-font-desc">开源江湖  一站式部署</p>
-          <cite>由职业前端倾情打造，面向全层次的前后端开发者，易上手开源免费的 Web UI 组件库</cite>
-      </div>
-      <div class="site-download">
-          <a href="/<$ appId $>/page/article/10005" class="layui-inline site-down">
-              <cite class="layui-icon">&#xe601;</cite>
-              快速上手
-          </a>
-      </div>
-      <div class="site-version">
-          <span>当前版本：v<cite class="site-showv">…</cite></span>
-          <span><a href="/doc/base/changelog.html" rel="nofollow" target="_blank">更新日志</a></span>
-          <span>下载量：<em class="site-showdowns">…</em></span>
-      </div>
-      <div class="site-banner-other">
-          <a href="https://github.com/sentsin/layui/" target="_blank" rel="nofollow" class="site-star">
-              <i class="layui-icon">&#xe658;</i>
-              Star <cite id="getStars"></cite>
-          </a>
-          <a href="https://gitee.com/sentsin/layui" target="_blank" rel="nofollow" class="site-fork">
-              Gitee
-          </a>
-          <a href="about/disclaimer.html" target="_blank" class="site-fork">
-              免责声明
-          </a>
-      </div>
-  </div>
-</div>
-
-<div class="layui-container" style="padding-bottom: 50px">
-
-
-  <ul class="layui-row layui-col-space30 site-idea">
-      <li class="layui-col-md4">
-          <div>
-              <fieldset class="layui-elem-field layui-field-title">
-                  <legend>返璞归真</legend>
-                  <p>身处在前端社区的繁荣之下，我们都在有意或无意地追逐。而 layui 偏偏回望当初，奔赴在返璞归真的漫漫征途，自信并勇敢着，追寻于原生态的书写指令，试图以最简单的方式诠释高效。</p>
-              </fieldset>
-          </div>
-      </li>
-      <li class="layui-col-md4">
-          <div>
-              <fieldset class="layui-elem-field layui-field-title">
-                  <legend>双面体验</legend>
-                  <p>拥有双面的不仅是人生，还有 layui。一面极简，一面丰盈。极简是视觉所见的外在，是开发所念的简易。丰盈是倾情雕琢的内在，是信手拈来的承诺。一切本应如此，简而全，双重体验。</p>
-              </fieldset>
-          </div>
-      </li>
-      <li class="layui-col-md4">
-          <div>
-              <fieldset class="layui-elem-field layui-field-title">
-                  <legend>星辰大海</legend>
-                  <p>如果眼下还是一团零星之火，那运筹帷幄之后，迎面东风，就是一场烈焰燎原吧，那必定会是一番尽情的燃烧。待，秋风萧瑟时，散作满天星辰，你看那四季轮回<!--海天相接-->，正是 layui 不灭的执念。</p>
-              </fieldset>
-          </div>
-      </li>
-  </ul>
-
-</div>
-<div id="drawer">
-  <div class="layui-panel site-menu">
-      <ul class="layui-menu layui-menu-lg">
-          <li class="layui-menu-item-group">
-              <ul>
-                  {% for category in categoryList %}
-                  <li class="<$ 'layui-menu-item-checked2' if category.active else '' $>">
-                      <div class="layui-menu-body-title">
-                          <a href="/<$ ctx.app.config.appId $>/page/article/<$ category.articleList[0].articleId $>">
-                              <span><$ category.categoryName $> </span>
-                              <span class="layui-font-12 layui-font-gray">Getting Started</span>
-                          </a>
-
-                      </div>
-                  </li>
-                  {% endfor %}
-              </ul>
-          </li>
-      </ul>
-  </div>
+<div class="jianghu-default-layout-content">
+    <div class="jianghu-egg-intro">
+        <div class="jianghu-egg-intro-wrap">
+            <div class="jianghu-egg-intro-logo"><a href=""><img
+                    src="https://zos.alipayobjects.com/rmsportal/JFKAMfmPehWfhBPdCjrw.svg"></a></div>
+            <div class="jianghu-egg-intro-info">
+                <h1><p class="jianghu-egg-intro-info-stronge">Born to build</p>better enterprise frameworks and apps with
+                    Node.js &amp; Koa
+                </h1>
+                <p>为企业级框架和应用而生</p>
+                <div class="jianghu-egg-intro-buttons"><a class="jianghu-egg-intro-button jianghu-egg-intro-button-primary"
+                                                         href="">开始使用</a><a
+                        class="jianghu-egg-intro-button jianghu-egg-intro-button-secondary"
+                        href="https://github.com/eggjs/egg/">GitHub</a></div>
+            </div>
+        </div>
+    </div>
+    <div class="jianghu-egg-features">
+        <div class="jianghu-egg-features-wrap">
+            <div class="jianghu-egg-features-item">
+                <div class="jianghu-egg-features-item-icon"><img src="<$ static $>images/home/icon-3.png"></div>
+                <h2>完善的生态</h2>
+                <p>基于开源生态，专为泛蚂蚁生态定制，一分钟接入后端服务中间件，支持多种部署环境。</p></div>
+            <div class="jianghu-egg-features-item">
+                <div class="jianghu-egg-features-item-icon"><img src="<$ static $>images/home/icon-4.png"></div>
+                <h2>高效自然的研发体验</h2>
+                <p>渐进式开发，学习曲线平滑，提供一站式开发套件，为研发全流程保驾护航。</p></div>
+            <div class="jianghu-egg-features-item">
+                <div class="jianghu-egg-features-item-icon"><img src="<$ static $>images/home/icon-2.png"></div>
+                <h2>高质量、可信赖</h2>
+                <p>高质量，完备的测试，内置集团安全策略，双十一等线上大规模顶级流量压力考验。</p></div>
+            <div class="jianghu-egg-features-item">
+                <div class="jianghu-egg-features-item-icon"><img src="<$ static $>images/home/icon-1.png"></div>
+                <h2>灵活、高扩展性</h2>
+                <p>约定优于配置，高度灵活的定制性，业界领先的插件机制和上层业务框架机制。</p></div>
+        </div>
+    </div>
+    <div class="jianghu-egg-links">
+        <div class="jianghu-egg-links-wrap">
+            <div class="jianghu-egg-links-item">
+                <div class="ant-list">
+                    <div class="ant-list-header">Resources</div>
+                    <div class="ant-spin-nested-loading">
+                        <div class="ant-spin-container">
+                            <ul class="ant-list-items">
+                                <li class="ant-list-item"><a href="" target="_blank">Egg</a>
+                                </li>
+                                <li class="ant-list-item"><a href="" target="_blank">Organization</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="jianghu-egg-links-item">
+                <div class="ant-list">
+                    <div class="ant-list-header">XTech</div>
+                    <div class="ant-spin-nested-loading">
+                        <div class="ant-spin-container">
+                            <ul class="ant-list-items">
+                                <li class="ant-list-item"><a href="" target="_blank">EggJS - 企业级
+                                    Node.js 开发框架</a></li>
+                                <li class="ant-list-item"><a href="" target="_blank">Ant Design - UI
+                                    体系</a></li>
+                                <li class="ant-list-item"><a href="" target="_blank">AntV - 数据可视化</a>
+                                </li>
+                                <li class="ant-list-item"><a href="" target="_blank">语雀 -
+                                    知识创作与分享工具</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="jianghu-egg-links-item">
+                <div class="ant-list">
+                    <div class="ant-list-header">Community</div>
+                    <div class="ant-spin-nested-loading">
+                        <div class="ant-spin-container">
+                            <ul class="ant-list-items">
+                                <li class="ant-list-item"><a href="" target="_blank">CNode 社区</a>
+                                </li>
+                                <li class="ant-list-item"><a href="" target="_blank">Node.js
+                                    专栏</a></li>
+                                <li class="ant-list-item"><a href="" target="_blank">提交反馈</a>
+                                </li>
+                                <li class="ant-list-item"><a href=""
+                                                             target="_blank">发布日志</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="jianghu-egg-links-item">
+                <div class="ant-list">
+                    <div class="ant-list-header">Egg.js Dingtalk</div>
+                    <div class="ant-spin-nested-loading">
+                        <div class="ant-spin-container">
+                            <ul class="ant-list-items">
+                                <li class="ant-list-item"><img class="jianghu-egg-links-qrcode"
+                                                               src="<$ static $>images/home/qrcode_dingtalk.png"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="jianghu-egg-copyright">Copyright © 2022 Eggjs.org</div>
 </div>
 <div class="layui-row project-list-page" style="text-align: center;">
 </div>
-<div class="layui-footer" style="border-top: 1px solid rgb(230, 230, 230); text-align: center; margin-top: 38px; width: 100%; position: fixed; left: 0px; bottom: 0;background: white">
-  <div style="margin-top:10px;padding-bottom: 10px;">
 
-      <a href="/" target="_blank">
-          ©
-      </a><a href="https://mrdoc.pro">开源江湖 2022</a>
-      &nbsp;|&nbsp;
-
-      <a href="https://mrdoc.pro" target="_blank">开源江湖</a>
-      出品 |
-
-      <a href="/sitemap.xml" target="_blank">网站地图</a>
-
-
-  </div>
-</div>
-
-<script type="text/javascript">
-  function showCategory() {
-    // $('body').addClass('big-page');
-    layer.open({
-      type: 1,
-      // r表示right,b表示bottom
-      offset: 'lb',
-      // 文集目录
-      title: '文集目录',
-      //
-      // anim 特效 0-平滑放大 1-从上掉落 2-从底部往上滑入 3-从左滑入 4-从左翻转 5-渐显 6-抖动
-      anim: 5,
-      shadeClose: true, //开启遮罩关闭
-      // 第一个参数宽度，第二个参数高度
-      area: ['300px', '100%'],
-      // 内容区 在body中写入<div id="draw">。。。。</div>代码，即弹窗内容
-      content: $("#drawer").html(),
-    })
-  }
-    function toArticleDetail(obj) {
-        let articleCount = $(obj).attr('data-article');
-        let app = $('body').attr('data-app');
-        if (articleCount) {
-            location.href = `/${app}/page/article/${articleCount}`;
-        }
-    }
-    function makeUrl() {
-
-    }
-    function searchCategory() {
-        let keyword = $('.mrdoc-search-input').val();
-        let app = $('body').attr('data-app');
-        if (!keyword) {
-            return
-        }
-        location.href = `/${app}/page/home?keyword=${keyword}`;
-        return false
-    }
-    function updateUrlParam(name) {
-      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
-      var r = window.location.search.substr(1).match(reg); //匹配目标参数
-      if (r === null) {
-        return
-      }
-      $('.mrdoc-search-input').val(unescape(r[2]));
-    }
-
-    updateUrlParam('keyword');
-</script>
-<link href="<$ static $>mrdoc/site-global.css" rel="stylesheet">
-<style>
-  .layui-nav .layui-nav-child dd.layui-this a, .layui-nav-child dd.layui-this{
-      background-color: #333 !important;
-  }
-  /* layui分页组件样式 */
-  .layui-laypage .layui-laypage-curr .layui-laypage-em{
-      background-color: #333 !important;
-  }
-  .layui-form-label{
-      width: 30px !important;
-  }
-  .layui-input-block{
-      margin-left: 60px !important;
-  }
-  /* 控制栏表单下拉框样式 */
-  .index-control .layui-input-inline{
-      width: 100px;
-  }
-  .index-control .layui-input{
-      height: 25px;
-      border: none;
-  }
-  .index-control .layui-form-select dl {
-      top: 30px;
-  }
-  .index-control .layui-form-item{
-      margin-bottom: 0px;
-  }
-  /* 文集列表样式 */
-  .project-item-list{
-      /* float: left; */
-      min-width: 0;
-      width: 100vw;
-      height: 120px;
-      /* margin-top: 20px; */
-      /* margin-left: 20px; */
-      margin: 10px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      box-shadow: 0 1px 3px rgba(0,0,0,.055);
-  }
-  /* 文集图标按钮样式 */
-  #project-icon-select{
-      height: 38px !important;
-  }
-  #drawer {
-      color: #333;
-      position: fixed;
-      height: calc(100%);
-      background-color: #fafafa;
-      /* border-right: 1px solid #e6e6e6; */
-      width: 300px;
-      overflow: auto;
-      left: -310px;
-  }
-  /* 移动端筛选控制栏样式 */
-  @media screen and (max-width: 768px){
-      /* 控制栏样式 */
-      .index-control .layui-form-item .layui-inline{
-          display: flex;
-      }
-      .index-control .layui-form-item .layui-input-inline{
-          display: -webkit-inline-box;
-          float: none;
-          left: -3px;
-          /* width: auto; */
-          margin: 0;
-      }
-      .logo {
-          position: inherit;
-          left: 0;
-          top: 0;
-          margin: 0 auto;
-      }
-      .layui-fluid {
-          text-align: center;
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-      }
-      .header-menu-icon {
-          position: absolute;
-          left: 15px;
-          font-size: 24px;
-      }
-
-  }
-
-</style>
+<link href="<$ static $>jianghu/jianghu-home.css" rel="stylesheet">
 {% endblock %}

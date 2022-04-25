@@ -71,7 +71,9 @@ function changeSidebar(){
     if(screen_width.matches){
         //如果匹配到，切换侧边栏
         $("body").addClass("big-page");
+        $(".sidebar").addClass("doc-toc-hide");
     }else{
+        $(".sidebar").removeClass("doc-toc-hide");
         let bgpage_status = window.localStorage.getItem('bgpage')
         if(bgpage_status === '1'){
             $("body").addClass("big-page");
@@ -163,11 +165,11 @@ $(document).ready(function() {
             $(".toTop").hide();
         }
 
-        if($(document).scrollTop() >= 60) {
+        /*if($(document).scrollTop() >= 60) {
             $("body").addClass('site-fix');
         } else {
             $("body").removeClass('site-fix');
-        }
+        }*/
     })
     // 绑定点击事件，实现返回顶部的效果
     $(".toTop").click(function() {

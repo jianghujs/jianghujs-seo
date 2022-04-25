@@ -44,8 +44,8 @@
     <link rel="stylesheet" href="<$ static $>editor.md/css/editormd.css" />
     <!-- <link rel="stylesheet" href="<$ static $>vditor/dist/index.css" /> -->
     <link href="<$ static $>viewerjs/viewer.min.css" rel="stylesheet">
-    <link href="<$ static $>mrdoc/mrdoc.css" rel="stylesheet">
-    <link href="<$ static $>mrdoc/mrdoc-docs.css" rel="stylesheet">
+    <link href="<$ static $>mrdoc/jianghu-mrdoc.css" rel="stylesheet">
+    <link href="<$ static $>mrdoc/jianghu-mrdoc-docs.css" rel="stylesheet">
     <link href="<$ static $>iconFont/iconfont.css" rel="stylesheet">
     <script src="<$ static $>jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
@@ -65,16 +65,25 @@
             }
         };
     </script>
+    <style>
+        .layui-layer-title {
+            height: 60px;
+        }
+    </style>
 </head>
 
 <body class="big-page">
 
-    <div class="layui-header">
-        <div class="layui-fluid header-body" style="height: 100%; display: flex; justify-content: space-between;">
-            <i class="layui-icon header-menu-icon layui-icon-slider layui-show-xs-inline" style="display: none" onclick="showCategory()"></i>
+    <div class="layui-header jianghu-header">
+        <div class="layui-fluid header-body">
+            <i class="layui-icon header-menu-icon layui-icon-slider" style="display: none" onclick="showCategoryMenu()"></i>
             <a class="logo" href="/">
                 <img src="https://yun.startalk.tech/index.php/s/JxPejNyea9bn3gB/download" alt="layui">
             </a>
+
+            <div class="layui-hide layui-show-xs-inline-block" style="position: absolute; right: 25px">
+                <button class="layui-btn layui-btn-radius" onclick="showCategoryMenu()">菜单</button>
+            </div>
             <div class="layui-hide-xs site-notice"></div>
 
             <ul class="layui-nav layui-hide-xs" id="LAY_NAV_TOP" style="position: unset;">
@@ -133,7 +142,8 @@
             </ul>
         </div>
     </div>
-    <div id="drawer">
+    <div class="jianghu-header-back"></div>
+    <div id="jianghu-munu">
         <div class="layui-panel site-menu">
             <ul class="layui-menu layui-menu-lg">
                 <li class="layui-menu-item-group" lay-options="{type: 'group', isAllowSpread: true}">
@@ -152,6 +162,7 @@
             </ul>
         </div>
     </div>
+
 
     {% include 'common/jianghuAxios.html' %}
 
@@ -215,5 +226,25 @@
     </script>
 
     {% block content %}{% endblock %}
+    <script>
+      function showCategoryMenu() {
+        // $('body').addClass('big-page');
+        layer.open({
+          type: 1,
+          // r表示right,b表示bottom
+          offset: 'lb',
+          // 文集目录
+          title: '菜单',
+          //
+          // anim 特效 0-平滑放大 1-从上掉落 2-从底部往上滑入 3-从左滑入 4-从左翻转 5-渐显 6-抖动
+          anim: 5,
+          shadeClose: true, //开启遮罩关闭
+          // 第一个参数宽度，第二个参数高度
+          area: ['300px', '100%'],
+          // 内容区 在body中写入<div id="draw">。。。。</div>代码，即弹窗内容
+          content: $("#jianghu-munu").html(),
+        })
+      }
+    </script>
 
 </body>

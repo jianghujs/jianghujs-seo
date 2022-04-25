@@ -32,10 +32,17 @@ body {
 }
 /* 页头logo图片样式 */
 .header-body {
+    height: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 90px;
+}
+
+.header-menu-icon {
+    position: absolute;
+    left: 15px;
+    font-size: 24px;
 }
 .logo img {
     height: 30px;
@@ -226,19 +233,13 @@ body, html {
     border-right: 1px solid #ddd;
 }
 .doc-summary:hover {
-    overflow-y: auto;
+    overflow-y: overlay;
     overflow-x: hidden;
 }
-
-.site-fix .doc-summary {
-    position: fixed;
-    top: 0;
-    height: 100vh;
-    overflow: hidden;
-}
-.site-fix .doc-summary:hover {
-    overflow-y: auto;
-    overflow-x: hidden;
+.big-page .doc-summary, .big-page .site-menu{
+    width: 280px;
+    min-height: calc(100vh - 70px);
+    border: none;
 }
 .doc-body {
     -webkit-box-orient: vertical;
@@ -383,7 +384,6 @@ li.active > a,li.active > div > a{
     position: relative;
     max-width: 960px;
     margin: 0 auto;
-    padding: 15px 15px 15px 5px;
 }
 .doc-content{
     outline: 0;
@@ -411,6 +411,7 @@ li.active > a,li.active > div > a{
     display: flex;
     display: -webkit-flex;
     flex-direction: column-reverse;
+    align-items: center;
 }
 
 /* 返回顶部 */
@@ -861,6 +862,12 @@ input#doc-name,input#doctemp-name{
         left: 150%;
     }
     }
+    .doc {
+        padding: 0;
+    }
+    .doc-body {
+        padding: 0 20px;
+    }
 
 /* 移动端小屏幕样式 */
 @media screen and (max-width:768px){
@@ -891,8 +898,7 @@ input#doc-name,input#doctemp-name{
     }
     /* 文档阅读页 */
     .doc-body{
-        margin-left: 0;
-        left: 0px;
+        padding: 0;
     }
     div.doc-summary{
         z-index: 9999;
@@ -900,4 +906,37 @@ input#doc-name,input#doctemp-name{
     .markdown-body{
         width: 100%;
     }
+    .logo {
+        margin: 0 auto;
+    }
+    .doc {
+        padding: 0 15px;
+    }
+}
+
+#jianghu-munu {
+    color: #333;
+    position: fixed;
+    height: calc(100%);
+    background-color: #fafafa;
+    /* border-right: 1px solid #e6e6e6; */
+    width: 300px;
+    overflow: auto;
+    left: -310px;
+}
+.site-menu {
+    box-shadow: none;
+    border: none;
+}
+.layui-layer-title {
+    height: 60px;
+}
+.jianghu-header {
+    position: fixed;
+    width: 100%;
+    background: white;
+}
+.jianghu-header-back {
+    height: 61px;
+    width: 100%;
 }
