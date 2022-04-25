@@ -14,7 +14,7 @@
    port: 3306,
    user: 'root',
    password: '123456',
-   database: 'openjianghu_seo'
+   database: 'doc'
    ```
 4. 启动 npm run dev
    
@@ -22,8 +22,8 @@
 
 ```sql
 # 数据库初始化
-create database `openjianghu_seo` default character set utf8mb4 collate utf8mb4_bin;
-use openjianghu_seo;
+create database `doc` default character set utf8mb4 collate utf8mb4_bin;
+use doc;
 # 运行 sql/init.sql 文件
 ```
 
@@ -38,9 +38,9 @@ use openjianghu_seo;
 
 ## 同步 admin/upload/xx 至 seo/upload/xx
 
-mkdir /www/wwwroot/openjianghu_seo/upload
-ln -s /www/wwwroot/openjianghu_admin/upload/articleMaterial /www/wwwroot/openjianghu_seo/upload/articleMaterial
-ln -s /www/wwwroot/openjianghu_admin/upload/materialRepo /www/wwwroot/openjianghu_seo/upload/materialRepo
+mkdir /www/wwwroot/doc/upload
+ln -s /www/wwwroot/openjianghu_admin/upload/articleMaterial /www/wwwroot/doc/upload/articleMaterial
+ln -s /www/wwwroot/openjianghu_admin/upload/materialRepo /www/wwwroot/doc/upload/materialRepo
 
 ## 测试环境
 

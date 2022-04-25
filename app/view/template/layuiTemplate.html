@@ -87,10 +87,10 @@
                 </li>
                 {% endfor %}
                 <li class="layui-nav-item">
-                    {% if userInfo.username %}
+                    {% if username %}
                     <a href="javascript:void(0);">
                         <i class="layui-icon layui-icon-friends"></i> 
-                        <span class="layui-hide-xs"> <$ userInfo.username $> </span>
+                        <span class="layui-hide-xs"> <$ username $> </span>
                     <i class="layui-icon layui-icon-down layui-nav-more"></i></a>
                     <dl class="layui-nav-child layui-anim layui-anim-upbit">
                         
@@ -202,7 +202,7 @@
                                 actionData: {
                                     oldPassword: oldPwd, 
                                     newPassword: newPwd1
-                                },
+                                }
                             }
                         }
                     })
