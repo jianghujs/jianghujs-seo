@@ -1,0 +1,310 @@
+{% extends 'index.html'%}
+
+{% block vue_template %}
+
+<jh-layout>
+
+  <!-- 页面主要内容 -->
+  <v-container class="fullScreen d-flex flex-column pa-xs-0 pa-0">
+    <v-row class="ma-0 pa-xs-4 align-center flex-none pt-0 " :class="{'pa-4': !isMobile, 'pb-0': !isMobile, 'pa-2': isMobile}">
+
+      <v-col cols="12" xs="4" sm="4" md="4" xl="4" class="pl-0">
+        <v-btn color="success" small dark class="elevation-0 mr-2" @click="handleTableButton({ text: '新增', buttonType: 'add' }, null)">新增</v-btn>
+        <span class="body-2">共{{ tableData.length }}条记录</span>
+      </v-col>
+
+      <v-spacer></v-spacer>
+
+      <v-col cols="12" xs="8" sm="4" md="3" xl="3" class="pa-xs-0 pa-xs-2 col-sm-8-flex">
+        <v-text-field v-model="searchInput" label="表格过滤" class="cus-v-input" dense outlined></v-text-field>
+      </v-col>
+
+    </v-row>
+    <v-data-table fixed-header
+                  :headers="headers"
+                  :items="tableData"
+                  :search="searchInput"
+                  :footer-props="{ itemsPerPageOptions: [20, 40, 60, 100, -1] }"
+                  :items-per-page="20"
+                  :loading="isTableLoading"
+                  checkbox-color="success"
+                  mobile-breakpoint="0"
+                  class="elevation-0 mt-0 mb-xs-4 flex-fill d-flex flex-column">
+      <template v-slot:item.userType="{ item }">
+        {{ getConstantCollectionItemText('userType', item.userType) }}
+      </template>
+      <template v-slot:item.userStatus="{ item }">
+        {{ getConstantCollectionItemText('userStatus', item.userStatus) }}
+      </template>
+      <template v-slot:item.action="{ item }">
+        <v-btn small class="mr-2" color="success" @click="handleTableButton({ text: '新增', buttonType: 'edit' }, item)">修改</v-btn>
+        <v-btn small class="mr-2" color="primary" v-if="item.userStatus !== 'active'" @click="handleTableButton({ text: '激活用户', buttonType: 'activeUserStatus' }, item)">
+          激活用户
+        </v-btn>
+        <v-btn small class="mr-2" color="error" v-if="item.userStatus === 'active'" @click="handleTableButton({ text: '禁用用户', buttonType: 'bannedUserStatus' }, item)">
+          禁用用户
+        </v-btn>
+        <v-btn small class="mr-2" color="error" v-if="item.userStatus === 'active'" @click="handleTableButton({ text: '修改密码', buttonType: 'resetUserPassword' }, item)">
+          修改密码
+        </v-btn>
+      </template>
+    </v-data-table>
+  </v-container>
+
+  <!-- 编辑抽屉 -->
+  <v-navigation-drawer v-model="isEditDrawerShow" absolute temporary right width="80%" hide-overlay
+                       :permanent="isEditDrawerPermanent"
+                       class="elevation-24">
+    <v-form v-model="isFormValid" v-if="isEditDrawerShow" ref="form" lazy-validation>
+      <v-row>
+        <span class="title pa-6">{{ currentClickButton.title }}</span>
+        <v-spacer></v-spacer>
+        <v-btn class="mt-7 mr-8 elevation-0" fab x-small @click="isEditDrawerShow = false">
+          <v-icon dark>mdi-close</v-icon>
+        </v-btn>
+      </v-row>
+      <v-row v-if="currentClickButton.action === 'resetUserPassword'" class="pa-0 ma-0 pa-xs-4 pb-xs-4 flex-none">
+        <v-col cols="12" sm="12" md="4" xl="3" class="pa-xs-0 pb-xs-4 pb-3">
+          <v-text-field class="cus-v-input mr-2" dense outlined label="密码" v-model="editItem.clearTextPassword" :rules="requireRules"></v-text-field>
+        </v-col>
+      </v-row>
+      <v-row v-else class="pa-0 ma-0 pa-xs-4 pb-xs-4 flex-none">
+        <v-col cols="12" sm="12" md="4" xl="3" class="pa-xs-0 pb-xs-4 pb-3" v-if="currentClickButton.action == 'add'">
+          <v-text-field class="cus-v-input mr-2" dense outlined label="用户ID[登陆]" v-model="editItem.userId"></v-text-field>
+        </v-col>
+        <v-col cols="12" sm="12" md="4" xl="3" class="pa-xs-0 pb-xs-4 pb-3" v-if="currentClickButton.action == 'edit'">
+          <v-text-field class="cus-v-input mr-2" disabled dense outlined label="用户ID[登陆]" v-model="editItem.userId"></v-text-field>
+        </v-col>
+        <v-col cols="12" sm="12" md="4" xl="3" class="pa-xs-0 pb-xs-4 pb-3">
+          <v-text-field class="cus-v-input mr-2" dense outlined label="用户名" v-model="editItem.username" :rules="requireRules"></v-text-field>
+        </v-col>
+        <v-col cols="12" sm="12" md="4" xl="3" class="pa-xs-0 pb-xs-4 pb-3">
+          <v-select class="cus-v-input mr-2" dense outlined clearable label="用户类型" v-model="editItem.userType" :items="constantCollection.userType"></v-select>
+        </v-col>
+        <v-col cols="12" sm="12" md="4" xl="3" class="pa-xs-0 pb-xs-4 pb-3" v-if="currentClickButton.action == 'add'">
+          <v-select class="cus-v-input mr-2" dense outlined clearable label="用户状态" v-model="editItem.userStatus" :items="constantCollection.userStatus"></v-select>
+        </v-col>
+        <v-col v-if="currentClickButton.action === 'add'" cols="12" sm="12" md="4" xl="3" class="pa-xs-0 pb-xs-4 pb-3">
+          <v-text-field class="cus-v-input mr-2" dense outlined label="初始密码" v-model="editItem.clearTextPassword" :rules="requireRules"></v-text-field>
+        </v-col>
+      </v-row>
+      <v-row class="justify-end pr-6">
+        <v-btn color="success" @click="saveInfo" small :style="{width: isMobile ? 'calc(100% - 45px)' : '200px'}" :class="{'mb-2': isMobile, 'mr-4': isMobile}">保存</v-btn>
+        <v-btn class="ml-2" @click="isEditDrawerShow = false" small :style="{width: isMobile ? 'calc(100% - 45px)' : '200px'}" :class="{'mr-4': isMobile}">取消</v-btn>
+      </v-row>
+    </v-form>
+  </v-navigation-drawer>
+
+</jh-layout>
+
+{% endblock %}
+
+{% block vue_body %}
+
+{% include 'layout/jhLayout.html' %}
+{% include 'common/resetTableMaxHeight.html' %}
+
+<script type="module">
+  new Vue({
+    el: '#app',
+    template: '#app-template',
+    vuetify: new Vuetify(),
+    data: () => ({
+      // 表格相关数据
+      isFormValid: true,
+      showLeftMenu: window.innerWidth > 600,
+      requireRules: [v => !!v || 'This is required'],
+      constantCollection: {
+        userStatus: [{value: 'active', text: '正常'}, {value: 'banned', text: '禁用'}],
+        userType: [{value: 'common', text: '普通用户'}],
+      },
+      isEditDrawerShow: false,
+      isEditDrawerPermanent: false,
+      searchInput: null,
+      isTableLoading: true,
+      tableDataFromBackend: [],
+      headers: [
+        {text: "用户ID[登陆]", value: "userId", width: 120, class: 'fixed', cellClass: 'fixed'},
+        {text: "用户名", value: "username", width: 140},
+        {text: "用户类型", value: "userType", width: 120},
+        {text: "用户状态", value: "userStatus", width: 120},
+        {text: "密码", value: "clearTextPassword", width: 120},
+        {text: "操作人", value: "operationByUser", width: 120},
+        {text: "操作时间", value: "operationAt", width: 250},
+        {text: '操作', value: 'action', align: 'center', sortable: false, width: 300, class: 'fixed', cellClass: 'fixed'},
+      ],
+
+      currentClickButton: {title: '新增', action: 'add'},
+      editItem: {},
+      defaultItem: {userType: 'common', userStatus: 'active'},
+    }),
+    computed: {
+      isMobile() {
+        return window.innerWidth < 600;
+      },
+      tableData() {
+        return this.tableDataFromBackend;
+      },
+    },
+    watch: {},
+    async created() {
+      await this.getTableData();
+
+    },
+    mounted() {
+    },
+    methods: {
+      /**
+       * 获取表格数据
+       */
+      async getTableData() {
+        this.isTableLoading = true;
+        const result = await window.jianghuAxios({
+          data: {
+            appData: {
+              pageId: 'userManagement',
+              actionId: 'selectItemList',
+              actionData: {},
+              where: {},
+              orderBy: [{column: 'operationAt', order: 'desc'}]
+            }
+          }
+        });
+        this.tableDataFromBackend = result.data.appData.rows;
+        this.isTableLoading = false;
+      },
+
+      /**
+       * 点击表格数据按钮
+       */
+      async handleTableButton({text, buttonType}, item) {
+        switch (buttonType) {
+          case 'edit':
+            this.currentClickButton = {action: 'edit', title: '修改'};
+            this.editItem = {...item};
+            this.isEditDrawerShow = true;
+            break;
+          case 'add':
+            this.currentClickButton = {action: 'add', title: '新增'};
+            this.editItem = Object.assign({}, this.defaultItem);
+            this.isEditDrawerShow = true;
+            break;
+          case 'resetUserPassword':
+            this.currentClickButton = {action: 'resetUserPassword', title: '修改用户密码'};
+            this.editItem = {...item};
+            this.isEditDrawerShow = true;
+            break;
+          case 'activeUserStatus':
+          case 'bannedUserStatus':
+            const dialogDone = await window.confirmDialog({title: text, content: `确定${text}吗？`});
+            if (dialogDone) {
+              await window.vtoast.loading(text);
+              this.editItem = {...item};
+              const userStatus = _.get({activeUserStatus: 'active', bannedUserStatus: 'banned'}, buttonType);
+              await this.updateUserStatus({userStatus});
+              await window.vtoast.success(`${text}成功`);
+              await this.getTableData();
+            }
+            break;
+        }
+      },
+      /**
+       * 删除用户
+       */
+      async updateUserStatus({userStatus}) {
+        await window.jianghuAxios({
+          data: {
+            appData: {
+              pageId: 'userManagement',
+              actionId: 'updateItem',
+              actionData: {userStatus},
+              where: {id: this.editItem.id}
+            }
+          }
+        });
+      },
+      /**
+       * 保存数据
+       */
+      async saveInfo() {
+        if (!this.$refs.form.validate()) return false;
+        if (this.currentClickButton.action === 'add') {
+          await window.vtoast.loading("保存中");
+          await this.insertUser();
+          await window.vtoast.success("保存成功");
+        }
+        if (this.currentClickButton.action === 'edit') {
+          await window.vtoast.loading("保存中");
+          await this.updateUser();
+          await window.vtoast.success("修改成功");
+        }
+        if (this.currentClickButton.action === 'resetUserPassword') {
+          const success = await this.resetUserPassword();
+          if(success) await window.vtoast.success("修改密码成功");
+        }
+        await this.getTableData();
+        this.isEditDrawerShow = false;
+      },
+      /**
+       * 新增用户
+       */
+      async insertUser() {
+        const {id, ...actionData} = this.editItem;
+        await window.jianghuAxios({
+          data: {
+            appData: {
+              pageId: 'userManagement',
+              actionId: 'insertItem',
+              actionData: actionData
+            }
+          }
+        })
+      },
+      /**
+       * 保存用户
+       */
+      async updateUser() {
+        const {id, userId, ...actionData} = this.editItem;
+        await window.jianghuAxios({
+          data: {
+            appData: {
+              pageId: 'userManagement',
+              actionId: 'updateItem',
+              actionData: actionData,
+              where: {id}
+            }
+          }
+        })
+      },
+      async resetUserPassword() {
+        this.isEditDrawerPermanent = true;
+        const dialogDone = await window.confirmDialog({title: '修改密码', content: '确定修改密码吗？'});
+        this.isEditDrawerPermanent = false;
+        if (dialogDone) {
+          const {userId, clearTextPassword} = this.editItem;
+          await window.vtoast.loading("修改密码");
+          await window.jianghuAxios({
+            data: {
+              appData: {
+                pageId: 'userManagement',
+                actionId: 'resetUserPassword',
+                actionData: {userId, clearTextPassword},
+              }
+            }
+          })
+        }
+        return dialogDone;
+      },
+      getConstantCollectionItemText(key, _value) {
+        const constantCollectionItemFind = this.constantCollection[key].find(({value}) => value === _value);
+        if(constantCollectionItemFind) {
+          return constantCollectionItemFind.text;
+        }
+        return _value;
+      }
+    }
+  })
+</script>
+
+
+{% endblock %}
