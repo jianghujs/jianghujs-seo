@@ -305,19 +305,6 @@ $("#copy_doc_url").click(function(){
     copyUrl();
 });
 
-// 生成文档链接二维码
-doc_qrcode = function(){
-    new QRCode("url_qrcode", {
-        text: document.URL,
-        width: 200,
-        height: 200,
-        colorDark : "#000000",
-        colorLight : "#ffffff",
-        correctLevel : QRCode.CorrectLevel.H
-    });
-};
-doc_qrcode();
-
 /*
     文集水印
 */

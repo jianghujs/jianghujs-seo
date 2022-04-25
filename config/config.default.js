@@ -20,13 +20,14 @@ module.exports = (appInfo) => {
 
   return {
     appId,
-    appTitle: "openjianghu",
+    appTitle: "开源江湖",
     appLogo: `${appId}/public/img/logo.png`,
     appType: "single",
     appDirectoryLink: "/",
     indexPage: `/${appId}/page/home`,
     loginPage: `/${appId}/page/login`,
     helpPage: `/${appId}/page/help`,
+    adminUrl: 'http://127.0.0.1:8306',
     uploadDir,
     uploadDirConfig: [
       "/articleMaterial",

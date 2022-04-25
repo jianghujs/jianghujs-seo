@@ -1,160 +1,265 @@
-{% extends 'template/articleTemplate.html' %}
-
-{% block header %}
-<div class="layui-fluid layui-container" style="height: 100%">
-    <i class="layui-icon header-menu-icon layui-icon-slider layui-show-xs-inline" style="display: none" onclick="showCategory()"></i>
-    <a class="logo" href="/">
-        <img src="https://yun.startalk.tech/index.php/s/JxPejNyea9bn3gB/download" alt="layui">
-    </a>
-    <div class="layui-hide-xs site-notice"></div>
-
-    <ul class="layui-nav layui-hide-xs" id="LAY_NAV_TOP" style="position: absolute">
-        <li class="layui-nav-item">
-            <a href="/">首&nbsp;&nbsp;页</a>
-        </li>
-        {% for category in categoryList %}
-        <li class="layui-nav-item <$ category.active $>">
-            <a href="/<$ ctx.app.config.appId $>/page/article/<$ category.articleList[0].articleId $>/"><$ category.categoryName $></a>
-        </li>
-        {% endfor %}
-        <span class="layui-nav-bar" style="left: 64px; top: 55px; width: 0px; opacity: 0;"></span></ul>
-</div>
-{% endblock %}
-
-<!-- 引入静态文件 -->
-{% set static = "/" + ctx.app.config.appId + "/public/" %}
-{% set url = "/" +ctx.app.config.appId + "/page/" %}
+{% extends 'template/layuiTemplate.html' %}
 
 {% block title %}<$ article.articleTitle $>{% endblock %}
 
-{% block head_toolbar %}
-    <!-- <span class="btn pull-left">|</span> -->
-    <!-- <a class="btn pull-left" aria-label="" href="<$ url $>articleEdit?articleId=<$ article.articleId $>&title=<$ article.articleTitle $>">
-        <i class="layui-icon layui-icon-edit"></i> <span class="layui-hide-xs">修改</span>
-    </a> -->
-    <!-- <a class="btn pull-left" aria-label="" href="<$ url $>articleEdit?&title=未命名" target="_blank">
-        <i class="layui-icon layui-icon-add-1"></i> <span class="layui-hide-xs">添加</span>
-    </a> -->
-    <!-- <a class="btn pull-left" aria-label="" href="<$ url $>articleManagement?categoryId=<$ article.categoryId $>">
-        <i class="fa fa-cubes"></i> <span class="layui-hide-xs">管理</span>
-    </a> -->
-    <!-- 文档目录 -->
-    <div id="toc-container" class='sidebar doc-toc-hide layui-hide-xs'></div>
-{% endblock %}
+{% block content %}
+<div class="doc layui-fluid" style="padding-left:0px;">
+    <!-- 左侧目录栏 -->
+    <div class="doc-summary-parent">
 
-{% block content_head %}
-    <h1>
-        <$ article.articleTitle $>
-    </h1>
-    <hr>
-{% endblock %}
-
-{% block page_content %}
-    <!--<div class="doc_cover" style="width: 100%; max-height: 280px; display: flex; justify-content: center;">
-        <img title="封面" src="/upload/<$ article.articleCoverImage $>" style="object-fit: cover;">
-    </div>-->
-    <$ article.articleContentForSeo | safe $>
-  <div id="articleContentHidden" class="articleContentHidden" style="position: absolute; top: -1000px; overflow: hidden; height: 0; width: 0;">
-    <textarea style="display: none;"><$ article.articleContent $></textarea>
-  </div>
-{% endblock %}
-
-{% block doc_bottom_block %}
-    <div class="layui-row layui-col-space20" style="padding-left: 20px;">
-        <span class="doc-bottom-icon">
-            <i class="layui-icon layui-icon-user"></i>
-            <$ article.articleUpdateUsername $>
-        </span>
-        <span tooltip="更新于:<$ article.articleUpdateTime $>" class="doc-bottom-icon">
-            <i class="layui-icon layui-icon-log"></i>
-            <$ article.articleUpdateTime $>
-        </span>
-
-        {% if article.articleTagList %}
-            <i class="fa fa-tag"></i><$ article.articleTagList $>
-        {% endif %}
-
-        <!-- <button id="share" class="doc-bottom-btn" tooltip="转发本文档">
-            <i class="layui-icon layui-icon-share"></i> 转发文档
-        </button> -->
-
-        <!-- <button class="doc-bottom-btn" tooltip="下载文档" id="download_doc">
-            <i class="fa fa-download"></i> 下载文档
-        </button> -->
+        <div class="doc-summary">
+            <!-- 文档搜索 -->
+            <!-- <div id="doc-search-input">
+                <input type="text" name="kw" placeholder="在分类内搜索文档" value="" class="layui-input doc-search-input">
+            </div> -->
+            <!-- 文集名称 -->
+            <div class="project-title">
+                <$ article.articleTitle.split('-')[0] $>
+            </div>
+            <nav>
+                <ul class="summary" style="padding-bottom: 80px">
+                    {% for node in article.articleList %}
+                    <li>
+                        <div style="display:flex;justify-content:space-between;">
+                            {% if not node.isGroup %}
+                            <a href="<$ pageUrl $>/article/<$ node.articleId $>" title="<$ children.articleTitle $>">
+                                <i class="iconfont mrdoc-icon-wendang"></i> <$ node.articleTitle $></a>
+                            {% endif %}
+                        </div>
+                    </li>
+                    {% endfor %}
+                    {% for node in article.articleList %}
+                    <li>
+                        <div style="display:flex;justify-content:space-between;">
+                            {% if node.isGroup %}
+                            <span title="<$ node.articleTitle $>">
+                                <i class="layui-icon layui-icon-table"></i> <$ node.articleTitle $>
+                            </span>
+                            {% endif %}
+                        </div>
+                        {% if node.childrenList %}
+                        <ul class="sub-menu">
+                            {% for children in node.childrenList %}
+                            <li>
+                                <div style="display:flex;justify-content:space-between;">
+                                    <a href="<$ pageUrl $>/article/<$ children.articleId $>" title="<$ children.articleTitle $>">
+                                        <i class="iconfont mrdoc-icon-wendang"></i> <$ children.articleTitle $></a>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
     </div>
-{% endblock %}
+    <div class="doc-body doc-ml-300">
+        <!-- 文档导航 -->
+        <div class="doc-header" role="navigation">
+            <a class="btn pull-left js-toolbar-action layui-hide-xs" aria-label="" href="javascript:void(0);" title="切换侧边栏">
+                <i class="layui-icon layui-icon-slider"></i>
+            </a>
+            <a class="btn pull-left font-small" href="javascript:void(0);" title="缩小字体">
+                <i class="fa fa-font">-</i>
+            </a>
+            <a class="btn pull-left font-large" href="javascript:void(0);" title="放大字体">
+                <i class="fa fa-font">+</i>
+            </a>
+            <a class="btn pull-left font-switch" href="javascript:void(0);" title="切换字体类型">
+                <i class="fa fa-text-height"></i>
+            </a>
+            <!-- 顶部工具栏 -->
+            <div id="toc-container" class='sidebar doc-toc-hide layui-hide-xs'></div>
+            <!--<a class="btn pull-right" aria-label="" href="<$ pageUrl $>/home">
+                <i class="layui-icon layui-icon-home"></i> <span class="layui-hide-xs">首页</span>
+            </a>-->
+        </div>
+        <!-- 文档主体 -->
+        <div class="doc-body-content">
+            <div class="doc-body-content-div">
+                {% if project.is_watermark %}
+                <div id="wm"></div>
+                {% endif %}
+                <!-- 文档内容 -->
+                <div class="doc-content" id="doc-content">
+                    <!-- 标题 -->
+                    <div class="doc-info">
+                        <!-- 页面主体头信息 -->
+                        <h1>
+                            <$ article.articleTitle $>
+                        </h1>
+                        <hr>
 
-{% block right_widget %}
-    <div class="editDoc layui-show-xs-inline-block" style="display: none;" onclick="showArticle()"><i class="layui-icon layui-icon-slider"></i></div>
-    <div class="tocMenu layui-hide-xs" ><i class="fa fa-list"></i></div>
-{% endblock %}
+                    </div>
+                    <!-- 正文开始 -->
+                    <div class="markdown-body" id="content" style="padding: 20px;padding-top: 5px;">
+                        <!--<div class="doc_cover" style="width: 100%; max-height: 280px; display: flex; justify-content: center;">
+                            <img title="封面" src="/upload/<$ article.articleCoverImage $>" style="object-fit: cover;">
+                        </div>-->
+                        <$ article.articleContentForSeo | safe $>
+                        <div id="articleContentHidden" class="articleContentHidden" style="position: absolute; top: -1000px; overflow: hidden; height: 0; width: 0;">
+                            <textarea style="display: none;"><$ article.articleContent $></textarea>
+                        </div>
+                    </div>
+                    <!-- 正文结束 -->
+                    <div class="markdown-body" style="padding-left: 20px;"></div>
+                </div>
+                <hr>
+                <!-- 分享栏 -->
+                <div style="color: rgba(0,0,0,.65);padding-bottom: 10px;margin-top: 10px;">
+                    <div class="layui-row layui-col-space20" style="padding-left: 20px;">
+                        <span class="doc-bottom-icon">
+                            <i class="layui-icon layui-icon-user"></i>
+                            <$ article.articleUpdateUsername $>
+                        </span>
+                        <span tooltip="更新于:<$ article.articleUpdateTime $>" class="doc-bottom-icon">
+                            <i class="layui-icon layui-icon-log"></i>
+                            <$ article.articleUpdateTime $>
+                        </span>
+                
+                        {% if article.articleTagList %}
+                            <i class="fa fa-tag"></i><$ article.articleTagList $>
+                        {% endif %}
+                
+                        <!-- <button id="share" class="doc-bottom-btn" tooltip="转发本文档">
+                            <i class="layui-icon layui-icon-share"></i> 转发文档
+                        </button> -->
+                
+                        <!-- <button class="doc-bottom-btn" tooltip="下载文档" id="download_doc">
+                            <i class="fa fa-download"></i> 下载文档
+                        </button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="fixed-tool-bar">
+        <div class="toTop layui-hide-xs-inline-block"><i class="layui-icon layui-icon-up"></i></div>
+        <div class="editDoc layui-show-xs-inline-block" style="display: none;" onclick="showArticle()"><i class="layui-icon layui-icon-slider"></i></div>
+        <div class="tocMenu layui-hide-xs" ><i class="fa fa-list"></i></div>
+    </div>
+</div>
 
+<script src="<$ static $>viewerjs/viewer.min.js"></script>
+<script src="<$ static $>iconFont/iconfont.js"></script>
+<script src="<$ static $>mrdoc/mrdoc-docs.js"></script>
+<script src="<$ static $>editor.md/lib/purify.min.js"></script>
+<script src="<$ static $>editor.md/lib/marked.min.js"></script>
+<script src="<$ static $>editor.md/editormd.js"></script>
+<script>
+    function showCategory() {
+    // $('body').addClass('big-page');
+    layer.open({
+        type: 1,
+        // r表示right,b表示bottom
+        offset: 'lb',
+        // 文集目录
+        title: '文集目录',
+        //
+        // anim 特效 0-平滑放大 1-从上掉落 2-从底部往上滑入 3-从左滑入 4-从左翻转 5-渐显 6-抖动
+        anim: 5,
+        shadeClose: true, //开启遮罩关闭
+        // 第一个参数宽度，第二个参数高度
+        area: ['300px', '100%'],
+        // 内容区 在body中写入<div id="draw">。。。。</div>代码，即弹窗内容
+        content: $("#drawer").html(),
+    })
+    }
 
-{% block custom_script %}
-    <script>
+    function showArticle() {
+    // $('body').addClass('big-page');
+    layer.open({
+        type: 1,
+        // r表示right,b表示bottom
+        offset: 'lb',
+        // 文集目录
+        title: '文章目录',
+        //
+        // anim 特效 0-平滑放大 1-从上掉落 2-从底部往上滑入 3-从左滑入 4-从左翻转 5-渐显 6-抖动
+        anim: 5,
+        shadeClose: true, //开启遮罩关闭
+        // 第一个参数宽度，第二个参数高度
+        area: ['300px', '100%'],
+        // 内容区 在body中写入<div id="draw">。。。。</div>代码，即弹窗内容
+        content: $(".doc-summary-parent").html(),
+    })
+    }
+    initDocRender(1);
+    // 图片放大显示
+    var img_options = {
+    url: 'data-original',
+    fullscreen:false,//全屏
+    rotatable:false,//旋转
+    scalable:false,//翻转
+    button:false,//关闭按钮
+    toolbar:false,
+    title:false,
+    };
+    var img_viewer = new Viewer(document.getElementById('content'), img_options);
+</script>
+<script>
+    var layer = layui.layer;
+    var form = layui.form;
+    // 非小屏默认展开文档目录
+    if (window.innerWidth > 1050) {
+        $(".sidebar").toggleClass("doc-toc-hide");
+    }
+    // 切换文档目录显示与否
+    $(".tocMenu").on("click", function () {
+        $(".sidebar").toggleClass("doc-toc-hide");
+    });
+</script>
 
-      function showCategory() {
-        // $('body').addClass('big-page');
-        layer.open({
-          type: 1,
-          // r表示right,b表示bottom
-          offset: 'lb',
-          // 文集目录
-          title: '文集目录',
-          //
-          // anim 特效 0-平滑放大 1-从上掉落 2-从底部往上滑入 3-从左滑入 4-从左翻转 5-渐显 6-抖动
-          anim: 5,
-          shadeClose: true, //开启遮罩关闭
-          // 第一个参数宽度，第二个参数高度
-          area: ['300px', '100%'],
-          // 内容区 在body中写入<div id="draw">。。。。</div>代码，即弹窗内容
-          content: $("#drawer").html(),
-        })
-      }
-
-      function showArticle() {
-        // $('body').addClass('big-page');
-        layer.open({
-          type: 1,
-          // r表示right,b表示bottom
-          offset: 'lb',
-          // 文集目录
-          title: '文章目录',
-          //
-          // anim 特效 0-平滑放大 1-从上掉落 2-从底部往上滑入 3-从左滑入 4-从左翻转 5-渐显 6-抖动
-          anim: 5,
-          shadeClose: true, //开启遮罩关闭
-          // 第一个参数宽度，第二个参数高度
-          area: ['300px', '100%'],
-          // 内容区 在body中写入<div id="draw">。。。。</div>代码，即弹窗内容
-          content: $(".doc-summary-parent").html(),
-        })
-      }
-      initDocRender(1);
-      // 图片放大显示
-      var img_options = {
-        url: 'data-original',
-        fullscreen:false,//全屏
-        rotatable:false,//旋转
-        scalable:false,//翻转
-        button:false,//关闭按钮
-        toolbar:false,
-        title:false,
-      };
-      var img_viewer = new Viewer(document.getElementById('content'), img_options);
-    </script>
-    <script>
-        var layer = layui.layer;
-        var form = layui.form;
-        // 非小屏默认展开文档目录
-        if (window.innerWidth > 1050) {
-            $(".sidebar").toggleClass("doc-toc-hide");
+<style>
+    .markdown-body p img {
+        max-width: 350px;
+    }
+    pre.linenums, .vditor-reset>pre>code {
+        max-height: max-content !important;
+    }
+    #drawer {
+        color: #333;
+        position: fixed;
+        height: calc(100%);
+        background-color: #fafafa;
+        /* border-right: 1px solid #e6e6e6; */
+        width: 300px;
+        overflow: auto;
+        left: -310px;
+    }
+    /* 移动端筛选控制栏样式 */
+    @media screen and (max-width: 768px){
+        .logo {
+            position: inherit;
+            left: 0;
+            top: 0;
+            margin: 0 auto;
         }
-        // 切换文档目录显示与否
-        $(".tocMenu").on("click", function () {
-            $(".sidebar").toggleClass("doc-toc-hide");
-        });
-    </script>
-<script src="<$ static $>toc/doctoc.js"></script>
+        .layui-fluid {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+        .header-menu-icon {
+            position: absolute;
+            left: 15px;
+            font-size: 24px;
+        }
 
+    }
+    div.sidebar {
+        top:60px;
+        border: 1px solid #ddd;
+        background: white;
+        overflow: hidden;
+        width: 250px;
+    }
+    div.sidebar:hover {
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+</style>
+<script src="<$ static $>toc/doctoc.js"></script>
 {% endblock %}

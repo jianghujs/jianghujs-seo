@@ -18,14 +18,27 @@ class ArticleService extends Service {
 
   async getArticleAndFillArticles() {
     const { ctx, app } = this;
+    const { userId } = ctx.userInfo;
     const { jianghuKnex } = app;
     const articleId = ctx.pathParams && ctx.pathParams[0]
       || this.ctx.request.body.appData.actionData.articleId;
+
+
+    const articlePublishStatus = [ 'public' ];
+    if (userId) {
+      articlePublishStatus.push('login');
+    }
+
     const article = await jianghuKnex(tableEnum.article)
+      .whereIn('articlePublishStatus', [ 'public', 'login'])
       .where({ articleId })
       .first();
     if (!article) {
-      throw new BizError(errorInfoEnum.article_not_found)
+      return errorInfoEnum.article_not_found
+    }
+    if (article.articlePublishStatus === 'login' && !userId) {
+      article.articleContent = "# 无权限访问";
+      article.articleContentForSeo = "<h1>无权限访问</h1>";
     }
 
     const { categoryId } = article;
@@ -33,7 +46,7 @@ class ArticleService extends Service {
       .where({
         categoryId,
       })
-      .whereNot('articlePublishStatus', 'deleted')
+      .whereIn('articlePublishStatus', articlePublishStatus)
       .select();
     articlelist = articlelist.map(
       ({
