@@ -101,6 +101,7 @@ class ArticleService extends Service {
     }
     ctx.locals.article = article;
     ctx.locals.categoryList = categoryList;
+    ctx.locals.homeActive = '';
     return article;
   }
 

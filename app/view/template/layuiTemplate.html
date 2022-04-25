@@ -56,10 +56,10 @@
         window.vtoast = {
             success: (message) => {
                 layer.msg(message, {icon: 1});
-            },           
+            },
             fail: (message) => {
                 layer.msg(message, {icon: 2});
-            },           
+            },
             loading: (message) => {
                 layer.msg(message, {icon: 0});
             }
@@ -70,15 +70,15 @@
 <body class="big-page">
 
     <div class="layui-header">
-        <div class="layui-fluid layui-container" style="height: 100%">
+        <div class="layui-fluid header-body" style="height: 100%; display: flex; justify-content: space-between;">
             <i class="layui-icon header-menu-icon layui-icon-slider layui-show-xs-inline" style="display: none" onclick="showCategory()"></i>
             <a class="logo" href="/">
                 <img src="https://yun.startalk.tech/index.php/s/JxPejNyea9bn3gB/download" alt="layui">
             </a>
             <div class="layui-hide-xs site-notice"></div>
 
-            <ul class="layui-nav layui-hide-xs" id="LAY_NAV_TOP" style="position: absolute">
-                <li class="layui-nav-item">
+            <ul class="layui-nav layui-hide-xs" id="LAY_NAV_TOP" style="position: unset;">
+                <li class="layui-nav-item <$ homeActive $>">
                     <a href="/">首&nbsp;&nbsp;页</a>
                 </li>
                 {% for category in categoryList %}
@@ -89,11 +89,11 @@
                 <li class="layui-nav-item">
                     {% if username %}
                     <a href="javascript:void(0);">
-                        <i class="layui-icon layui-icon-friends"></i> 
+                        <i class="layui-icon layui-icon-friends"></i>
                         <span class="layui-hide-xs"> <$ username $> </span>
                     <i class="layui-icon layui-icon-down layui-nav-more"></i></a>
                     <dl class="layui-nav-child layui-anim layui-anim-upbit">
-                        
+
                         <dd>
                             <a href="<$ adminUrl $>" title="进入站点后台管理" target="_blank">
                                 <i class="layui-icon layui-icon-console layui-hide-md"></i>
@@ -124,11 +124,11 @@
                                     登录
                                 </a>
                             </dd>
-                            
+
                         </dl>
-                    </a>   
+                    </a>
                     {% endif %}
- 
+
                 </li>
             </ul>
         </div>
@@ -200,7 +200,7 @@
                                 pageId: 'allPage',
                                 actionId: 'resetPassword',
                                 actionData: {
-                                    oldPassword: oldPwd, 
+                                    oldPassword: oldPwd,
                                     newPassword: newPwd1
                                 }
                             }
@@ -215,5 +215,5 @@
     </script>
 
     {% block content %}{% endblock %}
-    
+
 </body>
