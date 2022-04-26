@@ -46,7 +46,7 @@ class CategoryService extends Service {
       }
       row.articleList = articleList.slice(0,3);
     });
-    ctx.locals.homeActive = 'layui-this';
+    ctx.locals.homeActive = 'home';
     return categoryList;
   }
 

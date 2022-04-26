@@ -157,9 +157,10 @@ if(window.localStorage.getItem('font-size')){// 字体大小
 $(document).ready(function() {
     // 初始时，“返回顶部”标签隐藏
     $(".toTop").hide();
-    $(window).scroll(function() {
+    console.log(123)
+    $('.jianghu-body').on('scroll', function() {
         // 若滚动的高度，超出指定的高度后，“返回顶部”的标签出现。
-        if($(document).scrollTop() >= 140) {
+        if($('.jianghu-body').scrollTop() >= 140) {
             $(".toTop").show();
         } else {
             $(".toTop").hide();
@@ -173,7 +174,7 @@ $(document).ready(function() {
     })
     // 绑定点击事件，实现返回顶部的效果
     $(".toTop").click(function() {
-        $(document).scrollTop(0);
+        $('.jianghu-body').scrollTop(0);
     });
     // 生成当前网页链接
     $("input[name=current_url]").val(document.URL)

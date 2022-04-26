@@ -55,11 +55,11 @@
             </nav>
         </div>
     </div>
-    <div class="doc-body doc-ml-300">
+    <div class="doc-body doc-ml-300 jianghu-body">
         <!-- 文档导航 -->
         <div class="doc-header" role="navigation">
             <a class="btn pull-left js-toolbar-action layui-hide-xs" aria-label="" href="javascript:void(0);" title="切换侧边栏">
-                <i class="layui-icon layui-icon-slider"></i>
+                <i class="layui-icon layui-icon-read"></i>
             </a>
             <a class="btn pull-left font-small" href="javascript:void(0);" title="缩小字体">
                 <i class="fa fa-font">-</i>
@@ -112,12 +112,10 @@
     </div>
     <div class="fixed-tool-bar">
         <div class="toTop layui-hide-xs-inline-block"><i class="layui-icon layui-icon-up"></i></div>
-        <div class="editDoc layui-show-xs-inline-block" style="display: none;text-align: center;width: auto" onclick="showArticle()">
+        <!--<div class="editDoc layui-show-xs-inline-block" style="display: none;text-align: center;width: auto" onclick="showArticle()">
             <button class="layui-btn layui-btn-radius">文章</button>
-        </div>
-        <div class="tocMenu" style="text-align: center;width: auto">
-            <button class="layui-btn layui-btn-radius">大纲</button>
-        </div>
+        </div>-->
+        <div class="tocMenu" ><i class="layui-icon layui-icon-more"></i></div>
     </div>
 </div>
 
@@ -141,7 +139,7 @@
         layer.open({
             type: 1,
             // r表示right,b表示bottom
-            offset: 'lb',
+            offset: 'rb',
             // 文集目录
             title: '目录',
             //

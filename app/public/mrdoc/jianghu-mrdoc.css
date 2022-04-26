@@ -15,10 +15,6 @@
     background: rgba(0,0,0,.1);
     border-radius: 0;
 }
-body {
-    overflow-y: overlay;
-    overflow-x: hidden;
-}
 /* 页头下边框线 */
 .layui-header{
     border-bottom:1px solid #ddd;
@@ -39,10 +35,13 @@ body {
     padding: 0 90px;
 }
 
-.header-menu-icon {
+.header-menu-icon-category, .header-menu-icon-article {
     position: absolute;
-    left: 15px;
+    right: 15px;
     font-size: 24px;
+}
+.header-menu-icon-article {
+    left: 15px;
 }
 .logo img {
     height: 30px;
@@ -199,6 +198,7 @@ a.index-add-link:hover{
 /* 文档浏览页 */
 body, html {
     height: 100%;
+    overflow: hidden;
 }
 .doc{
     display: -webkit-box;
@@ -216,7 +216,8 @@ body, html {
     padding: 0;
     height: calc(100vh - 61px);
     max-height: calc(100vh - 61px);
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 .project-title{
     font-size: 20px;
@@ -229,6 +230,7 @@ body, html {
     color: #333;
     /*height: calc(100% - 20px);*/
     height: calc(100vh - 61px);
+    max-height: calc(100vh - 61px);
     background-color: #fafafa;
     /* border-right: 1px solid #e6e6e6; */
     width:299px;
@@ -899,9 +901,12 @@ input#doc-name,input#doctemp-name{
         white-space: pre;
         word-wrap: break-word;
     }
+    .editormd-preview-container {
+        padding: 0;
+    }
     /* 文档阅读页 */
     .doc-body{
-        padding: 0;
+        padding: 0 15px;
     }
     div.doc-summary{
         z-index: 9999;
@@ -913,7 +918,7 @@ input#doc-name,input#doctemp-name{
         margin: 0 auto;
     }
     .doc {
-        padding: 0 15px;
+        padding: 0;
     }
 }
 
@@ -936,7 +941,7 @@ input#doc-name,input#doctemp-name{
 }
 .jianghu-header {
     position: fixed;
-    width: 100%;
+    width: 100vw;
     background: white;
 }
 .jianghu-header-back {
