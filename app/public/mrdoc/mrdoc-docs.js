@@ -157,7 +157,6 @@ if(window.localStorage.getItem('font-size')){// 字体大小
 $(document).ready(function() {
     // 初始时，“返回顶部”标签隐藏
     $(".toTop").hide();
-    console.log(123)
     $('.jianghu-body').on('scroll', function() {
         // 若滚动的高度，超出指定的高度后，“返回顶部”的标签出现。
         if($('.jianghu-body').scrollTop() >= 140) {
@@ -204,7 +203,6 @@ $(function(){
 });
 function largeFont(){
     var font_size = window.localStorage.getItem('font-size')
-    console.log(font_size)
     if(parseFloat(font_size) < 1.4){
         size = parseFloat(font_size) + 0.1
         $('#content').css({'font-size':size+'rem'})
