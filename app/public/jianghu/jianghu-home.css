@@ -226,7 +226,7 @@
     color: #315947;
     text-align: justify;
     line-height: 1.5rem;
-    width: 11.88rem;
+    width: 13rem;
     margin: auto
 }
 
@@ -257,14 +257,6 @@
     margin: 1.5rem 0 1rem;
     border-bottom: none;
     padding-bottom: 0
-}
-
-.jianghu-egg-features-item p {
-    color: #315947;
-    text-align: justify;
-    line-height: 1.5rem;
-    width: 11.88rem;
-    margin: auto
 }
 
 .jianghu-egg-features-item-icon {
@@ -587,7 +579,7 @@
     .jianghu-egg-intro-logo {
         width: 160px;
         padding-right: 40px;
-        padding-bottom: 25px;
+        padding-bottom: 15px;
         margin: 0;
     }
 

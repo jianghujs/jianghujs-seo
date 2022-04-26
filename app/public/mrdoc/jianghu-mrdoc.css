@@ -35,10 +35,13 @@
     padding: 0 90px;
 }
 
-.header-menu-icon-category, .header-menu-icon-article {
+.header-menu-icon-category, .header-menu-icon-article, .header-menu-icon-user {
     position: absolute;
-    right: 15px;
-    font-size: 24px;
+    right: 50px;
+    font-size: 20px;
+}
+.header-menu-icon-user {
+    right: 15px
 }
 .header-menu-icon-article {
     left: 15px;
