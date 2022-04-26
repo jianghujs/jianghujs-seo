@@ -246,6 +246,7 @@ body, html {
     width: 280px;
     min-height: calc(100vh - 70px);
     border: none;
+    overflow-y: overlay;
 }
 .doc-body {
     -webkit-box-orient: vertical;
