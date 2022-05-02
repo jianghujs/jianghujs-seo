@@ -895,6 +895,9 @@ input#doc-name,input#doctemp-name{
     a.js-toolbar-action {
         display: none !important;
     }
+    .logo {
+        margin: 0 auto;
+    }
 }
 /* 移动端小屏幕样式 */
 @media screen and (max-width:768px){
@@ -935,9 +938,6 @@ input#doc-name,input#doctemp-name{
     }
     .markdown-body{
         width: 100%;
-    }
-    .logo {
-        margin: 0 auto;
     }
     .doc {
         padding: 0;
