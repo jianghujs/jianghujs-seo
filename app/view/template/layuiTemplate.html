@@ -85,16 +85,16 @@
     <div class="layui-header jianghu-header <$ 'home-header' if homeActive == 'home' else '' $>">
         <div class="layui-fluid header-body">
             {% if homeActive === 'article' %}
-            <i class="layui-icon header-menu-icon-article layui-icon-read layui-show-xs-inline-block" style="display: none; width: 30px" onclick="showArticle()"></i>
+            <i class="layui-icon header-menu-icon header-menu-icon-article layui-icon-read " style="width: 30px" onclick="showArticle()"></i>
             {% endif %}
             <a class="logo" href="/">
                 <img src="<$ static $>img/logo.png" alt="layui">
             </a>
-            <i class="layui-icon header-menu-icon-category layui-icon-shrink-right layui-show-xs-inline" style="display: none" onclick="showCategoryMenu()"></i>
-            <i class="layui-icon header-menu-icon-user layui-icon-username layui-show-xs-inline"  id="userIcon" style="display: none" ></i>
+            <i class="layui-icon header-menu-icon header-menu-icon-category layui-icon-shrink-right " style="" onclick="showCategoryMenu()"></i>
+            <i class="layui-icon header-menu-icon header-menu-icon-user layui-icon-username "  id="userIcon" style="" ></i>
             <div class="layui-hide-xs site-notice"></div>
             <div>
-                <ul class="layui-nav layui-hide-xs" id="LAY_NAV_TOP" style="position: unset;">
+                <ul class="layui-nav layui-hide-xs menu-list-box" id="LAY_NAV_TOP" style="position: unset;">
                     <li class="layui-nav-item <$ 'layui-this' if homeActive == 'home' else '' $>">
                         <a href="/">首&nbsp;&nbsp;页</a>
                     </li>
@@ -103,7 +103,7 @@
                         <a href="/<$ ctx.app.config.appId $>/page/article/<$ category.articleList[0].articleId $>/"><$ category.categoryName $></a>
                     </li>
                     {% endfor %}
-                    <li class="layui-nav-item user-nav-box" style="width: 100px">
+                    <li class="layui-nav-item user-nav-box" style="min-width: 100px">
                         {% if username %}
                         <a href="javascript:void(0);">
                             <i class="layui-icon layui-icon-friends"></i>

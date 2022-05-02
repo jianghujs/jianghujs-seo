@@ -878,6 +878,18 @@ input#doc-name,input#doctemp-name{
         padding: 0 20px;
     }
 
+    .header-menu-icon {
+        display: none;
+    }
+/* 移动端小屏幕样式 */
+@media screen and (max-width:1050px){
+    .menu-list-box {
+        display: none;
+    }
+    .header-menu-icon {
+        display: inline-block;
+    }
+}
 /* 移动端小屏幕样式 */
 @media screen and (max-width:768px){
     /* 首页 */
