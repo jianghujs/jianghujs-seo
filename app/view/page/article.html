@@ -126,14 +126,6 @@
 <script src="<$ static $>editor.md/lib/marked.min.js"></script>
 <script src="<$ static $>editor.md/editormd.js"></script>
 <script>
-  $(function () {
-    function getTop() {
-      const top = $('.doc-summary').find('list.active').offset().top;
-      console.log(top)
-      $('.doc-summary').scrollTop(top-65);
-    }
-    getTop()
-  })
     // 展示左侧目录
     function showArticle() {
         layer.open({

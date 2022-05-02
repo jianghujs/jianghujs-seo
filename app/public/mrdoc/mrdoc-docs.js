@@ -145,7 +145,7 @@ if(font_stauts == 'serif'){// 字体类型
 }
 if(window.localStorage.getItem('font-size')){// 字体大小
     font_size = window.localStorage.getItem('font-size')
-    console.log(font_size)
+    // console.log(font_size)
     $('#content').css({'font-size':font_size+'rem'})
 }else{
     window.localStorage.setItem('font-size',1.0)
@@ -264,7 +264,7 @@ function SwitchToc(i){
 // 展开文档树
 function openDocTree(){
     $("nav ul.summary ul").each(function(obj){
-        console.log(obj,this)
+        // console.log(obj,this)
         $(this).removeClass("toc-close")
         $(this).prev().children('i').toggleClass("layui-icon-left layui-icon-down");//切换图标
     })
@@ -273,7 +273,7 @@ function openDocTree(){
 // 收起文档树
 function closeDocTree(){
     $("nav ul.summary ul").each(function(obj){
-        console.log(obj,this)
+        // console.log(obj,this)
         $(this).addClass("toc-close")
         $(this).prev().children('i').toggleClass("layui-icon-left layui-icon-down");//切换图标
     })
