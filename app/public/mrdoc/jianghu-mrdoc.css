@@ -881,6 +881,9 @@ input#doc-name,input#doctemp-name{
     .header-menu-icon {
         display: none;
     }
+    .js-toolbar-action {
+        display: inline-block;
+    }
 /* 移动端小屏幕样式 */
 @media screen and (max-width:1050px){
     .menu-list-box {
@@ -888,6 +891,9 @@ input#doc-name,input#doctemp-name{
     }
     .header-menu-icon {
         display: inline-block;
+    }
+    a.js-toolbar-action {
+        display: none !important;
     }
 }
 /* 移动端小屏幕样式 */
