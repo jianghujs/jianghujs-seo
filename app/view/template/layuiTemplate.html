@@ -56,13 +56,13 @@
     <script src="<$ static $>/js/lib/axios.min.js"></script>
     <script type="text/javascript">
         window.vtoast = {
-            success: (message) => {
+            success: ({message}) => {
                 layer.msg(message, {icon: 1});
             },
-            fail: (message) => {
+            fail: ({message}) => {
                 layer.msg(message, {icon: 2});
             },
-            loading: (message) => {
+            loading: ({message}) => {
                 layer.msg(message, {icon: 0});
             }
         };
@@ -231,6 +231,7 @@
                             }
                         }
                     })
+                    debugger
                     layer.msg('密码修改成功', {icon: 1});
                     layer.closeAll('page');
                     location.reload();
