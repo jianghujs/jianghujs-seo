@@ -118,7 +118,7 @@ Vue.component("tree", {
                         actionData: { path: item.path },
                     }
                 }
-            })).data.appData.rows;
+            })).data.appData.resultData.rows;
             // eslint-disable-next-line require-atomic-updates
             item.children = rows
                 .map(item => {

@@ -205,7 +205,7 @@
                                 actionData: { path },
                             }
                         }
-                    })).data.appData.rows;
+                    })).data.appData.resultData.rows;
                     this.items = rows;
                 } else {
                     // TODO: load file
@@ -261,7 +261,7 @@
                     return;
                 }
                 window.vtoast.loading("文件重命名");
-                const appData = (await window.jianghuAxios({
+                await window.jianghuAxios({
                     data: {
                         appData: {
                             pageId: 'materialManagement',
@@ -272,7 +272,7 @@
                             },
                         }
                     }
-                }));
+                });
                 item.newFolderPopper = false;
                 this.load();
                 const isDir = item.path[item.path.length - 1] === "/";

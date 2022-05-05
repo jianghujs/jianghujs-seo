@@ -290,7 +290,7 @@ Vue.component("file-browser", {
             const fromDir = this.currentCopyPath.substring(0, this.currentCopyPath.lastIndexOf('/')+1);
             const toDir = this.path;
             const filename = this.currentCopyPath.substring(this.currentCopyPath.lastIndexOf('/')+1);
-            const appData = (await window.jianghuAxios({
+            await window.jianghuAxios({
                 data: {
                     appData: {
                         pageId: 'materialManagement',
@@ -302,7 +302,7 @@ Vue.component("file-browser", {
                         },
                     }
                 }
-            }));
+            });
             window.vtoast.success(this.pasteMode === 'cut' ? '文件移动成功' : '文件复制成功');
             this.$refs.list.load();
             if (fromDir.startsWith(toDir)) {
