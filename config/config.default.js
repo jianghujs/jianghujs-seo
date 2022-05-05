@@ -7,6 +7,7 @@ const {
   middleware,
   middlewareMatch,
 } = require("egg-jianghu/config/middlewareConfig");
+const fs = require("fs");
 
 const eggJianghuPathTemp = require.resolve("egg-jianghu");
 const eggJianghuPath = path.join(eggJianghuPathTemp, "../");
@@ -77,6 +78,11 @@ module.exports = (appInfo) => {
             ctx.request.path.startsWith(`/${ctx.app.config.appId}/upload/`)
             || ctx.request.path.startsWith(`/upload/`));
       },
+    },
+    siteFile: {
+      "/favicon.ico": fs.readFileSync(
+        path.join(__dirname, "../app/public/favicon.ico")
+      ),
     },
   };
 };
