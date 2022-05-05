@@ -27,14 +27,9 @@ use doc;
 # 运行 sql/init.sql 文件
 ```
 
-## 测试账号 & 测试环境
-
-- admin/123456
-
 ## 线上
 
-- seo: https://openjianghu.org
-- admin: https://admin.openjianghu.org
+- seo: https://openjianghu.org/doc
 
 ## 同步 admin/upload/xx 至 seo/upload/xx
 
