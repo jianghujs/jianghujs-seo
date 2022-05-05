@@ -230,13 +230,8 @@
             }
           }
         }).then(response => {
-          return response.data.appData;
-        }).catch(err => {
-          const { response } = err
-          if (response.data.appData) {
-            return response.data.appData;
-          }
-        });
+          return response.data.appData.resultData;
+        })
         this.userInfo = userInfo;
         this.$emit('layoutData', { userInfo: this.userInfo })
         this.layoutLoading = false;
