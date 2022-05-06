@@ -22,8 +22,6 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="{% block ogp_title %}{% endblock %}">
   <meta property="og:description" content="{% block ogp_desc %}{% endblock %}">
-  <meta property="og:image"
-        content="<$ request.scheme $>://<$ request.META.HTTP_HOST $><$ static $>/search/mrdoc_logo_300.png">
   <meta property="og:pageUrl" content="<$ request.scheme $>://<$ request.META.HTTP_HOST $><$ request.path_info $>">
 
   <script async defer data-website-id="6d41fa09-0bd3-4146-9367-aba746868472" src="https://umami.openjianghu.org/jh_stat.js"></script>
@@ -43,12 +41,10 @@
   <!-- OGP分享协议结束 -->
   <title>{% block title %}{% endblock %} - <$ ctx.app.config.appTitle $></title>
   <link href="<$ static $>/layui/css/layui.css" rel="stylesheet">
-  <link rel="stylesheet" href="<$ static $>/editor.md/css/editormd.css" />
-  <!-- <link rel="stylesheet" href="<$ static $>/vditor/dist/index.css" /> -->
-  <link href="<$ static $>/viewerjs/viewer.min.css" rel="stylesheet">
-  <link href="<$ static $>/mrdoc/jianghu-mrdoc.css" rel="stylesheet">
-  <link href="<$ static $>/mrdoc/jianghu-mrdoc-docs.css" rel="stylesheet">
-  <link href="<$ static $>/iconFont/iconfont.css" rel="stylesheet">
+  <link rel="stylesheet" href="<$ static $>/jianghu/jianghu-md.css" />
+  <link href="<$ static $>/jianghu/jianghu-doc.css" rel="stylesheet">
+  <link href="<$ static $>/jianghu/jianghu-doc-docs.css" rel="stylesheet">
+<!--  <link href="<$ static $>/iconFont/iconfont.css" rel="stylesheet">-->
   <script src="<$ static $>/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
   <script src="<$ static $>/layui/layui.js"></script>

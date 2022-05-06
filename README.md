@@ -47,9 +47,9 @@ ln -s /www/wwwroot/openjianghu_admin/upload/materialRepo /www/wwwroot/doc/upload
 
 ```config
 
-    # 将favicon.ico 上传到 /www/wwwroot/admin.jhxf.org/
+    # 将favicon.ico 上传到 /www/wwwroot/openjianghu.org/
     location = /favicon.ico {
-      root  /www/wwwroot/admin.jhxf.org;
+      root  /www/wwwroot/openjianghu.org;
     }
 
     location / {
