@@ -112,9 +112,7 @@
           </div>
           <!-- 音频 -->
           {% if article.articleAudioUrl %}
-          <div class="items-center-box">
-            <audio src="/<$ ctx.app.config.appId $>/upload/<$ article.articleAudioUrl $>" controls preload></audio>
-          </div>
+          <audio src="/<$ ctx.app.config.appId $>/upload/<$ article.articleAudioUrl $>" style="width: 100%;" controls preload></audio>
           {% endif %}
           <!-- 视频 -->
           {% if article.articleVideoUrl %}
