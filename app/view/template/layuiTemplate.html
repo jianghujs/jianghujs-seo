@@ -110,7 +110,7 @@
         {% endfor %}
         {% if (categoryList.length > 4) %}
           <li class="layui-nav-item layui-nav-item-more">
-            <a href="javascript:void(0);" style="padding: 0 20px; min-width: 40px"><i class="layui-icon layui-icon-more" ></i></a>
+            <a href="javascript:void(0);" style="min-width: 40px"><i class="layui-icon layui-icon-more" ></i></a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
               {% for category in categoryList.slice(4) %}
               <dd><a href="/<$ ctx.app.config.appId $>/page/article/<$ category.articleList[0].articleId $>/"><$ category.categoryName $></a></dd>

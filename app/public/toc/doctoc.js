@@ -231,9 +231,9 @@ function addAllStyle(highlightColor) {
         margin-block-end:11px;
         margin-block-start:11px;
     }`)
-    addStyle(`.menu-root .h2-link:hover {
+    /*addStyle(`.menu-root .h2-link:hover {
         border-bottom: 2px solid ${highlightColor};
-    }`)
+    }`)*/
     addStyle(`.menu-root .h2-link.current+.menu-sub{
         display:block;
     }`)
@@ -275,10 +275,10 @@ function addAllStyle(highlightColor) {
             margin-left:310px !important;
         }
     }`)
-    addStyle(`.sidebar .active{
+    /*addStyle(`.sidebar .active{
         color:${highlightColor};
         font-weight:700;
-    }`)
+    }`)*/
 }
 /**
 >函数节流
