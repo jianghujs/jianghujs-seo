@@ -118,9 +118,7 @@
           {% endif %}
           <!-- 视频 -->
           {% if article.articleVideoUrl %}
-          <div class="items-center-box">
-            <video src="/<$ ctx.app.config.appId $>/upload/<$ article.articleVideoUrl $>" width="320" height="200" controls preload></video>
-          </div>
+          <video src="/<$ ctx.app.config.appId $>/upload/<$ article.articleVideoUrl $>" style="width: 100%; height: auto" controls preload></video>
           {% endif %}
           <!-- 正文开始 -->
           <div class="markdown-body editormd-preview-container" id="content">

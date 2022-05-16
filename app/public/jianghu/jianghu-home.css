@@ -136,16 +136,6 @@
     font-size: 48px !important
 }
 
-
-.jianghu-egg-intro-buttons {
-    padding: 50px 0 0;
-    margin: 0
-}
-
-.jianghu-egg-intro-buttons a {
-    text-decoration: none
-}
-
 .jianghu-egg-intro-button {
     display: inline-block;
     height: 38px;
@@ -525,7 +515,7 @@
         font-size: 14px;
     }
     .jianghu-egg-intro-buttons {
-        padding-top: 15px;
+        padding-top: 30px;
     }
     .jianghu-egg-links-wrap {
         flex-direction: column;
