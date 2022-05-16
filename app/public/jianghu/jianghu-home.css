@@ -40,6 +40,7 @@
 .jianghu-egg-intro-logo img {
     width: 120%;
     max-width: unset;
+    margin-top: -55px;
 }
 
 .jianghu-egg-intro-info {
@@ -69,6 +70,7 @@
     font-weight: 700;
     font-size: 48px !important;
     white-space: nowrap;
+    line-height: 0.7;
 }
 
 .jianghu-egg-intro-buttons {
@@ -482,9 +484,11 @@
         margin: 0 auto;
         justify-content: center;
     }
+    .jianghu-egg-intro-logo img {
+        margin-top: 15px;
+    }
     .jianghu-egg-intro {
-        padding: 0 150px 0 200px;
-        min-height: 300px;
+        padding: 0 150px 30px 200px;
     }
 
     .jianghu-egg-intro-logo {
@@ -499,10 +503,10 @@
         padding-top: 50px;
     }
     .jianghu-egg-intro-info h1 {
-        font-size: 28px;
+        font-size: 32px;
     }
     .jianghu-egg-intro-info h1 p {
-        font-size: 40px !important;
+        font-size: 35px !important;
     }
     .jianghu-egg-intro-info p.desc {
         font-size: 14px;
@@ -531,7 +535,7 @@
 
 @media only screen and (max-width: 992px) {
     .jianghu-egg-intro {
-        padding: 0 100px 0 130px;
+        padding: 0 100px 30px 130px;
     }
     .jianghu-egg-links {
         padding-top: 30px;
@@ -539,7 +543,7 @@
 }
 @media only screen and (max-width: 892px) {
     .jianghu-egg-intro {
-        padding: 0 40px 0 60px;
+        padding: 0 40px  30px 60px;
     }
     .jianghu-egg-intro-info {
         width: 80%;

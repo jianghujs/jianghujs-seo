@@ -27,7 +27,8 @@ ul.markdown-toc-list{
 }
 ul.markdown-toc-list li{
     list-style: none!important;
-    line-height: 24px;
+    line-height: 17px;
+    margin: 8px 0;
 }
 ul.markdown-toc-list > li > ul > li,ul.markdown-toc-list > li > ul li{
     padding-left:15px;
