@@ -100,9 +100,6 @@
     <div class="layui-hide-xs site-notice"></div>
     <div>
       <ul class="layui-nav layui-hide-xs menu-list-box" id="LAY_NAV_TOP" style="position: unset;">
-        <li class="layui-nav-item <$ 'layui-this' if homeActive == 'home' else '' $>">
-          <a href="/">首&nbsp;&nbsp;页</a>
-        </li>
         {% for category in categoryList.slice(0, 4) %}
         <li class="layui-nav-item <$ category.active $>">
           <a href="/<$ ctx.app.config.appId $>/page/article/<$ category.articleList[0].articleId $>/"><$ category.categoryName $></a>

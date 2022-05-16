@@ -1,7 +1,7 @@
 /* 全局滚动条 */
 ::-webkit-scrollbar {
     -webkit-appearance: none;
-    width: 10px;
+    width: 5px;
     height: 10px;
 }
 ::-webkit-scrollbar-thumb {
@@ -241,13 +241,11 @@ body, html {
     /* border-right: 1px solid #e6e6e6; */
     width:299px;
     min-width: 299px;
-    overflow: hidden;
     border-right: 1px solid #ddd;
-}
-.doc-summary:hover {
-    overflow-y: overlay;
     overflow-x: hidden;
+    overflow-y: overlay;
 }
+
 .big-page .doc-summary, .big-page .site-menu{
     width: 280px;
     min-height: calc(100vh - 70px);

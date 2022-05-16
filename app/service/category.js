@@ -26,10 +26,12 @@ class CategoryService extends Service {
       categoryList = await jianghuKnex(tableEnum.view01_category)
         .whereNot('categoryPublishStatus', 'deleted')
         .where('categoryName', 'like', `%${keyword.trim()}%`)
+        .orderBy('categoryGroupSort', 'asc')
         .select();
     } else {
       categoryList = await jianghuKnex(tableEnum.view01_category)
         .whereNot('categoryPublishStatus', 'deleted')
+        .orderBy('categoryGroupSort', 'asc')
         .select();
     }
     categoryList.forEach(row => {
