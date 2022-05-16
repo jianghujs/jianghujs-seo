@@ -65,7 +65,8 @@
 
 .jianghu-egg-intro-info-stronge {
     font-weight: 700;
-    font-size: 48px !important
+    font-size: 48px !important;
+    white-space: nowrap;
 }
 
 .jianghu-egg-intro-buttons {
@@ -553,6 +554,10 @@
     }
 }
 @media only screen and (max-width: 768px) {
+
+    .jianghu-egg-intro-info-stronge {
+        white-space: normal;
+    }
     .jianghu-egg-intro {
         padding: 0;
     }
@@ -563,7 +568,8 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        height: 300px;
+        height: auto;
+        padding-bottom: 20px;
     }
 
     .jianghu-egg-intro-logo {
