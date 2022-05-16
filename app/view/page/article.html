@@ -105,7 +105,7 @@
 
           <div class="doc-info">
             <!-- 页面主体头信息 -->
-            <h1>
+            <h1 style="line-height: initial">
               <$ article.articleTitle $>
             </h1>
             <hr>
@@ -157,7 +157,7 @@
       offset: 'lb',
       // 文集目录
       title: '目录',
-      //
+      move: false,
       // anim 特效 0-平滑放大 1-从上掉落 2-从底部往上滑入 3-从左滑入 4-从左翻转 5-渐显 6-抖动
       anim: 5,
       shadeClose: true, //开启遮罩关闭
@@ -194,52 +194,5 @@
   });
 </script>
 
-<style>
-    .markdown-body p img {
-        max-width: 350px;
-    }
-
-    pre.linenums, .vditor-reset > pre > code {
-        max-height: max-content !important;
-    }
-
-    div.sidebar {
-        top: 60px;
-        border: 1px solid #ddd;
-        background: white;
-        width: 250px;
-        right: 10px;
-        overflow-x: hidden;
-        overflow-y: auto;
-    }
-
-    #editorMdContainer pre {
-        font-size: 16px !important;
-    }
-
-    #baseinfo_diff_body pre {
-        font-size: 16px !important;
-    }
-
-    #baseinfo_diff_body .CodeMirror-merge {
-        height: 100%;
-    }
-
-    #baseinfo_diff_body .CodeMirror-merge .CodeMirror {
-        height: 100%;
-    }
-
-    #diff_body pre {
-        font-size: 16px !important;
-    }
-
-    #diff_body .CodeMirror-merge {
-        height: 100%;
-    }
-
-    #diff_body .CodeMirror-merge .CodeMirror {
-        height: 100%;
-    }
-</style>
 <script src="<$ static $>/toc/doctoc.js"></script>
 {% endblock %}

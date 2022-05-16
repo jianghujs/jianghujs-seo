@@ -43,6 +43,7 @@
   <link href="<$ static $>/layui/css/layui.css" rel="stylesheet">
   <link rel="stylesheet" href="<$ static $>/jianghu.md/css/editormd.css" />
   <link href="<$ static $>/jianghu/jianghu-doc.css" rel="stylesheet">
+  <link href="<$ static $>/jianghu/jianghu-ui.css" rel="stylesheet">
   <link href="<$ static $>/jianghu/jianghu-doc-docs.css" rel="stylesheet">
   <link href="<$ static $>/iconFont/css/font-awesome.min.css" rel="stylesheet">
   <script src="<$ static $>/jquery/3.1.1/jquery.min.js"></script>
@@ -63,26 +64,6 @@
       }
     };
   </script>
-  <style>
-      .layui-layer-title {
-          height: 60px;
-          text-align: center;
-          padding: 0 20px;
-          font-size: 16px;
-      }
-      .layui-layer-setwin {
-          top: 22px;
-      }
-      .layui-nav .layui-nav-item a {
-          padding: 0 12px;
-      }
-      .layui-nav .layui-nav-item-more a i.layui-icon-down, .layui-nav .layui-nav-item-more a i.layui-nav-mored {
-          display: none;
-      }
-      .layui-nav .layui-this:after, .layui-nav-bar {
-          height: 3px;
-      }
-  </style>
 </head>
 
 <body class="big-page">
@@ -295,6 +276,7 @@
       offset: 'rb',
       // 文集目录
       title: '菜单',
+      move: false,
       //
       // anim 特效 0-平滑放大 1-从上掉落 2-从底部往上滑入 3-从左滑入 4-从左翻转 5-渐显 6-抖动
       anim: 5,
