@@ -73,6 +73,15 @@
       .layui-layer-setwin {
           top: 22px;
       }
+      .layui-nav .layui-nav-item a {
+          padding: 0 12px;
+      }
+      .layui-nav .layui-nav-item-more a i.layui-icon-down, .layui-nav .layui-nav-item-more a i.layui-nav-mored {
+          display: none;
+      }
+      .layui-nav .layui-this:after, .layui-nav-bar {
+          height: 3px;
+      }
   </style>
 </head>
 
@@ -94,17 +103,28 @@
         <li class="layui-nav-item <$ 'layui-this' if homeActive == 'home' else '' $>">
           <a href="/">首&nbsp;&nbsp;页</a>
         </li>
-        {% for category in categoryList %}
+        {% for category in categoryList.slice(0, 4) %}
         <li class="layui-nav-item <$ category.active $>">
           <a href="/<$ ctx.app.config.appId $>/page/article/<$ category.articleList[0].articleId $>/"><$ category.categoryName $></a>
         </li>
         {% endfor %}
-        <li class="layui-nav-item user-nav-box" style="min-width: 100px">
+        {% if (categoryList.length > 4) %}
+          <li class="layui-nav-item layui-nav-item-more">
+            <a href="javascript:void(0);"><i class="layui-icon layui-icon-more" ></i></a>
+            <dl class="layui-nav-child"> <!-- 二级菜单 -->
+              {% for category in categoryList.slice(4) %}
+              <dd><a href="/<$ ctx.app.config.appId $>/page/article/<$ category.articleList[0].articleId $>/"><$ category.categoryName $></a></dd>
+              {% endfor %}
+            </dl>
+          </li>
+        {% endif %}
+        <li class="layui-nav-item user-nav-box">
           {% if username %}
-          <a href="javascript:void(0);">
+          <a href="javascript:void(0);" style="padding: 0 20px">
             <i class="layui-icon layui-icon-friends"></i>
             <span class="layui-hide-xs"> <$ username $> </span>
-            <i class="layui-icon layui-icon-down layui-nav-more"></i></a>
+            <i class="layui-icon layui-icon-down layui-nav-more"></i>
+          </a>
           <dl class="layui-nav-child layui-anim layui-anim-upbit">
 
             <dd>
@@ -127,7 +147,7 @@
             </dd>
           </dl>
           {% else %}
-          <a href="javascript:void(0);">
+          <a href="javascript:void(0);" style="padding: 0 20px">
             <i class="layui-icon layui-icon-username"></i> 游客
             <i class="layui-icon layui-icon-down layui-nav-more"></i></a>
           <dl class="layui-nav-child layui-anim layui-anim-upbit">

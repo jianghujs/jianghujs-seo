@@ -66,7 +66,7 @@ window.onresize = function(){
 };
 function changeSidebar(){
     // 获取匹配指定的媒体查询
-    var screen_width = window.matchMedia('(max-width: 768px)');
+    var screen_width = window.matchMedia('(max-width: 1050px)');
     //判断匹配状态
     if(screen_width.matches){
         //如果匹配到，切换侧边栏
@@ -84,7 +84,7 @@ function changeSidebar(){
 };
 // 监听文档div点击
 document.querySelector('.doc-body').addEventListener('click', function (e) {
-    var screen_width = window.matchMedia('(max-width: 768px)');
+    var screen_width = window.matchMedia('(max-width: 1050px)');
     // 小屏下收起左侧文集大纲
     if(screen_width.matches){
         // console.log("点击了div")
@@ -97,7 +97,7 @@ document.querySelector('.doc-body').addEventListener('click', function (e) {
 */
 // 初始化左侧文集大纲状态
 function init_sidebar(){
-    var screen_width = window.matchMedia('(max-width: 768px)');
+    var screen_width = window.matchMedia('(max-width: 1050px)');
     if(screen_width.matches){}else{
         // 读取浏览器存储
         let bgpage_status = window.localStorage.getItem('bgpage')
@@ -139,10 +139,11 @@ function toggleSidebar(){
     页面初始化字体设置
 */
 font_stauts = window.localStorage.getItem('font-sans')
+/*
 if(font_stauts == 'serif'){// 字体类型
     $(".doc-content").toggleClass("switch-font")
     $("#content").toggleClass("switch-font")
-}
+}*/
 if(window.localStorage.getItem('font-size')){// 字体大小
     font_size = window.localStorage.getItem('font-size')
     // console.log(font_size)

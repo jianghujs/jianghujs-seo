@@ -970,3 +970,13 @@ input#doc-name,input#doctemp-name{
     height: 61px;
     width: 100%;
 }
+
+.items-center-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.items-center-box audio, .items-center-box audio {
+    width: 400px;
+    max-width: 100%;
+}

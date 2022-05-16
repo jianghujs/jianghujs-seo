@@ -4,122 +4,143 @@
 
 {% block content %}
 <div class="doc layui-fluid">
-    <!-- 左侧目录栏 -->
-    <div class="doc-summary-parent">
+  <!-- 左侧目录栏 -->
+  <div class="doc-summary-parent">
 
-        <div class="doc-summary">
-            <!-- 文档搜索 -->
-            <!-- <div id="doc-search-input">
-                <input type="text" name="kw" placeholder="在分类内搜索文档" value="" class="layui-input doc-search-input">
-            </div> -->
-            <!-- 文集名称 -->
-            <!--<div class="project-title">
-                <$ article.articleTitle.split('-')[0] $>
-            </div>-->
-            <nav>
-                <ul class="summary" style="padding-bottom: 80px">
-                    {% for node in article.articleList %}
-                    <li>
-                        <div style="display:flex;justify-content:space-between;">
-                            {% if not node.isGroup %}
-                            <a href="<$ pageUrl $>/article/<$ node.articleId $>" title="<$ children.articleTitle $>">
-                                <i class="iconfont mrdoc-icon-wendang"></i> <$ node.articleTitle $></a>
-                            {% endif %}
-                        </div>
-                    </li>
-                    {% endfor %}
-                    {% for node in article.articleList %}
-                    <li>
-                        <div style="display:flex;justify-content:space-between;">
-                            {% if node.isGroup %}
-                            <span title="<$ node.articleTitle $>" style="color: #999;font-size: 13px">
+    <div class="doc-summary">
+      <!-- 文档搜索 -->
+      <!-- <div id="doc-search-input">
+          <input type="text" name="kw" placeholder="在分类内搜索文档" value="" class="layui-input doc-search-input">
+      </div> -->
+      <!-- 文集名称 -->
+      <!--<div class="project-title">
+          <$ article.articleTitle.split('-')[0] $>
+      </div>-->
+      <nav>
+        <ul class="summary" style="padding-bottom: 80px">
+          {% for node in article.articleList %}
+          <li>
+            <div style="display:flex;justify-content:space-between;">
+              {% if not node.isGroup %}
+              <a href="<$ pageUrl $>/article/<$ node.articleId $>" title="<$ children.articleTitle $>">
+                <i class="iconfont mrdoc-icon-wendang"></i> <$ node.articleTitle $></a>
+              {% endif %}
+            </div>
+          </li>
+          {% endfor %}
+          {% for node in article.articleList %}
+          <li>
+            <div style="display:flex;justify-content:space-between;">
+              {% if node.isGroup %}
+              <span title="<$ node.articleTitle $>" style="color: #999;font-size: 13px">
                                 <$ node.articleTitle $>
                             </span>
-                            {% endif %}
-                        </div>
-                        {% if node.childrenList %}
-                        <ul class="sub-menu">
-                            {% for children in node.childrenList %}
-                            <li>
-                                <div style="display:flex;justify-content:space-between;">
-                                    <a href="<$ pageUrl $>/article/<$ children.articleId $>" title="<$ children.articleTitle $>">
-                                        <i class="iconfont mrdoc-icon-wendang"></i> <$ children.articleTitle $></a>
-                                </div>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                        {% endif %}
-                    </li>
-                    {% endfor %}
-                </ul>
-            </nav>
-        </div>
-    </div>
-    <div class="doc-body doc-ml-300 jianghu-body">
-        <!-- 文档导航 -->
-        <div class="doc-header" role="navigation">
-            <a class="btn pull-left js-toolbar-action" aria-label="" href="javascript:void(0);" title="切换侧边栏">
-                <i class="layui-icon layui-icon-read"></i>
-            </a>
-            <a class="btn pull-left font-small" href="javascript:void(0);" title="缩小字体">
-                <i class="fa fa-font">-</i>
-            </a>
-            <a class="btn pull-left font-large" href="javascript:void(0);" title="放大字体">
-                <i class="fa fa-font">+</i>
-            </a>
-            <a class="btn pull-left font-switch" href="javascript:void(0);" title="切换字体类型">
-                <i class="fa fa-text-height"></i>
-            </a>
-            <a class="btn pull-left" aria-label="" href="<$ adminUrl $>/page/articleEdit?articleId=<$ article.articleId $>&title=<$ article.articleTitle $>" target="_blank">
-                <i class="layui-icon layui-icon-edit"></i> <span class="layui-hide-xs">修改</span>
-            </a>
-            <a class="btn pull-left" aria-label="" href="<$ adminUrl $>/page/articleEdit?categoryId=<$ article.categoryId $>&articleGroupName=<$ article.articleGroupName $>&articlePublishStatus=<$ article.articlePublishStatus $>" target="_blank">
-                <i class="layui-icon layui-icon-edit"></i> <span class="layui-hide-xs">新增</span>
-            </a>            
-            <!-- 顶部工具栏 -->
-            <div id="toc-container" class='sidebar doc-toc-hide'></div>
-            <!--<a class="btn pull-right" aria-label="" href="<$ pageUrl $>/home">
-                <i class="layui-icon layui-icon-home"></i> <span class="layui-hide-xs">首页</span>
-            </a>-->
-        </div>
-        <!-- 文档主体 -->
-        <div class="doc-body-content">
-            <div class="doc-body-content-div">
-                {% if project.is_watermark %}
-                <div id="wm"></div>
-                {% endif %}
-                <!-- 文档内容 -->
-                <div class="doc-content" id="doc-content">
-                    <!-- 标题 -->
-                    <div class="doc-info">
-                        <!-- 页面主体头信息 -->
-                        <h1>
-                            <$ article.articleTitle $>
-                        </h1>
-                        <hr>
-
-                    </div>
-                    <!-- 正文开始 -->
-                    <div class="markdown-body editormd-preview-container" id="content">
-                        <$ article.articleContentForSeo | safe $>
-                        <div id="articleContentHidden" class="articleContentHidden" style="position: absolute; top: -1000px; overflow: hidden; height: 0; width: 0;">
-                            <textarea style="display: none;"><$ article.articleContent $></textarea>
-                        </div>
-                    </div>
-                    <!-- 正文结束 -->
-                    <div class="markdown-body" style="padding-left: 20px;"></div>
-                </div>
-                <hr>
+              {% endif %}
             </div>
+            {% if node.childrenList %}
+            <ul class="sub-menu">
+              {% for children in node.childrenList %}
+              <li>
+                <div style="display:flex;justify-content:space-between;">
+                  <a href="<$ pageUrl $>/article/<$ children.articleId $>" title="<$ children.articleTitle $>">
+                    <i class="iconfont mrdoc-icon-wendang"></i> <$ children.articleTitle $></a>
+                </div>
+              </li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <div class="doc-body doc-ml-300 jianghu-body">
+    <!-- 文档导航 -->
+    <div class="doc-header" role="navigation">
+      <a class="btn pull-left js-toolbar-action" aria-label="" href="javascript:void(0);" title="切换侧边栏">
+        <i class="layui-icon layui-icon-read"></i>
+      </a>
+      <a class="btn pull-left font-small" href="javascript:void(0);" title="缩小字体">
+        <i class="fa fa-font">-</i>
+      </a>
+      <a class="btn pull-left font-large" href="javascript:void(0);" title="放大字体">
+        <i class="fa fa-font">+</i>
+      </a>
+      <!--<a class="btn pull-left font-switch" href="javascript:void(0);" title="切换字体类型">
+        <i class="fa fa-text-height"></i>
+      </a>-->
+      {% if username %}
+      <a class="btn pull-left" aria-label=""
+         href="<$ adminUrl $>/page/articleEdit?articleId=<$ article.articleId $>&title=<$ article.articleTitle $>"
+         target="_blank">
+        <i class="layui-icon layui-icon-edit"></i> <span class="layui-hide-xs">修改</span>
+      </a>
+      <a class="btn pull-left" aria-label=""
+         href="<$ adminUrl $>/page/articleEdit?categoryId=<$ article.categoryId $>&articleGroupName=<$ article.articleGroupName $>&articlePublishStatus=<$ article.articlePublishStatus $>"
+         target="_blank">
+        <i class="layui-icon layui-icon-add-1"></i> <span class="layui-hide-xs">新增</span>
+      </a>
+      {% endif %}
+      <!-- 顶部工具栏 -->
+      <div id="toc-container" class='sidebar doc-toc-hide'></div>
+      <!--<a class="btn pull-right" aria-label="" href="<$ pageUrl $>/home">
+          <i class="layui-icon layui-icon-home"></i> <span class="layui-hide-xs">首页</span>
+      </a>-->
+    </div>
+    <!-- 文档主体 -->
+    <div class="doc-body-content">
+      <div class="doc-body-content-div">
+        {% if project.is_watermark %}
+        <div id="wm"></div>
+        {% endif %}
+        <!-- 文档内容 -->
+        <div class="doc-content" id="doc-content">
+          <!-- 封面 -->
+          {% if article.articleCoverImage %}
+          <img style="width: 100%; background-color: #e0e0e0" src="/<$ ctx.app.config.appId $>/upload/<$ article.articleCoverImage $>" alt=""/>
+          {% endif %}
+          <div class="doc-info">
+            <!-- 页面主体头信息 -->
+            <h1>
+              <$ article.articleTitle $>
+            </h1>
+            <hr>
+          </div>
+          <!-- 音频 -->
+          {% if article.articleAudioUrl %}
+          <div class="items-center-box">
+            <audio src="/<$ ctx.app.config.appId $>/upload/<$ article.articleAudioUrl $>" controls preload></audio>
+          </div>
+          {% endif %}
+          <!-- 视频 -->
+          {% if article.articleVideoUrl %}
+          <div class="items-center-box">
+            <video src="/<$ ctx.app.config.appId $>/upload/<$ article.articleVideoUrl $>" width="320" height="200" controls preload></video>
+          </div>
+          {% endif %}
+          <!-- 正文开始 -->
+          <div class="markdown-body editormd-preview-container" id="content">
+            <$ article.articleContentForSeo | safe $>
+            <div id="articleContentHidden" class="articleContentHidden"
+                 style="position: absolute; top: -1000px; overflow: hidden; height: 0; width: 0;">
+              <textarea style="display: none;"><$ article.articleContent $></textarea>
+            </div>
+          </div>
+          <!-- 正文结束 -->
+          <div class="markdown-body" style="padding-left: 20px;"></div>
         </div>
+        <hr>
+      </div>
     </div>
-    <div class="fixed-tool-bar">
-        <div class="toTop layui-hide-xs-inline-block"><i class="layui-icon layui-icon-up"></i></div>
-        <!--<div class="editDoc layui-show-xs-inline-block" style="display: none;text-align: center;width: auto" onclick="showArticle()">
-            <button class="layui-btn layui-btn-radius">文章</button>
-        </div>-->
-        <div class="tocMenu" ><i class="layui-icon layui-icon-more-vertical"></i></div>
-    </div>
+  </div>
+  <div class="fixed-tool-bar">
+    <div class="toTop layui-hide-xs-inline-block"><i class="layui-icon layui-icon-up"></i></div>
+    <!--<div class="editDoc layui-show-xs-inline-block" style="display: none;text-align: center;width: auto" onclick="showArticle()">
+        <button class="layui-btn layui-btn-radius">文章</button>
+    </div>-->
+    <div class="tocMenu"><i class="layui-icon layui-icon-more-vertical"></i></div>
+  </div>
 </div>
 <script src="<$ static $>/jianghu.md/lib/purify.min.js"></script>
 <script src="<$ static $>/jianghu.md/lib/marked.min.js"></script>
@@ -127,66 +148,71 @@
 <script src="<$ static $>/viewer/viewer.min.js"></script>
 <!--<script src="<$ static $>/iconFont/iconfont.js"></script>-->
 <script src="<$ static $>/jianghu/jianghu-doc-docs.js"></script>
+<script src="//api.html5media.info/1.2.2/html5media.min.js"></script>
 <script>
-    // 展示左侧目录
-    function showArticle() {
-        layer.open({
-            type: 1,
-            // r表示right,b表示bottom
-            offset: 'lb',
-            // 文集目录
-            title: '目录',
-            //
-            // anim 特效 0-平滑放大 1-从上掉落 2-从底部往上滑入 3-从左滑入 4-从左翻转 5-渐显 6-抖动
-            anim: 5,
-            shadeClose: true, //开启遮罩关闭
-            // 第一个参数宽度，第二个参数高度
-            area: ['300px', '100%'],
-            // 内容区 在body中写入<div id="draw">。。。。</div>代码，即弹窗内容
-            content: $(".doc-summary-parent").html(),
-        })
-    }
-    initDocRender(1);
-    // 图片放大显示
-    var img_options = {
+  // 展示左侧目录
+  function showArticle() {
+    layer.open({
+      type: 1,
+      // r表示right,b表示bottom
+      offset: 'lb',
+      // 文集目录
+      title: '目录',
+      //
+      // anim 特效 0-平滑放大 1-从上掉落 2-从底部往上滑入 3-从左滑入 4-从左翻转 5-渐显 6-抖动
+      anim: 5,
+      shadeClose: true, //开启遮罩关闭
+      // 第一个参数宽度，第二个参数高度
+      area: ['300px', '100%'],
+      // 内容区 在body中写入<div id="draw">。。。。</div>代码，即弹窗内容
+      content: $(".doc-summary-parent").html(),
+    })
+  }
+
+  initDocRender(1);
+  // 图片放大显示
+  var img_options = {
     url: 'data-original',
-    fullscreen:false,//全屏
-    rotatable:false,//旋转
-    scalable:false,//翻转
-    button:false,//关闭按钮
-    toolbar:false,
-    title:false,
-    };
-    var img_viewer = new Viewer(document.getElementById('content'), img_options);
+    fullscreen: false,//全屏
+    rotatable: false,//旋转
+    scalable: false,//翻转
+    button: false,//关闭按钮
+    toolbar: false,
+    title: false,
+  };
+  var img_viewer = new Viewer(document.getElementById('content'), img_options);
 </script>
 <script>
-    var layer = layui.layer;
-    var form = layui.form;
-    // 非小屏默认展开文档目录
-    if (window.innerWidth > 1050) {
-        $(".sidebar").toggleClass("doc-toc-hide");
-    }
-    // 切换文档目录显示与否
-    $(".tocMenu").on("click", function () {
-        $(".sidebar").toggleClass("doc-toc-hide");
-    });
+  var layer = layui.layer;
+  var form = layui.form;
+  // 非小屏默认展开文档目录
+  if (window.innerWidth > 1050) {
+    $(".sidebar").toggleClass("doc-toc-hide");
+  }
+  // 切换文档目录显示与否
+  $(".tocMenu").on("click", function () {
+    $(".sidebar").toggleClass("doc-toc-hide");
+  });
 </script>
 
 <style>
     .markdown-body p img {
         max-width: 350px;
     }
-    pre.linenums, .vditor-reset>pre>code {
+
+    pre.linenums, .vditor-reset > pre > code {
         max-height: max-content !important;
     }
+
     div.sidebar {
-        top:60px;
+        top: 60px;
         border: 1px solid #ddd;
         background: white;
         overflow: hidden;
         width: 250px;
         right: 10px;
     }
+
     div.sidebar:hover {
         overflow-x: hidden;
         overflow-y: auto;
@@ -199,18 +225,23 @@
     #baseinfo_diff_body pre {
         font-size: 16px !important;
     }
+
     #baseinfo_diff_body .CodeMirror-merge {
         height: 100%;
     }
+
     #baseinfo_diff_body .CodeMirror-merge .CodeMirror {
         height: 100%;
     }
+
     #diff_body pre {
         font-size: 16px !important;
     }
+
     #diff_body .CodeMirror-merge {
         height: 100%;
     }
+
     #diff_body .CodeMirror-merge .CodeMirror {
         height: 100%;
     }
