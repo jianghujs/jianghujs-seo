@@ -4,6 +4,7 @@ module.exports.tableEnum = Object.freeze({
   // ========================江湖表============================
   _cache: "_cache",
   _constant: "_constant",
+  _constant_ui: "_constant_ui",
   _app: "_app",
   _file: "_file",
   _group: "_group",
