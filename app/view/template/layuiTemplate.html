@@ -70,7 +70,7 @@
 
 <div class="layui-header jianghu-header <$ 'home-header' if homeActive == 'home' else '' $>">
   <div class="layui-fluid header-body">
-    {% if homeActive === 'article' %}
+    {% if ctx.packagePage.pageId === 'article' %}
     <i class="layui-icon header-menu-icon header-menu-icon-article layui-icon-read " style="width: 30px" onclick="showArticle()"></i>
     {% endif %}
     <a class="logo" href="/">
