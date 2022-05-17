@@ -162,7 +162,7 @@
     <ul class="layui-menu layui-menu-lg">
       <li class="layui-menu-item-group" lay-options="{type: 'group', isAllowSpread: true}">
         <ul>
-          {% for menu in constantUiList.menuList %}
+          {% for menu in constantUiList.header.menuList %}
           <li class="<$ 'layui-menu-item-checked2' if menu.active else '' $>">
             <div class="layui-menu-body-title">
               <a href="/<$ ctx.app.config.appId $>/page/article/<$ menu.articleId $>">

@@ -23,7 +23,6 @@ class ConstantUiService extends Service {
 
     for (const item of constantUiList) {
       const menuArray = ['array', 'object'].includes(item.constantType) ? JSON.parse(item[language]) : item[language];
-      constantUi[item.constantKey] = menuArray;
       if (item.constantKey === 'header') {
         const menuArticleIds = _.map(menuArray.menuList, (item, index) => {
           return item.articleId;
@@ -38,12 +37,15 @@ class ConstantUiService extends Service {
           const nowArticle = await jianghuKnex(tableEnum.article)
             .where('articleId', articleId)
             .first(['categoryId']);
-          const nowArticleIndex = articleList.findIndex(e => +e.categoryId === +nowArticle.categoryId);
-          if (nowArticleIndex > -1) {
-            menuArray.menuList[nowArticleIndex].active = 'layui-this';
-          }
+          const nowArticleCache = articleList.find(e => +e.categoryId === +nowArticle.categoryId);
+          _.forEach(menuArray.menuList, (item, index) => {
+            if (+item.articleId === +nowArticleCache.articleId) {
+              item.active = 'layui-this';
+            }
+          })
         }
       }
+      constantUi[item.constantKey] = menuArray;
     }
     return constantUi;
   }

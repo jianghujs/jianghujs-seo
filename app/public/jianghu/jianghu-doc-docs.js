@@ -67,6 +67,7 @@ window.onresize = function(){
 function changeSidebar(){
     // 获取匹配指定的媒体查询
     var screen_width = window.matchMedia('(max-width: 1050px)');
+    console.log(screen_width)
     //判断匹配状态
     if(screen_width.matches){
         //如果匹配到，切换侧边栏
@@ -98,17 +99,18 @@ document.querySelector('.doc-body').addEventListener('click', function (e) {
 // 初始化左侧文集大纲状态
 function init_sidebar(){
     var screen_width = window.matchMedia('(max-width: 1050px)');
-    if(screen_width.matches){}else{
+    if(screen_width.matches){
+      $("body").addClass("big-page");
+    }else{
         // 读取浏览器存储
         let bgpage_status = window.localStorage.getItem('bgpage')
         if(bgpage_status === null){ // 如果没有值，则默认展开
             $("body").toggleClass("big-page");
-        }else if(bgpage_status === '1'){ // 如果值为1，则默认展开
+        } else if(bgpage_status === '1'){ // 如果值为1，则默认展开
             if($("body").hasClass("big-page")){}else{
                 $("body").toggleClass("big-page");
             }
-        }
-        else{ // 否则收起
+        } else{ // 否则收起
             if($("body").hasClass("big-page")){
                 $("body").toggleClass("big-page");
             }else{

@@ -235,14 +235,6 @@ body, html {
     overflow-y: overlay;
 }
 
-.big-page .doc-summary, .big-page .site-menu {
-    min-height: calc(100vh - 70px);
-    box-shadow: none;
-    border: none;
-    overflow-x: hidden;
-    overflow-y: auto;
-}
-
 .doc-body {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -379,14 +371,6 @@ li.active > a, li.active > div > a {
     float: left !important;
 }
 
-.big-page .doc-summary-parent {
-    left: -300px;
-    position: fixed
-}
-
-.big-page .doc-body {
-    margin-left: 0;
-}
 
 /* 文集、文档作者、发布时间栏等样式 */
 .project-doc-content-head {
@@ -1012,6 +996,22 @@ button.layui-btn-normal, .doctemp-list a.layui-btn-normal {
 
 /* 移动端小屏幕样式 */
 @media screen and (max-width: 1050px) {
+
+    .doc-summary-parent {
+        left: -300px;
+        position: fixed
+    }
+
+    .doc-body {
+        margin-left: 0;
+    }
+    .doc-summary, .site-menu {
+        min-height: calc(100vh - 70px);
+        box-shadow: none;
+        border: none;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
     .menu-list-box {
         display: none;
     }

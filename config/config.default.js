@@ -29,7 +29,7 @@ module.exports = (appInfo) => {
     loginPage: `/${appId}/page/login`,
     helpPage: `/${appId}/page/help`,
     adminUrl: 'http://127.0.0.1:8306/admin',
-    language: 'en',
+    language: 'zh',
     uploadDir,
     uploadDirConfig: [
       "/articleMaterial",
