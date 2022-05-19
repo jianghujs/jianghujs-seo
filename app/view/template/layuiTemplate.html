@@ -83,7 +83,7 @@
       <ul class="layui-nav layui-hide-xs menu-list-box" id="LAY_NAV_TOP" style="position: unset;">
         {% for menu in constantUiList.header.menuList.slice(0, constantUiList.header.showMenu) %}
         <li class="layui-nav-item <$ menu.active $>">
-          <a href="/<$ ctx.app.config.appId $>/page/article/<$ menu.articleId $>/"><$ menu.title $></a>
+          <a href="/<$ ctx.app.config.appId $><$ menu.path $>"><$ menu.title $></a>
         </li>
         {% endfor %}
         {% if (constantUiList.header.menuList.length > constantUiList.header.showMenu) %}
@@ -91,7 +91,7 @@
             <a href="javascript:void(0);" style="min-width: 40px"><i class="layui-icon layui-icon-more" ></i></a>
             <dl class="layui-nav-child" style="left: -50px"> <!-- 二级菜单 -->
               {% for menu in constantUiList.header.menuList.slice(constantUiList.header.showMenu) %}
-              <dd><a href="/<$ ctx.app.config.appId $>/page/article/<$ menu.articleId $>/"><$ menu.title $></a></dd>
+              <dd><a href="/<$ ctx.app.config.appId $><$ menu.path $>"><$ menu.title $></a></dd>
               {% endfor %}
             </dl>
           </li>
@@ -165,7 +165,7 @@
           {% for menu in constantUiList.header.menuList %}
           <li class="<$ 'layui-menu-item-checked2' if menu.active else '' $>">
             <div class="layui-menu-body-title">
-              <a href="/<$ ctx.app.config.appId $>/page/article/<$ menu.articleId $>">
+              <a href="/<$ ctx.app.config.appId $><$ menu.path $>">
                 <span><$ menu.title $> </span>
               </a>
             </div>

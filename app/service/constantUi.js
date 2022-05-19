@@ -25,11 +25,14 @@ class ConstantUiService extends Service {
       const menuArray = ['array', 'object'].includes(item.constantType) ? JSON.parse(item[language]) : item[language];
       if (item.constantKey === 'header') {
         const menuArticleIds = _.map(menuArray.menuList, (item, index) => {
-          return item.articleId;
+          if (item.path.includes('/page/article/')) {
+            return item.path.split('/')[3];
+          }
         });
 
         if (pageId === 'article') {
           if (!menuArticleIds.length) continue;
+          console.log(menuArticleIds)
           const articleId = ctx.pathParams && ctx.pathParams[0] || this.ctx.request.body.appData.actionData.articleId;
           const articleList = await jianghuKnex(tableEnum.article)
             .whereIn('articleId', menuArticleIds)
@@ -39,7 +42,7 @@ class ConstantUiService extends Service {
             .first(['categoryId']);
           const nowArticleCache = articleList.find(e => +e.categoryId === +nowArticle.categoryId);
           _.forEach(menuArray.menuList, (item, index) => {
-            if (+item.articleId === +nowArticleCache.articleId) {
+            if (item.path.includes(nowArticleCache.articleId)) {
               item.active = 'layui-this';
             }
           })
