@@ -1,7 +1,15 @@
 {% extends 'template/layuiTemplate.html' %}
 
 {% block title %}<$ article.articleTitle $>{% endblock %}
-
+{% block keyword %}<$ article.articleTagList $>{% endblock %}
+<style>
+    #canvas, .canvas {
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
 {% block content %}
 <div class="doc layui-fluid">
   <!-- 左侧目录栏 -->
@@ -132,6 +140,45 @@
         <hr>
       </div>
     </div>
+    <div class="doc-comment">
+      <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+        <legend>评论建议</legend>
+      </fieldset>
+      <form class="layui-form layui-form-pane" action="" lay-filter="" id="commentForm">
+        <div class="layui-form-item layui-form-text">
+          <label class="layui-form-label">评论</label>
+          <div class="layui-input-block">
+            <textarea name="content" placeholder="请输入内容" required  lay-verify="required" class="layui-textarea"></textarea>
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <label class="layui-form-label">姓名</label>
+          <div class="layui-input-block">
+            <input type="text" name="username" required  lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <label class="layui-form-label">邮箱</label>
+          <div class="layui-input-block">
+            <input type="text" name="email" required  lay-verify="email" placeholder="请输入电子邮箱" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+        <div class="layui-form-item">
+
+          <label class="layui-form-label" style="padding: 0">
+            <canvas id="canvas" class="canvas" style="display: inline-block;cursor: pointer;width: 100%; height: 100%"></canvas>
+          </label>
+          <div class="layui-input-block">
+            <input type="text" name="vercode" required  lay-verify="required" placeholder="请输入验证码" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+        <div class="layui-form-item">
+          <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">发表评论</button>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
   <div class="fixed-tool-bar">
     <div class="toTop layui-hide-xs-inline-block"><i class="layui-icon layui-icon-up"></i></div>
@@ -149,6 +196,116 @@
 <script src="<$ static $>/jianghu/jianghu-doc-docs.js"></script>
 <script src="//api.html5media.info/1.2.2/html5media.min.js"></script>
 <script>
+  //Demo
+  layui.use('form', function(){
+
+    var $ = layui.$
+      ,setter = layui.setter
+      ,admin = layui.admin
+      ,form = layui.form
+      ,capcha = layui.captcha;
+
+    var show_num = [];
+    capcha.draw(show_num);
+    //显示验证码
+    $("#canvas").on('click',function(){
+      capcha.draw(show_num);
+    });
+
+    //监听提交
+    form.on('submit(formDemo)', function(data){
+      var num = show_num.join("");
+      var code = data.field["vercode"];
+      //验证码判断
+      if(code !== num){
+        layer.msg('验证码错误,请重新输入', {icon: 5});
+        capcha.draw(show_num);
+        return false
+      }
+      // layer.msg(JSON.stringify(data.field));
+      submitComment(data.field)
+      return false;
+    });
+    async function submitComment(data) {
+      const {content, email, username} = data;
+      const {data: {appData : {resultData}, status}} = await window.jianghuAxios({
+        data: {
+          appData: {
+            pageId: 'article',
+            actionId: 'addComment',
+            actionData: {content, email, username}
+          }
+        }
+      });
+      console.log(data)
+      if (status === 'success') {
+        layer.msg('提交成功');
+        $('#commentForm')[0].reset();
+      }
+    }
+  });
+  /** layuiAdmin.std-v2020.1.24 LPPL License By https://www.layui.com/admin/
+   captcha.js for layui
+   author:yangyongzhen
+   */
+  layui.define(function(e) {
+    var a = layui.jquery;
+    var obj={
+      randomColor:function() {//得到随机的颜色值
+        var r = Math.floor(Math.random() * 256);
+        var g = Math.floor(Math.random() * 256);
+        var b = Math.floor(Math.random() * 256);
+        return "rgb(" + r + "," + g + "," + b + ")";
+      },
+      draw:function(show_num) {
+        var canvas_width=a('#canvas').width();
+        var canvas_height=a('#canvas').height();
+        var canvas = document.getElementById("canvas");//获取到canvas的对象，演员
+        var context = canvas.getContext("2d");//获取到canvas画图的环境，演员表演的舞台
+        canvas.width = canvas_width;
+        canvas.height = canvas_height;
+        var sCode = "A,B,C,E,F,G,H,J,K,L,M,N,P,Q,R,S,T,W,X,Y,Z,1,2,3,4,5,6,7,8,9,0";
+        var aCode = sCode.split(",");
+        var aLength = aCode.length;//获取到数组的长度
+
+        for (var i = 0; i <= 3; i++) {
+          var j = Math.floor(Math.random() * aLength);//获取到随机的索引值
+          var deg = Math.random() * 30 * Math.PI / 180;//产生0~30之间的随机弧度
+          var txt = aCode[j];//得到随机的一个内容
+          show_num[i] = txt.toLowerCase();
+          var x = 10 + i * 20;//文字在canvas上的x坐标
+          var y = 20 + Math.random() * 8;//文字在canvas上的y坐标
+          context.font = "bold 23px 微软雅黑";
+
+          context.translate(x, y);
+          context.rotate(deg);
+
+          context.fillStyle = obj.randomColor();
+          context.fillText(txt, 0, 0);
+
+          context.rotate(-deg);
+          context.translate(-x, -y);
+        }
+        for (var i = 0; i <= 5; i++) { //验证码上显示线条
+          context.strokeStyle = obj.randomColor();
+          context.beginPath();
+          context.moveTo(Math.random() * canvas_width, Math.random() * canvas_height);
+          context.lineTo(Math.random() * canvas_width, Math.random() * canvas_height);
+          context.stroke();
+        }
+        for (var i = 0; i <= 30; i++) { //验证码上显示小点
+          context.strokeStyle = obj.randomColor();
+          context.beginPath();
+          var x = Math.random() * canvas_width;
+          var y = Math.random() * canvas_height;
+          context.moveTo(x, y);
+          context.lineTo(x + 1, y + 1);
+          context.stroke();
+        }
+      },
+    };
+    e("captcha", obj);
+  });
   // 展示左侧目录
   function showArticle() {
     layer.open({
@@ -183,7 +340,6 @@
 </script>
 <script>
   var layer = layui.layer;
-  var form = layui.form;
   // 非小屏默认展开文档目录
   if (window.innerWidth > 1050) {
     $(".sidebar").toggleClass("doc-toc-hide");

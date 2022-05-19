@@ -58,6 +58,7 @@ class ArticleService extends Service {
         articleCoverImage,
         articlePublishStatus,
         articleGroupName,
+        articleTagList,
       }) => {
         return {
           articleId,
@@ -67,6 +68,7 @@ class ArticleService extends Service {
           articleCoverImage,
           articlePublishStatus,
           articleGroupName,
+          articleTagList,
         };
       }
     );
