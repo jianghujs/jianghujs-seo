@@ -30,8 +30,11 @@
   },
   "scripts": {
     "start": "egg-scripts start --daemon  --node-options--max-http-header-size=102400 --port=8307 --title=openjianghu_seo_web",
+    "cn-start": "egg-scripts start --daemon  --node-options--max-http-header-size=102400 --port=9307 --title=cn_openjianghu_seo_web",
     "stop": "egg-scripts stop --title=openjianghu_seo_web",
+    "cn-stop": "egg-scripts stop --title=cn_openjianghu_seo_web",
     "dev": "egg-bin dev --node-options--max-http-header-size=102400 --port=8307",
+    "cn-dev": "egg-bin dev --node-options--max-http-header-size=102400 --port=9307",
     "debug": "egg-bin debug",
     "test": "npm run lint -- --fix && npm run test-local",
     "test-local": "egg-bin test",

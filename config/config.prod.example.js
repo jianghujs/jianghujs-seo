@@ -4,6 +4,8 @@ const path = require('path');
 
 module.exports = appInfo => {
 
+  const target = process.env.npm_lifecycle_event; // 'dev' | 'cn-dev' | 'start' | 'cn-start'
+  const database = target.includes('cn-') ? 'cn_openjianghu_seo' : 'openjianghu_seo';
   return {
     adminUrl: 'https://openjianghu.org/admin',
     static: {
@@ -30,7 +32,7 @@ module.exports = appInfo => {
           port: "3306",
           user: "root",
           password: "123456",
-          database: "openjianghu_seo",
+          database
         },
         pool: { min: 0, max: 100 },
         acquireConnectionTimeout: 30000,

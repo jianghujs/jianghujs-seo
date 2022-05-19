@@ -14,7 +14,8 @@ const eggJianghuPath = path.join(eggJianghuPathTemp, "../");
 
 module.exports = (appInfo) => {
   assert(appInfo);
-
+  const target = process.env.npm_lifecycle_event; // 'dev' | 'cn-dev' | 'start' | 'cn-start' |
+  const adminPort = target.includes('cn-') ? 9306 : 8306;
   const appId = "doc";
   const uploadDir = path.join(appInfo.baseDir, "upload");
   const downloadBasePath = `/${appId}/upload`;
@@ -28,7 +29,7 @@ module.exports = (appInfo) => {
     indexPage: `/${appId}/page/home`,
     loginPage: `/${appId}/page/login`,
     helpPage: `/${appId}/page/help`,
-    adminUrl: 'http://127.0.0.1:8306/admin',
+    adminUrl: `http://127.0.0.1:${adminPort}/admin`,
     language: 'zh',
     uploadDir,
     uploadDirConfig: [
