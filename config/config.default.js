@@ -16,7 +16,7 @@ module.exports = (appInfo) => {
   assert(appInfo);
   const target = process.env.npm_lifecycle_event; // 'dev' | 'cn-dev' | 'start' | 'cn-start' |
   const adminPort = target.includes('cn-') ? 9306 : 8306;
-  const language = target.includes('cn-') ? 'cn' : 'zh';
+  const language = target.includes('cn-') ? 'zh' : 'en';
   const appId = "doc";
   const uploadDir = path.join(appInfo.baseDir, "upload");
   const downloadBasePath = `/${appId}/upload`;
