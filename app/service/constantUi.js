@@ -32,7 +32,6 @@ class ConstantUiService extends Service {
 
         if (pageId === 'article') {
           if (!menuArticleIds.length) continue;
-          console.log(menuArticleIds)
           const articleId = ctx.pathParams && ctx.pathParams[0] || this.ctx.request.body.appData.actionData.articleId;
           const articleList = await jianghuKnex(tableEnum.article)
             .whereIn('articleId', menuArticleIds)
