@@ -67,7 +67,6 @@ window.onresize = function(){
 function changeSidebar(){
     // 获取匹配指定的媒体查询
     var screen_width = window.matchMedia('(max-width: 1050px)');
-    console.log(screen_width)
     //判断匹配状态
     if(screen_width.matches){
         //如果匹配到，切换侧边栏
