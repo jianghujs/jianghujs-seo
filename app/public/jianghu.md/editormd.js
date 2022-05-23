@@ -2002,7 +2002,8 @@
                 pedantic: false,
                 sanitize: (settings.htmlDecode) ? false : true,  // 关闭忽略HTML标签，即开启识别HTML标签，默认为false
                 smartLists: true,
-                smartypants: true
+                // MODIFY: 禁用 字符自动转换; 避免 " 转成===>“
+                smartypants: false
             };
 
             marked.setOptions(markedOptions);
@@ -2390,7 +2391,8 @@
                 pedantic: false,
                 sanitize: true,  // 关闭忽略HTML标签，即开启识别HTML标签，默认为false
                 smartLists: true,
-                smartypants: true
+                // MODIFY: 禁用 字符自动转换; 避免 " 转成===>“
+                smartypants: false
             };
 
             marked.setOptions(markedOptions);
@@ -4297,7 +4299,8 @@
             pedantic: false,
             sanitize: (settings.htmlDecode) ? false : true, // 是否忽略HTML标签，即是否开启HTML标签解析，为了安全性，默认不开启
             smartLists: true,
-            smartypants: true
+            // MODIFY: 禁用 字符自动转换; 避免 " 转成===>“
+            smartypants: false
         };
 
         markdownDoc = new String(markdownDoc).toString();
