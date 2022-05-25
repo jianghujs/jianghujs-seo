@@ -84,11 +84,11 @@
         {% for menu in constantUiList.header.menuList.slice(0, constantUiList.header.showMenu) %}
           {% if article and menu.categoryId == article.categoryId %}
             <li class="layui-nav-item layui-this">
-              <a href="/<$ ctx.app.config.appId $><$ menu.path $>"><$ menu.title $></a>
+              <a href="/<$ ctx.app.config.appId $><$ menu.path $>"><$ menu.categoryName $></a>
             </li>
           {% else %}
             <li class="layui-nav-item">
-              <a href="/<$ ctx.app.config.appId $><$ menu.path $>"><$ menu.title $></a>
+              <a href="/<$ ctx.app.config.appId $><$ menu.path $>"><$ menu.categoryName $></a>
             </li>  
           {% endif %}
         {% endfor %}
@@ -97,7 +97,7 @@
             <a href="javascript:void(0);" style="min-width: 40px"><i class="layui-icon layui-icon-more" ></i></a>
             <dl class="layui-nav-child" style="left: -50px"> <!-- 二级菜单 -->
               {% for menu in constantUiList.header.menuList.slice(constantUiList.header.showMenu) %}
-              <dd><a href="/<$ ctx.app.config.appId $><$ menu.path $>"><$ menu.title $></a></dd>
+              <dd><a href="/<$ ctx.app.config.appId $><$ menu.path $>"><$ menu.categoryName $></a></dd>
               {% endfor %}
             </dl>
           </li>
@@ -172,7 +172,7 @@
           <li class="<$ 'layui-menu-item-checked2' if menu.active else '' $>">
             <div class="layui-menu-body-title">
               <a href="/<$ ctx.app.config.appId $><$ menu.path $>">
-                <span><$ menu.title $> </span>
+                <span><$ menu.categoryName $> </span>
               </a>
             </div>
           </li>
