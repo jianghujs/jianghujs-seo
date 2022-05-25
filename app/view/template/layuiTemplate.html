@@ -82,9 +82,15 @@
     <div>
       <ul class="layui-nav layui-hide-xs menu-list-box" id="LAY_NAV_TOP" style="position: unset;">
         {% for menu in constantUiList.header.menuList.slice(0, constantUiList.header.showMenu) %}
-        <li class="layui-nav-item <$ menu.active $>">
-          <a href="/<$ ctx.app.config.appId $><$ menu.path $>"><$ menu.title $></a>
-        </li>
+          {% if article and menu.categoryId == article.categoryId %}
+            <li class="layui-nav-item layui-this">
+              <a href="/<$ ctx.app.config.appId $><$ menu.path $>"><$ menu.title $></a>
+            </li>
+          {% else %}
+            <li class="layui-nav-item">
+              <a href="/<$ ctx.app.config.appId $><$ menu.path $>"><$ menu.title $></a>
+            </li>  
+          {% endif %}
         {% endfor %}
         {% if (constantUiList.header.menuList.length > constantUiList.header.showMenu) %}
           <li class="layui-nav-item layui-nav-item-more">
