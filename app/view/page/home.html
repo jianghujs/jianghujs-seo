@@ -10,20 +10,22 @@
         src="https://zos.alipayobjects.com/rmsportal/JFKAMfmPehWfhBPdCjrw.svg"></div>
       <div class="jianghu-egg-intro-info">
         <h1>
-          <$ constantUiList.body.desc $>
-          <p class="jianghu-egg-intro-info-stronge""><br/> <$ constantUiList.body.title $></p>
+          <$ constantUi.body.desc $>
+          <p class="jianghu-egg-intro-info-stronge""><br/> <$ constantUi.body.title $></p>
         </h1>
 <!--        <p class="desc">新手也容易学习和使用的企业级框架</p>-->
-        <div class="jianghu-egg-intro-buttons"><a class="jianghu-egg-intro-button jianghu-egg-intro-button-primary"
-                                                  href="/<$ ctx.app.config.appId $>/page/article/10005">开始使用</a><a
-          class="jianghu-egg-intro-button jianghu-egg-intro-button-secondary"
-          href="https://github.com/openjianghu/">GitHub</a></div>
+        <div class="jianghu-egg-intro-buttons">
+          <a class="jianghu-egg-intro-button jianghu-egg-intro-button-primary"
+            href="/<$ ctx.app.config.appId $>/page/article/10005">
+            <$ constantUi.body.btnGettingStarted $>
+          </a>
+          <a class="jianghu-egg-intro-button jianghu-egg-intro-button-secondary" href="https://github.com/openjianghu/">GitHub</a></div>
       </div>
     </div>
   </div>
   <div class="jianghu-egg-features">
     <div class="jianghu-egg-features-wrap">
-      {% for item in constantUiList.features %}
+      {% for item in constantUi.features %}
       <div class="jianghu-egg-features-item">
         <div class="jianghu-egg-features-item-icon"><img src="<$ static $><$ item.img $>"></div>
         <h2 style="white-space: pre-line"><$ item.title $></h2>
@@ -34,7 +36,7 @@
   </div>
   <div class="jianghu-egg-links">
     <div class="jianghu-egg-links-wrap">
-      {% for item in constantUiList.links %}
+      {% for item in constantUi.links %}
       <div class="jianghu-egg-links-item">
         <div class="ant-list">
           <div class="ant-list-header"><$ item.label $></div>
@@ -65,7 +67,7 @@
       {% endfor %}
     </div>
   </div>
-  <div class="jianghu-egg-copyright"><$ constantUiList.footer.copyright $></div>
+  <div class="jianghu-egg-copyright"><$ constantUi.footer.copyright $></div>
 </div>
 <div class="layui-row project-list-page" style="text-align: center;">
 </div>

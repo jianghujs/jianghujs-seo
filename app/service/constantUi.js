@@ -20,7 +20,7 @@ class ConstantUiService extends Service {
     const { language } = this.app.config;
     const constantUiList = await jianghuKnex(tableEnum._constant_ui).whereIn('pageId', ['all', pageId]).select();
     const constantUi = Object.fromEntries(
-      constantUiList.map(obj => [obj.constantKey, JSON.parse(obj[language] || '{}')])
+      constantUi.map(obj => [obj.constantKey, JSON.parse(obj[language] || '{}')])
     );
     return constantUi;
   }
