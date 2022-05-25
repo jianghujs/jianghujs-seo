@@ -29,7 +29,8 @@ use doc;
 
 ## 线上
 
-- seo: https://openjianghu.org/doc
+- 英文: https://openjianghu.org/doc
+- 中文: https://cn.openjianghu.org/doc
 
 ## 同步 admin/upload/xx 至 seo/upload/xx
 
