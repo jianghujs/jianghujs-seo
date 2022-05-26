@@ -4,8 +4,6 @@ const path = require('path');
 
 module.exports = appInfo => {
 
-  const target = process.env.npm_lifecycle_event; // 'dev' | 'cn-dev' | 'start' | 'cn-start'
-  const database = target.includes('cn-') ? 'cn_openjianghu_seo' : 'openjianghu_seo';
   return {
     language: 'zh',
     adminUrl: 'https://cn.openjianghu.org/admin',
