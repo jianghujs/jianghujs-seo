@@ -80,13 +80,13 @@
       </a>-->
       {% if username %}
       <a class="btn pull-left" aria-label=""
-         href="<$ adminUrl $>/page/articleEdit?articleId=<$ article.articleId $>&title=<$ article.articleTitle $>"
-         target="_blank">
+        href="<$ adminUrl $>/page/articleEdit?articleId=<$ article.articleId $>&title=<$ article.articleTitle $>"
+        target="_blank">
         <i class="layui-icon layui-icon-edit"></i> <span class="layui-hide-xs">修改</span>
       </a>
       <a class="btn pull-left" aria-label=""
-         href="<$ adminUrl $>/page/articleEdit?categoryId=<$ article.categoryId $>&articleGroupName=<$ article.articleGroupName $>&articlePublishStatus=<$ article.articlePublishStatus $>"
-         target="_blank">
+        href="<$ adminUrl $>/page/articleEdit?categoryId=<$ article.categoryId $>&articleGroupName=<$ article.articleGroupName $>&articlePublishStatus=<$ article.articlePublishStatus $>"
+        target="_blank">
         <i class="layui-icon layui-icon-add-1"></i> <span class="layui-hide-xs">新增</span>
       </a>
       {% endif %}
@@ -130,7 +130,7 @@
           <div class="markdown-body editormd-preview-container" id="content">
             <$ article.articleContentForSeo | safe $>
             <div id="articleContentHidden" class="articleContentHidden"
-                 style="position: absolute; top: -1000px; overflow: hidden; height: 0; width: 0;">
+                style="position: absolute; top: -1000px; overflow: hidden; height: 0; width: 0;">
               <textarea style="display: none;"><$ article.articleContent $></textarea>
             </div>
           </div>
@@ -138,35 +138,24 @@
           {% if constantUi.article.comment.isOpen %}
           <div class="doc-comment">
 
-           <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px; ">
-           <legend style="font-size: 14px;">评论建议</legend>
+            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+              <legend style="font-size: 14px;">评论建议</legend>
             </fieldset>
-
-
-<form class="layui-form" action="">
-             
+            <form class="layui-form" action="">
               <div class="layui-form-item layui-form-text">
-                <label class="layui-form-label" style="font-size: 14px;">评论</label>
+                <label class="layui-form-label" >评论</label>
                 <div class="layui-input-block">
                   <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
                 </div>
               </div>
-              <!--<div class="layui-form-item layui-form-text">
-                <label class="layui-form-label">编辑器</label>
-                <div class="layui-input-block">
-                  <textarea class="layui-textarea layui-hide" name="content" lay-verify="content" id="LAY_demo_editor"></textarea>
-                </div>
-              </div>-->
-             
-
               <div class="layui-form-item">
-                <label class="layui-form-label" style="font-size: 14px;">姓名</label>
+                <label class="layui-form-label" >姓名</label>
                 <div class="layui-input-block">
                   <input type="text" name="username" required  lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
                 </div>
               </div>
               <div class="layui-form-item">
-                <label class="layui-form-label" style="font-size: 14px;">邮箱</label>
+                <label class="layui-form-label" >邮箱</label>
                 <div class="layui-input-block">
                   <input type="text" name="email" required  lay-verify="email" placeholder="请输入电子邮箱" autocomplete="off" class="layui-input">
                 </div>
@@ -200,7 +189,6 @@
         <hr>
       </div>
     </div>
-   
   <div class="fixed-tool-bar">
     <div class="toTop layui-hide-xs-inline-block"><i class="layui-icon layui-icon-up"></i></div>
     <!--<div class="editDoc layui-show-xs-inline-block" style="display: none;text-align: center;width: auto" onclick="showArticle()">
