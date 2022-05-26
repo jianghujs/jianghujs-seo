@@ -10,14 +10,14 @@
         src="https://zos.alipayobjects.com/rmsportal/JFKAMfmPehWfhBPdCjrw.svg"></div>
       <div class="jianghu-egg-intro-info">
         <h1>
-          <$ constantUi.body.desc $>
-          <p class="jianghu-egg-intro-info-stronge""><br/> <$ constantUi.body.title $></p>
+          <$ constantUiMap.body.desc $>
+          <p class="jianghu-egg-intro-info-stronge""><br/> <$ constantUiMap.body.title $></p>
         </h1>
 <!--        <p class="desc">新手也容易学习和使用的企业级框架</p>-->
         <div class="jianghu-egg-intro-buttons">
           <a class="jianghu-egg-intro-button jianghu-egg-intro-button-primary"
             href="/<$ ctx.app.config.appId $>/page/article/10005">
-            <$ constantUi.body.btnGettingStarted $>
+            <$ constantUiMap.body.btnGettingStarted $>
           </a>
           <a class="jianghu-egg-intro-button jianghu-egg-intro-button-secondary" href="https://github.com/openjianghu/">GitHub</a></div>
       </div>
@@ -25,7 +25,7 @@
   </div>
   <div class="jianghu-egg-features">
     <div class="jianghu-egg-features-wrap">
-      {% for item in constantUi.features %}
+      {% for item in constantUiMap.features %}
       <div class="jianghu-egg-features-item">
         <div class="jianghu-egg-features-item-icon"><img src="<$ static $><$ item.img $>"></div>
         <h2 style="white-space: pre-line"><$ item.title $></h2>
@@ -36,7 +36,7 @@
   </div>
   <div class="jianghu-egg-links">
     <div class="jianghu-egg-links-wrap">
-      {% for item in constantUi.links %}
+      {% for item in constantUiMap.links %}
       <div class="jianghu-egg-links-item">
         <div class="ant-list">
           <div class="ant-list-header"><$ item.label $></div>
@@ -67,7 +67,7 @@
       {% endfor %}
     </div>
   </div>
-  <div class="jianghu-egg-copyright"><$ constantUi.footer.copyright $></div>
+  <div class="jianghu-egg-copyright"><$ constantUiMap.footer.copyright $></div>
 </div>
 <div class="layui-row project-list-page" style="text-align: center;">
 </div>
