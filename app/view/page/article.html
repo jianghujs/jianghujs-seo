@@ -120,11 +120,11 @@
           </div>
           <!-- 音频 -->
           {% if article.articleAudioUrl %}
-          <audio src="/<$ ctx.app.config.appId $>/upload/<$ article.articleAudioUrl $>" style="width: 100%;" controls preload></audio>
+          <audio src="/<$ ctx.app.config.appId $>/upload<$ article.articleAudioUrl $>" style="width: 100%;" controls preload></audio>
           {% endif %}
           <!-- 视频 -->
           {% if article.articleVideoUrl %}
-          <video src="/<$ ctx.app.config.appId $>/upload/<$ article.articleVideoUrl $>" style="width: 100%; height: auto" controls preload></video>
+          <video src="/<$ ctx.app.config.appId $>/upload<$ article.articleVideoUrl $>" style="width: 100%; height: auto" controls preload></video>
           {% endif %}
           <!-- 正文开始 -->
           <div class="markdown-body editormd-preview-container" id="content">
@@ -171,7 +171,7 @@
               </div>
               <div class="layui-form-item">
                 <div class="layui-input-block">
-                  <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                  <button type="submit" class="layui-btn" lay-submit="" lay-filter="commentForm">立即提交</button>
                 </div>
               </div>
             </form>
@@ -225,16 +225,17 @@
     });
 
     //监听提交
-    form.on('submit(formDemo)', function(data){
+    form.on('submit(commentForm)', function(data){
       var num = show_num.join("");
       var code = data.field["vercode"];
       //验证码判断
+      debugger
       if(code !== num){
         layer.msg('验证码错误,请重新输入', {icon: 5});
         capcha.draw(show_num);
         return false
       }
-      // layer.msg(JSON.stringify(data.field));
+      layer.msg(JSON.stringify(data.field));
       submitComment(data.field)
       return false;
     });
