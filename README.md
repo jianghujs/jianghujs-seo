@@ -37,7 +37,6 @@ use doc;
 mkdir /www/wwwroot/openjianghu_seo/upload
 ln -s /www/wwwroot/openjianghu_admin/upload/articleMaterial /www/wwwroot/openjianghu_seo/upload/articleMaterial
 ln -s /www/wwwroot/openjianghu_admin/upload/materialRepo /www/wwwroot/openjianghu_seo/upload/materialRepo
-
 ln -s /www/wwwroot/cn_openjianghu_admin/upload/articleMaterial /www/wwwroot/cn_openjianghu_seo/upload/articleMaterial
 ln -s /www/wwwroot/cn_openjianghu_admin/upload/materialRepo /www/wwwroot/cn_openjianghu_seo/upload/materialRepo
 
