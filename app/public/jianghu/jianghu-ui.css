@@ -154,7 +154,8 @@ body {
     text-rendering: optimizeLegibility;
     transition: color .5s, background-color .5s;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
 }
 
 blockquote, dl, dd, h1, h2, h3, h4, h5, h6, hr, figure, p, pre {
@@ -325,4 +326,7 @@ fieldset {
 .layui-layer-title {
     height: var(--vt-nav-height) !important;
     line-height: var(--vt-nav-height) !important;
+}
+.layui-layer-content {
+    overflow-x: hidden !important;
 }

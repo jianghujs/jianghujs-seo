@@ -169,7 +169,7 @@
       <li class="layui-menu-item-group" lay-options="{type: 'group', isAllowSpread: true}">
         <ul>
           {% for menu in constantUiMap.header.menuList %}
-          <li class="<$ 'layui-menu-item-checked2' if menu.active else '' $>">
+          <li class="<$ 'layui-menu-item-checked2' if article and menu.categoryId == article.categoryId else '' $>">
             <div class="layui-menu-body-title">
               <a href="/<$ ctx.app.config.appId $><$ menu.path $>">
                 <span><$ menu.categoryName $> </span>

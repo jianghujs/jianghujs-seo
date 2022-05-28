@@ -1002,11 +1002,15 @@ button.layui-btn-normal, .doctemp-list a.layui-btn-normal {
         padding-left: 20px;
     }
     .doc-summary, .site-menu {
-        min-height: calc(100vh - 70px);
+        max-height: unset;
+        overflow: hidden;
         box-shadow: none;
         border: none;
-        overflow-x: hidden;
-        overflow-y: auto;
+    }
+    .doc-summary {
+        height: auto;
+        min-height: calc(100vh - 55px);
+        max-width: 100%;
     }
     .menu-list-box {
         display: none;
