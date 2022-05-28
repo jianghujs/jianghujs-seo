@@ -1161,3 +1161,10 @@ div.sidebar {
 #diff_body .CodeMirror-merge .CodeMirror {
     height: 100%;
 }
+.editormd-preview-container ol.linenums li, .editormd-html-preview ol.linenums li {
+    list-style-type: none;
+}
+.editormd-preview-container ol.linenums, .editormd-html-preview ol.linenums {
+    color: #999;
+    padding-left: .5rem;
+}
