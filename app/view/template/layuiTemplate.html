@@ -65,9 +65,9 @@
     };
   </script>
   <style>
-    .layui-layer {
-        top: 0 !important;
-    }
+      .topImp {
+          top: 0 !important;
+      }
   </style>
 </head>
 
@@ -306,6 +306,7 @@
       // 内容区 在body中写入<div id="draw">。。。。</div>代码，即弹窗内容
       content: $("#jianghu-munu").html(),
     })
+    $('.layui-layer').addClass('topImp')
   }
 </script>
 
