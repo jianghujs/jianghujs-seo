@@ -3,9 +3,9 @@
 }
 
 .jianghu-default-layout-content {
-    overflow-x: hidden;
+    /*overflow-x: hidden;
     overflow-y: auto;
-    max-height: calc(100vh - 55px);
+    max-height: calc(100vh - 55px);*/
 }
 
 .jianghu-default-layout-features, .jianghu-default-layout-features + .jianghu-default-layout-content, .jianghu-default-layout-hero + .jianghu-default-layout-content {

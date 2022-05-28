@@ -162,8 +162,8 @@
               </div>
               <div class="layui-form-item">
 
-                <label class="layui-form-label" style="padding: 0">
-                  <canvas id="canvas" class="canvas" style="display: inline-block;cursor: pointer;width: 100%; height: 100%"></canvas>
+                <label class="layui-form-label" style="padding: 0; height: 38px">
+                  <canvas id="canvas" class="canvas" style="display: inline-block;cursor: pointer;width: 100%; height: 100%; margin-left: 20px"></canvas>
                 </label>
                 <div class="layui-input-block">
                   <input type="text" name="vercode" required  lay-verify="required" placeholder="请输入验证码" autocomplete="off" class="layui-input">
@@ -197,13 +197,13 @@
     <div class="tocMenu"><i class="layui-icon layui-icon-more-vertical"></i></div>
   </div>
 </div>
-<script src="<$ static $>/jianghu.md/lib/purify.min.js"></script>
-<script src="<$ static $>/jianghu.md/lib/marked.min.js"></script>
-<script src="<$ static $>/jianghu.md/editormd.js"></script>
-<script src="<$ static $>/viewer/viewer.min.js"></script>
-<!--<script src="<$ static $>/iconFont/iconfont.js"></script>-->
-<script src="<$ static $>/jianghu/jianghu-doc-docs.js"></script>
-<script src="//api.html5media.info/1.2.2/html5media.min.js"></script>
+<script src="<$ static $>/jianghu.md/lib/purify.min.js?v=1.0.3"></script>
+<script src="<$ static $>/jianghu.md/lib/marked.min.js?v=1.0.3"></script>
+<script src="<$ static $>/jianghu.md/editormd.js?v=1.0.3"></script>
+<script src="<$ static $>/viewer/viewer.min.js?v=1.0.3"></script>
+<!--<script src="<$ static $>/iconFont/iconfont.js?v=1.0.3"></script>-->
+<script src="<$ static $>/jianghu/jianghu-doc-docs.js?v=1.0.3"></script>
+<script src="//api.html5media.info/1.2.2/html5media.min.js?v=1.0.3"></script>
 
 {% if constantUiMap.article.comment.isOpen %}
 <script>
@@ -276,6 +276,7 @@
         var canvas = document.getElementById("canvas");//获取到canvas的对象，演员
         var context = canvas.getContext("2d");//获取到canvas画图的环境，演员表演的舞台
         canvas.width = canvas_width;
+        canvas.width = 100;
         canvas.height = canvas_height;
         var sCode = "A,B,C,E,F,G,H,J,K,L,M,N,P,Q,R,S,T,W,X,Y,Z,1,2,3,4,5,6,7,8,9,0";
         var aCode = sCode.split(",");
@@ -286,7 +287,7 @@
           var deg = Math.random() * 30 * Math.PI / 180;//产生0~30之间的随机弧度
           var txt = aCode[j];//得到随机的一个内容
           show_num[i] = txt.toLowerCase();
-          var x = 10 + i * 15;//文字在canvas上的x坐标
+          var x = 10 + i * 20;//文字在canvas上的x坐标
           var y = 20 + Math.random() * 8;//文字在canvas上的y坐标
           context.font = "bold 23px 微软雅黑";
 

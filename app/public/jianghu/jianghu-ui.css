@@ -125,8 +125,21 @@
     box-sizing: border-box
 }
 
+html {
+    overflow-y: scroll;
+}
+
+:root {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+:root body {
+    position: absolute;
+}
+
 body {
-    width: 100%;
+    width: 100vw;
     min-width: 320px;
     min-height: 100vh;
     font-family: var(--vt-font-family-base);

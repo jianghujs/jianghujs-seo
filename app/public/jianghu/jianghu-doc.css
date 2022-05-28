@@ -189,12 +189,6 @@ a.index-add-link:hover {
     /*margin-right: 10px;*/
 }
 
-/* 文档浏览页 */
-body, html {
-    height: 100%;
-    overflow: hidden;
-}
-
 .doc {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -209,10 +203,10 @@ body, html {
     box-sizing: border-box;
     min-width: 0;
     padding: 0;
-    height: calc(100vh - 55px);
-    max-height: calc(100vh - 55px);
-    overflow-x: hidden;
-    overflow-y: auto;
+    /*height: calc(100vh - 55px);*/
+    /*max-height: calc(100vh - 55px);*/
+    /*overflow-x: hidden;*/
+    /*overflow-y: auto;*/
 }
 
 .project-title {
@@ -246,7 +240,7 @@ body, html {
     display: -webkit-flex;
     flex: 1 1 auto;
     display: flex;
-    padding: 0;
+    padding: 0 20px;
     max-width: 100%;
     min-width: 0;
     background: #fff;
@@ -257,6 +251,7 @@ body, html {
     left: 300px;
     overflow-x: hidden;
     overflow-y: auto;
+    margin-left: 300px;
 }
 
 .site-fix .doc-ml-300 {
@@ -982,10 +977,6 @@ button.layui-btn-normal, .doctemp-list a.layui-btn-normal {
     }
 }
 
-.doc-body {
-    padding: 0 20px;
-}
-
 .header-menu-icon {
     display: none;
 }
@@ -993,7 +984,9 @@ button.layui-btn-normal, .doctemp-list a.layui-btn-normal {
 .js-toolbar-action {
     display: inline-block;
 }
-
+.doc-summary-parent {
+    position: fixed
+}
 /* 移动端小屏幕样式 */
 @media screen and (max-width: 1050px) {
 
@@ -1001,9 +994,12 @@ button.layui-btn-normal, .doctemp-list a.layui-btn-normal {
         left: -300px;
         position: fixed
     }
-
+    .doc-content {
+        max-width: unset;
+    }
     .doc-body {
         margin-left: 0;
+        padding-left: 20px;
     }
     .doc-summary, .site-menu {
         min-height: calc(100vh - 70px);
@@ -1130,7 +1126,6 @@ div.sidebar {
     border: 1px solid #ddd;
     background: white;
     width: 250px;
-    right: 5px;
     overflow-x: hidden;
     overflow-y: auto;
 }

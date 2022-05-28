@@ -207,7 +207,7 @@ function addAllStyle(highlightColor) {
     }
     addStyle(`.sidebar{position:fixed;    z-index: 10;
         top: 50px;
-        right: 5px;
+        right: 0px;
         bottom: 0;
         overflow-x: auto;
         overflow-y: auto;
