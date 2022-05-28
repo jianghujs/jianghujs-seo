@@ -146,9 +146,9 @@ if(font_stauts == 'serif'){// 字体类型
     $("#content").toggleClass("switch-font")
 }*/
 if(window.localStorage.getItem('font-size')){// 字体大小
-    font_size = window.localStorage.getItem('font-size')
+    // font_size = window.localStorage.getItem('font-size')
     // console.log(font_size)
-    $('#content').css({'font-size':font_size+'em'})
+    // $('#content').css({'font-size':font_size+'em'})
 }else{
     window.localStorage.setItem('font-size',1.0)
 }
