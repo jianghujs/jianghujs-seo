@@ -64,6 +64,11 @@
       }
     };
   </script>
+  <style>
+    .layui-layer {
+        top: 0 !important;
+    }
+  </style>
 </head>
 
 <body>
@@ -289,11 +294,10 @@
     layer.open({
       type: 1,
       // r表示right,b表示bottom
-      offset: 'rb',
+      offset: 'r',
       // 文集目录
       title: '菜单',
       move: false,
-      //
       // anim 特效 0-平滑放大 1-从上掉落 2-从底部往上滑入 3-从左滑入 4-从左翻转 5-渐显 6-抖动
       anim: 5,
       shadeClose: true, //开启遮罩关闭
