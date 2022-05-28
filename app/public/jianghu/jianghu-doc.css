@@ -1166,5 +1166,5 @@ div.sidebar {
 }
 .editormd-preview-container ol.linenums, .editormd-html-preview ol.linenums {
     color: #999;
-    padding-left: .5rem;
+    padding-left: 0;
 }
