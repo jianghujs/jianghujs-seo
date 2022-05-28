@@ -148,7 +148,7 @@ if(font_stauts == 'serif'){// 字体类型
 if(window.localStorage.getItem('font-size')){// 字体大小
     font_size = window.localStorage.getItem('font-size')
     // console.log(font_size)
-    $('#content').css({'font-size':font_size+'rem'})
+    $('#content').css({'font-size':font_size+'em'})
 }else{
     window.localStorage.setItem('font-size',1.0)
 }
@@ -207,8 +207,8 @@ function largeFont(){
     var font_size = window.localStorage.getItem('font-size')
     if(parseFloat(font_size) < 1.4){
         size = parseFloat(font_size) + 0.1
-        $('#content').css({'font-size':size+'rem'})
-        window.localStorage.setItem('font-size',size)
+        $('#content').css({'font-size':size+'em'});
+        window.localStorage.setItem('font-size', size)
     }else{
         console.log("xxx")
     }
@@ -221,7 +221,7 @@ function smallFont(){
     var font_size = window.localStorage.getItem('font-size')
     if(parseFloat(font_size) >= 0.6){
         size = parseFloat(font_size) - 0.1
-        $('#content').css({'font-size':size+'rem'})
+        $('#content').css({'font-size':size+'em'})
         window.localStorage.setItem('font-size',size)
     }else{
         console.log("xxx")
