@@ -145,13 +145,15 @@ if(font_stauts == 'serif'){// 字体类型
     $(".doc-content").toggleClass("switch-font")
     $("#content").toggleClass("switch-font")
 }*/
-if(window.localStorage.getItem('font-size')){// 字体大小
+/*if(window.localStorage.getItem('font-size')){// 字体大小
     // font_size = window.localStorage.getItem('font-size')
     // console.log(font_size)
     // $('#content').css({'font-size':font_size+'em'})
 }else{
     window.localStorage.setItem('font-size',1.0)
-}
+}*/
+
+window.localStorage.setItem('font-size',1.0)
 
 /*
     返回顶部
