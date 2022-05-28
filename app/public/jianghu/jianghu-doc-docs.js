@@ -207,7 +207,7 @@ function largeFont(){
     var font_size = window.localStorage.getItem('font-size')
     if(parseFloat(font_size) < 1.4){
         size = parseFloat(font_size) + 0.1
-        $('#content').css({'font-size':size+'em'});
+        $('#content').css({'font-size':size+'rem'});
         window.localStorage.setItem('font-size', size)
     }else{
         console.log("xxx")
@@ -221,7 +221,7 @@ function smallFont(){
     var font_size = window.localStorage.getItem('font-size')
     if(parseFloat(font_size) >= 0.6){
         size = parseFloat(font_size) - 0.1
-        $('#content').css({'font-size':size+'em'})
+        $('#content').css({'font-size':size+'rem'})
         window.localStorage.setItem('font-size',size)
     }else{
         console.log("xxx")
