@@ -2471,7 +2471,7 @@
 }
 
 .markdown-body h1 {
-  font-size: 2em;
+  font-size: 1.7em;
   margin: 0.67em 0;
 }
 
@@ -2585,11 +2585,11 @@
 }
 
 .markdown-body h3 {
-  font-size: 16px;
+  font-size: 1.25em;
 }
 
 .markdown-body h4 {
-  font-size: 14px;
+  font-size: 1em;
 }
 
 .markdown-body h5 {
@@ -2761,7 +2761,7 @@
 }
 
 .markdown-body h5 {
-  font-size: 1em;
+  font-size: .85em;
 }
 
 .markdown-body h5 .anchor {
