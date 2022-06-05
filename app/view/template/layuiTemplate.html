@@ -46,11 +46,15 @@
   <link href="<$ static $>/jianghu/jianghu-doc.css?v=1.0.5" rel="stylesheet">
   <link href="<$ static $>/jianghu/jianghu-doc-docs.css?v=1.0.5" rel="stylesheet">
   <link href="<$ static $>/iconFont/css/font-awesome.min.css?v=1.0.5" rel="stylesheet">
+
   <script src="<$ static $>/jquery/3.1.1/jquery.min.js?v=1.0.5"></script>
   <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js?v=1.0.5"></script>
   <script src="<$ static $>/layui/layui.js?v=1.0.5"></script>
   <script src="<$ static $>/js/lib/lodash.min.js?v=1.0.5"></script>
   <script src="<$ static $>/js/lib/axios.min.js?v=1.0.5"></script>
+  <!-- meilisearch docs-searchbar.min.css -->
+  <link href="<$ static $>/meilisearch/docs-searchbar.min.css" rel="stylesheet">
+  <script src="<$ static $>/meilisearch/docs-searchbar.min.js"></script>
   <script type="text/javascript">
     window.vtoast = {
       success: ({message}) => {
@@ -81,6 +85,9 @@
     <a class="logo" href="/">
       <img src="<$ static $><$ constantUiMap.header.logo $>" alt="layui">
     </a>
+    <button type="button" class="layui-btn layui-btn-radius layui-btn-primary">
+      <input type="search" id="search-bar-input" value="111234"/>
+    </button>
     <i class="layui-icon header-menu-icon header-menu-icon-category layui-icon-shrink-right " style="" onclick="showCategoryMenu()"></i>
     <i class="layui-icon header-menu-icon header-menu-icon-user layui-icon-username "  id="userIcon" style="" ></i>
     <div class="layui-hide-xs site-notice"></div>
@@ -190,6 +197,16 @@
 
 
 {% include 'common/jianghuAxios.html' %}
+
+<script type="text/javascript">
+  docsSearchBar({
+    hostUrl: 'https://mymeilisearch.com',
+    apiKey: 'XXX',
+    indexUid: 'docs',
+    inputSelector: '#search-bar-input',
+    debug: true, // Set debug to true if you want to inspect the dropdown
+  })
+</script>
 
 <script type="text/javascript">
 
