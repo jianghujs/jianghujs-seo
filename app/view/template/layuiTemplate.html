@@ -73,6 +73,10 @@
       .topImp {
           top: 0 !important;
       }
+      .searchbox__submit {
+          top: -22px;
+          left: 14px;
+      }
   </style>
 </head>
 
@@ -86,9 +90,7 @@
     <a class="logo" href="/">
       <img src="<$ static $><$ constantUiMap.header.logo $>" alt="layui">
     </a>
-    <button type="button" class="layui-btn layui-btn-radius layui-btn-primary">
-      <input type="search" id="search-bar-input" value="111234"/>
-    </button>
+    <input type="search" id="search-bar-input"/>
     <i class="layui-icon header-menu-icon header-menu-icon-category layui-icon-shrink-right " style="" onclick="showCategoryMenu()"></i>
     <i class="layui-icon header-menu-icon header-menu-icon-user layui-icon-username "  id="userIcon" style="" ></i>
     <div class="layui-hide-xs site-notice"></div>
@@ -201,18 +203,20 @@
 
 <script type="text/javascript">
   docsSearchBar({
-    hostUrl: 'https://mymeilisearch.com',
-    apiKey: 'XXX',
-    indexUid: 'docs',
+    hostUrl: 'http://127.0.0.1:7700',
+    apiKey: 'masterKey',
+    indexUid: 'movie2',
     inputSelector: '#search-bar-input',
     debug: true, // Set debug to true if you want to inspect the dropdown
+    enableDarkMode: false,
+    enhancedSearchInput: true
   })
 
   const client = new MeiliSearch({
     host: 'http://127.0.0.1:7700',
     apiKey: 'masterKey',
   })
-  const index = client.index('movie');
+  const index = client.index('movie2');
   index.search('philoudelphia').then(res => {
     console.log("[MeiliSearch] search result", res)
   })

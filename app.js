@@ -6,7 +6,7 @@ const fsPromises = require("fs").promises;
 const util = require("util");
 const exists = util.promisify(fs.exists);
 const { MeiliSearch } = require('meilisearch');
-const movies = require('./movies.json');
+const movies = require('./movies2.json');
 
 class AppBootHook {
   constructor(app) {
@@ -33,7 +33,7 @@ class AppBootHook {
 
   async initMeiliSearchData () {
     const client = new MeiliSearch({ host: 'http://127.0.0.1:7700' })
-    client.index('movie').addDocuments(movies)
+    client.index('movie2').addDocuments(movies)
       .then((res) => {
         this.app.logger.info("[AppBootHook] initMeiliSearchData", res);
       })
