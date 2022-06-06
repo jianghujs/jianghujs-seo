@@ -20,6 +20,8 @@ class ArticleService extends Service {
     const { ctx, app } = this;
     const { user } = ctx.userInfo;
     const userStatusIsActive = user && user.userId && user.userStatus === 'active';
+    // 临时代码: 支持docs-scraper可以访问 login文章
+    // const userStatusIsActive = true;
     const { jianghuKnex } = app;
     const articleId = ctx.pathParams && ctx.pathParams[0]
       || this.ctx.request.body.appData.actionData.articleId;
