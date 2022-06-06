@@ -77,6 +77,23 @@ ln -s /www/wwwroot/cn_openjianghu_admin/upload/materialRepo /www/wwwroot/cn_open
 
 ```
 
+## meilisearch 服务器搭建
+
+```bash
+# 创建目录
+mkdir /www/wwwroot/meilisearch
+
+# 拉取镜像
+docker pull getmeili/meilisearch:v0.27.1
+
+# 启动 Meilisearch
+docker run -it --rm \
+    -p 7700:7700 \
+    -v /www/wwwroot/meilisearch/meili_data:/meili_data \
+    -c "/bin/meilisearch --master-key=123456" \
+    getmeili/meilisearch:v0.27.1
+```
+
 ## Reference
 
 - [文件上传demo](https://vuetify-file-browser-demo.herokuapp.com/)
