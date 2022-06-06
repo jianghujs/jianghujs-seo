@@ -86,8 +86,11 @@ mkdir /www/wwwroot/meilisearch
 # 拉取镜像
 docker pull getmeili/meilisearch:v0.27.1
 
-# 启动 Meilisearch
-docker run -d --rm --name meilisearch -p 7700:7700 -v /www/wwwroot/docker-data/meili_data:/meili_data getmeili/meilisearch:v0.27.1 /bin/meilisearch --master-key='123456'    
+# 启动 meilisearch
+docker run -d --rm --name meilisearch -p 7700:7700 -v /www/wwwroot/docker-data/meili_data:/meili_data getmeili/meilisearch:v0.27.1 /bin/meilisearch --master-key='FDsaf343efDsf#$325FGDg435$%fgDG'   
+
+# 进入 meilisearch docker容器
+docker exec -it --user root meilisearch /bin/bash
 ```
 
 ## Reference
