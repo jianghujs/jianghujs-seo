@@ -22,7 +22,7 @@ module.exports = (appInfo) => {
     appId,
     appTitle: "开源江湖",
     meilisearch: {
-      host: 'http://meilisearch.openjianghu.org',
+      host: 'https://meilisearch.openjianghu.org',
       apiKey: 'masterKey',
     },
     appLogo: `${appId}/public/img/logo.png`,
