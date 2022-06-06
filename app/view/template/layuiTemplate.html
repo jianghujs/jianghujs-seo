@@ -95,15 +95,15 @@
     <script type="text/javascript">
       // 方案一: 使用docsSearchBar初始化搜索框
       // TODO: masterKey如何确保安全===》只能读取操作，不能进行修改
-      docsSearchBar({
-        hostUrl: '<$ ctx.app.config.meilisearch.host $>',
-        apiKey: '<$ ctx.app.config.meilisearch.apiKey $>',
-        indexUid: 'docs_searchbar_demo',
-        inputSelector: '#search-bar-input',
-        debug: true, // Set debug to true if you want to inspect the dropdown
-        enableDarkMode: false,
-        enhancedSearchInput: true
-      })
+      // docsSearchBar({
+      //   hostUrl: '<$ ctx.app.config.meilisearch.host $>',
+      //   apiKey: '<$ ctx.app.config.meilisearch.apiKey $>',
+      //   indexUid: 'docs_searchbar_demo',
+      //   inputSelector: '#search-bar-input',
+      //   debug: true, // Set debug to true if you want to inspect the dropdown
+      //   enableDarkMode: false,
+      //   enhancedSearchInput: true
+      // })
     
       // 方案一: 使用MeiliSearch client 查询 (不推荐)
       // const client = new MeiliSearch({
