@@ -87,11 +87,7 @@ mkdir /www/wwwroot/meilisearch
 docker pull getmeili/meilisearch:v0.27.1
 
 # 启动 Meilisearch
-docker run -it --rm \
-    -p 7700:7700 \
-    -v /www/wwwroot/meilisearch/meili_data:/meili_data \
-    -c "/bin/meilisearch --master-key=123456" \
-    getmeili/meilisearch:v0.27.1
+docker run -d --rm --name meilisearch -p 7700:7700 -v /www/wwwroot/docker-data/meili_data:/meili_data getmeili/meilisearch:v0.27.1 /bin/meilisearch --master-key='123456'    
 ```
 
 ## Reference
