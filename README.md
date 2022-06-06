@@ -79,6 +79,7 @@ ln -s /www/wwwroot/cn_openjianghu_admin/upload/materialRepo /www/wwwroot/cn_open
 
 ## meilisearch 服务器搭建
 
+**meilisearch server docker运行:**
 ```bash
 # 创建目录
 mkdir /www/wwwroot/meilisearch
@@ -92,7 +93,30 @@ docker run -d --rm --name meilisearch -p 7700:7700 -v /www/wwwroot/docker-data/m
 # 进入 meilisearch docker容器
 docker exec -it --user root meilisearch /bin/bash
 ```
+
+> [chrome 307 解决方案](https://www.cnblogs.com/Don/p/12192420.html)
+
+**meilisearch server nginx配置:**(注意不要开启https 重定向)
+```config
+    location / {
+        proxy_pass http://127.0.0.1:7700;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header REMOTE-HOST $remote_addr;
+    
+        # wss 支持
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+    }
+```
 > [meilisearch api调用 支持 ssl](https://docs.meilisearch.com/learn/cookbooks/http2_ssl.html#try-to-use-http-2-without-ssl)
+
+**docs-scraper 爬取网站数据:**(注意：mac m1 不支持)
+```bash
+docker run -t --rm -e MEILISEARCH_HOST_URL=http://127.0.0.1:7700 -e MEILISEARCH_API_KEY=FDsaf343efDsf#$325FGDg435$%fgDG -v /www/wwwroot/openjianghu_seo/app/meilisearch/docs_scraper.json:/docs-scraper/config.json getmeili/docs-scraper:latest pipenv run ./docs_scraper config.json
+```
 
 ## Reference
 
