@@ -1,23 +1,22 @@
 {
     "index_uid": "doc",
-    "start_urls": ["https://cn.openjianghu.org/doc/page/article/"],
+    "start_urls": ["https://cn.openjianghu.org/doc/"],
+    "sitemap_urls": [],
     "stop_urls": [],
     "selectors": {
         "lvl0": {
-        "selector": ".docs-lvl0",
-        "global": true,
-        "default_value": "Documentation"
+            "selector": ".doc-info",
+            "global": true,
+            "default_value": "文章"
         },
         "lvl1": {
-        "selector": ".docs-lvl1",
-        "global": true,
-        "default_value": "Chapter"
+            "selector": ".editormd-preview-container h2",
+            "global": false,
+            "default_value": "章节"
         },
-        "lvl2": ".docs-content .docs-lvl2",
-        "lvl3": ".docs-content .docs-lvl3",
-        "lvl4": ".docs-content .docs-lvl4",
-        "lvl5": ".docs-content .docs-lvl5",
-        "lvl6": ".docs-content .docs-lvl6",
-        "text": ".docs-content p, .docs-content li"
+        "lvl2": ".editormd-preview-container h3",
+        "lvl3": ".editormd-preview-container h4",
+        "lvl4": ".editormd-preview-container h5",
+        "text": ".editormd-preview-container p, .editormd-preview-container li, .editormd-preview-container pre"
     }
 }

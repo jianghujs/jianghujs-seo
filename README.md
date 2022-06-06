@@ -115,7 +115,7 @@ docker exec -it --user root meilisearch /bin/bash
 
 **docs-scraper 爬取网站数据:**(注意：mac m1 不支持)
 ```bash
-docker run -t --rm -e MEILISEARCH_HOST_URL=http://127.0.0.1:7700 -e MEILISEARCH_API_KEY=FDsaf343efDsf#$325FGDg435$%fgDG -v /www/wwwroot/openjianghu_seo/app/meilisearch/docs_scraper.json:/docs-scraper/config.json getmeili/docs-scraper:latest pipenv run ./docs_scraper config.json
+docker run -t --rm --name docs-scraper  -e MEILISEARCH_HOST_URL=http://meilisearch.openjianghu.org -e MEILISEARCH_API_KEY='FDsaf343efDsf#$325FGDg435$%fgDG' -v /www/wwwroot/openjianghu_seo/app/meilisearch/docs_scraper.json:/docs-scraper/config.json getmeili/docs-scraper:latest pipenv run ./docs_scraper config.json
 ```
 
 ## Reference
