@@ -6,7 +6,7 @@ const fsPromises = require("fs").promises;
 const util = require("util");
 const exists = util.promisify(fs.exists);
 const { MeiliSearch } = require('meilisearch');
-const movies = require('./app/common/movies2.json');
+const docs_searchbar_demo = require('./app/meilisearch/docs_searchbar_demo.json');
 
 class AppBootHook {
   constructor(app) {
@@ -31,13 +31,17 @@ class AppBootHook {
     }
   }
 
-  // async initMeiliSearchData () {
-  //   const client = new MeiliSearch({ host: 'http://127.0.0.1:7700' })
-  //   client.index('movie2').addDocuments(movies)
-  //     .then((res) => {
-  //       this.app.logger.info("[AppBootHook] initMeiliSearchData", res);
-  //     })
-  // }
+  async initMeiliSearchData () {
+    const config = this.app.config;
+    const client = new MeiliSearch({ 
+      host: config.meilisearch.host,
+      apiKey: config.meilisearch.apiKey,
+    })
+    // await client.deleteIndex('docs_searchbar_demo');
+    await client.index('docs_searchbar_demo').deleteAllDocuments();
+    const addDocumentsRes = await client.index('docs_searchbar_demo').addDocuments(docs_searchbar_demo);
+    this.app.logger.info("[AppBootHook] initMeiliSearchData", addDocumentsRes);
+  }
 
 }
 

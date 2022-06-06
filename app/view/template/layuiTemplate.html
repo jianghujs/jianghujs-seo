@@ -91,6 +91,30 @@
       <img src="<$ static $><$ constantUiMap.header.logo $>" alt="layui">
     </a>
     <input type="search" id="search-bar-input"/>
+
+    <script type="text/javascript">
+      // 方案一: 使用docsSearchBar初始化搜索框
+      // TODO: masterKey如何确保安全===》只能读取操作，不能进行修改
+      docsSearchBar({
+        hostUrl: '<$ ctx.app.config.meilisearch.host $>',
+        apiKey: '<$ ctx.app.config.meilisearch.apiKey $>',
+        indexUid: 'docs_searchbar_demo',
+        inputSelector: '#search-bar-input',
+        debug: true, // Set debug to true if you want to inspect the dropdown
+        enableDarkMode: false,
+        enhancedSearchInput: true
+      })
+    
+      // 方案一: 使用MeiliSearch client 查询 (不推荐)
+      // const client = new MeiliSearch({
+      //   host: 'http://127.0.0.1:7700',
+      //   apiKey: 'masterKey',
+      // })
+      // const index = client.index('movie2');
+      // index.search('philoudelphia').then(res => {
+      //   console.log("[MeiliSearch] search result", res)
+      // })
+    </script>
     <i class="layui-icon header-menu-icon header-menu-icon-category layui-icon-shrink-right " style="" onclick="showCategoryMenu()"></i>
     <i class="layui-icon header-menu-icon header-menu-icon-user layui-icon-username "  id="userIcon" style="" ></i>
     <div class="layui-hide-xs site-notice"></div>
@@ -202,28 +226,6 @@
 {% include 'common/jianghuAxios.html' %}
 
 <script type="text/javascript">
-  docsSearchBar({
-    hostUrl: 'http://127.0.0.1:7700',
-    apiKey: 'masterKey',
-    indexUid: 'movie2',
-    inputSelector: '#search-bar-input',
-    debug: true, // Set debug to true if you want to inspect the dropdown
-    enableDarkMode: false,
-    enhancedSearchInput: true
-  })
-
-  // const client = new MeiliSearch({
-  //   host: 'http://127.0.0.1:7700',
-  //   apiKey: 'masterKey',
-  // })
-  // const index = client.index('movie2');
-  // index.search('philoudelphia').then(res => {
-  //   console.log("[MeiliSearch] search result", res)
-  // })
-</script>
-
-<script type="text/javascript">
-
 
   const pageUrl = "<$ pageUrl $>";
   const adminUrl = "<$ adminUrl $>";

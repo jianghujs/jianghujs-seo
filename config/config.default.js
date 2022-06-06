@@ -21,6 +21,10 @@ module.exports = (appInfo) => {
   return {
     appId,
     appTitle: "开源江湖",
+    meilisearch: {
+      host: 'http://127.0.0.1:7700',
+      apiKey: 'masterKey',
+    },
     appLogo: `${appId}/public/img/logo.png`,
     appType: "single",
     appDirectoryLink: "/",
