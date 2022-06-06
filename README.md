@@ -92,6 +92,7 @@ docker run -d --rm --name meilisearch -p 7700:7700 -v /www/wwwroot/docker-data/m
 # 进入 meilisearch docker容器
 docker exec -it --user root meilisearch /bin/bash
 ```
+> [meilisearch api调用 支持 ssl](https://docs.meilisearch.com/learn/cookbooks/http2_ssl.html#try-to-use-http-2-without-ssl)
 
 ## Reference
 

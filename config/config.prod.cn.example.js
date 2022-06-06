@@ -7,7 +7,7 @@ module.exports = appInfo => {
   return {
     language: 'zh',
     meilisearch: {
-      host: 'http://127.0.0.1:7700',
+      host: 'http://meilisearch.openjianghu.org',
       apiKey: 'masterKey',
     },
     adminUrl: 'https://cn.openjianghu.org/admin',

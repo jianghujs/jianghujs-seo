@@ -36,9 +36,9 @@ class AppBootHook {
     const client = new MeiliSearch({ 
       host: config.meilisearch.host,
       apiKey: config.meilisearch.apiKey,
-    })
+    });
     // await client.deleteIndex('docs_searchbar_demo');
-    await client.index('docs_searchbar_demo').deleteAllDocuments();
+    // await client.index('docs_searchbar_demo').deleteAllDocuments();
     const addDocumentsRes = await client.index('docs_searchbar_demo').addDocuments(docs_searchbar_demo);
     this.app.logger.info("[AppBootHook] initMeiliSearchData", addDocumentsRes);
   }
