@@ -104,7 +104,7 @@ docker exec -it --user root meilisearch /bin/bash
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header REMOTE-HOST $remote_addr;
-    
+
         # wss 支持
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
@@ -115,7 +115,14 @@ docker exec -it --user root meilisearch /bin/bash
 
 **docs-scraper 爬取网站数据:**(注意：mac m1 不支持)
 ```bash
-docker run -t --rm --name docs-scraper  -e MEILISEARCH_HOST_URL=http://meilisearch.openjianghu.org -e MEILISEARCH_API_KEY='FDsaf343efDsf#$325FGDg435$%fgDG' -v /www/wwwroot/openjianghu_seo/app/meilisearch/docs_scraper.json:/docs-scraper/config.json getmeili/docs-scraper:latest pipenv run ./docs_scraper config.json
+# public 文档
+docker run -t --rm --name docs-scraper  -e MEILISEARCH_HOST_URL=https://meilisearch.openjianghu.org -e MEILISEARCH_API_KEY='FDsaf343efDsf#$325FGDg435$%fgDG' -v /www/wwwroot/openjianghu_seo/app/meilisearch/docs_scraper_public.json:/docs-scraper/config.json getmeili/docs-scraper:latest pipenv run ./docs_scraper config.json
+
+# all 文档
+#   1. 运行前需要临时 适配一下/openjianghu_seo/app/service/article.js 中 getArticleAndFillArticles代码
+#   2. const userStatusIsActive = true;
+#   3. 重启项目
+docker run -t --rm --name docs-scraper  -e MEILISEARCH_HOST_URL=https://meilisearch.openjianghu.org -e MEILISEARCH_API_KEY='FDsaf343efDsf#$325FGDg435$%fgDG' -v /www/wwwroot/openjianghu_seo/app/meilisearch/docs_scraper_all.json:/docs-scraper/config.json getmeili/docs-scraper:latest pipenv run ./docs_scraper config.json
 ```
 
 ## Reference
