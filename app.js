@@ -14,7 +14,7 @@ class AppBootHook {
 
   async serverDidReady() {
     await this.uploadDirCreate();
-    await this.testMeiliSearchData();
+    // await this.testMeiliSearchData();
   }
 
   async uploadDirCreate () {
@@ -55,13 +55,13 @@ class AppBootHook {
     // this.app.logger.info("[AppBootHook] createKeyRes:", createKeyRes);
 
     // 删除一个 api key
-    for (const keyObj of getKeysRes.results) {
-      const { key, description } = keyObj;
-      if (description === "只读的api key") {
-        await client.deleteKey(key)
-        this.app.logger.info("[AppBootHook] deleteKey:", key);
-      }
-  }
+    // for (const keyObj of getKeysRes.results) {
+    //   const { key, description } = keyObj;
+    //   if (description === "只读的api key") {
+    //     await client.deleteKey(key)
+    //     this.app.logger.info("[AppBootHook] deleteKey:", key);
+    //   }
+    // }
 
     this.app.logger.info("[AppBootHook] testMeiliSearchData");
 
