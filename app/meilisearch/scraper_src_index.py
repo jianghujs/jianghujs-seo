@@ -78,7 +78,10 @@ def run_config(config):
         token_response = oidc_client.client_credentials()
         token = token_response["access_token"]
         headers.update({"Authorization": 'bearer ' + token})
-
+    
+    # 设置cookie ===》支持爬取 login文章
+    headers.update({"cookie": "doc_authToken=V2JzrwEqRl393SIpiD1EtK_obKTvJas8rgRV"})
+    
     DEFAULT_REQUEST_HEADERS = headers
 
     process = CrawlerProcess({

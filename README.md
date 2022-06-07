@@ -116,15 +116,16 @@ docker exec -it --user root meilisearch /bin/bash
 **docs-scraper 爬取网站数据:**(注意：mac m1 不支持)
 ```bash
 # public 文档
-docker run -t --rm --name docs-scraper  -e MEILISEARCH_HOST_URL=https://meilisearch.openjianghu.org -e MEILISEARCH_API_KEY='FDsaf343efDsf#$325FGDg435$%fgDG' -v /www/wwwroot/openjianghu_seo/app/meilisearch/docs_scraper_public.json:/docs-scraper/config.json getmeili/docs-scraper:latest pipenv run ./docs_scraper config.json
+docker run -t --rm --name docs-scraper  -e MEILISEARCH_HOST_URL=https://meilisearch.openjianghu.org -e MEILISEARCH_API_KEY='FDsaf343efDsf#$325FGDg435$%fgDG' -v /www/wwwroot/cn_openjianghu_seo/app/meilisearch/docs_scraper_public.json:/docs-scraper/config.json getmeili/docs-scraper:latest pipenv run ./docs_scraper config.json
 
 # all 文档
 #   1. 运行前需要临时 适配一下/openjianghu_seo/app/service/article.js 中 getArticleAndFillArticles代码
 #   2. const userStatusIsActive = true;
 #   3. 重启项目
-docker run -t --rm --name docs-scraper  -e MEILISEARCH_HOST_URL=https://meilisearch.openjianghu.org -e MEILISEARCH_API_KEY='FDsaf343efDsf#$325FGDg435$%fgDG' -v /www/wwwroot/openjianghu_seo/app/meilisearch/docs_scraper_all.json:/docs-scraper/config.json  -v /www/wwwroot/openjianghu_seo/app/meilisearch/scraper_src_index.py:/docs-scraper/scraper/src/index.py getmeili/docs-scraper:latest pipenv run ./docs_scraper config.json
+docker run -t --rm --name docs-scraper  -e MEILISEARCH_HOST_URL=https://meilisearch.openjianghu.org -e MEILISEARCH_API_KEY='FDsaf343efDsf#$325FGDg435$%fgDG' -v /www/wwwroot/cn_openjianghu_seo/app/meilisearch/docs_scraper_all.json:/docs-scraper/config.json  -v /www/wwwroot/cn_openjianghu_seo/app/meilisearch/scraper_src_index.py:/docs-scraper/scraper/src/index.py getmeili/docs-scraper:latest pipenv run ./docs_scraper config.json
 ```
 
 ## Reference
 
 - [文件上传demo](https://vuetify-file-browser-demo.herokuapp.com/)
+- /www/wwwroot/cn_openjianghu_seo/node_modules/egg-jianghu/app/middleware/
