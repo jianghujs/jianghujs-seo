@@ -134,16 +134,21 @@ class DocumentationSpider(CrawlSpider, SitemapSpider):
 
         # We crawl the start URL in order to ensure we didn't miss anything (Even if we used the sitemap)
         for url in self.start_urls:
-            yield Request(url,
-                          callback=self.parse_from_start_url if self.scrape_start_urls else self.parse,
-                          # If we wan't to crawl (default behavior) without scraping, we still need to let the
-                          # crawling spider acknowledge the content by parsing it with the built-in method
-                          meta={
-                              "alternative_links": DocumentationSpider.to_other_scheme(
-                                  url)
-                          },
-                          errback=self.errback_alternative_link)
-
+            if os.getenv('DOC_AUTHTOKEN'):
+                yield Request(url,
+                            callback=self.parse_from_start_url if self.scrape_start_urls else self.parse,
+                            cookies={'doc_authToken': os.getenv('DOC_AUTHTOKEN')},
+                            meta={
+                                "alternative_links": DocumentationSpider.to_other_scheme(url)
+                            },
+                            errback=self.errback_alternative_link)
+            else:
+                yield Request(url,
+                            callback=self.parse_from_start_url if self.scrape_start_urls else self.parse,
+                            meta={
+                                "alternative_links": DocumentationSpider.to_other_scheme(url)
+                            },
+                            errback=self.errback_alternative_link)
     def parse(self, response, **kwargs):
         return super()._parse(response, **kwargs)
 
