@@ -113,19 +113,14 @@ docker exec -it --user root meilisearch /bin/bash
 ```
 > [meilisearch api调用 支持 ssl](https://docs.meilisearch.com/learn/cookbooks/http2_ssl.html#try-to-use-http-2-without-ssl)
 
-**docs-scraper 爬取网站数据:**(注意：mac m1 不支持)
+**docs-scraper 爬取网站数据:**
 ```bash
-# public 文档
-docker run -t --rm --name docs-scraper  -e MEILISEARCH_HOST_URL=https://meilisearch.openjianghu.org -e MEILISEARCH_API_KEY='FDsaf343efDsf#$325FGDg435$%fgDG' -v /www/wwwroot/cn_openjianghu_seo/app/meilisearch/docs_scraper_public.json:/docs-scraper/config.json getmeili/docs-scraper:latest pipenv run ./docs_scraper config.json
-
-# all 文档
-#   1. 运行前需要临时 适配一下/openjianghu_seo/app/service/article.js 中 getArticleAndFillArticles代码
-#   2. const userStatusIsActive = true;
-#   3. 重启项目
-docker run -t --rm --name docs-scraper  -e MEILISEARCH_HOST_URL=https://meilisearch.openjianghu.org -e MEILISEARCH_API_KEY='FDsaf343efDsf#$325FGDg435$%fgDG' -v /www/wwwroot/cn_openjianghu_seo/app/meilisearch/docs_scraper_all.json:/docs-scraper/config.json  -v /www/wwwroot/cn_openjianghu_seo/app/meilisearch/documentation_spider.py:/docs-scraper/scraper/src/documentation_spider.py getmeili/docs-scraper:latest pipenv run ./docs_scraper config.json
+cd /openjianghu_seo/app/meilisearch/docs-scraper
+pip3 install pipenv
+# 拷贝.env 并配置参数
+cp .env.example .env
+pipenv run ./docs_scraper_openjianghu
 ```
-
-demo_advanced_authToken=UrZGm3hct-zjno-plEeqbD9CtbGC6Eqj8Djs; doc_authToken=
 
 ## Reference
 
