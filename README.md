@@ -129,4 +129,4 @@ pipenv run ./openjianghu_org_doc_all
 
 ## Reference
 
-- [文件上传demo](https://vuetify-file-browser-demo.herokuapp.com/)
+- [创建一个只读的 api key](https://docs.meilisearch.com/learn/security/master_api_keys.html#using-the-master-key-to-manage-api-keys)
