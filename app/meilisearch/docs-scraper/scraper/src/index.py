@@ -30,10 +30,11 @@ except ImportError:
 EXIT_CODE_NO_RECORD = 3
 
 
-def run_config(config):
+def run_config(config, doc_authToken):
     config = ConfigLoader(config)
     CustomDownloaderMiddleware.driver = config.driver
     DocumentationSpider.NB_INDEXED = 0
+    DocumentationSpider.doc_authToken = doc_authToken
 
     strategy = DefaultStrategy(config)
 

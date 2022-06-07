@@ -9,6 +9,8 @@ module.exports = appInfo => {
     meilisearch: {
       host: 'https://meilisearch.openjianghu.org',
       apiKey: 'masterKey',
+      allIndexUid: 'cn_openjianghu_org_doc_all',
+      publicIndexUid: 'cn_openjianghu_org_doc_public',
     },
     adminUrl: 'https://cn.openjianghu.org/admin',
     static: {

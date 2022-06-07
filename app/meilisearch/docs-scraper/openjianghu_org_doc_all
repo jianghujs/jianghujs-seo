@@ -1,0 +1,57 @@
+#! /usr/bin/env python
+
+import sys
+import os
+from scraper.src.index import run_config
+import requests, json
+
+HOST_URL = os.environ.get('MEILISEARCH_HOST_URL')
+API_KEY = os.environ.get('MEILISEARCH_API_KEY')
+CN_OPENJIANGHU_ORG_DOMAIN=os.environ.get('CN_OPENJIANGHU_ORG_DOMAIN')
+CN_OPENJIANGHU_ORG_USERID=os.environ.get('CN_OPENJIANGHU_ORG_USERID')
+CN_OPENJIANGHU_ORG_PASSWORD=os.environ.get('CN_OPENJIANGHU_ORG_PASSWORD')
+
+OPENJIANGHU_ORG_DOMAIN=os.environ.get('OPENJIANGHU_ORG_DOMAIN')
+OPENJIANGHU_ORG_USERID=os.environ.get('OPENJIANGHU_ORG_USERID')
+OPENJIANGHU_ORG_PASSWORD=os.environ.get('OPENJIANGHU_ORG_PASSWORD')
+
+if HOST_URL is None or API_KEY is None:
+    print("Error: MEILISEARCH_HOST_URL and MEILISEARCH_API_KEY environment variables are required.")
+    sys.exit(1)
+
+
+def getAuthToken(domain, userId, password):
+    response = requests.post(CN_OPENJIANGHU_ORG_DOMAIN + '/doc/resource',
+        headers={ 'content-type': 'application/json; charset=utf-8', 'Accept': 'application/json' },
+        json={
+            'packageId': '123456',
+            'packageType': 'httpRequest',
+            'appData': {
+                'appId': 'doc',
+                'pageId': 'login',
+                'actionId': 'passwordLogin',
+                'userAgent': 'docs-scraper',
+                'actionData': {
+                    'userId': CN_OPENJIANGHU_ORG_USERID,
+                    'password': CN_OPENJIANGHU_ORG_PASSWORD,
+                    'deviceId': 'docs-scraper',
+                },
+            }
+        }
+    )
+    if response.status_code != 200:
+        print("登录失败: " + response.text)
+        sys.exit(1)
+    response_body = json.loads(response.text)
+    if response_body.get('status') != 'success':
+        print("登录失败 status: " + response_body.get('status'))
+        sys.exit(1)
+
+    authToken = response_body.get('appData').get('resultData').get('authToken')
+    return authToken
+
+
+
+print(OPENJIANGHU_ORG_DOMAIN+": all 文章抓取开始")
+openjianghu_org_authToken = getAuthToken(domain=OPENJIANGHU_ORG_DOMAIN, userId=OPENJIANGHU_ORG_USERID, password=OPENJIANGHU_ORG_PASSWORD)
+run_config('./config/openjianghu_org_doc_all.json', openjianghu_org_authToken)

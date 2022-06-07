@@ -1,6 +1,6 @@
 {
-    "index_uid": "test",
-    "start_urls": ["https://cn.openjianghu.org/doc/page/article/10007"],
+    "index_uid": "openjianghu_org_doc_all",
+    "start_urls": ["https://openjianghu.org/doc/"],
     "sitemap_urls": [],
     "stop_urls": [],
     "selectors": {

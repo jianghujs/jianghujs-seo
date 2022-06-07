@@ -24,6 +24,7 @@ class DocumentationSpider(CrawlSpider, SitemapSpider):
     """
     DocumentationSpider
     """
+    doc_authToken = None
     http_user = os.environ.get('DOCS_SCRAPER_BASICAUTH_USERNAME', None)
     http_pass = os.environ.get('DOCS_SCRAPER_BASICAUTH_PASSWORD', None)
     meilisearch_helper = None
@@ -134,17 +135,18 @@ class DocumentationSpider(CrawlSpider, SitemapSpider):
 
         # We crawl the start URL in order to ensure we didn't miss anything (Even if we used the sitemap)
         for url in self.start_urls:
-            if os.getenv('DOC_AUTHTOKEN'):
+            if self.doc_authToken is None:
                 yield Request(url,
                             callback=self.parse_from_start_url if self.scrape_start_urls else self.parse,
-                            cookies={'doc_authToken': os.getenv('DOC_AUTHTOKEN')},
                             meta={
                                 "alternative_links": DocumentationSpider.to_other_scheme(url)
                             },
                             errback=self.errback_alternative_link)
             else:
+                print(self.doc_authToken)
                 yield Request(url,
                             callback=self.parse_from_start_url if self.scrape_start_urls else self.parse,
+                            cookies={'doc_authToken': self.doc_authToken},
                             meta={
                                 "alternative_links": DocumentationSpider.to_other_scheme(url)
                             },

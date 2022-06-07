@@ -117,12 +117,16 @@ docker exec -it --user root meilisearch /bin/bash
 ```bash
 cd /openjianghu_seo/app/meilisearch/docs-scraper
 pip3 install pipenv
+pipenv install
 # 拷贝.env 并配置参数
 cp .env.example .env
-pipenv run ./docs_scraper_openjianghu
+# 依次执行这四个脚本
+pipenv run ./cn_openjianghu_org_doc_public
+pipenv run ./openjianghu_org_doc_public
+pipenv run ./cn_openjianghu_org_doc_all
+pipenv run ./openjianghu_org_doc_all
 ```
 
 ## Reference
 
 - [文件上传demo](https://vuetify-file-browser-demo.herokuapp.com/)
-- /www/wwwroot/cn_openjianghu_seo/node_modules/egg-jianghu/app/middleware/
