@@ -69,15 +69,6 @@
       }
     };
   </script>
-  <style>
-      .topImp {
-          top: 0 !important;
-      }
-      .searchbox__submit {
-          top: -22px;
-          left: 14px;
-      }
-  </style>
 </head>
 
 <body>
@@ -91,6 +82,23 @@
       <img src="<$ static $><$ constantUiMap.header.logo $>" alt="layui">
     </a>
 
+    <style>
+      /* search-bar-input样式适配 */
+      .topImp {
+          top: 0 !important;
+      }
+      .searchbox__submit {
+          top: -22px;
+          left: 14px;
+      }
+      @media only screen and (max-width: 578px) {
+        #docs-searchbar-suggestion {
+          width: 140px;
+        }
+      }
+
+    </style>
+
     <input type="search" id="search-bar-input"/>
 
     <script type="text/javascript">
@@ -99,7 +107,7 @@
       docsSearchBar({
         hostUrl: '<$ ctx.app.config.meilisearch.host $>',
         apiKey: '<$ ctx.app.config.meilisearch.apiKey $>',
-        indexUid: 'cn_openjianghu_org_doc_all', // cn_openjianghu_org_doc_public cn_openjianghu_org_doc_all
+        indexUid: '<$ userId $>' ? '<$ ctx.app.config.meilisearch.allIndexUid $>' : '<$ ctx.app.config.meilisearch.publicIndexUid $>',
         inputSelector: '#search-bar-input',
         debug: true, // Set debug to true if you want to inspect the dropdown
         enableDarkMode: false,
