@@ -143,7 +143,6 @@ class DocumentationSpider(CrawlSpider, SitemapSpider):
                             },
                             errback=self.errback_alternative_link)
             else:
-                print(self.doc_authToken)
                 yield Request(url,
                             callback=self.parse_from_start_url if self.scrape_start_urls else self.parse,
                             cookies={'doc_authToken': self.doc_authToken},

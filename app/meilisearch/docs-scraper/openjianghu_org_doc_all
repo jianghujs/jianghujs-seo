@@ -7,13 +7,6 @@ import requests, json
 
 HOST_URL = os.environ.get('MEILISEARCH_HOST_URL')
 API_KEY = os.environ.get('MEILISEARCH_API_KEY')
-CN_OPENJIANGHU_ORG_DOMAIN=os.environ.get('CN_OPENJIANGHU_ORG_DOMAIN')
-CN_OPENJIANGHU_ORG_USERID=os.environ.get('CN_OPENJIANGHU_ORG_USERID')
-CN_OPENJIANGHU_ORG_PASSWORD=os.environ.get('CN_OPENJIANGHU_ORG_PASSWORD')
-
-OPENJIANGHU_ORG_DOMAIN=os.environ.get('OPENJIANGHU_ORG_DOMAIN')
-OPENJIANGHU_ORG_USERID=os.environ.get('OPENJIANGHU_ORG_USERID')
-OPENJIANGHU_ORG_PASSWORD=os.environ.get('OPENJIANGHU_ORG_PASSWORD')
 
 if HOST_URL is None or API_KEY is None:
     print("Error: MEILISEARCH_HOST_URL and MEILISEARCH_API_KEY environment variables are required.")
@@ -21,7 +14,8 @@ if HOST_URL is None or API_KEY is None:
 
 
 def getAuthToken(domain, userId, password):
-    response = requests.post(CN_OPENJIANGHU_ORG_DOMAIN + '/doc/resource',
+    print(domain + '/doc/resource')
+    response = requests.post(domain + '/doc/resource',
         headers={ 'content-type': 'application/json; charset=utf-8', 'Accept': 'application/json' },
         json={
             'packageId': '123456',
@@ -32,8 +26,8 @@ def getAuthToken(domain, userId, password):
                 'actionId': 'passwordLogin',
                 'userAgent': 'docs-scraper',
                 'actionData': {
-                    'userId': CN_OPENJIANGHU_ORG_USERID,
-                    'password': CN_OPENJIANGHU_ORG_PASSWORD,
+                    'userId': userId,
+                    'password': password,
                     'deviceId': 'docs-scraper',
                 },
             }
@@ -48,10 +42,13 @@ def getAuthToken(domain, userId, password):
         sys.exit(1)
 
     authToken = response_body.get('appData').get('resultData').get('authToken')
+    print("登录成功")
     return authToken
 
+DOMAIN=os.environ.get('OPENJIANGHU_ORG_DOMAIN')
+USERID=os.environ.get('OPENJIANGHU_ORG_USERID')
+PASSWORD=os.environ.get('OPENJIANGHU_ORG_PASSWORD')
 
-
-print(OPENJIANGHU_ORG_DOMAIN+": all 文章抓取开始")
-openjianghu_org_authToken = getAuthToken(domain=OPENJIANGHU_ORG_DOMAIN, userId=OPENJIANGHU_ORG_USERID, password=OPENJIANGHU_ORG_PASSWORD)
-run_config('./config/openjianghu_org_doc_all.json', openjianghu_org_authToken)
+print(DOMAIN+": all 文章抓取开始")
+authToken = getAuthToken(domain=DOMAIN, userId=USERID, password=PASSWORD)
+run_config('./config/openjianghu_org_doc_all.json', authToken)
