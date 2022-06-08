@@ -91,6 +91,9 @@
           position: relative;
           margin-right: 1rem;
       }
+      .header-menu-icon {
+          z-index: 1000;
+      }
   </style>
 </head>
 
@@ -105,7 +108,7 @@
     <i class="layui-icon header-menu-icon header-menu-icon-user layui-icon-username "  id="userIcon" style="" ></i>
     <div class="layui-hide-xs site-notice"></div>
     <div class="header-menu-box">
-      <input type="search" class="search-bar-input"/>
+      <input type="search" id="search-bar-input"/>
       <ul class="layui-nav layui-hide-xs menu-list-box" id="LAY_NAV_TOP" style="position: unset;">
         {% for menu in constantUiMap.header.menuList.slice(0, constantUiMap.header.showMenu) %}
           {% if article and menu.categoryId == article.categoryId %}
@@ -219,7 +222,7 @@
     hostUrl: '<$ ctx.app.config.meilisearch.host $>',
     apiKey: '<$ ctx.app.config.meilisearch.apiKey $>',
     indexUid: '<$ userId $>' ? '<$ ctx.app.config.meilisearch.allIndexUid $>' : '<$ ctx.app.config.meilisearch.publicIndexUid $>',
-    inputSelector: '.search-bar-input',
+    inputSelector: '#search-bar-input',
     debug: true, // Set debug to true if you want to inspect the dropdown
     enableDarkMode: false,
     enhancedSearchInput: true
