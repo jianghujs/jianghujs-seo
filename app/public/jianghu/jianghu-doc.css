@@ -422,13 +422,14 @@ li.active > a, li.active > div > a {
 }
 
 /* 返回顶部 */
-.toTop, .tocMenu, .shareDoc, .editDoc {
+.toTop, .tocMenu, .shareDoc, .editDoc, .article-mobile {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     background: #f6f6f6;
     text-align: center;
     line-height: 40px;
+    cursor: pointer;
     /*返回顶部标签固定定位*/
     /* position: fixed;
     right: 35px;
@@ -977,7 +978,7 @@ button.layui-btn-normal, .doctemp-list a.layui-btn-normal {
     }
 }
 
-.header-menu-icon {
+.header-menu-icon, .article-mobile {
     display: none;
 }
 
@@ -987,9 +988,17 @@ button.layui-btn-normal, .doctemp-list a.layui-btn-normal {
 .doc-summary-parent {
     position: fixed
 }
+.header-menu-box {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+    align-items: center;
+}
 /* 移动端小屏幕样式 */
 @media screen and (max-width: 1050px) {
-
+    .header-menu-box {
+        padding-right: 70px;
+    }
     .doc-summary-parent {
         left: -300px;
         position: fixed
@@ -1016,7 +1025,7 @@ button.layui-btn-normal, .doctemp-list a.layui-btn-normal {
         display: none;
     }
 
-    .header-menu-icon {
+    .header-menu-icon, .article-mobile {
         display: inline-block;
     }
 
@@ -1025,12 +1034,20 @@ button.layui-btn-normal, .doctemp-list a.layui-btn-normal {
     }
 
     .logo {
-        margin: 0 auto;
+        /*margin: 0 auto;*/
+    }
+
+    .layui-fluid {
+        padding: 0 25px;
     }
 }
 
 /* 移动端小屏幕样式 */
 @media screen and (max-width: 768px) {
+    .docs-searchbar-js .searchbox .dsb-dropdown-menu {
+        min-width: calc(100vw - 4rem)!important;
+        max-width: calc(100vw - 4rem)!important;
+    }
     /* 首页 */
     .project-item {
         min-width: 0;
@@ -1047,7 +1064,7 @@ button.layui-btn-normal, .doctemp-list a.layui-btn-normal {
     }
 
     .layui-fluid {
-        padding: 0 25px;
+        padding: 0 15px;
     }
 
     /* 文档浏览页 顶部控制按钮 */
@@ -1083,6 +1100,15 @@ button.layui-btn-normal, .doctemp-list a.layui-btn-normal {
     }
 }
 
+@media screen and (max-width: 578px) {
+
+    .header-menu-box {
+        padding-right: 0;
+    }
+    #docs-searchbar-suggestion {
+        width: 150px !important;
+    }
+}
 #jianghu-munu {
     color: #333;
     position: fixed;
