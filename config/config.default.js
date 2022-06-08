@@ -23,7 +23,7 @@ module.exports = (appInfo) => {
     appTitle: "开源江湖",
     meilisearch: {
       host: 'https://meilisearch.openjianghu.org',
-      apiKey: 'masterKey',
+      apiKey: 'Iy4kJeGu643c54a953fdc6a5d0cbf752a228a8fc58cb1a00ddaf1634fe4e82f07475718e',
       allIndexUid: 'cn_openjianghu_org_doc_all',
       publicIndexUid: 'cn_openjianghu_org_doc_public',
     },
