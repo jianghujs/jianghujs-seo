@@ -113,7 +113,7 @@ docker exec -it --user root meilisearch /bin/bash
 ```
 > [meilisearch api调用 支持 ssl](https://docs.meilisearch.com/learn/cookbooks/http2_ssl.html#try-to-use-http-2-without-ssl)
 
-**docs-scraper 爬取网站数据:**
+**docs-scraper 爬取网站数据:**（需要python3.8+环境）
 ```bash
 cd /openjianghu_seo/app/meilisearch/docs-scraper
 pip3 install pipenv
