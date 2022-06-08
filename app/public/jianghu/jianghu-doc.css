@@ -996,8 +996,8 @@ button.layui-btn-normal, .doctemp-list a.layui-btn-normal {
 }
 /* 移动端小屏幕样式 */
 @media screen and (max-width: 1050px) {
-    .header-menu-box {
-        padding-right: 70px;
+    #docs-searchbar-suggestion {
+        width: 150px !important;
     }
     .doc-summary-parent {
         left: -300px;
@@ -1038,7 +1038,7 @@ button.layui-btn-normal, .doctemp-list a.layui-btn-normal {
     }
 
     .layui-fluid {
-        padding: 0 25px;
+        padding: 0 15px;
     }
 }
 
@@ -1063,9 +1063,9 @@ button.layui-btn-normal, .doctemp-list a.layui-btn-normal {
         padding: 0 5px;
     }
 
-    .layui-fluid {
-        padding: 0 15px;
-    }
+    /*.layui-fluid {*/
+    /*    padding: 0 15px;*/
+    /*}*/
 
     /* 文档浏览页 顶部控制按钮 */
     .doc-header .btn {
@@ -1101,10 +1101,6 @@ button.layui-btn-normal, .doctemp-list a.layui-btn-normal {
 }
 
 @media screen and (max-width: 578px) {
-
-    .header-menu-box {
-        padding-right: 0;
-    }
     #docs-searchbar-suggestion {
         width: 150px !important;
     }
