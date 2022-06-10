@@ -144,19 +144,19 @@
               <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label" >评论</label>
                 <div class="layui-input-block">
-                  <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+                  <textarea name="content" placeholder="请输入内容" lay-verify="content" class="layui-textarea"></textarea>
                 </div>
               </div>
               <div class="layui-form-item">
                 <label class="layui-form-label" >姓名</label>
                 <div class="layui-input-block">
-                  <input type="text" name="username" required  lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+                  <input type="text" name="username" required lay-verify="username" placeholder="请输入姓名" autocomplete="off" class="layui-input">
                 </div>
               </div>
               <div class="layui-form-item">
                 <label class="layui-form-label" >邮箱</label>
                 <div class="layui-input-block">
-                  <input type="text" name="email" required  lay-verify="email" placeholder="请输入电子邮箱" autocomplete="off" class="layui-input">
+                  <input type="text" name="email" required lay-verify="email" placeholder="请输入电子邮箱" autocomplete="off" class="layui-input">
                 </div>
               </div>
               <div class="layui-form-item">
@@ -174,10 +174,19 @@
                 </div>
               </div>
             </form>
-
+            {% if article.commentList.length %}
             <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
               <legend style="font-size: 14px;">评论列表</legend>
             </fieldset>
+            {% endif %}
+            {% for comment in article.commentList %}
+            <div class="layui-form-item">
+              <label class="layui-form-label" style="width: 120px"><$ comment.username $></label>
+              <div class="layui-input-block" style="padding: 6px 12px; margin-left: 140px; background-color: #efefef; border-radius: 10px">
+                <$ comment.content $>
+              </div>
+            </div>
+            {% endfor %}
           </div>
           {% endif %}
         </div>
@@ -229,7 +238,23 @@
     $("#canvas").on('click',function(){
       capcha.draw(show_num);
     });
-
+    //自定义验证规则
+    form.verify({
+      username: function(value){
+        if(value.length > 15){
+          return '用户名至多得10个字符';
+        } else if(value.length < 2 ){
+          return '用户名至少得2个字符';
+        }
+      },
+      content: function(value){
+        if(value.length > 100){
+          return '评论内容至多得100个字符';
+        } else if(value.length < 2 ){
+          return '评论内容至少得2个字符';
+        }
+      }
+    });
     //监听提交
     form.on('submit(commentForm)', function(data){
       var num = show_num.join("");
