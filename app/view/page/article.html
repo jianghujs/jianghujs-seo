@@ -141,7 +141,7 @@
             <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
               <legend style="font-size: 14px;">评论建议</legend>
             </fieldset>
-            <form class="layui-form" action="">
+            <form class="layui-form" action="" id="commentForm">
               <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label" >评论</label>
                 <div class="layui-input-block">
@@ -232,13 +232,12 @@
       var num = show_num.join("");
       var code = data.field["vercode"];
       //验证码判断
-      debugger
       if(code !== num){
         layer.msg('验证码错误,请重新输入', {icon: 5});
         capcha.draw(show_num);
         return false
       }
-      layer.msg(JSON.stringify(data.field));
+      // layer.msg(JSON.stringify(data.field));
       submitComment(data.field)
       return false;
     });
@@ -253,7 +252,6 @@
           }
         }
       });
-      console.log(data)
       if (status === 'success') {
         layer.msg('提交成功');
         $('#commentForm')[0].reset();
