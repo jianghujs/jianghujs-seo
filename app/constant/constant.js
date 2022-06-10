@@ -23,6 +23,7 @@ module.exports.tableEnum = Object.freeze({
   _user_session: "_user_session",
   // ========================业务表============================
   album: "album",
+  comment: "comment",
   article: "article",
   article_history: "article_history",
   article_tag: "article_tag",

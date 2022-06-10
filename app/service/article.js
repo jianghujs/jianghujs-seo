@@ -93,7 +93,13 @@ class ArticleService extends Service {
       ["id"],
       ["asc"]
     );
+    const commentList = await jianghuKnex(tableEnum.comment)
+      .where({
+        articleId: article.articleId,
+      })
+      .select();
     article.articleList = newArticleList;
+    article.commentList = commentList;
     return article;
   }
 
