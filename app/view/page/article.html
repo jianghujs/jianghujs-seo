@@ -259,7 +259,7 @@
       var num = show_num.join("");
       var code = data.field["vercode"];
       //验证码判断
-      if(code !== num){
+      if(code.toLowerCase() !== num.toLowerCase()){
         layer.msg('验证码错误,请重新输入', {icon: 5});
         capcha.draw(show_num);
         return false
