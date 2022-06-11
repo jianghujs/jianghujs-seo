@@ -111,7 +111,7 @@
       <input type="search" id="search-bar-input"/>
       <ul class="layui-nav layui-hide-xs menu-list-box" id="LAY_NAV_TOP" style="position: unset;">
         {% for menu in constantUiMap.header.menuList %}
-          {% if menu.isLogin == true %}
+          {% if menu.isLogin == false %}
             {% if article and menu.categoryId == article.categoryId %}
               <li class="layui-nav-item layui-this">
                 <a href="/<$ ctx.app.config.appId $><$ menu.path $>"><$ menu.categoryName $></a>
