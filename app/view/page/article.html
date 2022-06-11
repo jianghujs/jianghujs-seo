@@ -282,6 +282,10 @@
       if (status === 'success') {
         layer.msg('提交成功');
         $('#commentForm')[0].reset();
+        const url = window.location.href;
+        setTimeout(() => {
+          window.location.href = url;
+        },400)
       }
     }
   });
