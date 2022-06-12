@@ -77,12 +77,10 @@ class ArticleService extends Service {
         };
       }
     );
-    const groupNameArticlelist = articlelist.filter(({ articleGroupName }) => !!articleGroupName);
-    const noGroupNameArticlelist = articlelist.filter(
-      ({ articleGroupName }) => !articleGroupName
-    );
-    const groupByArticleMap = _.groupBy(groupNameArticlelist, "articleGroupName");
-    const hasGroupNameArticlelist = Object.values(groupByArticleMap).map(list => {
+    let groupNameArticlelist = articlelist.filter(({ articleGroupName }) => !!articleGroupName);
+    const noGroupNameArticlelist = articlelist.filter(({ articleGroupName }) => !articleGroupName);
+    const groupNameArticleMap = _.groupBy(groupNameArticlelist, "articleGroupName");
+    groupNameArticlelist = Object.values(groupNameArticleMap).map(list => {
       const { articleGroupName } = list[0];
       return {
         articleTitle: articleGroupName,
@@ -90,18 +88,15 @@ class ArticleService extends Service {
         childrenList: list,
       };
     });
-    let newArticleList = hasGroupNameArticlelist.concat(noGroupNameArticlelist);
-    newArticleList = _.orderBy(
-      newArticleList,
-      ["id"],
-      ["asc"]
-    );
+    groupNameArticlelist = _.orderBy(groupNameArticlelist, ["articleTitle"], ["asc"]);
+
     const commentList = await jianghuKnex(tableEnum.comment)
       .where({
         articleId: article.articleId,
       })
       .select();
-    article.articleList = newArticleList;
+
+    article.articleList = noGroupNameArticlelist.concat(groupNameArticlelist);
     article.commentList = commentList;
     return article;
   }
