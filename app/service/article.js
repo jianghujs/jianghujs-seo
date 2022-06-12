@@ -50,12 +50,14 @@ class ArticleService extends Service {
         categoryId,
       })
       .whereIn('articlePublishStatus', articlePublishStatus)
+      .orderBy('articleTitle', 'asc')
       .select();
     articlelist = articlelist.map(
       ({
         articleId,
         articleTitle,
         categoryId,
+        categoryArticleIgnoreTiltle,
         categoryName,
         articleCoverImage,
         articlePublishStatus,
@@ -66,6 +68,7 @@ class ArticleService extends Service {
           articleId,
           articleTitle,
           categoryId,
+          categoryArticleIgnoreTiltle,
           categoryName,
           articleCoverImage,
           articlePublishStatus,
