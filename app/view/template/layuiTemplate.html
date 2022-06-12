@@ -129,7 +129,7 @@
             <a href="javascript:void(0);" style="min-width: 40px"><i class="layui-icon layui-icon-more" ></i></a>
             <dl class="layui-nav-child" style="left: -50px"> <!-- 二级菜单 -->
               {% for menu in constantUiMap.header.menuList %}
-                {% if menu.isLogin != true %}
+                {% if menu.isLogin == true %}
                   <dd><a href="/<$ ctx.app.config.appId $><$ menu.path $>"><$ menu.categoryName $></a></dd>
                 {% endif %}
               {% endfor %}
