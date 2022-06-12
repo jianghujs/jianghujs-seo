@@ -32,7 +32,7 @@ class ArticleService extends Service {
       articlePublishStatus.push('login');
     }
 
-    const article = await jianghuKnex(tableEnum.view01_article)
+    const article = await jianghuKnex(tableEnum.article)
       .whereIn('articlePublishStatus', [ 'public', 'login'])
       .where({ articleId })
       .first();

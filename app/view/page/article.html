@@ -31,7 +31,7 @@
             <div style="display:flex;justify-content:space-between;">
               {% if not node.isGroup %}
                 <a href="<$ pageUrl $>/article/<$ node.articleId $>" title="<$ children.articleTitle $>">
-                <i class="iconfont mrdoc-icon-wendang"></i><$ node.articleTitle.replace(article.categoryArticleIgnoreTiltle, '') $></a>
+                <i class="iconfont mrdoc-icon-wendang"></i><$ node.articleTitle.replace(node.categoryArticleIgnoreTiltle, '') $></a>
               {% endif %}
             </div>
           </li>
@@ -41,7 +41,7 @@
             <div style="display:flex;justify-content:space-between;">
               {% if node.isGroup %}
                 <span title="<$ node.articleTitle $>" style="color: #999;font-size: 13px">
-                    <$ node.articleTitle.replace(article.categoryArticleIgnoreTiltle, '') $>
+                    <$ node.articleTitle.replace(node.categoryArticleIgnoreTiltle, '') $>
                 </span>
               {% endif %}
             </div>
@@ -51,7 +51,7 @@
               <li>
                 <div style="display:flex;justify-content:space-between;">
                   <a href="<$ pageUrl $>/article/<$ children.articleId $>" title="<$ children.articleTitle $>">
-                    <i class="iconfont mrdoc-icon-wendang"></i> <$ children.articleTitle.replace(article.categoryArticleIgnoreTiltle, '') $></a>
+                    <i class="iconfont mrdoc-icon-wendang"></i> <$ children.articleTitle.replace(node.categoryArticleIgnoreTiltle, '') $></a>
                 </div>
               </li>
               {% endfor %}
