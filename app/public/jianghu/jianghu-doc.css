@@ -1140,7 +1140,7 @@ button.layui-btn-normal, .doctemp-list a.layui-btn-normal {
     max-width: 100%;
 }
 .markdown-body p img {
-    max-width: 350px;
+    max-width: 600px;
 }
 
 pre.linenums, .vditor-reset > pre > code {
