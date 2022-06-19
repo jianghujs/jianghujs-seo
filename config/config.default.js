@@ -85,6 +85,14 @@ module.exports = (appInfo) => {
             || ctx.request.path.startsWith(`/upload/`));
       },
     },
+    onerror: {
+      html(error, ctx) {
+        const appId = ctx.app.config.appId
+        ctx.app.logger.error("[config.default.js] onerror html:", error);
+        const { errorCode, errorReason } = error;
+        ctx.redirect(`/${appId}/page/home?errorCode=${errorCode}&errorReason=${errorReason}`);
+      },
+    },     
     siteFile: {
       "/favicon.ico": fs.readFileSync(
         path.join(__dirname, "../app/public/favicon.ico")

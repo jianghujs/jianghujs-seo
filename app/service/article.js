@@ -37,7 +37,7 @@ class ArticleService extends Service {
       .where({ articleId })
       .first();
     if (!article) {
-      return errorInfoEnum.article_not_found
+      throw new BizError(errorInfoEnum.article_not_found)
     }
     if (article.articlePublishStatus === 'login' && !userStatusIsActive) {
       article.articleContent = "# 无权限访问";
