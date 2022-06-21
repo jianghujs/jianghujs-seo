@@ -673,6 +673,11 @@ CREATE TABLE `comment` (
 ) ENGINE = InnoDB AUTO_INCREMENT = 61 ;
 
 
+# ------------------------------------------------------------
+# DATA DUMP FOR TABLE: comment
+# ------------------------------------------------------------
+
+
 
 
 # ------------------------------------------------------------
@@ -744,6 +749,7 @@ from
 
 
 
+
 # ------------------------------------------------------------
 # SCHEMA DUMP FOR TABLE: category
 # ------------------------------------------------------------
@@ -770,6 +776,7 @@ select
   `cn_openjianghu_admin`.`category`.`operationAt` AS `operationAt`
 from
   `cn_openjianghu_admin`.`category`;
+
 
 
 
