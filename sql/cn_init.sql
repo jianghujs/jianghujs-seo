@@ -13,7 +13,7 @@ CREATE TABLE `_cache` (
   `operationByUser` varchar(255) DEFAULT NULL COMMENT '操作者用户名',
   `operationAt` varchar(255) DEFAULT NULL COMMENT '操作时间; E.g: 2021-05-28T10:24:54+08:00 ',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB COMMENT = '缓存表';
+) ENGINE = InnoDB  COMMENT = '缓存表';
 
 
 
@@ -34,7 +34,7 @@ CREATE TABLE `_constant` (
   `operationByUser` varchar(255) DEFAULT NULL COMMENT '操作者用户名',
   `operationAt` varchar(255) DEFAULT NULL COMMENT '操作时间; E.g: 2021-05-28T10:24:54+08:00 ',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 66 COMMENT = '常量表;';
+) ENGINE = InnoDB AUTO_INCREMENT = 66  COMMENT = '常量表;';
 
 
 # ------------------------------------------------------------
@@ -70,7 +70,7 @@ CREATE TABLE `_constant_ui` (
   `operationAt` varchar(255) DEFAULT NULL COMMENT '操作时间; E.g: 2021-05-28T10:24:54+08:00 ',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `pageId_constantKey_unique` (`constantKey`, `pageId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 21 COMMENT = '常量表;';
+) ENGINE = InnoDB AUTO_INCREMENT = 21  COMMENT = '常量表;';
 
 
 # ------------------------------------------------------------
@@ -108,7 +108,7 @@ CREATE TABLE `_file` (
   `operationAt` varchar(255) DEFAULT NULL COMMENT '操作时间; E.g: 2021-05-28T10:24:54+08:00 ',
   PRIMARY KEY (`id`) USING BTREE,
   KEY `fileId_index` (`fileId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 132 COMMENT = '文件表; 软删除未启用;';
+) ENGINE = InnoDB AUTO_INCREMENT = 132  COMMENT = '文件表; 软删除未启用;';
 
 
 # ------------------------------------------------------------
@@ -256,7 +256,7 @@ CREATE TABLE `_group` (
   `operationAt` varchar(255) DEFAULT NULL COMMENT '操作时间; E.g: 2021-05-28T10:24:54+08:00 ',
   PRIMARY KEY (`id`) USING BTREE,
   KEY `groupId_index` (`groupId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 COMMENT = '群组表; 软删除未启用;';
+) ENGINE = InnoDB AUTO_INCREMENT = 2  COMMENT = '群组表; 软删除未启用;';
 
 
 # ------------------------------------------------------------
@@ -284,7 +284,7 @@ CREATE TABLE `_page` (
   `operationByUser` varchar(255) DEFAULT NULL COMMENT '操作者用户名',
   `operationAt` varchar(255) DEFAULT NULL COMMENT '操作时间; E.g: 2021-05-28T10:24:54+08:00 ',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 39 COMMENT = '页面表; 软删除未启用;';
+) ENGINE = InnoDB AUTO_INCREMENT = 39  COMMENT = '页面表; 软删除未启用;';
 
 
 # ------------------------------------------------------------
@@ -322,7 +322,7 @@ CREATE TABLE `_record_history` (
   PRIMARY KEY (`id`) USING BTREE,
   KEY `index_record_id` (`recordId`) USING BTREE,
   KEY `index_table_action` (`table`, `operation`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2900 COMMENT = '数据历史表';
+) ENGINE = InnoDB AUTO_INCREMENT = 2900  COMMENT = '数据历史表';
 
 
 
@@ -349,7 +349,7 @@ CREATE TABLE `_resource` (
   `operationByUser` varchar(255) DEFAULT NULL COMMENT '操作者用户名',
   `operationAt` varchar(255) DEFAULT NULL COMMENT '操作时间; E.g: 2021-05-28T10:24:54+08:00 ',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 462 COMMENT = '请求资源表; 软删除未启用; resourceId=`${appId}.${pageId}.${actionId}`';
+) ENGINE = InnoDB AUTO_INCREMENT = 462  COMMENT = '请求资源表; 软删除未启用; resourceId=`${appId}.${pageId}.${actionId}`';
 
 
 # ------------------------------------------------------------
@@ -394,7 +394,7 @@ CREATE TABLE `_resource_request_log` (
   PRIMARY KEY (`id`) USING BTREE,
   KEY `resourceId_index` (`resourceId`) USING BTREE,
   KEY `packageId_index` (`packageId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 19789 COMMENT = '文件表; 软删除未启用;';
+) ENGINE = InnoDB AUTO_INCREMENT = 19789  COMMENT = '文件表; 软删除未启用;';
 
 
 
@@ -414,7 +414,7 @@ CREATE TABLE `_role` (
   `operationByUser` varchar(255) DEFAULT NULL COMMENT '操作者用户名',
   `operationAt` varchar(255) DEFAULT NULL COMMENT '操作时间; E.g: 2021-05-28T10:24:54+08:00 ',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 COMMENT = '角色表; 软删除未启用;';
+) ENGINE = InnoDB AUTO_INCREMENT = 10  COMMENT = '角色表; 软删除未启用;';
 
 
 # ------------------------------------------------------------
@@ -434,17 +434,17 @@ INSERT INTO `_role` (`id`,`roleId`,`roleName`,`roleDesc`,`operation`,`operationB
 DROP TABLE IF EXISTS `_test_case`;
 CREATE TABLE `_test_case` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `pageId` varchar(255) DEFAULT NULL COMMENT '页面Id',
-  `testId` varchar(255) DEFAULT NULL COMMENT '测试用例Id; 10000 ++',
-  `testName` varchar(255) DEFAULT NULL COMMENT '测试用例名',
-  `uiActionIdList` varchar(255) DEFAULT NULL COMMENT 'uiAction列表; 一个测试用例对应多个uiActionId',
-  `testOpeartion` text COMMENT '测试用例步骤;',
-  `operation` varchar(255) DEFAULT NULL COMMENT '操作; jhInsert, jhUpdate, jhDelete jhRestore',
-  `operationByUserId` varchar(255) DEFAULT NULL COMMENT '操作者userId; recordContent.operationByUserId',
-  `operationByUser` varchar(255) DEFAULT NULL COMMENT '操作者用户名; recordContent.operationByUser',
-  `operationAt` varchar(255) DEFAULT NULL COMMENT '操作时间; recordContent.operationAt; E.g: 2021-05-28T10:24:54+08:00 ',
+  `pageId` varchar(255)  DEFAULT NULL COMMENT '页面Id',
+  `testId` varchar(255)  DEFAULT NULL COMMENT '测试用例Id; 10000 ++',
+  `testName` varchar(255)  DEFAULT NULL COMMENT '测试用例名',
+  `uiActionIdList` varchar(255)  DEFAULT NULL COMMENT 'uiAction列表; 一个测试用例对应多个uiActionId',
+  `testOpeartion` text  COMMENT '测试用例步骤;',
+  `operation` varchar(255)  DEFAULT NULL COMMENT '操作; jhInsert, jhUpdate, jhDelete jhRestore',
+  `operationByUserId` varchar(255)  DEFAULT NULL COMMENT '操作者userId; recordContent.operationByUserId',
+  `operationByUser` varchar(255)  DEFAULT NULL COMMENT '操作者用户名; recordContent.operationByUser',
+  `operationAt` varchar(255)  DEFAULT NULL COMMENT '操作时间; recordContent.operationAt; E.g: 2021-05-28T10:24:54+08:00 ',
   PRIMARY KEY (`id`)
-) ENGINE = InnoDB AUTO_INCREMENT = 33 COMMENT = '测试用例表';
+) ENGINE = InnoDB AUTO_INCREMENT = 33   COMMENT = '测试用例表';
 
 
 # ------------------------------------------------------------
@@ -461,18 +461,18 @@ CREATE TABLE `_test_case` (
 DROP TABLE IF EXISTS `_ui`;
 CREATE TABLE `_ui` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `pageId` varchar(255) DEFAULT NULL COMMENT 'page id; E.g: index',
-  `uiActionType` varchar(255) DEFAULT NULL COMMENT 'ui 动作类型，如：fetchData, postData, changeUi',
-  `uiActionId` varchar(255) DEFAULT NULL COMMENT 'action id; E.g: selectXXXByXXX',
-  `desc` varchar(255) DEFAULT NULL COMMENT '描述',
-  `uiActionConfig` text COMMENT 'ui 动作数据',
-  `appDataSchema` text COMMENT 'ui 校验数据',
-  `operation` varchar(255) DEFAULT 'insert' COMMENT '操作; insert, update, jhInsert, jhUpdate, jhDelete jhRestore',
-  `operationByUserId` varchar(255) DEFAULT NULL COMMENT '操作者userId',
-  `operationByUser` varchar(255) DEFAULT NULL COMMENT '操作者用户名',
-  `operationAt` varchar(255) DEFAULT NULL COMMENT '操作时间; E.g: 2021-05-28T10:24:54+08:00 ',
+  `pageId` varchar(255)  DEFAULT NULL COMMENT 'page id; E.g: index',
+  `uiActionType` varchar(255)  DEFAULT NULL COMMENT 'ui 动作类型，如：fetchData, postData, changeUi',
+  `uiActionId` varchar(255)  DEFAULT NULL COMMENT 'action id; E.g: selectXXXByXXX',
+  `desc` varchar(255)  DEFAULT NULL COMMENT '描述',
+  `uiActionConfig` text  COMMENT 'ui 动作数据',
+  `appDataSchema` text  COMMENT 'ui 校验数据',
+  `operation` varchar(255)  DEFAULT 'insert' COMMENT '操作; insert, update, jhInsert, jhUpdate, jhDelete jhRestore',
+  `operationByUserId` varchar(255)  DEFAULT NULL COMMENT '操作者userId',
+  `operationByUser` varchar(255)  DEFAULT NULL COMMENT '操作者用户名',
+  `operationAt` varchar(255)  DEFAULT NULL COMMENT '操作时间; E.g: 2021-05-28T10:24:54+08:00 ',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB COMMENT = 'ui 施工方案';
+) ENGINE = InnoDB   COMMENT = 'ui 施工方案';
 
 
 # ------------------------------------------------------------
@@ -510,7 +510,7 @@ CREATE TABLE `_user` (
   `operationAt` varchar(255) DEFAULT NULL COMMENT '操作时间; E.g: 2021-05-28T10:24:54+08:00 ',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `userId_unique` (`userId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 179 COMMENT = '用户表;';
+) ENGINE = InnoDB AUTO_INCREMENT = 179  COMMENT = '用户表;';
 
 
 # ------------------------------------------------------------
@@ -551,7 +551,7 @@ CREATE TABLE `_user_group_role` (
   PRIMARY KEY (`id`) USING BTREE,
   KEY `groupId_index` (`groupId`) USING BTREE,
   KEY `userId_index` (`userId`) USING BTREE
-) ENGINE = InnoDB COMMENT = '用户群组角色关联表; 软删除未启用;';
+) ENGINE = InnoDB  COMMENT = '用户群组角色关联表; 软删除未启用;';
 
 
 # ------------------------------------------------------------
@@ -579,7 +579,7 @@ CREATE TABLE `_user_group_role_page` (
   `operationByUser` varchar(255) DEFAULT NULL COMMENT '操作者用户名',
   `operationAt` varchar(255) DEFAULT NULL COMMENT '操作时间; E.g: 2021-05-28T10:24:54+08:00 ',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 61 COMMENT = '用户群组角色 - 页面 映射表; 软删除未启用;';
+) ENGINE = InnoDB AUTO_INCREMENT = 61  COMMENT = '用户群组角色 - 页面 映射表; 软删除未启用;';
 
 
 # ------------------------------------------------------------
@@ -613,7 +613,7 @@ CREATE TABLE `_user_group_role_resource` (
   `operationByUser` varchar(255) DEFAULT NULL COMMENT '操作者用户名',
   `operationAt` varchar(255) DEFAULT NULL COMMENT '操作时间; E.g: 2021-05-28T10:24:54+08:00 ',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 56 COMMENT = '用户群组角色 - 请求资源 映射表; 软删除未启用;';
+) ENGINE = InnoDB AUTO_INCREMENT = 56  COMMENT = '用户群组角色 - 请求资源 映射表; 软删除未启用;';
 
 
 # ------------------------------------------------------------
@@ -649,7 +649,7 @@ CREATE TABLE `_user_session` (
   PRIMARY KEY (`id`) USING BTREE,
   KEY `userId_index` (`userId`) USING BTREE,
   KEY `userId_deviceId_unique` (`userId`, `deviceId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 93 COMMENT = '用户session表; deviceId 维度;软删除未启用;';
+) ENGINE = InnoDB AUTO_INCREMENT = 93  COMMENT = '用户session表; deviceId 维度;软删除未启用;';
 
 
 
@@ -670,7 +670,7 @@ CREATE TABLE `comment` (
   `operationByUser` varchar(255) DEFAULT NULL COMMENT '操作者用户名',
   `operationAt` varchar(255) DEFAULT NULL COMMENT '操作时间; E.g: 2021-05-28T10:24:54+08:00',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 61;
+) ENGINE = InnoDB AUTO_INCREMENT = 61 ;
 
 
 
