@@ -96,7 +96,19 @@ class ArticleService extends Service {
       })
       .select();
 
+    // 将articleTitle上的 "01_" 替换成 ""
+    const articleTitleIgnoreReg = /^[0-9]*_/;
+    noGroupNameArticlelist.forEach(item => {
+      item.articleTitle = item.articleTitle.replace(articleTitleIgnoreReg, "");
+    });
+    groupNameArticlelist.forEach(item => {
+      item.articleTitle = item.articleTitle.replace(articleTitleIgnoreReg, "");
+      item.childrenList.forEach(children => {
+        children.articleTitle = children.articleTitle.replace(articleTitleIgnoreReg, "");
+      })
+    });
     article.articleList = noGroupNameArticlelist.concat(groupNameArticlelist);
+
     article.commentList = commentList;
     return article;
   }
