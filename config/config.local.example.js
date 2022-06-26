@@ -37,7 +37,7 @@ module.exports = appInfo => {
           password: "123456",
           database: 'cn_openjianghu_seo',
         },
-        pool: { min: 0, max: 100 },
+        pool: { min: 0, max: 30 },
         acquireConnectionTimeout: 30000,
       },
       app: true,
