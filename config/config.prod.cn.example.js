@@ -14,10 +14,10 @@ module.exports = appInfo => {
     },
     adminUrl: 'https://cn.openjianghu.org/admin',
     static: {
-      maxAge: 0,
-      buffer: false,
+      maxAge: 30 * 24 * 60 * 60,
+      buffer: true,
       preload: false,
-      maxFiles: 0,
+      maxFiles: 0
     },
     logger: {
       outputJSON: true,

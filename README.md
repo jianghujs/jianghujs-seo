@@ -34,11 +34,12 @@ use doc;
 
 ## 同步 admin/upload/xx 至 seo/upload/xx
 
-mkdir /www/wwwroot/openjianghu_seo/upload
-ln -s /www/wwwroot/openjianghu_admin/upload/articleMaterial /www/wwwroot/openjianghu_seo/upload/articleMaterial
-ln -s /www/wwwroot/openjianghu_admin/upload/materialRepo /www/wwwroot/openjianghu_seo/upload/materialRepo
-ln -s /www/wwwroot/cn_openjianghu_admin/upload/articleMaterial /www/wwwroot/cn_openjianghu_seo/upload/articleMaterial
-ln -s /www/wwwroot/cn_openjianghu_admin/upload/materialRepo /www/wwwroot/cn_openjianghu_seo/upload/materialRepo
+mkdir /www/wwwroot/openjianghu-seo/upload
+ln -s /www/wwwroot/openjianghu-admin/upload/articleMaterial /www/wwwroot/openjianghu-seo/upload/articleMaterial
+ln -s /www/wwwroot/openjianghu-admin/upload/materialRepo /www/wwwroot/openjianghu-seo/upload/materialRepo
+mkdir /www/wwwroot/cn-openjianghu-seo/upload
+ln -s /www/wwwroot/cn-openjianghu-admin/upload/articleMaterial /www/wwwroot/cn-openjianghu-seo/upload/articleMaterial
+ln -s /www/wwwroot/cn-openjianghu-admin/upload/materialRepo /www/wwwroot/cn-openjianghu-seo/upload/materialRepo
 
 ## 测试环境
 
