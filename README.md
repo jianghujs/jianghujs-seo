@@ -119,3 +119,30 @@ pipenv run ./openjianghu_org_doc_all
 
 - [创建一个只读的 api key](https://docs.meilisearch.com/learn/security/master_api_keys.html#using-the-master-key-to-manage-api-keys)
 - [chrome 307 解决方案](https://www.cnblogs.com/Don/p/12192420.html)
+
+## FAQ
+
+- linux corn中无法运行获取 python
+    ```bash
+    # 找到python安装路径
+    whereis python
+    which python
+    # 设置临时环境变量
+    export PATH=/home/snjy2qmn/.pyenv/versions/3.9.7/bin:${PATH}
+    python --version
+    ```
+- linux corn 配置 定时刷新 meilisearch data
+    ```bash
+    export PATH=/home/snjy2qmn/.pyenv/versions/3.9.7/bin:${PATH}
+    python --version
+    cd /www/wwwroot/openjianghu-seo/app/meilisearch/docs-scraper
+    pip3 install pipenv
+    pipenv install
+    # 拷贝.env 并配置参数
+    cp .env.example .env
+    # 依次执行这四个脚本
+    pipenv run ./cn_openjianghu_org_doc_public
+    pipenv run ./openjianghu_org_doc_public
+    pipenv run ./cn_openjianghu_org_doc_all
+    pipenv run ./openjianghu_org_doc_all
+    ```
