@@ -34,12 +34,15 @@ use doc;
 
 ## 同步 admin/upload/xx 至 seo/upload/xx
 
+```bash
 mkdir /www/wwwroot/openjianghu-seo/upload
 ln -s /www/wwwroot/openjianghu-admin/upload/articleMaterial /www/wwwroot/openjianghu-seo/upload/articleMaterial
 ln -s /www/wwwroot/openjianghu-admin/upload/materialRepo /www/wwwroot/openjianghu-seo/upload/materialRepo
+
 mkdir /www/wwwroot/cn-openjianghu-seo/upload
 ln -s /www/wwwroot/cn-openjianghu-admin/upload/articleMaterial /www/wwwroot/cn-openjianghu-seo/upload/articleMaterial
 ln -s /www/wwwroot/cn-openjianghu-admin/upload/materialRepo /www/wwwroot/cn-openjianghu-seo/upload/materialRepo
+```
 
 ## 测试环境
 
@@ -47,57 +50,30 @@ ln -s /www/wwwroot/cn-openjianghu-admin/upload/materialRepo /www/wwwroot/cn-open
 - 新的openjianghu  https://openjianghu.org/
 - openjianghu admin  https://openjianghu.org/openjianghu_admin
 
-## nginx
-
-```config
-
-    # 将favicon.ico 上传到 /www/wwwroot/openjianghu.org/
-    location = /favicon.ico {
-      root  /www/wwwroot/openjianghu.org;
-    }
-
-    location / {
-        proxy_pass http://127.0.0.1:8301;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header REMOTE-HOST $remote_addr;
-    
-        # wss 支持
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection "upgrade";
-        
-        # 禁用缓存
-        expires 1s;
-        add_header X-Cache $upstream_cache_status;
-        add_header Cache-Control no-cache;
-        proxy_no_cache 1;
-        proxy_cache_bypass 1;
-    }
-
-```
-
 ## meilisearch 服务器搭建
 
-**meilisearch server docker运行:**
+1. 创建`/www/wwwroot/meilisearch/docker-compose.yml`
 ```bash
-# 创建目录
-mkdir /www/wwwroot/meilisearch
-
-# 拉取镜像
-docker pull getmeili/meilisearch:v0.27.1
-
-# 启动 meilisearch
-docker run -d --rm --name meilisearch -p 7700:7700 -v /www/wwwroot/docker-data/meili_data:/meili_data getmeili/meilisearch:v0.27.1 /bin/meilisearch --master-key='FDsaf343efDsf#$325FGDg435$%fgDG'   
-
-# 进入 meilisearch docker容器
-docker exec -it --user root meilisearch /bin/bash
+version: "3"
+services:
+    meilisearch:
+        image: getmeili/meilisearch:v0.27.1
+        container_name: meilisearch
+        restart: always
+        volumes:
+            - /www/wwwroot/meilisearch/meili_data:/meili_data
+        ports:
+            - "7700:7700"
+        command: "/bin/meilisearch --master-key='123456'"
 ```
-
-> [chrome 307 解决方案](https://www.cnblogs.com/Don/p/12192420.html)
-
-**meilisearch server nginx配置:**(注意不要开启https 重定向)
+> 进入容器:`docker exec -it --user root meilisearch /bin/bash`
+1. 启动
+```bash
+cd /www/wwwroot/meilisearch
+docker-compose up -d
+```
+1. 访问 http://127.0.0.1:7700  密码: 123456
+1. nginx配置
 ```config
     location / {
         proxy_pass http://127.0.0.1:7700;
@@ -112,11 +88,22 @@ docker exec -it --user root meilisearch /bin/bash
         proxy_set_header Connection "upgrade";
     }
 ```
-> [meilisearch api调用 支持 ssl](https://docs.meilisearch.com/learn/cookbooks/http2_ssl.html#try-to-use-http-2-without-ssl)
-
-**docs-scraper 爬取网站数据:**（需要python3.8+环境）
+1. 停止
 ```bash
-cd /openjianghu_seo/app/meilisearch/docs-scraper
+cd /www/wwwroot/meilisearch
+docker-compose down -v
+```
+1. 创建一个只读的api key(前端使用)
+```bash
+cd /www/wwwroot/openjianghu-seo
+# 修改 app/meilisearch/createAnSearchApiKey.js 内的master-key值
+node app/meilisearch/createAnSearchApiKey.js
+# 拷贝控制台输出的key 将其配置到 config/config.prod.js 的 `apiKey`
+```
+1. **docs-scraper 爬取网站数据 到meilisearch:**（需要python3.8+环境）
+> [linux python3.x 安装](https://cn.openjianghu.org/doc/page/article/10071)
+```bash
+cd /www/wwwroot/openjianghu-seo/app/meilisearch/docs-scraper
 pip3 install pipenv
 pipenv install
 # 拷贝.env 并配置参数
@@ -131,3 +118,4 @@ pipenv run ./openjianghu_org_doc_all
 ## Reference
 
 - [创建一个只读的 api key](https://docs.meilisearch.com/learn/security/master_api_keys.html#using-the-master-key-to-manage-api-keys)
+- [chrome 307 解决方案](https://www.cnblogs.com/Don/p/12192420.html)

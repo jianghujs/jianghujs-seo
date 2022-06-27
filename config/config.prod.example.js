@@ -8,7 +8,7 @@ module.exports = appInfo => {
     language: 'en',
     meilisearch: {
       host: 'https://meilisearch.openjianghu.org',
-      apiKey: 'masterKey',
+      apiKey: '只读权限的apiKey',
       allIndexUid: 'openjianghu_org_doc_all',
       publicIndexUid: 'openjianghu_org_doc_public',
     },
