@@ -104,7 +104,7 @@ node app/meilisearch/createAnSearchApiKey.js
 > [linux python3.x 安装](https://cn.openjianghu.org/doc/page/article/10071)
 ```bash
 cd /www/wwwroot/openjianghu-seo/app/meilisearch/docs-scraper
-pip3 install pipenv
+pip install pipenv
 pipenv install
 # 拷贝.env 并配置参数
 cp .env.example .env
@@ -136,10 +136,8 @@ pipenv run ./openjianghu_org_doc_all
     export PATH=/home/snjy2qmn/.pyenv/versions/3.9.7/bin:${PATH}
     python --version
     cd /www/wwwroot/openjianghu-seo/app/meilisearch/docs-scraper
-    pip3 install pipenv
+    pip install pipenv
     pipenv install
-    # 拷贝.env 并配置参数
-    cp .env.example .env
     # 依次执行这四个脚本
     pipenv run ./cn_openjianghu_org_doc_public
     pipenv run ./openjianghu_org_doc_public
