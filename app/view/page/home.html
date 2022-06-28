@@ -69,18 +69,20 @@
   </div>
 </div>
 <div class="jianghu-egg-copyright"><$ constantUiMap.footer.copyright $></div>
+<div class="jianghu-egg-copyright"><$ constantUiMap.errorInfo | dump $></div>
 <link href="<$ static $>/jianghu/jianghu-home.css" rel="stylesheet">
 
 <script>
   const searchParams = new URLSearchParams(location.search.substring(1));
+  const errorInfo = <$ constantUiMap.errorInfo | dump | safe $>;
   const errorCode = searchParams.get('errorCode');
   const errorReason = searchParams.get('errorReason');
   if (errorCode) {
     layer.open({
-      title: '错误',
-      content: errorReason
+      btn: [],
+      title: errorInfo.title,
+      content: errorInfo.contentEnum[errorCode] || errorReason
     });
-    // 优化点: errorReason 只展示一次
   }
 </script>
 {% endblock %}
