@@ -122,25 +122,16 @@ pipenv run ./openjianghu_org_doc_all
 
 ## FAQ
 
-- linux corn中无法运行获取 python
-    ```bash
-    # 找到python安装路径
-    whereis python
-    which python
-    # 设置临时环境变量
-    export PATH=/home/snjy2qmn/.pyenv/versions/3.9.7/bin:${PATH}
-    python --version
-    ```
 - linux corn 配置 定时刷新 meilisearch data
     ```bash
-    export PATH=/home/snjy2qmn/.pyenv/versions/3.9.7/bin:${PATH}
-    python --version
+    #!/bin/sh
+    # meilisearch-org[data refresh]
     cd /www/wwwroot/openjianghu-seo/app/meilisearch/docs-scraper
-    pip install pipenv
-    pipenv install
+    /xxx/.pyenv/versions/3.9.7/bin/pip install pipenv
+    /xxx/.pyenv/versions/3.9.7/bin/pipenv install
     # 依次执行这四个脚本
-    pipenv run ./cn_openjianghu_org_doc_public
-    pipenv run ./openjianghu_org_doc_public
-    pipenv run ./cn_openjianghu_org_doc_all
-    pipenv run ./openjianghu_org_doc_all
+    /xxx/.pyenv/versions/3.9.7/bin/pipenv  run ./cn_openjianghu_org_doc_public
+    /xxx/.pyenv/versions/3.9.7/bin/pipenv  run ./openjianghu_org_doc_public
+    /xxx/.pyenv/versions/3.9.7/bin/pipenv  run ./cn_openjianghu_org_doc_all
+    /xxx/.pyenv/versions/3.9.7/bin/pipenv  run ./openjianghu_org_doc_all
     ```
