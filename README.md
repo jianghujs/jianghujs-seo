@@ -104,15 +104,16 @@ node app/meilisearch/createAnSearchApiKey.js
 > [linux python3.x 安装](https://cn.openjianghu.org/doc/page/article/10071)
 ```bash
 cd /www/wwwroot/openjianghu-seo/app/meilisearch/docs-scraper
-pip install pipenv
-pipenv install
+/www/server/python_manager/versions/3.9.7/bin/pip3 install pipenv
+/www/server/python_manager/versions/3.9.7/bin/pipenv --python 3.9.7
+/www/server/python_manager/versions/3.9.7/bin/pipenv install
 # 拷贝.env 并配置参数
 cp .env.example .env
 # 依次执行这四个脚本
-pipenv run ./cn_openjianghu_org_doc_public
-pipenv run ./openjianghu_org_doc_public
-pipenv run ./cn_openjianghu_org_doc_all
-pipenv run ./openjianghu_org_doc_all
+/www/server/python_manager/versions/3.9.7/bin/pipenv run ./cn_openjianghu_org_doc_public
+/www/server/python_manager/versions/3.9.7/bin/pipenv run ./openjianghu_org_doc_public
+/www/server/python_manager/versions/3.9.7/bin/pipenv run ./cn_openjianghu_org_doc_all
+/www/server/python_manager/versions/3.9.7/bin/pipenv run ./openjianghu_org_doc_all
 ```
 
 ## Reference
@@ -123,15 +124,12 @@ pipenv run ./openjianghu_org_doc_all
 ## FAQ
 
 - linux corn 配置 定时刷新 meilisearch data
-    ```bash
-    #!/bin/sh
-    # meilisearch-org[data refresh]
-    cd /www/wwwroot/openjianghu-seo/app/meilisearch/docs-scraper
-    /xxx/.pyenv/versions/3.9.7/bin/pip install pipenv
-    /xxx/.pyenv/versions/3.9.7/bin/pipenv install
-    # 依次执行这四个脚本
-    /xxx/.pyenv/versions/3.9.7/bin/pipenv  run ./cn_openjianghu_org_doc_public
-    /xxx/.pyenv/versions/3.9.7/bin/pipenv  run ./openjianghu_org_doc_public
-    /xxx/.pyenv/versions/3.9.7/bin/pipenv  run ./cn_openjianghu_org_doc_all
-    /xxx/.pyenv/versions/3.9.7/bin/pipenv  run ./openjianghu_org_doc_all
-    ```
+```bash
+#!/bin/sh
+# meilisearch-org[data refresh]
+cd /www/wwwroot/openjianghu-seo/app/meilisearch/docs-scraper
+/www/server/python_manager/versions/3.9.7/bin/pipenv run ./cn_openjianghu_org_doc_public
+/www/server/python_manager/versions/3.9.7/bin/pipenv run ./openjianghu_org_doc_public
+/www/server/python_manager/versions/3.9.7/bin/pipenv run ./cn_openjianghu_org_doc_all
+/www/server/python_manager/versions/3.9.7/bin/pipenv run ./openjianghu_org_doc_all
+```
