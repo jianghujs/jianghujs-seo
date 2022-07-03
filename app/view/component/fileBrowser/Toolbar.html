@@ -32,13 +32,13 @@
             @change="addFiles" />
 
         <template v-if="$vuetify.breakpoint.smAndUp">
-            <v-btn v-if="path" depressed small @click="$refs.inputUpload.click()" title="Upload Files">
+            <v-btn v-if="path && pathIsFloder" depressed small @click="$refs.inputUpload.click()" title="Upload Files">
                 上传
             </v-btn>
             <v-btn v-if="currentCopyPath" depressed small @click="pasteItem()" class="ml-1" title="粘贴">
                 粘贴
             </v-btn>
-            <v-menu v-model="newFolderPopper" :close-on-content-click="false" :nudge-width="200" offset-y>
+            <v-menu v-if="path && pathIsFloder" v-model="newFolderPopper" :close-on-content-click="false" :nudge-width="200" offset-y>
                 <template v-slot:activator="{ on }">
                     <!-- <v-btn v-if="path" icon v-on="on" title="Create Folder">
                                                 <v-icon>mdi-folder-plus-outline</v-icon>
