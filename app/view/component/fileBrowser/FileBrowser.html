@@ -21,31 +21,6 @@
             v-on:close-material-picker="closeMaterialPicker"
         >
         </toolbar>
-      <!-- 手机端显示按钮-->
-      <v-row v-if="isMobile" class="ma-0 pa-2">
-        <v-spacer></v-spacer>
-        <v-btn small class="mr-2" elevation="0" @click="cutItem">剪切</v-btn>
-        <v-btn small class="mr-2" elevation="0" @click="copyItem">复制</v-btn>
-        <v-btn small class="mr-2" elevation="0" @click="pasteItem">粘贴</v-btn>
-        <v-btn small class="mr-2" elevation="0" @click="$refs.toolbar && $refs.toolbar.$refs.inputUpload && $refs.toolbar.$refs.inputUpload.click()">上传</v-btn>
-        <v-btn small class="mr-2" elevation="0" @click="$refs.toolbar && $refs.toolbar.useMaterial({})" color="success">使用</v-btn>
-        <v-menu offset-y>
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn small class="mr-2" v-on="on" elevation="0">更多 <v-icon size="12">mdi-arrow-down</v-icon></v-btn>
-          </template>
-          <v-list dense class="pa-0 mt-2">
-            <template v-for="(item, index) in moreBtn">
-              <v-list-item class="pa-2" style="min-height: 20px"
-                           @click="moreBtnAction(item)"
-                           :key="index"
-              >
-                <v-list-item-title dense style="font-size: 12px!important">{{ item.title }}</v-list-item-title>
-              </v-list-item>
-              <v-divider></v-divider>
-            </template>
-          </v-list>
-        </v-menu>
-      </v-row>
         <v-row no-gutters :style="{'height': isMobile ? 'calc(100vh - 148px)' : 'calc(100vh - 100px)'}">
             <v-col v-if="tree && $vuetify.breakpoint.smAndUp" sm="auto">
                 <tree
