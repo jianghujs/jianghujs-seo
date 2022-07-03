@@ -15,19 +15,19 @@
         <v-card-text v-else-if="isFile" class="grow d-flex justify-center align-center">
             <div style="position: absolute; text-align: center;" class="flex flex-column justify-center align-center">
                 <v-img v-if="fileType === 'image'" min-width="30" max-width="500" min-height="30" max-height="500"
-                    :src="`/<$ ctx.app.config.appId $>/upload/materialRepo/${path}`" :key="path" lazy-src=""
+                    :src="`/<$ ctx.app.config.appId $>/upload/materialRepo/${path}?v=${new Date().getTime()}`" :key="path" lazy-src=""
                     class="grey lighten-2 mb-5" style="margin: auto; cursor: pointer;"
-                    @click="openFile(`/<$ ctx.app.config.appId $>/upload/materialRepo/${path}`)">
+                    @click="openFile(`/<$ ctx.app.config.appId $>/upload/materialRepo/${path}?v=${new Date().getTime()}`)">
                 </v-img>
                 <video v-if="fileType === 'video'" min-width="30" max-width="500" min-height="30" max-height="500"
-                    :src="`/<$ ctx.app.config.appId $>/upload/materialRepo/${path}`" :key="path" lazy-src=""
+                    :src="`/<$ ctx.app.config.appId $>/upload/materialRepo/${path}?v=${new Date().getTime()}`" :key="path" lazy-src=""
                     class="grey lighten-2 mb-5" style="display: block; margin: auto;" controls>
-                    <source :src="`/<$ ctx.app.config.appId $>/upload/materialRepo/${path}`" type="video/mp4">
+                    <source :src="`/<$ ctx.app.config.appId $>/upload/materialRepo/${path}?v=${new Date().getTime()}`" type="video/mp4">
                 </video>
                 <audio v-if="fileType === 'audio'" min-width="30" max-width="500" min-height="30" max-height="500"
-                    :src="`/<$ ctx.app.config.appId $>/upload/materialRepo/${path}`" :key="path" lazy-src=""
+                    :src="`/<$ ctx.app.config.appId $>/upload/materialRepo/${path}?v=${new Date().getTime()}`" :key="path" lazy-src=""
                     class="grey lighten-2 mb-5" style="display: block; margin: auto;" controls>
-                    <source :src="`/<$ ctx.app.config.appId $>/upload/materialRepo/${path}`" type="audio/mpeg">
+                    <source :src="`/<$ ctx.app.config.appId $>/upload/materialRepo/${path}?v=${new Date().getTime()}`" type="audio/mpeg">
                 </audio>
                 文件: {{ path }}
             </div>
