@@ -70,8 +70,11 @@
             <v-list subheader v-if="files.length">
                 <v-subheader>Files</v-subheader>
                 <v-list-item v-for="item in files" :key="item.basename" @click="changePath(item.path)" class="pl-0">
-                    <v-list-item-avatar class="ma-0">
-                        <v-icon>{{ icons[item.extension.toLowerCase()] || icons['other'] }}</v-icon>
+                    <v-list-item-avatar class="ma-0" tile size="55">
+                        <v-img 
+                            v-if="checkIsImg(item.basename)"
+                            :src="`/<$ ctx.app.config.appId $>/upload/materialRepo/${path}/${item.basename}?v=${new Date().getTime()}`"></v-img>
+                        <v-icon v-else >{{ icons[item.extension.toLowerCase()] || icons['other'] }}</v-icon>
                     </v-list-item-avatar>
 
                     <v-list-item-content class="py-2">
@@ -190,6 +193,9 @@
             }
         },
         methods: {
+            checkIsImg(filename) {
+                return /\.(jpg|jpeg|png|GIF|JPG|PNG)$/.test(filename);
+            },
             changePath(path) {
                 this.$emit("path-changed", path);
             },
