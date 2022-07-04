@@ -1,158 +1,261 @@
-/*一级无序li显示实心圆点*/
-.doc-content ul li{
-    list-style:disc;
+/* docs */
+.jianghu-markdown h1, .jianghu-markdown h2, .jianghu-markdown h3, .jianghu-markdown h4, .jianghu-markdown h5, .jianghu-markdown h6 {
+    position: relative;
+    font-weight: 600;
+    line-height: 1.5;
+    outline: none;
 }
-/*二级无序li显示空心圆点*/
-.doc-content ul > li > ul > li{
-    list-style-type: circle;
+.jianghu-markdown h1 {
+    margin: 0 0 3rem;
+    font-size: 38px;
+    line-height: 1.4;
+    letter-spacing: -.02em;
 }
-/*有序li显示数字*/
-.doc-content ol li{
-    list-style-type: decimal;
+.jianghu-markdown h2 {
+    margin: 4rem 0 1.8rem;
+    border-top: 1px solid var(--vt-c-divider-light);
+    padding-top: 1.8rem;
+    font-size: 24px;
+    letter-spacing: -.02em;
 }
-.doc-content ol ol ul,.doc-content ol ul ul,.doc-content ul ol ul,.doc-content ul ul ul {
-    list-style-type: square;
+.jianghu-markdown h3 {
+    font-size: 19px;
+    letter-spacing: -.01em;
+    margin: 3rem 0 1.25rem;
 }
-/* 三级及以下无序li显示小方块 */
-.doc-content ul ul ul li{
-    list-style-type: square;
+.jianghu-markdown p, .jianghu-markdown ul, .jianghu-markdown ol, .jianghu-markdown summary {
+    margin-bottom: 1.2em;
 }
-/* 下拉目录隐藏li样式 */
-.editormd-toc-menu ul.markdown-toc-list li{
-    /*list-style:none;*/
+.jianghu-markdown ul {
+    padding-left: 1.25rem;
 }
-/* 弹出框文档目录样式 */
-ul.markdown-toc-list{
-    list-style-position:inside;
-}
-ul.markdown-toc-list li{
-    list-style: none!important;
-    line-height: 17px;
-    margin: 8px 0;
-}
-ul.markdown-toc-list > li > ul > li,ul.markdown-toc-list > li > ul li{
-    padding-left:15px;
-}
-ul.markdown-toc-list a{
-    /* text-decoration: underline!important; */
-}
-/* 块级代码和行内代码去除边框 */
-.markdown-body p code{
-    border:none;
-}
-
-#url_qrcode img{
-    margin: auto;
-}
-/* 文档代码块样式 */
-ol.linenums li{
-    width: max-content;
-}
-pre.linenums{
-    max-height: 500px;
-}
-li.L1, li.L3, li.L5, li.L7, li.L9 {
-    background: none !important;
-}
-
-/* layui弹出框颜色 */
-.layui-tab-brief>.layui-tab-more li.layui-this:after, .layui-tab-brief>.layui-tab-title .layui-this:after{
-    border-bottom: 2px solid #333;
-}
-.layui-tab-brief>.layui-tab-title .layui-this{
-    color: #333;
-}
-/* 覆盖vditor样式 */
-.vditor-outline__item{
-    padding: 0;
-    padding-bottom: 5px;
-    color: #333;
-}
-.vditor-reset pre>code{
-    font-size: 100%;
-}
-/* 文档图片悬浮鼠标样式 */
-#content img:hover{
-    cursor: -moz-zoom-in;
-    cursor: -webkit-zoom-in;
-    cursor: zoom-in;
-}
-#wm{
-    width: 100%;
-    height: 100%;
-    display: block;
+.jianghu-markdown ul>li:before {
+    content: "";
     position: absolute;
-    opacity: 0.1;
-    pointer-events: none;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: var(--vt-c-text-3);
+    transition: background-color .5s;
+    left: -1.25rem;
+    top: 0.75rem;
 }
-.collected{
-    color: rgb(250, 173, 20);
+.jianghu-markdown li {
+    position: relative;
+    margin: 1px 0;
 }
-.doc-bottom-icon,.doc-bottom-btn{
-    cursor: pointer;
+.jianghu-markdown a {
+    font-weight: 500;
+    color: var(--vt-c-brand);
+    transition: color .25s;
+    text-decoration-style: dotted;
 }
-
-/* 文集大纲图标 */
-i.switch-toc{
-    padding:10px;
-    cursor: pointer;
+.jianghu-markdown blockquote {
+    margin: 28px 0;
+    padding: 20px 24px 4px 42px;
+    border-radius: 8px;
+    overflow-x: auto;
+    transition: color .5s,background-color .5s;
+    position: relative;
+    font-size: 14px;
+    line-height: 1.6;
+    font-weight: 500;
+    color: #0000008c;
+    background-color: var(--vt-c-bg-soft);
 }
-
-/* 文集大纲样式 */
-ul#doc-tree{
-    padding-left: 0;
+.jianghu-markdown blockquote[class="default"] {
+    border: 1px solid var(--vt-c-brand);
 }
-.layui-tab-item #doc-tree li{
-    list-style: none;
+.jianghu-markdown blockquote p {
+    margin-bottom: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--vt-c-text-1);
+    transition: color .5s;
 }
-
-.project-toc-right,.project-toc-left,.project-toc-center{
-    display: inline-block;
+.jianghu-markdown blockquote[class="default"]:before {
+    color: var(--vt-c-brand);
 }
-.project-toc-left{
-    border-top:1px dashed #d8d8d8;
-    width: 100%;
-    padding-top: 4px;
-}
-.project-toc-right{
-    float: right;
+.jianghu-markdown blockquote:before {
+    content: "\24d8";
     position: absolute;
-    right: 0px;
-    z-index: 100;
-    background-color: white;
-    color: #bfbfbf;
-    padding-left: 40px;
-    padding-right: 90px;
-    font-family: Consolas,Menlo,Courier,monospace;
+    font-weight: 600;
+    font-size: 15px;
+    top: 20px;
+    left: 17px;
 }
-.project-toc-left a{
+.jianghu-markdown :not(pre,h1,h2,h3,h4,h5,h6,li)>code{
+    font-size: var(--vt-doc-code-font-size);
+}
+.jianghu-markdown :not(pre,li)>code{
+    background-color: var(--vt-c-bg-mute);
+    padding: 0.15em 0.5em;
+    border-radius: 4px;
+    color: var(--vt-c-text-code);
+    transition: color .5s,background-color .5s;
+}
+.jianghu-markdown pre {
+    position: relative;
+    margin: 28px -24px;
+    background-color: #292d3e;
+    overflow-x: auto;
+    transition: background-color .5s;
+}
+.jianghu-markdown pre ol, .jianghu-markdown pre code {
     text-align: left;
-    margin-top: -15px;
-    padding-right: 40px;
-    position: absolute;
-    background: #fff;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+}
+.jianghu-markdown pre ol{
+    position: relative;
     z-index: 1;
-    min-width: 0;
-    color: #666;
-    /* font-weight: 700; */
-    font-family: Consolas,Menlo,Courier,monospace;
+    margin: 0;
+    padding: 14px 24px;
+    background: transparent;
+    overflow-x: auto;
 }
-/* 为外部链接添加图标指示 */
-.external::after {
-  content: '\e7c2';
-  font-family: 'iconfont';
+.jianghu-markdown pre code {
+    display: inline-block;
+    padding: 0;
+    line-height: var(--vt-doc-code-line-height);
+    font-size: var(--vt-doc-code-font-size);
+    color: #a6accd;
+    transition: color .5s;
 }
-@media screen and (max-width:768px){
-    .project-toc-left{
-        border-top:1px dashed #d8d8d8;
-        width: 0;
-        padding-top: 4px;
+@media (min-width: 640px){
+    .jianghu-markdown pre {
+        margin: 28px 0;
+        border-radius: 8px;
     }
 }
-/* 覆盖vditor文档目录样式 */
-.vditor-outline{
-    width: 200px;
+@media (min-width: 768px){
+    .jianghu-markdown :not(pre,li)>code{
+        white-space: nowrap;
+    }
 }
-.vditor-outline ul{
-    padding-left: 0px;
+@media (max-width: 768px){
+    .jianghu-markdown h1 {
+        font-size: 32px;
+        margin-bottom: 1.8rem;
+    }
+    
 }
+
+
+/* 字体颜色 */
+.pln {
+    color: #a6accd;
+}
+  
+/* plain text */
+@media screen {
+    .str {
+        color: #C3E88D;
+    }
+
+    /* string content */
+    .kwd {
+        color: #82AAFF;
+    }
+
+    /* a keyword */
+    .com {
+        color: #676E95;
+    }
+
+    /* a comment */
+    .typ {
+        color: #C792EA;
+    }
+
+    /* a type name */
+    .lit {
+        color: #89DDFF;
+    }
+
+    /* a literal value */
+    /* punctuation, lisp open bracket, lisp close bracket */
+    .pun, .opn, .clo {
+        color: #FFCB6B;
+    }
+
+    .tag {
+        color: #F07178;
+    }
+
+    /* a markup tag name */
+    .atn {
+        color: #606;
+    }
+
+    /* a markup attribute name */
+    .atv {
+        color: #080;
+    }
+
+    /* a markup attribute value */
+    .dec, .var {
+        color: #606;
+    }
+
+    /* a declaration; a variable name */
+    .fun {
+        color: red;
+    }
+
+/* a function name */
+}
+/* Use higher contrast and text-weight for printable form. */
+@media print, projection {
+.str {
+    color: #C3E88D;
+}
+
+.kwd {
+    color: #82AAFF;
+    font-weight: bold;
+}
+
+.com {
+    color: #676E95;
+    font-style: italic;
+}
+
+.typ {
+    color: #C792EA;
+    font-weight: bold;
+}
+
+.lit {
+    color: #89DDFF;
+}
+
+.pun, .opn, .clo {
+    color: #FFCB6B;
+}
+
+.tag {
+    color: #F07178;
+    font-weight: bold;
+}
+
+.atn {
+    color: #404;
+}
+
+.atv {
+    color: #060;
+}
+}
+
+
+
