@@ -22,6 +22,7 @@
     --vt-c-gray-dark-5: #202020;
     --vt-c-divider-light-1: rgba(60, 60, 60, .29);
     --vt-c-divider-light-2: rgba(60, 60, 60, .12);
+    --vt-c-divider-light-3: #e7e7e7;
     --vt-c-divider-dark-1: rgba(84, 84, 84, .65);
     --vt-c-divider-dark-2: rgba(84, 84, 84, .48);
     --vt-c-text-light-1: var(--vt-c-indigo);
@@ -58,7 +59,7 @@
     --vt-c-purple-light: #e936eb;
     --vt-c-purple-lighter: #f616f8;
     --vt-c-purple-dark: #823c83;
-    --vt-c-purple-darker: #602960
+    --vt-c-purple-darker: #602960;
 }
 
 :root {
@@ -81,7 +82,12 @@
     --vt-c-brand: var(--vt-c-green);
     --vt-c-brand-light: var(--vt-c-green-light);
     --vt-c-brand-dark: var(--vt-c-green-dark);
-    --vt-c-brand-highlight: var(--vt-c-brand-dark)
+    --vt-c-brand-highlight: var(--vt-c-brand-dark);
+    --docsearch-searchbox-focus-background: transparent;
+    --docsearch-searchbox-shadow: none;
+    --docsearch-highlight-color: var(--vt-c-green);
+    --docsearch-text-color: var(--vt-c-indigo);
+    --docsearch-muted-color: var(--vt-c-text-light-2);
 }
 
 .dark {
@@ -101,7 +107,8 @@
     --vt-c-text-inverse-2: var(--vt-c-text-light-2);
     --vt-c-text-inverse-3: var(--vt-c-text-light-3);
     --vt-c-text-inverse-4: var(--vt-c-text-light-4);
-    --vt-c-brand-highlight: var(--vt-c-brand-light)
+    --vt-c-brand-highlight: var(--vt-c-brand-light);
+    --docsearch-text-color: var(--vt-c-indigo);
 }
 
 :root {
@@ -118,7 +125,18 @@
 }
 
 :root {
-    --vt-nav-height: 55px
+    --vt-nav-height: 55px;
+    --vp-screen-max-width: 1376px;
+    --vp-sidebar-width-small: 272px;
+    --vp-z-index-sidebar: 50px;
+    --vp-sidebar-width-mobile: 320px;
+    --vp-z-index-nav: 20;
+    --vp-z-index-local-nav: 10;
+    --vp-z-index-sidebar: 99;
+    --vp-z-index-backdrop: 40;
+    --vp-z-index-loading: 99;
+    --docsearch-searchbox-height: 56px;
+    --docsearch-spacing: 12px;
 }
 
 *, :before, :after {
@@ -145,7 +163,7 @@ body {
     font-family: var(--vt-font-family-base);
     letter-spacing: .2px;
     line-height: 24px;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
     color: var(--vt-c-text-1);
     background-color: var(--vt-c-bg);
@@ -155,7 +173,7 @@ body {
     transition: color .5s, background-color .5s;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
 }
 
 blockquote, dl, dd, h1, h2, h3, h4, h5, h6, hr, figure, p, pre {
@@ -266,67 +284,4 @@ select {
 fieldset {
     margin: 0;
     padding: 0
-}
-
-/* 页头背景 */
-.layui-nav{
-    background-color:transparent;
-}
-
-/* 页头下边框线 */
-.layui-header{
-    height: var(--vt-nav-height);
-    border-bottom: 1px solid var(--vt-c-divider-light);
-}
-
-.layui-header .layui-nav{
-    /*position: absolute;*/
-    right: 0;
-    top: 0;
-    padding: 0;
-}
-
-.layui-nav .layui-nav-item {
-    line-height: calc(var(--vt-nav-height) - 1px);
-}
-
-.layui-layer-title {
-    height: 60px;
-    /* text-align: center; */
-    padding: 0 20px;
-    font-size: 16px;
-}
-
-.layui-layer-setwin {
-    top: 22px;
-}
-
-.layui-nav .layui-nav-item a {
-    padding: 0 12px;
-    color: var(--vt-c-text-1) !important;
-    font-size: 13px;
-    font-weight: 500;
-}
-.layui-nav .layui-nav-item a:hover {
-    color: var(--vt-c-green) !important;
-}
-
-.layui-nav .layui-nav-item-more a i.layui-icon-down, .layui-nav .layui-nav-item-more a i.layui-nav-mored {
-    display: none;
-}
-
-.layui-nav .layui-this:after, .layui-nav-bar {
-    height: 2px;
-}
-
-.jianghu-header-back {
-    height: var(--vt-nav-height);
-    width: 100%;
-}
-.layui-layer-title {
-    height: var(--vt-nav-height) !important;
-    line-height: var(--vt-nav-height) !important;
-}
-.layui-layer-content {
-    overflow-x: hidden !important;
 }

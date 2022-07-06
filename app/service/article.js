@@ -108,7 +108,6 @@ class ArticleService extends Service {
       })
     });
     article.articleList = noGroupNameArticlelist.concat(groupNameArticlelist);
-
     article.commentList = commentList;
     return article;
   }

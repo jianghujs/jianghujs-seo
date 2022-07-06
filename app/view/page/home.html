@@ -1,87 +1,72 @@
-{% extends 'template/layuiTemplate.html' %}
+{% extends 'template/template.html' %}
 
 {% block title %}首页{% endblock %}
 
 {% block content %}
-<div class="jianghu-default-layout-content jianghu-body">
-  <div class="jianghu-egg-intro">
-    <div class="jianghu-egg-intro-wrap">
-      <div class="jianghu-egg-intro-logo"><img
-        src="https://zos.alipayobjects.com/rmsportal/JFKAMfmPehWfhBPdCjrw.svg"></div>
-      <div class="jianghu-egg-intro-info">
-        <h1>
-          <$ constantUiMap.body.desc $>
-          <p class="jianghu-egg-intro-info-stronge""><br/> <$ constantUiMap.body.title $></p>
-        </h1>
-<!--        <p class="desc">新手也容易学习和使用的企业级框架</p>-->
-        <div class="jianghu-egg-intro-buttons">
-          <a class="jianghu-egg-intro-button jianghu-egg-intro-button-primary"
-            href="/<$ ctx.app.config.appId $>/page/article/10005">
-            <$ constantUiMap.body.btnGettingStarted $>
-          </a>
-          <a class="jianghu-egg-intro-button jianghu-egg-intro-button-secondary" href="https://github.com/openjianghu/">GitHub</a></div>
-      </div>
+<link href="<$ static $>/jianghu/jianghu-home.css?v=1" rel="stylesheet">
+<!-- home -->
+<main class="jianghu-home">
+  <section class="jianghu-home-hero">
+    <div>
+      <p class="jianghu-home-hero-tagline"><$ constantUiMap.body.title | safe $></p>
+      <p class="jianghu-home-hero-description"><$ constantUiMap.body.desc $></p>
     </div>
-  </div>
-  <div class="jianghu-egg-features">
-    <div class="jianghu-egg-features-wrap">
-      {% for item in constantUiMap.features %}
-      <div class="jianghu-egg-features-item">
-        <div class="jianghu-egg-features-item-icon"><img src="<$ static $><$ item.img $>"></div>
-        <h2 style="white-space: pre-line"><$ item.title $></h2>
-        <p><$ item.content $></p>
-      </div>
-      {% endfor %}
+    <div class="jianghu-home-hero-actions">
+      <a role="button" href="/<$ ctx.app.config.appId $>/page/article/10005" class="jianghu-home-hero-button jianghu-home-hero-button-start"><$ constantUiMap.body.btnGettingStarted $><i class="fas fa-arrow-right jianghu-home-hero-icon-right"></i></a>
+      <a role="button" href="https://github.com/openjianghu/" class="jianghu-home-hero-button jianghu-home-hero-button-github"><i class="fab fa-github jianghu-home-hero-icon-github"></i>GitHub</a>
     </div>
-  </div>
-  <div class="jianghu-egg-links">
-    <div class="jianghu-egg-links-wrap">
-      {% for item in constantUiMap.links %}
-      <div class="jianghu-egg-links-item">
-        <div class="ant-list">
-          <div class="ant-list-header"><$ item.label $></div>
-          <div class="ant-spin-nested-loading">
-            <div class="ant-spin-container">
-              <ul class="ant-list-items">
-                {% for it in item.list %}
-                <li class="ant-list-item">
-                  {% if it.path.includes('http') %}
-                  <a href="<$ it.path $>" target="_blank"><$ it.title $></a>
-                  {% elif it.path === '' %}
-                  <a href="javascript:void(0);"><$ it.title $></a>
-                  {% else %}
-                  <a href="/<$ ctx.app.config.appId $><$ it.path $>"><$ it.title $></a>
-                  {% endif%}
-                </li>
-                {% endfor %}
-                {% if item.img %}
-                <li class="ant-list-item">
-                  <img class="jianghu-egg-links-qrcode" style="background-color: #eee">
-                </li>
-                {% endif%}
-              </ul>
-            </div>
-          </div>
+  </section>
+  <hr class="divider-horizontal jianghu-home-divider" />
+  <section class="jianghu-home-highlights">
+    {% for item in constantUiMap.features %}
+    <div class="jianghu-home-highlights-box">
+      <h2 class="jianghu-home-highlights-title"><$ item.title $></h2>
+      <p class="jianghu-home-highlights-description"><$ item.content $></p>
+    </div>
+    {% endfor %}
+  </section>
+</main>
+<!-- Footer -->
+<footer class="text-center text-lg-start bg-light text-muted jianghu-footer">
+  <section class="jianghu-footer-links">
+    <div class="container text-center text-md-start jianghu-footer-links-container">
+      <div class="row">
+        {% for item in constantUiMap.links %}
+        <div class="col-md-3 col-lg-2 col-xl-3 mx-auto">
+          <h6 class="text-uppercase mb-4 jianghu-footer-links-title">
+            <$ item.label $>
+          </h6>
+          {% for it in item.list %}
+          <p class="mb-3 jianghu-footer-links-item">
+            {% if it.path.includes('http') %}
+            <a href="<$ it.path $>" target="_blank" class="text-reset"><$ it.title $></a>
+            {% elif it.path === '' %}
+            <a href="javascript:void(0);" class="text-reset"><$ it.title $></a>
+            {% else %}
+            <a href="/<$ ctx.app.config.appId $><$ it.path $>" class="text-reset"><$ it.title $></a>
+            {% endif%}
+          </p>
+          {% endfor %}
+          {% if item.img %}
+            <img class="jianghu-footer-img"/>
+          {% endif%}
         </div>
+        {% endfor %}
       </div>
-      {% endfor %}
     </div>
+  </section>
+  <div class="text-center p-4 jianghu-footer-copyright">
+    <$ constantUiMap.footer.copyright $>
   </div>
-</div>
-<div class="jianghu-egg-copyright"><$ constantUiMap.footer.copyright $></div>
-<link href="<$ static $>/jianghu/jianghu-home.css" rel="stylesheet">
-
+</footer>
 <script>
+  // 错误提示
   const searchParams = new URLSearchParams(location.search.substring(1));
   const errorInfo = <$ constantUiMap.errorInfo | dump | safe $>;
   const errorCode = searchParams.get('errorCode');
   const errorReason = searchParams.get('errorReason');
   if (errorCode) {
-    layer.open({
-      btn: [],
-      title: errorInfo.title,
-      content: errorInfo.contentEnum[errorCode] || errorReason
-    });
+    showFailAlert(errorInfo.contentEnum[errorCode] || errorReason)
   }
 </script>
 {% endblock %}
