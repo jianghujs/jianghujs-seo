@@ -13,7 +13,6 @@ $.ajaxSetup({
 // 视频iframe域名白名单
 var iframe_whitelist = '{{ iframe_whitelist }}'.split(',')
 
-
 // 展开文档页左边菜单
 function openDocMenu(){
     $(".vt-backdrop").addClass("open");
@@ -80,11 +79,32 @@ function generateSidebar(){
      for(var i = 1;i < 7; i++){
         allHeaders.push.apply(allHeaders,content.querySelectorAll('h' + i))
      }
+    //  标题分组
+     let groupAllHeaders = []
+     allHeaders.forEach(h => {
+         if(h.localName === 'h1' || h.localName === 'h2'){
+            groupAllHeaders.push(h);
+         }else if(h.localName === 'h3'){
+            let parentH = groupAllHeaders[groupAllHeaders.length - 1];
+            if(parentH){
+                parentH.childH = parentH.childH ? parentH.childH.concat(h) : [h]
+            }
+         }
+     })
      // 生成html
      var sidebar = ''
-     allHeaders.forEach(h => {
+     groupAllHeaders.forEach(h => {
         sidebar += ' <li class="nav-item">'
         sidebar += ' <a class="nav-link jianghu-doc-contentDoc-aside-outline-link" href="#' + h.id + '">' + h.innerText + '</a>'
+        if(h.childH){
+            sidebar += '<ul class="nav flex-column ps-3">'
+            h.childH.forEach(childH => {
+                sidebar += '<li class="nav-item">'
+                sidebar += '<a class="nav-link jianghu-doc-contentDoc-aside-outline-link" href="#' + childH.id + '">' + childH.innerText + '</a>'
+                sidebar += '</li>'
+            })
+            sidebar += '</ul>'
+        }
         sidebar += ' </li>'
      })
      $('#jianghu-doc-contentDoc-aside-menu').empty().html(sidebar)
@@ -111,6 +131,19 @@ function showFailAlert(msg){
         $('.alert-danger').remove()
     }, 2000)
 }
+// 显示loading
+function showLoading(){
+    var temp = '<div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div>'
+    $('body').append(temp);
+    $(".vt-backdrop").addClass("open light");
+    $(".vt-backdrop").attr("closeable", "false");
+}
+// 删除loading
+function hideLoading(){
+    $('.spinner-border').remove()
+    $(".vt-backdrop").removeClass("open light");
+    $(".vt-backdrop").removeAttr("closeable");
+}
 $(function(){
     // 生成当前网页链接
     $("input[name=current_url]").val(document.URL)
@@ -134,8 +167,12 @@ $(function(){
             openUserCenter()
         }
     });
-    // 切换侧边栏
-    $(".vt-backdrop").click(closeBackdrop);
+    // 关闭遮罩
+    $(".vt-backdrop").click(() => {
+        if($(".vt-backdrop").attr("closeable") !== "false"){
+            closeBackdrop()
+        }
+    });
 });
 
 

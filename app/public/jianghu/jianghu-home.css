@@ -1,4 +1,9 @@
 /* home */
+@media (min-width: 960px){
+    .jianghu-home {
+        padding-top: var(--vt-nav-height);
+    }
+}
 .jianghu-home-hero{
     padding: 96px 32px;
     text-align: center;

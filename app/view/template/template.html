@@ -58,23 +58,25 @@
   <script src='<$ static $>/meilisearch/meilisearch.umd.js'></script>
 </head>
 
-<body data-mdb-spy="scroll" data-mdb-target="#scrollspy" data-mdb-offset="300">
+<body data-mdb-spy="scroll" data-mdb-target="#scrollspy" data-mdb-offset="300" class="grey-bg">
+  <!-- 遮罩 -->
   <div class="vt-backdrop backdrop"></div>
 
   <!-- header -->
   <header class="VPNav nav-bar">
     <div class="VPNavBar">
       <div class="jianghu-header-mobile-container">
-        <a class="VPNavBarTitle" href="/">
-          <img
+        <a class="VPNavBarTitle jianghu-logo-text" href="/">
+          <!-- <img
               src="<$ static $><$ constantUiMap.header.logo $>"
               class="jianghu-header-mobile-logo"
               alt="openjianghu"
-          />
+          /> -->
+          openjianghu
         </a>
         <div class="jianghu-header-mobile-content">
             <div class="VPNavBarSearch search">
-              <div id="docsearch">
+              <div id="docsearch" data-mdb-toggle="modal" data-mdb-target="#searchModal">
                 <button type="button" class="DocSearch DocSearch-Button" aria-label="Search">
                   <span class="DocSearch-Button-Container">
                     <svg width="20" height="20" class="DocSearch-Search-Icon" viewBox="0 0 20 20">
@@ -263,22 +265,38 @@
      </div>
   </div>
 
+  <!-- 搜索 -->
+  <div class="modal fade" id="searchModal" data-mdb-keyboard="false" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+     <div class="modal-dialog">
+       <div class="modal-content">
+        <div class="modal-header">
+          <h6 class="modal-title" id="changePwdModalLabel">搜索</h6>
+          <a role="button" data-mdb-dismiss="modal">
+            Cancel
+          </a>
+        </div>
+         <div class="modal-body">
+              <input id="search-bar-input" class="form-control" />
+         </div>
+       </div>
+     </div>
+  </div>
+
   {% include 'common/jianghuAxios.html' %}
   <!-- js -->
   <script type="text/javascript" src="<$ static $>/mdbootstrap/mdb.min.js?v=4.2.0"></script>
   <script src="<$ static $>/jianghu/jianghu.js?v=1.0.5"></script>
-  <script type="text/javascript"></script>
   <script type="text/javascript">
-    // // 使用docsSearchBar初始化搜索框
-    // docsSearchBar({
-    //   hostUrl: '<$ ctx.app.config.meilisearch.host $>',
-    //   apiKey: '<$ ctx.app.config.meilisearch.apiKey $>',
-    //   indexUid: '<$ userId $>' ? '<$ ctx.app.config.meilisearch.allIndexUid $>' : '<$ ctx.app.config.meilisearch.publicIndexUid $>',
-    //   inputSelector: '#search-bar-input',
-    //   debug: true, // Set debug to true if you want to inspect the dropdown
-    //   enableDarkMode: false,
-    //   enhancedSearchInput: true
-    // })
+    // 使用docsSearchBar初始化搜索框
+    docsSearchBar({
+      hostUrl: '<$ ctx.app.config.meilisearch.host $>',
+      apiKey: '<$ ctx.app.config.meilisearch.apiKey $>',
+      indexUid: '<$ userId $>' ? '<$ ctx.app.config.meilisearch.allIndexUid $>' : '<$ ctx.app.config.meilisearch.publicIndexUid $>',
+      inputSelector: '#search-bar-input',
+      debug: true, // Set debug to true if you want to inspect the dropdown
+      enableDarkMode: false,
+      enhancedSearchInput: true
+    })
   </script>
   <script type="text/javascript">
     const pageUrl = "<$ pageUrl $>";
@@ -286,6 +304,21 @@
     const userId = "<$ userId $>";
     const username = "<$ username $>";
 
+    // 全局提示
+    window.vtoast = {
+      success: ({message}) => {
+        showSuccessAlert(message)
+      },
+      fail: ({message}) => {
+        showFailAlert(message)
+      },
+      loading: () => {
+        showLoading()
+      },
+      hideLoading: () => {
+        showLoading()
+      }
+    };
     // 退出登录
     async function logout() {
         $.removeCookie('<$ appId $>_authToken', { path: '/' });
@@ -304,7 +337,6 @@
         showFailAlert('将表单填写完整')
         return;
       }
-
       if (newPwd1 !== newPwd2) {
         showFailAlert('两次输入的密码不一致')
         return;
@@ -322,7 +354,7 @@
           }
         }
       })
-      debugger
+
       showSuccessAlert('密码修改成功')
       location.reload();
     };

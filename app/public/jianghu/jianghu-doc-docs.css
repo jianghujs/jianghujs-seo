@@ -50,7 +50,7 @@
     transition: color .25s;
     text-decoration-style: dotted;
 }
-.jianghu-markdown blockquote {
+.jianghu-markdown>blockquote {
     margin: 28px 0;
     padding: 20px 24px 4px 42px;
     border-radius: 8px;
@@ -63,20 +63,20 @@
     color: #0000008c;
     background-color: var(--vt-c-bg-soft);
 }
-.jianghu-markdown blockquote[class="default"] {
+.jianghu-markdown>blockquote[class="default"] {
     border: 1px solid var(--vt-c-brand);
 }
-.jianghu-markdown blockquote p {
+.jianghu-markdown>blockquote p {
     margin-bottom: 8px;
     font-size: 15px;
     font-weight: 500;
     color: var(--vt-c-text-1);
     transition: color .5s;
 }
-.jianghu-markdown blockquote[class="default"]:before {
+.jianghu-markdown>blockquote[class="default"]:before {
     color: var(--vt-c-brand);
 }
-.jianghu-markdown blockquote:before {
+.jianghu-markdown>blockquote:before {
     content: "\24d8";
     position: absolute;
     font-weight: 600;
@@ -150,6 +150,30 @@
     
 }
 
+/* table */
+.markdown-body table {
+    display: block;
+    width: 100%;
+    overflow: auto;
+    word-break: normal;
+    word-break: keep-all;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+.editormd-preview-container table thead tr, .editormd-html-preview table thead tr {
+    background-color: #F8F8F8;
+}
+.markdown-body table tr {
+    background-color: #fff;
+    border-top: 1px solid #ccc;
+}
+.markdown-body table th, .markdown-body table td {
+    padding: 6px 13px;
+    border: 1px solid #ddd;
+}
+.markdown-body table th {
+    font-weight: bold;
+}
 
 /* 字体颜色 */
 .pln {

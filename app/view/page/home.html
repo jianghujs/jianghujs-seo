@@ -8,8 +8,7 @@
 <main class="jianghu-home">
   <section class="jianghu-home-hero">
     <div>
-      <!-- <p class="jianghu-home-hero-tagline">CN <span class="jianghu-home-hero-accent">Enterprise-level</span> framework</p> -->
-      <p class="jianghu-home-hero-tagline"><$ constantUiMap.body.title $></p>
+      <p class="jianghu-home-hero-tagline"><$ constantUiMap.body.title | safe $></p>
       <p class="jianghu-home-hero-description"><$ constantUiMap.body.desc $></p>
     </div>
     <div class="jianghu-home-hero-actions">
@@ -61,16 +60,13 @@
   </div>
 </footer>
 <script>
-  // const searchParams = new URLSearchParams(location.search.substring(1));
-  // const errorInfo = <$ constantUiMap.errorInfo | dump | safe $>;
-  // const errorCode = searchParams.get('errorCode');
-  // const errorReason = searchParams.get('errorReason');
-  // if (errorCode) {
-  //   layer.open({
-  //     btn: [],
-  //     title: errorInfo.title,
-  //     content: errorInfo.contentEnum[errorCode] || errorReason
-  //   });
-  // }
+  // 错误提示
+  const searchParams = new URLSearchParams(location.search.substring(1));
+  const errorInfo = <$ constantUiMap.errorInfo | dump | safe $>;
+  const errorCode = searchParams.get('errorCode');
+  const errorReason = searchParams.get('errorReason');
+  if (errorCode) {
+    showFailAlert(errorInfo.contentEnum[errorCode] || errorReason)
+  }
 </script>
 {% endblock %}

@@ -59,7 +59,7 @@
     --vt-c-purple-light: #e936eb;
     --vt-c-purple-lighter: #f616f8;
     --vt-c-purple-dark: #823c83;
-    --vt-c-purple-darker: #602960
+    --vt-c-purple-darker: #602960;
 }
 
 :root {
@@ -82,7 +82,12 @@
     --vt-c-brand: var(--vt-c-green);
     --vt-c-brand-light: var(--vt-c-green-light);
     --vt-c-brand-dark: var(--vt-c-green-dark);
-    --vt-c-brand-highlight: var(--vt-c-brand-dark)
+    --vt-c-brand-highlight: var(--vt-c-brand-dark);
+    --docsearch-searchbox-focus-background: transparent;
+    --docsearch-searchbox-shadow: none;
+    --docsearch-highlight-color: var(--vt-c-green);
+    --docsearch-text-color: var(--vt-c-indigo);
+    --docsearch-muted-color: var(--vt-c-text-light-2);
 }
 
 .dark {
@@ -128,7 +133,10 @@
     --vp-z-index-nav: 20;
     --vp-z-index-local-nav: 10;
     --vp-z-index-sidebar: 99;
-    --vp-z-index-backdrop: 40
+    --vp-z-index-backdrop: 40;
+    --vp-z-index-loading: 99;
+    --docsearch-searchbox-height: 56px;
+    --docsearch-spacing: 12px;
 }
 
 *, :before, :after {

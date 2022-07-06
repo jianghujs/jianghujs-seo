@@ -89,6 +89,20 @@
             <div class="jianghu-doc-contentDoc-main-doc">
               <div class="markdown-body editormd-preview-container jianghu-markdown" id="doc-content">
                 <h1><$ article.articleTitle $></h1>
+                <!-- 封面 -->
+                {% if article.articleCoverImage %}
+                <div class="items-center-box" style="margin-bottom: 20px">
+                   <img style="width: 100%; background-color: #e0e0e0" src="/<$ ctx.app.config.appId $>/upload<$ article.articleCoverImage $>" alt=""/>
+                </div>
+                {% endif %}
+                <!-- 音频 -->
+                {% if article.articleAudioUrl %}
+                <audio src="/<$ ctx.app.config.appId $>/upload<$ article.articleAudioUrl $>" style="width: 100%;" controls preload></audio>
+                {% endif %}
+                <!-- 视频 -->
+                {% if article.articleVideoUrl %}
+                <video src="/<$ ctx.app.config.appId $>/upload<$ article.articleVideoUrl $>" style="width: 100%; height: auto" controls preload></video>
+                {% endif %}
                 <$ article.articleContentForSeo | safe $>
                 <div id="articleContentHidden" class="articleContentHidden"
                     style="position: absolute; top: -1000px; overflow: hidden; height: 0; width: 0;">
