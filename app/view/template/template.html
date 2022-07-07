@@ -135,13 +135,13 @@
                   <div class="vt-menu">
                     <div class="vt-menu-items">
                       {% if constantUiMap.header.userAction.admin %}
-                      <a class="vt-link link vt-menu-link" href="<$ adminUrl $>" title="进入站点后台管理" target="_blank">进入后台</a>
+                      <a class="vt-link link vt-menu-link" href="<$ adminUrl $>" title="<$ constantUiMap.button.manage $>" target="_blank"><$ constantUiMap.button.manage $></a>
                       {% endif %}
                       {% if constantUiMap.header.userAction.password %}
-                      <a class="vt-link link vt-menu-link" href="javascript:void(0);" title="修改登录密码" data-mdb-toggle="modal" data-mdb-target="#changePwdModal">修改密码</a>
+                      <a class="vt-link link vt-menu-link" href="javascript:void(0);" title="<$ constantUiMap.button.changePassword $>" data-mdb-toggle="modal" data-mdb-target="#changePwdModal"><$ constantUiMap.button.changePassword $></a>
                       {% endif %}
                       {% if constantUiMap.header.userAction.logout %}
-                      <a class="vt-link link vt-menu-link" href="javascript:void(0);" title="退出登录" onclick="logout()">退出登录</a>
+                      <a class="vt-link link vt-menu-link" href="javascript:void(0);" title="<$ constantUiMap.button.logout $>" onclick="logout()"><$ constantUiMap.button.logout $></a>
                       {% endif %}
                     </div>
                   </div>
@@ -152,7 +152,7 @@
             <nav aria-labelledby="main-nav-aria-label" class="VPNavBarMenu menu">
               <div class="vt-flyout VPNavBarMenuGroup">
                 <button type="button" class="vt-flyout-button" aria-haspopup="true" aria-expanded="false" aria-label="extra navigation">
-                  <span class="vt-flyout-button-text">游客
+                  <span class="vt-flyout-button-text"><$ constantUiMap.button.visitor $>
                     <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" viewBox="0 0 24 24" class="vt-flyout-button-text-icon">
                       <path d="M12,16c-0.3,0-0.5-0.1-0.7-0.3l-6-6c-0.4-0.4-0.4-1,0-1.4s1-0.4,1.4,0l5.3,5.3l5.3-5.3c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4l-6,6C12.5,15.9,12.3,16,12,16z"></path></svg>
                   </span>
@@ -160,7 +160,7 @@
                 <div class="vt-flyout-menu">
                   <div class="vt-menu">
                     <div class="vt-menu-items">
-                      <a class="vt-link link vt-menu-link" href="<$ pageUrl $>/login">登录</a>
+                      <a class="vt-link link vt-menu-link" href="<$ pageUrl $>/login"><$ constantUiMap.button.login $></a>
                     </div>
                   </div>
                 </div>
@@ -214,16 +214,16 @@
         <nav class="VPNavScreenMenu menu">
           {% if username %}
             {% if constantUiMap.header.userAction.admin %}
-            <a class="vt-link link VPNavScreenMenuLink" href="<$ adminUrl $>" title="进入站点后台管理" target="_blank">进入后台</a>
+            <a class="vt-link link VPNavScreenMenuLink" href="<$ adminUrl $>" title="<$ constantUiMap.button.manage $>" target="_blank"><$ constantUiMap.button.manage $></a>
             {% endif %}
             {% if constantUiMap.header.userAction.password %}
-            <a class="vt-link link VPNavScreenMenuLink" href="javascript:void(0);" title="修改登录密码" data-mdb-toggle="modal" data-mdb-target="#changePwdModal">修改密码</a>
+            <a class="vt-link link VPNavScreenMenuLink" href="javascript:void(0);" title="<$ constantUiMap.button.changePassword $>" data-mdb-toggle="modal" data-mdb-target="#changePwdModal"><$ constantUiMap.button.changePassword $></a>
             {% endif %}
             {% if constantUiMap.header.userAction.logout %}
-            <a class="vt-link link VPNavScreenMenuLink" href="javascript:void(0);" title="退出登录" onclick="logout()">退出登录</a>
+            <a class="vt-link link VPNavScreenMenuLink" href="javascript:void(0);" title="<$ constantUiMap.button.logout $>" onclick="logout()"><$ constantUiMap.button.logout $></a>
             {% endif %}
           {% else %}
-          <a class="vt-link link VPNavScreenMenuLink" href="<$ pageUrl $>/login">登录</a>
+          <a class="vt-link link VPNavScreenMenuLink" href="<$ pageUrl $>/login"><$ constantUiMap.button.login $></a>
           {% endif %}
         </nav>
       </div>
@@ -236,7 +236,7 @@
      <div class="modal-dialog">
        <div class="modal-content">
          <div class="modal-header">
-           <h6 class="modal-title" id="changePwdModalLabel">修改密码</h6>
+           <h6 class="modal-title" id="changePwdModalLabel"><$ constantUiMap.button.changePassword $></h6>
            <a role="button" data-mdb-dismiss="modal">
              <svg t="1656740533679" class="icon closeIcon jianghu-toggleUserCenter-closeIcon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6749" width="18" height="18"><path d="M597.795527 511.488347 813.564755 295.718095c23.833825-23.833825 23.833825-62.47489 0.001023-86.307691-23.832801-23.832801-62.47489-23.833825-86.307691 0L511.487835 425.180656 295.717583 209.410404c-23.833825-23.833825-62.475913-23.833825-86.307691 0-23.832801 23.832801-23.833825 62.47489 0 86.308715l215.769228 215.769228L209.410915 727.258599c-23.833825 23.833825-23.833825 62.47489 0 86.307691 23.832801 23.833825 62.473867 23.833825 86.307691 0l215.768205-215.768205 215.769228 215.769228c23.834848 23.833825 62.475913 23.832801 86.308715 0 23.833825-23.833825 23.833825-62.47489 0-86.307691L597.795527 511.488347z" p-id="6750" fill="#767676"></path></svg>
            </a>
@@ -245,21 +245,21 @@
            <form>
              <div class="form-outline mb-3">
                <input type="password" id="oldPwd" class="form-control" />
-               <label class="form-label" for="oldPwd">原密码</label>
+               <label class="form-label" for="oldPwd"><$ constantUiMap.button.oldPassword $></label>
              </div>
              <div class="form-outline mb-3">
                <input type="password" id="newPwd1" class="form-control" />
-               <label class="form-label" for="newPwd1">新密码</label>
+               <label class="form-label" for="newPwd1"><$ constantUiMap.button.newPassword $></label>
              </div>
               <div class="form-outline mb-3">
                <input type="password" id="newPwd2" class="form-control" />
-               <label class="form-label" for="newPwd2">再次确认新密码</label>
+               <label class="form-label" for="newPwd2"><$ constantUiMap.button.newPasswordAgain $></label>
              </div>
            </form>
          </div>
          <div class="modal-footer">
-           <a role="button" class="jianghu-button-light" data-mdb-dismiss="modal">取消</a>
-           <a role="button" class="jianghu-button-primary" onclick="changePwd()">修改</a>
+           <a role="button" class="jianghu-button-light" data-mdb-dismiss="modal"><$ constantUiMap.button.cancel $></a>
+           <a role="button" class="jianghu-button-primary" onclick="changePwd()"><$ constantUiMap.button.modify $></a>
          </div>
        </div>
      </div>
@@ -270,7 +270,7 @@
      <div class="modal-dialog">
        <div class="modal-content">
         <div class="modal-header">
-          <h6 class="modal-title" id="changePwdModalLabel">搜索</h6>
+          <h6 class="modal-title" id="changePwdModalLabel"><$ constantUiMap.button.search $></h6>
           <a role="button" data-mdb-dismiss="modal">
             Cancel
           </a>
