@@ -33,6 +33,9 @@
 .jianghu-doc-sidebar-group+.jianghu-doc-sidebar-group{
     padding-top: 24px;
 }
+.jianghu-doc-sidebar-group+.jianghu-doc-sidebar-group.no-group{
+    padding-top: 0;
+}
 .jianghu-doc-sidebar-group-title{
     padding: 6px 0;
 }

@@ -44,7 +44,7 @@
             {% endif %}
           </div>
         {% else %}
-          <div class="jianghu-doc-sidebar-group">
+          <div class="jianghu-doc-sidebar-group no-group">
             {% if article and node.articleId == article.articleId %}
               <a class="jianghu-doc-sidebar-group-link jianghu-doc-sidebar-group-link-active" href="<$ pageUrl $>/article/<$ node.articleId $>" title="<$ node.articleTitle $>">
                 <p class="jianghu-doc-sidebar-group-link-text"><$ node.articleTitle.replace(node.categoryArticleIgnoreTiltle, '') $></p>

@@ -22,12 +22,10 @@ function initSidebar(sidebarQuery, contentQuery, mode=1) {
         // 遍历文章中的所有 h1或 h2(取决于最大的 h 是多大) , 编辑为li.h3插入 ul
         var allHeaders = []
         var content = document.querySelector(contentQuery)
-        console.log('content==========', content)
         for(var i = 1;i < 7; i++){
         //    console.log(i,content.querySelectorAll('h' + i))
         allHeaders.push.apply(allHeaders,content.querySelectorAll('h' + i))
         }
-        console.log('目录列表：',allHeaders)
 
         //增加 click 点击处理,使用 scrollIntoView,增加控制滚动的 flag
         var scrollFlag = 0

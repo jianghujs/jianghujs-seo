@@ -73,12 +73,17 @@ function closeUserCenter(){
 };
 // 生成文档大纲
 function generateSidebar(){
-     // 遍历文章中的所有标题
-     var allHeaders = []
-     var content = document.querySelector('.jianghu-markdown')
-     for(var i = 1;i < 7; i++){
-        allHeaders.push.apply(allHeaders,content.querySelectorAll('h' + i))
-     }
+    // 遍历文章中的所有标题
+    const allHeaders = []
+    Array.from(document.getElementById('doc-content').children).forEach((item, i) => {
+        if (item.tagName.length === 2 && item.tagName !== 'HR' && item.tagName.indexOf('H') === 0) {
+            if(item.id){
+                const newId = 'links-' + i;
+                item.id = newId;
+            }  
+            allHeaders.push(item)
+        }
+    })
     //  标题分组
      let groupAllHeaders = []
      allHeaders.forEach(h => {
