@@ -3,8 +3,8 @@
 {% block title %}<$ article.articleTitle $>{% endblock %}
 {% block keyword %}<$ article.articleTagList $>{% endblock %}
 {% block content %}
-<link href="<$ static $>/jianghu/jianghu-doc.css?v=1.0" rel="stylesheet">
-<link href="<$ static $>/jianghu/jianghu-doc-docs.css?v=1.0" rel="stylesheet">
+{% include 'util/jianghu/jianghuDocCss.html' %}
+{% include 'util/jianghu/jianghuDocDocsCss.html' %}
 <!-- mobile nav -->
 <div class="VPLocalNav">
   <button id="jianghu-mobile-toggle-docMenu" class="jianghu-nav-mobile-menu" aria-expanded="false" aria-controls="VPSidebarNav">

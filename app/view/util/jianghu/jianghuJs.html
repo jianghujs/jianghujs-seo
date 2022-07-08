@@ -1,4 +1,4 @@
-
+<script type="text/javascript">
 /*
     ########################################################
     ### 页面js ###
@@ -96,6 +96,10 @@ function generateSidebar(){
             }
          }
      })
+    //如果只有一个标题，移除body绑定的scroll事件，否则scrollspy.js会报错
+    if(groupAllHeaders.length <= 1){
+        $('body').removeAttr('data-mdb-spy');
+    }  
      // 生成html
      var sidebar = ''
      groupAllHeaders.forEach(h => {
@@ -179,6 +183,7 @@ $(function(){
         }
     });
 });
+</script>
 
 
 
