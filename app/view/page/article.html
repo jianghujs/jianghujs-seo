@@ -97,11 +97,11 @@
                 {% endif %}
                 <!-- 音频 -->
                 {% if article.articleAudioUrl %}
-                <audio src="/<$ ctx.app.config.appId $>/upload<$ article.articleAudioUrl $>" style="width: 100%;" controls preload></audio>
+                <audio src="/<$ ctx.app.config.appId $>/upload<$ article.articleAudioUrl $>" style="width: 100%;" controls preload="none"></audio>
                 {% endif %}
                 <!-- 视频 -->
                 {% if article.articleVideoUrl %}
-                <video src="/<$ ctx.app.config.appId $>/upload<$ article.articleVideoUrl $>" style="width: 100%; height: auto" controls preload></video>
+                <video src="/<$ ctx.app.config.appId $>/upload<$ article.articleVideoUrl $>" style="width: 100%; height: auto" controls preload="none"></video>
                 {% endif %}
                 <$ article.articleContentForSeo | safe $>
                 <div id="articleContentHidden" class="articleContentHidden"
