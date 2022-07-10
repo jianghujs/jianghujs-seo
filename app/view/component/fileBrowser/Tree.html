@@ -121,6 +121,8 @@ Vue.component("tree", {
             })).data.appData.resultData.rows;
             // eslint-disable-next-line require-atomic-updates
             item.children = rows
+                // 只展示文件夹
+                .filter(item => item.type === "dir")
                 .map(item => {
                     if (item.type === "dir" && !item.children) {
                         item.children = [];
