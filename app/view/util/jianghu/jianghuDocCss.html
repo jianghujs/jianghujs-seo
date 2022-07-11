@@ -21,6 +21,11 @@
     -ms-transition: background-color .5s,opacity .5s,transform .3s ease;
     -o-transition: background-color .5s,opacity .5s,transform .3s ease;
 }
+.jianghu-doc-sidebar::-webkit-scrollbar {
+    display: none; /* Chrome Safari */
+    scrollbar-width: none; /* firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+}
 .jianghu-doc-sidebar.open{
     opacity: 1;
     visibility: visible;

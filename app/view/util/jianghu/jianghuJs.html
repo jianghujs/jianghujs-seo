@@ -96,10 +96,6 @@ function generateSidebar(){
             }
          }
      })
-    //如果只有一个标题，移除body绑定的scroll事件，否则scrollspy.js会报错
-    if(groupAllHeaders.length <= 1){
-        $('body').removeAttr('data-mdb-spy');
-    }  
      // 生成html
      var sidebar = ''
      groupAllHeaders.forEach(h => {
@@ -117,6 +113,10 @@ function generateSidebar(){
         sidebar += ' </li>'
      })
      $('#jianghu-doc-contentDoc-aside-menu').empty().html(sidebar)
+    //body绑定的scroll事件（需大于一个标题，否则scrollspy.js会报错）
+    if(groupAllHeaders.length > 1){
+        $('body').attr('data-mdb-spy', 'scroll');
+    }  
 }
 // 显示success alert
 function showSuccessAlert(msg){

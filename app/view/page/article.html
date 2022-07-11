@@ -116,32 +116,39 @@
     </div>
   </div>
 </main>
-<!-- <script src="<$ static $>/jianghu.md/lib/purify.min.js?v=1.0.5"></script> -->
-<!-- <script src="<$ static $>/jianghu.md/lib/marked.min.js?v=1.0.5"></script> -->
-<!-- <script src="<$ static $>/jianghu.md/editormd.js?v=1.0.5"></script> -->
-<!-- <script src="<$ static $>/viewer/viewer.min.js?v=1.0.5"></script> -->
-<!-- <script src="<$ static $>/iconFont/iconfont.js?v=1.0.5"></script> -->
-<!-- <script src="<$ static $>/jianghu/jianghu-doc-docs.js?v=1.0.5"></script> -->
-<!-- <script src="//api.html5media.info/1.2.2/html5media.min.js?v=1.0.5"></script> -->
+{% endblock %}
+{% block javascript %}
+    <!-- <script src="<$ static $>/jianghu.md/lib/purify.min.js?v=1.0.5"></script> -->
+    <!-- <script src="<$ static $>/jianghu.md/lib/marked.min.js?v=1.0.5"></script> -->
+    <!-- <script src="<$ static $>/jianghu.md/editormd.js?v=1.0.5"></script> -->
+    <!-- <script src="<$ static $>/viewer/viewer.min.js?v=1.0.5"></script> -->
+    <!-- <script src="<$ static $>/iconFont/iconfont.js?v=1.0.5"></script> -->
+    <!-- <script src="<$ static $>/jianghu/jianghu-doc-docs.js?v=1.0.5"></script> -->
+    <!-- <script src="//api.html5media.info/1.2.2/html5media.min.js?v=1.0.5"></script> -->
 
-{% if constantUiMap.article.comment.isOpen %}
-<script>
-  const articleId = '<$ article.articleId $>'
+    {% if constantUiMap.article.comment.isOpen %}
+    <script>
+      const articleId = '<$ article.articleId $>'
 
-  $(function(){
+      $(function(){
 
-  })
-</script>
-{% endif %}
-<script>
-  $(function(){
-     // 生成文档大纲
-    generateSidebar();
-    // 点击大纲关闭遮罩
-    $(".jianghu-doc-contentDoc-aside-outline-link").on( "click", function(){
-        closeBackdrop();
-    }); 
-  })
-</script>
-<!-- <script src="<$ static $>/toc/doctoc.js"></script> -->
+      })
+    </script>
+    {% endif %}
+    <script>
+      $(function(){
+        // 生成文档大纲
+        generateSidebar();
+        // 点击大纲关闭遮罩
+        $(".jianghu-doc-contentDoc-aside-outline-link").on( "click", function(){
+            closeBackdrop();
+        }); 
+        // 目录滚动到指定位置
+        if($('.jianghu-doc-sidebar-group-link-active')){
+          const linkOffsetTop = $('.jianghu-doc-sidebar-group-link-active').position().top;
+          $('.jianghu-doc-sidebar').scrollTop(linkOffsetTop - 300);
+        }
+      })
+    </script>
+    <!-- <script src="<$ static $>/toc/doctoc.js"></script> -->
 {% endblock %}

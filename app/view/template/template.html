@@ -57,7 +57,7 @@
   <script src='<$ static $>/meilisearch/meilisearch.umd.js'></script>
 </head>
 
-<body data-mdb-spy="scroll" data-mdb-target="#scrollspy" data-mdb-offset="0" class="grey-bg">
+<body data-mdb-target="#scrollspy" data-mdb-offset="0" class="grey-bg">
   <!-- 遮罩 -->
   <div class="vt-backdrop backdrop"></div>
 
@@ -282,10 +282,16 @@
   </div>
 
   {% include 'common/jianghuAxios.html' %}
+  {% block content %}{% endblock %}
   <!-- js -->
   <script type="text/javascript" src="<$ static $>/mdbootstrap/mdb.min.js?v=4.2.0"></script>
   {% include 'util/jianghu/jianghuJs.html' %}
   <script type="text/javascript">
+    const pageUrl = "<$ pageUrl $>";
+    const adminUrl = "<$ adminUrl $>";
+    const userId = "<$ userId $>";
+    const username = "<$ username $>";
+
     // 使用docsSearchBar初始化搜索框
     docsSearchBar({
       hostUrl: '<$ ctx.app.config.meilisearch.host $>',
@@ -296,13 +302,6 @@
       enableDarkMode: false,
       enhancedSearchInput: true
     })
-  </script>
-  <script type="text/javascript">
-    const pageUrl = "<$ pageUrl $>";
-    const adminUrl = "<$ adminUrl $>";
-    const userId = "<$ userId $>";
-    const username = "<$ username $>";
-
     // 全局提示
     window.vtoast = {
       success: ({message}) => {
@@ -358,6 +357,5 @@
       location.reload();
     };
   </script>
-
-  {% block content %}{% endblock %}
+  {% block javascript %}{% endblock %}
 </body>

@@ -838,27 +838,43 @@
 .meilisearch-autocomplete .docs-searchbar-suggestion--subcategory-column:before{
     background: var(--vt-c-divider-light) !important;
 }
+.meilisearch-autocomplete .docs-searchbar-suggestion--content:before{
+    display: none !important;
+}
 .meilisearch-autocomplete .docs-searchbar-suggestion--text{
     line-height: 24px !important;
-    font-size: 17px !important;
+    font-size: .9em !important;
     font-weight: 400 !important;
     color: var(--vt-c-text-1) !important;
 }
 .meilisearch-autocomplete .docs-searchbar-suggestion--title{
-    color: var(--vt-c-text-1) !important;
+    color: var(--docsearch-muted-color) !important;
     font-size: .9em !important;
-    font-weight: 500 !important;
+    font-weight: 400 !important;
 }
 .meilisearch-autocomplete .docs-searchbar-suggestion--subcategory-column{
     color: var(--docsearch-muted-color) !important;
 }
 .meilisearch-autocomplete .docs-searchbar-footer{
-    display: flex !important;
+    display: none !important;
     align-items: end !important;
     justify-content: end !important;
 }
 .meilisearch-autocomplete .docs-searchbar-footer-logo{
     margin-left: 10px !important;
+}
+.meilisearch-autocomplete .docs-searchbar-suggestion .docs-searchbar-suggestion--subcategory-column {
+    display: none !important;
+}
+.meilisearch-autocomplete .docs-searchbar-suggestion--category-header{
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+.meilisearch-autocomplete .docs-searchbar-suggestion--content{
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    width: 100% !important;
 }
 @media (max-width: 768px){
     #searchModal{

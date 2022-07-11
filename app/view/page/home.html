@@ -59,14 +59,16 @@
     <$ constantUiMap.footer.copyright $>
   </div>
 </footer>
-<script>
-  // 错误提示
-  const searchParams = new URLSearchParams(location.search.substring(1));
-  const errorInfo = <$ constantUiMap.errorInfo | dump | safe $>;
-  const errorCode = searchParams.get('errorCode');
-  const errorReason = searchParams.get('errorReason');
-  if (errorCode) {
-    showFailAlert(errorInfo.contentEnum[errorCode] || errorReason)
-  }
-</script>
+{% endblock %}
+{% block javascript %}
+    <script>
+      // 错误提示
+      const searchParams = new URLSearchParams(location.search.substring(1));
+      const errorInfo = <$ constantUiMap.errorInfo | dump | safe $>;
+      const errorCode = searchParams.get('errorCode');
+      const errorReason = searchParams.get('errorReason');
+      if (errorCode) {
+        showFailAlert(errorInfo.contentEnum[errorCode] || errorReason)
+      }
+    </script>
 {% endblock %}
