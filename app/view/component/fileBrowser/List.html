@@ -131,8 +131,8 @@
                 <v-icon>mdi-download</v-icon>
             </v-btn>
         </v-toolbar>
-        <div class="text-center">
-            <v-pagination v-model="page" :length="totalPage"></v-pagination>
+        <div class="text-center" v-if="totalPage > 0">
+            <v-pagination v-model="page" :length="totalPage" :total-visible="7"></v-pagination>
         </div>
     </v-card>
 </template>
