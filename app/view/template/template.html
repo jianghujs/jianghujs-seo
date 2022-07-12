@@ -83,6 +83,7 @@
                     </svg>
                     <span class="DocSearch-Button-Placeholder">Search</span>
                   </span>  
+                  <span class="DocSearch-Button-Keys"><kbd class="DocSearch-Button-Key" id="search-ctrlKey">⌘</kbd><kbd class="DocSearch-Button-Key">K</kbd></span>
                 </button>
               </div>
             </div>
@@ -356,6 +357,24 @@
       showSuccessAlert('密码修改成功')
       location.reload();
     };
+    $(function() {
+      const searchModal = new mdb.Modal($('#searchModal'))
+      // 键盘事件
+      $(document).keydown(function (event) {
+          const keyname = event.key.toLocaleLowerCase();
+          // 【ctrl + k || command + k】 打开搜索框
+          if ((event.ctrlKey || event.metaKey) && keyname === 'k') {
+            searchModal.show()
+          }
+      }) 
+      // search 快捷键提示
+      let userAgent = navigator.userAgent.toLowerCase();
+      if (userAgent.indexOf('mac') > -1) {
+        $('#search-ctrlKey').text('⌘')
+      }else{
+        $('#search-ctrlKey').text('ctrl')
+      }
+    })
   </script>
   {% block javascript %}{% endblock %}
 </body>
