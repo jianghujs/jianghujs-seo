@@ -22,7 +22,7 @@
         >
         </toolbar>
         <v-row no-gutters :style="{'height': isMobile ? 'calc(100vh - 148px)' : 'calc(100vh - 100px)'}">
-            <v-col v-if="tree && $vuetify.breakpoint.smAndUp" sm="auto">
+            <!-- <v-col v-if="tree && $vuetify.breakpoint.smAndUp" sm="auto">
                 <tree
                     ref="tree"
                     :material-type="materialType"
@@ -40,7 +40,7 @@
                     v-on:refreshed="refreshPending = false"
                 ></tree>
             </v-col>
-            <v-divider v-if="tree" vertical></v-divider>
+            <v-divider v-if="tree" vertical></v-divider> -->
             <v-col>
                 <list
                     ref="list"

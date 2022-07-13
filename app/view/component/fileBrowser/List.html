@@ -203,6 +203,12 @@
                 return '';
             }
         },
+        async mounted() {
+            const that = this;
+            setTimeout(() => {
+                that.load();
+            }, 500)
+        },
         methods: {
             checkIsImg(filename) {
                 return /\.(jpg|jpeg|png|GIF|JPG|PNG)$/.test(filename);
