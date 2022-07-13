@@ -177,7 +177,7 @@ Vue.component("file-browser", {
     data() {
         return {
             loading: 0,
-            path: "/image/",
+            path: "/",
             activeStorage: null,
             uploadingFiles: false, // or an Array of files
             // 用于让子组件做监听，有变化时对当前目录做刷新
@@ -199,6 +199,11 @@ Vue.component("file-browser", {
       isMobile() {
           return window.innerWidth < 500;
       }
+    },
+    created() {
+        this.activeStorage = this.storage;
+        this.axiosInstance = this.axios || axios.create(this.axiosConfig);
+        this.path = `/${this.materialType}/` ||  "/image/";
     },
     methods: {
         moreBtnAction(btn) {
@@ -313,10 +318,6 @@ Vue.component("file-browser", {
         readFolderByPath(path) {
             this.$refs.tree.readFolderByPath(path);
         },
-    },
-    created() {
-        this.activeStorage = this.storage;
-        this.axiosInstance = this.axios || axios.create(this.axiosConfig);
     },
     mounted() {
     }
