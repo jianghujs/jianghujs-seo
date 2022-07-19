@@ -108,10 +108,10 @@
                             </v-menu>
 
 
-                            <v-btn v-if="operationOption.copy === true && item.path.indexOf('_recycle') === -1" icon @click.stop="cutItem(item)">
+                            <v-btn v-if="operationOption.copy === true" icon @click.stop="cutItem(item)">
                                 <v-icon color="grey lighten-1" style="font-size: 20px;">mdi-content-cut</v-icon>
                             </v-btn>
-                            <v-btn v-if="operationOption.copy === true" icon @click.stop="copyItem(item)">
+                            <v-btn v-if="operationOption.copy === true && item.path.indexOf('_recycle') === -1" icon @click.stop="copyItem(item)">
                                 <v-icon color="grey lighten-1" style="font-size: 20px;">mdi-content-copy</v-icon>
                             </v-btn>
                             <v-btn v-if="operationOption.delete === true && item.path.indexOf('_recycle') === -1" icon @click.stop="deleteItem(item)">
