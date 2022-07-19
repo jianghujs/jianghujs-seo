@@ -13,6 +13,8 @@ module.exports = appInfo => {
       publicIndexUid: 'openjianghu_org_doc_public',
     },
     adminUrl: 'https://openjianghu.org/admin',
+    junshiHost: "https://junshi.openjianghu.org",
+    junshiWebsiteUuid: "E07ZQKzhJat2jO1mjpc5J",
     static: {
       maxAge: 30 * 24 * 60 * 60,
       buffer: true,

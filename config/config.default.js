@@ -34,6 +34,8 @@ module.exports = (appInfo) => {
     loginPage: `/${appId}/page/login`,
     helpPage: `/${appId}/page/help`,
     adminUrl: `http://127.0.0.1:8306/admin`,
+    junshiHost: "https://junshi.openjianghu.org",
+    junshiWebsiteUuid: "XYXOVr_eFenMR6Xi1n9Gt",
     language: 'zh',
     uploadDir,
     uploadDirConfig: [
