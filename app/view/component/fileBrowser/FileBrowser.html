@@ -203,7 +203,9 @@ Vue.component("file-browser", {
     created() {
         this.activeStorage = this.storage;
         this.axiosInstance = this.axios || axios.create(this.axiosConfig);
-        this.path = `/${this.materialType}/` ||  "/image/";
+        if (this.materialType) {
+            this.path = `/${this.materialType}/`;
+        }
     },
     methods: {
         moreBtnAction(btn) {
@@ -285,20 +287,21 @@ Vue.component("file-browser", {
             });
             window.vtoast.success(this.pasteMode === 'cut' ? '文件移动成功' : '文件复制成功');
             this.$refs.list.load();
-            if (fromDir.startsWith(toDir)) {
-                this.$refs.tree.readFolderByPath(toDir);
-                setTimeout(()=> {
-                    this.$refs.tree.readFolderByPath(fromDir);
-                }, 2600);                
-            } else if (toDir.startsWith(fromDir)) {
-                this.$refs.tree.readFolderByPath(fromDir);
-                setTimeout(()=> {
-                    this.$refs.tree.readFolderByPath(toDir);
-                }, 2600);
-            } else {
-                this.$refs.tree.readFolderByPath(fromDir);
-                this.$refs.tree.readFolderByPath(toDir);
-            }
+            // Tip: tree组件废弃
+            // if (fromDir.startsWith(toDir)) {
+            //     this.$refs.tree.readFolderByPath(toDir);
+            //     setTimeout(()=> {
+            //         this.$refs.tree.readFolderByPath(fromDir);
+            //     }, 2600);                
+            // } else if (toDir.startsWith(fromDir)) {
+            //     this.$refs.tree.readFolderByPath(fromDir);
+            //     setTimeout(()=> {
+            //         this.$refs.tree.readFolderByPath(toDir);
+            //     }, 2600);
+            // } else {
+            //     this.$refs.tree.readFolderByPath(fromDir);
+            //     this.$refs.tree.readFolderByPath(toDir);
+            // }
 
 
             if (this.pasteMode === 'cut') {
@@ -315,6 +318,7 @@ Vue.component("file-browser", {
             this.pasteMode = 'copy'
             console.log('copyItem', this.currentCopyPath)
         },
+        // Tip: tree组件废弃
         readFolderByPath(path) {
             this.$refs.tree.readFolderByPath(path);
         },

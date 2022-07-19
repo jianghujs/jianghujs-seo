@@ -54,13 +54,13 @@
                                 icon @click.stop="copyItem(item)">
                                 <v-icon color="grey lighten-1" style="font-size: 20px;">mdi-content-copy</v-icon>
                             </v-btn> -->
-                            <v-btn
-                                v-if="operationOption.delete === true 
-                                    && ['/_recycle/', '/image/', '/audio/', '/video/', '/attachment/'].indexOf(item.path) === -1
-                                    && item.path.indexOf('_recycle') === -1"
-                                icon @click.stop="deleteItem(item)">
-                                <v-icon color="grey lighten-1">mdi-delete-outline</v-icon>
-                            </v-btn>
+                            <template v-if="operationOption.delete === true && !item.path.startsWith('/_recycle/')">
+                                <v-btn
+                                    v-if="['/_recycle/', '/image/', '/audio/', '/video/', '/attachment/'].indexOf(item.path) === -1"
+                                    icon @click.stop="deleteItem(item)">
+                                    <v-icon color="grey lighten-1">mdi-delete-outline</v-icon>
+                                </v-btn>
+                            </template>
                             <v-btn icon v-if="false">
                                 <v-icon color="grey lighten-1">mdi-information</v-icon>
                             </v-btn>
@@ -87,7 +87,7 @@
                     <!-- v-if="item.path.indexOf('_recycle') === -1" -->
                     <v-list-item-action>
                         <div class="flex">
-                            <v-menu v-if="operationOption.renameFile === true && item.path.indexOf('_recycle') === -1" v-model="item.newFolderPopper" :close-on-content-click="false" :nudge-width="200" offset-y>
+                            <v-menu v-if="operationOption.renameFile === true && !item.path.startsWith('/_recycle/')" v-model="item.newFolderPopper" :close-on-content-click="false" :nudge-width="200" offset-y>
                                 <template v-slot:activator="{ on }">
                                     <span>
                                         <v-btn v-if="path" icon v-on="on" @click="item.newFilename=item.basename;">
@@ -111,10 +111,10 @@
                             <v-btn v-if="operationOption.copy === true" icon @click.stop="cutItem(item)">
                                 <v-icon color="grey lighten-1" style="font-size: 20px;">mdi-content-cut</v-icon>
                             </v-btn>
-                            <v-btn v-if="operationOption.copy === true && item.path.indexOf('_recycle') === -1" icon @click.stop="copyItem(item)">
+                            <v-btn v-if="operationOption.copy === true && !item.path.startsWith('/_recycle/')" icon @click.stop="copyItem(item)">
                                 <v-icon color="grey lighten-1" style="font-size: 20px;">mdi-content-copy</v-icon>
                             </v-btn>
-                            <v-btn v-if="operationOption.delete === true && item.path.indexOf('_recycle') === -1" icon @click.stop="deleteItem(item)">
+                            <v-btn v-if="operationOption.delete === true && !item.path.startsWith('/_recycle/')" icon @click.stop="deleteItem(item)">
                                 <v-icon color="grey lighten-1">mdi-delete-outline</v-icon>
                             </v-btn>
                             <v-btn v-if="false" icon>
