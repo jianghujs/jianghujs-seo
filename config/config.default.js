@@ -51,6 +51,18 @@ module.exports = (appInfo) => {
     materialRepoDir: path.join(uploadDir, "materialRepo"),
     articleMaterialDir: path.join(uploadDir, "articleMaterial"),
     downloadBasePath,
+    jiangHuConfig: {
+      // ignoreListOfResourceRequestLog: [
+      //   'allPage.getConstantList', 'allPage.httpUploadByStream', 'allPage.httpUploadByBase64', 'allPage.httpDownloadByBase64',
+      //   'socket.disconnect', 'socket.connect', 'index.pingRecord', 'chat.getGroupInfo',
+      //   'allPage.getUserGroupRoleList', 'allPage.userInfo', 'chat.getMessageHistory', 'index.getSrsToken',
+      //   'index.srsRtcRequest', 'index.cleanCurrentUserGroupSession',
+      // ],
+      // Tip: 兼容配置, 下一个大版本删除
+      compatibleConfig: {
+        resourceRequestLogRecordUserId: true
+      }
+    },
     static: {
       maxAge: 0,
       buffer: false,
