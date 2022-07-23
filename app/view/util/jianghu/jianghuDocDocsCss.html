@@ -88,7 +88,7 @@
 .jianghu-markdown :not(pre,h1,h2,h3,h4,h5,h6,li)>code{
     font-size: var(--vt-doc-code-font-size);
 }
-.jianghu-markdown :not(pre,li)>code{
+.jianghu-markdown :not(pre, pre li)>code{
     background-color: var(--vt-c-bg-mute);
     padding: 0.15em 0.5em;
     border-radius: 4px;
@@ -139,7 +139,7 @@
     }
 }
 @media (min-width: 768px){
-    .jianghu-markdown :not(pre,li)>code{
+    .jianghu-markdown :not(pre,pre li)>code{
         white-space: nowrap;
     }
 }
