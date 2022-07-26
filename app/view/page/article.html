@@ -103,7 +103,7 @@
                 
                 {% if article.articleVideoUrl %}
                     {% if article.articleVideoUrl.includes('https://') %}
-                        <video src="/<$ article.articleVideoUrl $>" style="width: 100%; height: auto" controls preload="none"></video>
+                        <video src="<$ article.articleVideoUrl $>" style="width: 100%; height: auto" controls preload="none"></video>
                     {% else %}
                         <video src="/<$ ctx.app.config.appId $>/upload<$ article.articleVideoUrl $>" style="width: 100%; height: auto" controls preload="none"></video>
                     {% endif %}
