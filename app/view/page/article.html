@@ -100,8 +100,13 @@
                 <audio src="/<$ ctx.app.config.appId $>/upload<$ article.articleAudioUrl $>" style="width: 100%;" controls preload="none"></audio>
                 {% endif %}
                 <!-- 视频 -->
+                
                 {% if article.articleVideoUrl %}
-                <video src="/<$ ctx.app.config.appId $>/upload<$ article.articleVideoUrl $>" style="width: 100%; height: auto" controls preload="none"></video>
+                    {% if article.articleVideoUrl.includes('https://') %}
+                        <video src="/<$ article.articleVideoUrl $>" style="width: 100%; height: auto" controls preload="none"></video>
+                    {% else %}
+                        <video src="/<$ ctx.app.config.appId $>/upload<$ article.articleVideoUrl $>" style="width: 100%; height: auto" controls preload="none"></video>
+                    {% endif %}
                 {% endif %}
                 <$ article.articleContentForSeo | safe $>
                 <div id="articleContentHidden" class="articleContentHidden"
