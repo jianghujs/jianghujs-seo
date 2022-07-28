@@ -20,14 +20,14 @@ module.exports = (appInfo) => {
 
   return {
     appId,
-    appTitle: "开源江湖",
+    appTitle: "JIANGHU",
     meilisearch: {
       host: 'https://meilisearch.openjianghu.org',
       apiKey: 'Iy4kJeGu643c54a953fdc6a5d0cbf752a228a8fc58cb1a00ddaf1634fe4e82f07475718e',
       allIndexUid: 'cn_openjianghu_org_doc_all',
       publicIndexUid: 'cn_openjianghu_org_doc_public',
     },
-    appLogo: `${appId}/public/img/logo.png`,
+    appLogo: `/${appId}/public/logo.png`,
     appType: "single",
     appDirectoryLink: "/",
     indexPage: `/${appId}/page/home`,
