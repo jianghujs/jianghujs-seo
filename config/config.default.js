@@ -27,7 +27,7 @@ module.exports = (appInfo) => {
       allIndexUid: 'cn_openjianghu_org_doc_all',
       publicIndexUid: 'cn_openjianghu_org_doc_public',
     },
-    appLogo: `/${appId}/public/logo.png`,
+    appLogo: `/${appId}/public/logo02.png`,
     appType: "single",
     appDirectoryLink: "/",
     indexPage: `/${appId}/page/home`,
