@@ -3,8 +3,8 @@
 // ========================================常用 require start===========================================
 const Service = require('egg').Service;
 const { BizError } = require('../constant/error');
-const validateUtil = require('egg-jianghu/app/common/validateUtil');
-const idGenerateUtil = require('egg-jianghu/app/common/idGenerateUtil');
+const validateUtil = require('@jianghujs/jianghu/app/common/validateUtil');
+const idGenerateUtil = require('@jianghujs/jianghu/app/common/idGenerateUtil');
 const { tableEnum } = require('../constant/constant');
 const errorInfoEnum = Object.freeze({
   user_id_exist: {
