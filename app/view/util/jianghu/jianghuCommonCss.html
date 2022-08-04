@@ -152,7 +152,8 @@
 	position: relative;
 	top: 0;
 	left: 0;
-	z-index: var(--vp-z-index-nav)
+	z-index: var(--vp-z-index-nav);
+    box-shadow: 0px 10px 30px 0px rgb(82 63 105 / 3%);
 }
 @media (min-width: 960px) {
 	.VPNav {
@@ -176,12 +177,17 @@
 
 @media (min-width: 768px) {
 	.VPNavBar {
-		padding: 0 12px 0 32px
+		padding: 0 12px 0 32px;
+	}
+}
+@media (min-width: 960px) {
+	.VPNavBar {
+        border-bottom: 0;
 	}
 }
 @media (min-width: 1280px) {
 	.VPNavBar {
-		padding: 0 32px
+		padding: 0 32px;
 	}
 }
 .jianghu-header-mobile-container {
@@ -195,7 +201,7 @@
 	align-items: center;
 	padding-top: 1px;
 	height: var(--vt-nav-height);
-	transition: opacity .25s
+	transition: opacity .25s;
 }
 .VPNavBarTitle:hover {
 	opacity: .6
@@ -214,16 +220,12 @@
     justify-content: flex-end;
     align-items: center;
     flex-grow: 1;
+    margin-left: 40px;
 }
 .VPNavBarSearch {
 	display: flex;
 	align-items: center;
 	padding-left: 16px
-}
-@media (min-width: 768px) {
-	.VPNavBarSearch {
-		flex-grow: 1
-	}
 }
 
 .DocSearch-Button {
@@ -435,6 +437,7 @@
 @media (min-width: 768px){
     .VPNavBarMenu {
         display: flex;
+        align-items: center;
     }
 }
 .VPNavBarMenuGroup.active {
@@ -496,7 +499,7 @@
 }
 .vt-menu {
     border-radius: 8px;
-    padding: 12px 0;
+    padding: 12px 10px;
     min-width: 192px;
     border: 1px solid transparent;
     background: var(--vt-c-bg);
@@ -508,16 +511,19 @@
 }
 .vt-menu-link {
     display: block;
-    padding: 0 18px;
+    padding: 0 10px;
     line-height: 28px;
     font-size: 13px;
     font-weight: 400;
     color: var(--vt-c-text-1);
     white-space: nowrap;
     transition: color .25s;
+    margin: 5px 0;
 }
 .vt-menu-link:hover {
     color: var(--vt-c-brand);
+    background-color: var(--vt-c-bg-2);
+    border-radius: 6px;
 }
 .vt-menu .vt-menu-group {
     padding: 0 0 12px;
@@ -533,18 +539,17 @@
 }
 .VPNavBarMenuLink {
     display: block;
-    padding: 0 12px;
-    line-height: calc(var(--vt-nav-height) - 1px);
+    padding: 5px 13px;
     font-size: 13px;
     font-weight: 500;
     color: var(--vt-c-text-1);
     transition: color .25s;
+    margin-left: 10px;
 }
-.VPNavBarMenuLink:hover {
+.VPNavBarMenuLink.active, .VPNavBarMenuLink:hover {
+    background-color: #F4F6FA;
     color: var(--vt-c-brand);
-}
-.VPNavBarMenuLink.active {
-    border-bottom: 1px solid var(--vt-c-brand);
+    border-radius: 6px;
 }
 .vt-social-links {
     display: flex;
@@ -964,7 +969,7 @@ body.grey-bg{
     background-color: var(--vt-c-bg-soft);
 }
 main{
-    background-color: var(--vt-c-white);
+    background-color: var(--vt-c-gray-light-6);
 }
 .vt-backdrop {
     position: fixed;
