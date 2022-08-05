@@ -153,7 +153,6 @@
 	top: 0;
 	left: 0;
 	z-index: var(--vp-z-index-nav);
-    box-shadow: 0px 10px 30px 0px rgb(82 63 105 / 3%);
 }
 @media (min-width: 960px) {
 	.VPNav {
@@ -164,10 +163,10 @@
 }
 .VPNavBar {
 	position: relative;
-	border-bottom: 1px solid var(--vt-c-divider-light);
 	padding: 0 12px 0 24px;
 	height: var(--vt-nav-height);
 	background-color: var(--vt-c-bg);
+    border-bottom: 1px solid var(--vt-c-divider-light);
 	transition: border-color .5s,background-color .5s;
 	-webkit-transition: border-color .5s,background-color .5s;
 	-moz-transition: border-color .5s,background-color .5s;
@@ -178,11 +177,6 @@
 @media (min-width: 768px) {
 	.VPNavBar {
 		padding: 0 12px 0 32px;
-	}
-}
-@media (min-width: 960px) {
-	.VPNavBar {
-        border-bottom: 0;
 	}
 }
 @media (min-width: 1280px) {
@@ -983,7 +977,7 @@ body.grey-bg{
     background-color: var(--vt-c-bg-soft);
 }
 main{
-    background-color: var(--vt-c-gray-light-6);
+    background-color: var(--vt-c-bg);
 }
 .vt-backdrop {
     position: fixed;
