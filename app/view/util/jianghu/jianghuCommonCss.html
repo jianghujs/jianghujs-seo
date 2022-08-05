@@ -220,7 +220,12 @@
     justify-content: flex-end;
     align-items: center;
     flex-grow: 1;
-    margin-left: 40px;
+    margin-left: 10px;
+}
+@media (min-width: 1264px) {
+	.jianghu-header-mobile-content {
+        margin-left: 40px;
+	}
 }
 .VPNavBarSearch {
 	display: flex;
@@ -280,7 +285,11 @@
 }
 .DocSearch-Button-Keys{
     display: flex;
-    min-width: calc(40px + 0.8em);
+}
+@media (min-width: 1264px){
+    .DocSearch-Button-Keys{
+        min-width: calc(40px + 0.8em);
+    }
 }
 .DocSearch-Button-Key{
     justify-content: center;
@@ -343,7 +352,7 @@
     display: none;
     padding: 0 10px 0 0;
 }
-@media (max-width: 750px){
+@media (max-width: 960px){
     .DocSearch-Button-Keys, .DocSearch-Button-Placeholder {
         display: none;
     }
@@ -360,7 +369,7 @@
     justify-content: center;
     align-items: center;
 }
-@media (min-width: 768px){
+@media (min-width: 960px){
     .VPNavBarHamburger {
         display: none;
     }
@@ -434,7 +443,7 @@
 .VPNavBarMenu {
     display: none;
 }
-@media (min-width: 768px){
+@media (min-width: 960px){
     .VPNavBarMenu {
         display: flex;
         align-items: center;
@@ -539,12 +548,18 @@
 }
 .VPNavBarMenuLink {
     display: block;
-    padding: 5px 13px;
     font-size: 13px;
     font-weight: 500;
     color: var(--vt-c-text-1);
     transition: color .25s;
-    margin-left: 10px;
+    margin-left: 3px;
+    padding: 5px 8px;
+}
+@media (min-width: 1264px){
+    .VPNavBarMenuLink {
+        margin-left: 10px;
+        padding: 5px 13px;
+    }
 }
 .VPNavBarMenuLink.active, .VPNavBarMenuLink:hover {
     background-color: #F4F6FA;
