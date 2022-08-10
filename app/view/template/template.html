@@ -81,7 +81,7 @@
             <nav aria-labelledby="main-nav-aria-label" class="VPNavBarMenu menu" style="flex-grow: 1;">
               {% for menu in constantUiMap.header.menuList %}
                 {% if menu.isLogin == false %}
-                  {% if article and menu.categoryId == article.categoryId %}
+                  {% if (article and menu.categoryId == article.categoryId) or (xfPage and menu.articleId == xfPage.xfPageId) %}
                     <a class="vt-link link VPNavBarMenuLink active" href="/<$ ctx.app.config.appId $><$ menu.path $>"><$ menu.categoryName $></a>
                   {% else %}
                     <a class="vt-link link VPNavBarMenuLink" href="/<$ ctx.app.config.appId $><$ menu.path $>"><$ menu.categoryName $></a>

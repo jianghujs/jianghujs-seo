@@ -22,6 +22,9 @@ module.exports.tableEnum = Object.freeze({
   _user_group_role_ui_level: "_user_group_role_ui_level",
   _user_session: "_user_session",
   // ========================业务表============================
+  xf_page: 'xf_page',
+  xf_page_history: 'xf_page_history',
+  xf_page_tag: 'xf_page_tag',
   album: "album",
   comment: "comment",
   article: "article",
