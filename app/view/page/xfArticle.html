@@ -3,7 +3,11 @@
 {% block title %}<$ xfPage.xfPageTitle $>{% endblock %}
 {% block keyword %}<$ xfPage.articleTagList $>{% endblock %}
 {% block content %}
-<$ xfPage.xfPageContentForSeo  | safe $>
+
+{% if xfPage.template == 'case' %}
+  {% include 'xfpageTemplate/case.html' %}
+{% endif%}
+
 <!-- Footer -->
 <footer class="text-center text-lg-start bg-light text-muted jianghu-footer">
   <section class="jianghu-footer-links">

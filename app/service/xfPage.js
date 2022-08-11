@@ -147,6 +147,7 @@ class xfPageService extends Service {
     if (!xfPage) {
       throw new BizError(errorInfoEnum.article_not_found);
     }
+    xfPage.xfPageConfig = JSON.parse(xfPage.xfPageConfig) || {}
 
     let xfPageList = await jianghuKnex(tableEnum.xf_page)
       .select();
