@@ -6,12 +6,6 @@ module.exports = appInfo => {
 
   return {
     language: 'zh',
-    meilisearch: {
-      host: 'https://meilisearch.openjianghu.org',
-      apiKey: '只读权限的apiKey',
-      allIndexUid: 'cn_openjianghu_org_doc_all',
-      publicIndexUid: 'cn_openjianghu_org_doc_public',
-    },
     static: {
       maxAge: 0,
       buffer: false,
@@ -35,7 +29,7 @@ module.exports = appInfo => {
           port: 3306,
           user: "root",
           password: "123456",
-          database: 'cn_openjianghu_seo',
+          database: 'jianghujs_seo',
         },
         pool: { min: 0, max: 30 },
         acquireConnectionTimeout: 30000,

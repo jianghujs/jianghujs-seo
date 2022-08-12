@@ -9,56 +9,19 @@
   <section class="jianghu-home-hero">
     <div>
       <p class="jianghu-home-hero-tagline"><$ constantUiMap.body.title | safe $></p>
-      <p class="jianghu-home-hero-description"><$ constantUiMap.body.desc $></p>
-    </div>
-    <div class="jianghu-home-hero-actions">
-      <a role="button" href="/<$ ctx.app.config.appId $>/page/article/10005" class="jianghu-home-hero-button jianghu-home-hero-button-start"><$ constantUiMap.body.btnGettingStarted $><i class="fas fa-arrow-right jianghu-home-hero-icon-right"></i></a>
-      <a role="button" href="https://github.com/openjianghu/" class="jianghu-home-hero-button jianghu-home-hero-button-github"><i class="fab fa-github jianghu-home-hero-icon-github"></i>GitHub</a>
+      <p class="jianghu-home-hero-description"><$ njk.string $></p>
     </div>
   </section>
   <hr class="divider-horizontal jianghu-home-divider" />
   <section class="jianghu-home-highlights">
-    {% for item in constantUiMap.features %}
+    {% for item in njk.array %}
     <div class="jianghu-home-highlights-box">
       <h2 class="jianghu-home-highlights-title"><$ item.title $></h2>
-      <p class="jianghu-home-highlights-description"><$ item.content $></p>
+      <p class="jianghu-home-highlights-description"><$ item.id $></p>
     </div>
     {% endfor %}
   </section>
 </main>
-<!-- Footer -->
-<footer class="text-center text-lg-start bg-light text-muted jianghu-footer">
-  <section class="jianghu-footer-links">
-    <div class="container text-center text-md-start jianghu-footer-links-container">
-      <div class="row">
-        {% for item in constantUiMap.links %}
-        <div class="col-md-3 col-lg-2 col-xl-3 mx-auto">
-          <h6 class="text-uppercase mb-4 jianghu-footer-links-title">
-            <$ item.label $>
-          </h6>
-          {% for it in item.list %}
-          <p class="mb-3 jianghu-footer-links-item">
-            {% if it.path.includes('http') %}
-            <a href="<$ it.path $>" target="_blank" class="text-reset"><$ it.title $></a>
-            {% elif it.path === '' %}
-            <a href="javascript:void(0);" class="text-reset"><$ it.title $></a>
-            {% else %}
-            <a href="/<$ ctx.app.config.appId $><$ it.path $>" class="text-reset"><$ it.title $></a>
-            {% endif%}
-          </p>
-          {% endfor %}
-          {% if item.img %}
-            <img class="jianghu-footer-img"/>
-          {% endif%}
-        </div>
-        {% endfor %}
-      </div>
-    </div>
-  </section>
-  <div class="text-center p-4 jianghu-footer-copyright">
-    <$ constantUiMap.footer.copyright $>
-  </div>
-</footer>
 {% endblock %}
 {% block javascript %}
     <script>
