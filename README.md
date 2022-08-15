@@ -1,8 +1,4 @@
-# openjianghu
-
-## 风格
-
-- [参考](https://layui.itze.cn/)
+# jianghujs-seo
 
 ## 配置
 
@@ -14,7 +10,7 @@
    port: 3306,
    user: 'root',
    password: '123456',
-   database: 'doc'
+   database: 'jianghujs-seo'
    ```
 4. 启动 npm run dev
    
@@ -22,114 +18,23 @@
 
 ```sql
 # 数据库初始化
-create database `doc` default character set utf8mb4 collate utf8mb4_bin;
-use doc;
-# 运行 sql/init.sql 文件
+create database `jianghujs-seo` default character set utf8mb4 collate utf8mb4_bin;
+use jianghujs-seo;
+# 运行 sql/jianghujs-seo.sql 文件
 ```
 
-## 线上
+## 测试账号 & 测试环境
 
-- 英文: https://openjianghu.org/doc
-- 中文: https://cn.openjianghu.org/doc
+- admin/123456
 
-## 同步 admin/upload/xx 至 seo/upload/xx
+## 页面
 
-```bash
-mkdir /www/wwwroot/openjianghu-seo/upload
-ln -s /www/wwwroot/openjianghu-admin/upload/articleMaterial /www/wwwroot/openjianghu-seo/upload/articleMaterial
-ln -s /www/wwwroot/openjianghu-admin/upload/materialRepo /www/wwwroot/openjianghu-seo/upload/materialRepo
-
-mkdir /www/wwwroot/cn-openjianghu-seo/upload
-ln -s /www/wwwroot/cn-openjianghu-admin/upload/articleMaterial /www/wwwroot/cn-openjianghu-seo/upload/articleMaterial
-ln -s /www/wwwroot/cn-openjianghu-admin/upload/materialRepo /www/wwwroot/cn-openjianghu-seo/upload/materialRepo
-```
-
-## 测试环境
-
-- 密思文档版 openjianghu https://temp.openjianghu.org/
-- 新的openjianghu  https://openjianghu.org/
-- openjianghu admin  https://openjianghu.org/openjianghu_admin
-
-## meilisearch 服务器搭建
-
-1. 创建`/www/wwwroot/meilisearch/docker-compose.yml`
-```bash
-version: "3"
-services:
-    meilisearch:
-        image: getmeili/meilisearch:v0.27.1
-        container_name: meilisearch
-        restart: always
-        volumes:
-            - /www/wwwroot/meilisearch/meili_data:/meili_data
-        ports:
-            - "7700:7700"
-        command: "/bin/meilisearch --master-key='123456'"
-```
-> 进入容器:`docker exec -it --user root meilisearch /bin/bash`
-1. 启动
-```bash
-cd /www/wwwroot/meilisearch
-docker-compose up -d
-```
-1. 访问 http://127.0.0.1:7700  密码: 123456
-1. nginx配置
-```config
-    location / {
-        proxy_pass http://127.0.0.1:7700;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header REMOTE-HOST $remote_addr;
-
-        # wss 支持
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection "upgrade";
-    }
-```
-1. 停止
-```bash
-cd /www/wwwroot/meilisearch
-docker-compose down -v
-```
-1. 创建一个只读的api key(前端使用)
-```bash
-cd /www/wwwroot/openjianghu-seo
-# 修改 app/meilisearch/createAnSearchApiKey.js 内的master-key值
-node app/meilisearch/createAnSearchApiKey.js
-# 拷贝控制台输出的key 将其配置到 config/config.prod.js 的 `apiKey`
-```
-1. **docs-scraper 爬取网站数据 到meilisearch:**（需要python3.8+环境）
-> [linux python3.x 安装](https://cn.openjianghu.org/doc/page/article/10071)
-```bash
-cd /www/wwwroot/openjianghu-seo/app/meilisearch/docs-scraper
-/www/server/python_manager/versions/3.9.7/bin/pip3 install pipenv
-/www/server/python_manager/versions/3.9.7/bin/pipenv --python 3.9.7
-/www/server/python_manager/versions/3.9.7/bin/pipenv install
-# 拷贝.env 并配置参数
-cp .env.example .env
-# 依次执行这四个脚本
-/www/server/python_manager/versions/3.9.7/bin/pipenv run ./cn_openjianghu_org_doc_public
-/www/server/python_manager/versions/3.9.7/bin/pipenv run ./openjianghu_org_doc_public
-/www/server/python_manager/versions/3.9.7/bin/pipenv run ./cn_openjianghu_org_doc_all
-/www/server/python_manager/versions/3.9.7/bin/pipenv run ./openjianghu_org_doc_all
-```
-
-## Reference
-
-- [创建一个只读的 api key](https://docs.meilisearch.com/learn/security/master_api_keys.html#using-the-master-key-to-manage-api-keys)
-- [chrome 307 解决方案](https://www.cnblogs.com/Don/p/12192420.html)
+1. 示例列表: constantUiManagement.html
 
 ## FAQ
 
-- linux corn 配置 定时刷新 meilisearch data
-```bash
-#!/bin/sh
-# meilisearch-org[data refresh]
-cd /www/wwwroot/openjianghu-seo/app/meilisearch/docs-scraper
-/www/server/python_manager/versions/3.9.7/bin/pipenv run ./cn_openjianghu_org_doc_public
-/www/server/python_manager/versions/3.9.7/bin/pipenv run ./openjianghu_org_doc_public
-/www/server/python_manager/versions/3.9.7/bin/pipenv run ./cn_openjianghu_org_doc_all
-/www/server/python_manager/versions/3.9.7/bin/pipenv run ./openjianghu_org_doc_all
+- egg-jianghu mysql view
+```sql
+DROP VIEW IF EXISTS `_view01_user`;
+CREATE ALGORITHM = UNDEFINED SQL SECURITY DEFINER VIEW `_view01_user` AS select * from `_user`;
 ```
