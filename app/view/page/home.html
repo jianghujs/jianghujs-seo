@@ -1,4 +1,4 @@
-{% extends 'template/template.html' %}
+{% extends 'template/articleTemplate.html' %}
 
 {% block title %}<$ constantUiMap.button.homeTitle $>{% endblock %}
 
@@ -14,10 +14,16 @@
   </section>
   <hr class="divider-horizontal jianghu-home-divider" />
   <section class="jianghu-home-highlights">
-    {% for item in njk.array %}
+    {% for item in categoryList %}
     <div class="jianghu-home-highlights-box">
-      <h2 class="jianghu-home-highlights-title"><$ item.title $></h2>
-      <p class="jianghu-home-highlights-description"><$ item.id $></p>
+      <h2 class="jianghu-home-highlights-title"><$ item.categoryName $></h2>
+      <section class="jianghu-home-highlights-p-list">
+        {% for article in item.articleList %}
+        <p class="jianghu-home-highlights-description">
+          <a href="/<$ ctx.app.config.appId $>/page/article/<$ article.articleId $>"><$ article.articleTitle $></a>
+        </p>
+        {% endfor %}
+      </section>
     </div>
     {% endfor %}
   </section>

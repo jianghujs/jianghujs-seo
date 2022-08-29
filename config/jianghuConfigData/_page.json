@@ -1,0 +1,64 @@
+{
+  "RECORDS": [
+    {
+      "id": 2,
+      "pageId": "help",
+      "pageName": "帮助",
+      "pageType": "dynamicInMenu",
+      "sort": "11",
+      "pageHook": null,
+      "operation": "insert",
+      "operationByUserId": null,
+      "operationByUser": null,
+      "operationAt": null
+    },
+    {
+      "id": 3,
+      "pageId": "login",
+      "pageName": "登录",
+      "pageType": "",
+      "sort": "",
+      "pageHook": "{\n  \"beforeHook\":[\r\n    {\"field\": \"constantUiMap\", \"service\": \"constantUi\", \"serviceFunc\": \"getConstantUiMap\"}\n  ]\n}",
+      "operation": "insert",
+      "operationByUserId": null,
+      "operationByUser": null,
+      "operationAt": null
+    },
+    {
+      "id": 6,
+      "pageId": "manual",
+      "pageName": "操作手册",
+      "pageType": "showInMenu",
+      "sort": "0",
+      "pageHook": null,
+      "operation": "insert",
+      "operationByUserId": null,
+      "operationByUser": null,
+      "operationAt": null
+    },
+    {
+      "id": 13,
+      "pageId": "home",
+      "pageName": "首页",
+      "pageType": "seo",
+      "sort": "",
+      "pageHook": "{\n  \"beforeHook\":[\r\n    {\"field\": \"constantUiMap\", \"service\": \"constantUi\", \"serviceFunc\": \"getConstantUiMap\"},\n\t\t{\"field\": \"userInfo\", \"service\": \"user\", \"serviceFunc\": \"userInfo\"},\r\n    {\"field\": \"njk\", \"service\": \"njk\", \"serviceFunc\": \"test\"},\n\t\t{\"field\": \"categoryList\", \"service\": \"article\", \"serviceFunc\": \"getCategoryListAndArticleList\"}\n  ]\n}",
+      "operation": "insert",
+      "operationByUserId": null,
+      "operationByUser": null,
+      "operationAt": null
+    },
+    {
+      "id": 14,
+      "pageId": "article",
+      "pageName": "文章预览",
+      "pageType": "seo",
+      "sort": null,
+      "pageHook": "{\n  \"beforeHook\":[\n    {\"field\": \"article\", \"service\": \"article\", \"serviceFunc\": \"getArticleAndFillArticles\"}\n  ]\n}",
+      "operation": "insert",
+      "operationByUserId": null,
+      "operationByUser": null,
+      "operationAt": null
+    }
+  ]
+}

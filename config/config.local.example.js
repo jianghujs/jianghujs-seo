@@ -12,6 +12,15 @@ module.exports = appInfo => {
       preload: false,
       maxFiles: 0,
     },
+    jiangHuConfig: {
+      jianghuConfigDataIgnoreIdList: {
+        _constant: [],
+        _page: [],
+        _resource: [],
+        _test_case: [],
+        _ui: [],
+      }
+    },
     logger: {
       outputJSON: true,
       consoleLevel: "DEBUG",
