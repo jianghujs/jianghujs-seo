@@ -88,7 +88,12 @@
           <div class="jianghu-doc-contentDoc-main">
             <div class="jianghu-doc-contentDoc-main-edit-links">
               <span>
-                <a href="<$ url $>home" class="jianghu-doc-contentDoc-main-edit-link">
+                <a href="<$ url $>articleEdit?articleId=<$ article.articleId $>&title=<$ article.articleTitle $>"
+                  class="jianghu-doc-contentDoc-main-edit-link">
+                  <i class="far fa-edit jianghu-doc-contentDoc-main-edit-icon"></i><$ constantUiMap.common.modify $></a>
+                <a href="<$ url $>articleEdit?&title=未命名" target="_blank" class="jianghu-doc-contentDoc-main-edit-link">
+                  <i class="far fa-plus-square jianghu-doc-contentDoc-main-edit-icon"></i><$ constantUiMap.common.add $></a>
+                <a href="<$ url $>articleManagement?categoryId=<$ article.categoryId $>" class="jianghu-doc-contentDoc-main-edit-link">
                   <i class="fas fa-th-list jianghu-doc-contentDoc-main-edit-icon"></i><$ constantUiMap.common.manage $></a>
               </span>
               <span class="jianghu-doc-contentDoc-main-update-time"><i class="far fa-user"></i> <$ article.articleUpdateUsername $>  <i class="far fa-clock" style="margin-left: 5px;"></i>  <$ article.articleUpdateTime $></span>
@@ -127,6 +132,14 @@
 {% block javascript %}
     <script>
       $(function(){
+        $("h3.toggle-head").click(function () {
+          if($(this).parent().hasClass('toggle-close')) {
+            $(this).parent().removeClass('toggle-close')
+          } else {
+            $(this).parent().addClass('toggle-close')
+          }
+          $(this).parent().find("div.toggle-content").slideToggle();
+        });
         // 生成文档大纲
         generateSidebar();
         // 点击大纲关闭遮罩

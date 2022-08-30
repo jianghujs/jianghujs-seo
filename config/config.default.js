@@ -20,7 +20,7 @@ module.exports = (appInfo) => {
 
   return {
     appId,
-    appTitle: "JIANGHU",
+    appTitle: "JIANGHU-SEO",
     appLogo: `/${appId}/public/logo02.png`,
     appType: "single",
     appDirectoryLink: "/",
@@ -28,6 +28,7 @@ module.exports = (appInfo) => {
     loginPage: `/${appId}/page/login`,
     helpPage: `/${appId}/page/help`,
     language: 'zh',
+    primaryColor: '#4caf50',
     uploadDir,
     uploadDirConfig: [
       "/articleMaterial",

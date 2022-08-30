@@ -1,0 +1,387 @@
+{% extends 'template/jhTemplateV3.html'%}
+
+{% block vue_template %}
+<jh-layout-v3>
+<template slot="serverSearch">
+  <v-row class="ma-0 align-center" :class="{'pa-0': isMobile, 'pa-2': !isMobile}" style="justify-content: end">
+    <v-col cols="12" sm="12" xs="5" md="3" xl="2" class="pb-3" :class="{'px-0': isMobile, 'pt-0': isMobile}">
+      <v-text-field v-model="serverSearchForm.articleTitle" prefix="文章标题：" color="success" class="cus-v-input"
+                    :class="{'mr-2': !isMobile}" dense filled single-line></v-text-field>
+    </v-col>
+    <v-col cols="12" sm="12" xs="5" md="3" xl="2" class="pb-3" :class="{'pt-0': isMobile}">
+      <v-select class="cus-v-input mr-2" v-model="serverSearchForm.categoryId"
+                :items="searchText ? categoryFilter : constantCollection.category"
+                prefix="分类：" item-text="text" item-value="value" dense filled single-line>
+        <template v-slot:prepend-item>
+          <v-text-field
+              label="搜索"
+              clearable
+              v-model="searchText"
+              class="mb-2"
+              prepend-inner-icon="mdi-magnify"
+              dense
+              filled
+              single-line
+              hide-details
+          ></v-text-field>
+        </template>
+      </v-select>
+    </v-col>
+    <v-col cols="12" sm="12" xs="5" md="4" xl="2" class="pb-3" :class="{'pt-0': isMobile}">
+      <v-select class="cus-v-input mr-2" v-model="serverSearchForm.articlePublishStatus"
+                :items="constantCollection.allArticlePublishStatus" prefix="发布状态：" item-text="text"
+                item-value="value" dense filled single-line multiple></v-select>
+    </v-col>
+    <v-col class="pl-0" :class="{'pr-0': isMobile, 'pt-0': isMobile}" style="max-width: 77px">
+      <v-btn
+          class="elevation-0"
+          color="success"
+          dark
+          @click="getTableData">
+        查询
+      </v-btn>
+    </v-col>
+  </v-row>
+</template>
+
+<!-- 页面主要内容 -->
+<v-card :class="{'px-2': isMobile}">
+  <v-row class="ma-0 pa-xs-4 align-center flex-none pt-0 "
+         :class="{'pa-4': !isMobile, 'pb-0': !isMobile, 'pa-2': isMobile}">
+    <v-btn color="success" dark class="elevation-0 mr-2"
+           @click="doUiAction('openArticleCreatePage')">新增
+    </v-btn>
+    <span style="margin-right: 10px;">{{ serverSearchForm.searchSummary }}</span>
+    <v-spacer></v-spacer>
+    <v-col cols="12" xs="6" sm="4" md="3" xl="3" class="pr-0">
+      <v-text-field v-model="tableFilterKeyword" color="success" prefix="表格过滤：" class="cus-v-input" dense filled
+                    single-line></v-text-field>
+    </v-col>
+  </v-row>
+  <v-data-table :headers="headers" :items="tableData" :search="tableFilterKeyword"
+                mobile-breakpoint="0"
+                :loading="isTableLoading " checkbox-color="success" class="elevation-0"
+                :options="{
+            itemsPerPage: 15
+        }">
+    <template v-slot:item.articlePublishStatus="{ item }">
+      {{ globalHandler.parseConstantValue('articlePublishStatus', item.articlePublishStatus, constantCollection) }}
+    </template>
+    <template v-slot:item.action="{ item }">
+      <v-btn small class="mr-2 success" @click="doUiAction('openArticleViewerPage', item)">查看</v-btn>
+      <v-btn small class="mr-2 success" @click="doUiAction('openArticleEditPage', item)">修改</v-btn>
+      <v-btn v-if="item.articlePublishStatus !== 'deleted'" small class="mr-2 error"
+             @click="doUiAction('handleTableButton', { text: '回收站', buttonType: 'delete', item })">
+        回收站
+      </v-btn>
+      <v-btn v-if="item.articlePublishStatus === 'deleted'" small
+             class="mr-2 white--text" color="#BDBDBD"
+             @click="doUiAction('handleTableButton', { text: '恢复', buttonType: 'restore' , item})"
+             style="min-width: 65px;">
+        恢复
+      </v-btn>
+    </template>
+  </v-data-table>
+</v-card>
+</jh-layout-v3>
+
+{% endblock %}
+
+{% block vue_body %}
+{% include 'component/singleSelectDialog.html' %}
+{% include 'component/globalHandler.html' %}
+<script type="module">
+new Vue({
+  el: '#app',
+  template: '#app-template',
+  vuetify: new Vuetify(),
+  data: () => ({
+    globalHandler: new GlobalHandler(),
+    categoryFilter: [],
+    searchText: null,
+    // 表格相关数据
+    isFormValid: true,
+    requireRules: [
+      v => !!v || '此项为必填项',
+    ],
+    constantCollection: {
+      articlePublishStatus: [
+        {text: "公开", value: "public"},
+        {text: "登录可见", value: "login"},
+        {text: "草稿", value: "draft"},
+        {text: "回收站", value: "deleted"},
+      ],
+      allArticlePublishStatus: [
+        {text: "公开", value: "public"},
+        {text: "登录可见", value: "login"},
+        {text: "草稿", value: "draft"},
+        {text: "回收站", value: "deleted"},
+      ],
+      category: [
+        {text: "全部类目", value: "all"},
+      ],
+    },
+
+    categoryIdToName: {},
+    serverSearchForm: {
+      articleTitle: null,
+      categoryId: "all",
+      categoryName: "全部类目",
+      articlePublishStatus: ['public', 'login'],
+      isFirstSearch: true,
+      searchSummary: null,
+    },
+    isEditDrawerShow: false,
+    tableFilterKeyword: null,
+    isTableLoading: true,
+    tableDataBackups: [],
+    headers: [
+      {text: "ID", value: "id", width: 120, class: 'fixed', cellClass: 'fixed'},
+      {text: "文章ID", value: "articleId", width: 120},
+      {text: "文章标题", value: "articleTitle", width: 300},
+      {text: "归属分类", value: "categoryGroupConcat", width: 200},
+      {text: "文章分组", value: "articleGroupName", width: 200},
+      {text: "发布状态", value: "articlePublishStatus", width: 120, type: 'select', required: true},
+      {text: "发布时间", value: "articlePublishTime", width: 220},
+      {text: "文章标签", value: "articleTagList", width: 220},
+      {text: "音频URL", value: "articleAudioUrl", width: 200},
+      {text: "视频URL", value: "articleVideoUrl", width: 200},
+      {text: "修改者", value: "articleUpdateUsername", width: 120, edit: false},
+      {text: "修改时间", value: "articleUpdateTime", width: 220, edit: false},
+      {text: "创建者", value: "articleCreateUsername", width: 120, edit: false},
+      {text: "创建时间", value: "articleCreateTime", width: 220, edit: false},
+      {text: '操作', value: 'action', align: 'center', sortable: false, width: 350},
+    ],
+
+    currentClickButton: {title: '新增', action: 'add'},
+    editItem: {},
+    tableRowActionList: [
+      {text: '修改', buttonType: 'edit', color: 'success',},
+      {text: '历史版本', buttonType: 'history', color: 'default',},
+      {text: '回收站', buttonType: 'delete', color: 'error',},
+    ],
+  }),
+  computed: {
+    isMobile() {
+      return window.innerWidth < 600;
+    },
+    tableData() {
+      return this.tableDataBackups;
+    },
+    getEditItem() {
+      return this.editItem;
+    }
+  },
+  watch: {
+    searchText(value) {
+      value = value && value.toLowerCase();
+      const {constantCollection: {category = []}} = this;
+      if (value) {
+        this.categoryFilter = category.slice()
+            .filter((v) => v.text && (v.text.toLowerCase().includes(value) || v.text.includes(value)))
+        return false;
+      }
+      this.categoryFilter = category.slice();
+    },
+  },
+  async created() {
+    this.doUiAction('setHeaderThToFixed');
+    this.doUiAction('getLocationParams');
+    await this.doUiAction('getCategoryData');
+    await this.doUiAction('getTableData');
+  },
+  async mounted() {
+  },
+  methods: {
+    async doUiAction(uiActionId, uiActionData) {
+      switch (uiActionId) {
+        case 'setHeaderThToFixed':
+          await this.globalHandler.setHeaderThToFixed(this)
+          break;
+        case 'getLocationParams':
+          await this.globalHandler.getLocationParams('categoryId', this)
+          break;
+        case 'handleTableButton':
+          await this.globalHandler.handleTableButton(uiActionData, this)
+          break;
+        case 'getCategoryData':
+          await this.getCategoryData()
+          break;
+        case 'getTableData':
+          await this.getTableData()
+          break;
+        case 'deleteItem':
+          await this.globalHandler.confirmEditItemDialog('移入回收站');
+          await this.deleteItem();
+          await this.globalHandler.editItemSuccess('移入回收站', this);
+          await this.getTableData();
+          break;
+        case 'restoreItem':
+          await this.globalHandler.confirmEditItemDialog('恢复');
+          await this.restoreItem();
+          await this.globalHandler.editItemSuccess('修改', this);
+          await this.getTableData();
+          break;
+        case 'openArticleCreatePage':
+          await this.openArticleCreatePage();
+          break;
+        case 'openArticleViewerPage':
+          await this.openArticleViewerPage(uiActionData);
+          break;
+        case 'openArticleEditPage':
+          await this.openArticleEditPage(uiActionData);
+          break;
+      }
+    },
+
+    /**
+     * 获取表格数据
+     */
+    async getTableData() {
+      this.isTableLoading = true;
+      const where = {};
+      if (this.serverSearchForm.categoryId !== 'all') {
+        where.categoryId = this.serverSearchForm.categoryId;
+      }
+      const {rows, count} = (await window.jianghuAxios({
+        data: {
+          appData: {
+            pageId: 'articleManagement',
+            actionId: 'selectItemList',
+            where,
+            whereIn: {
+              articlePublishStatus: this.serverSearchForm.articlePublishStatus
+            },
+            whereLike: {
+              articleTitle: this.serverSearchForm.articleTitle,
+            },
+            limit: (this.serverSearchForm.isFirstSearch && this.serverSearchForm.categoryId === 'all') ? 200 : 99999999,
+            orderBy: [
+              {column: 'articleUpdateTime', order: 'desc'},
+              {column: 'categoryGroup', order: 'desc'},
+              {column: 'categoryGroupSort', order: 'asc'}, {column: 'articleTitle', order: 'asc'}
+            ]
+          }
+        }
+      })).data.appData.resultData;
+
+      // 补充 categoryName
+      this.setServerSearchForm(rows, count);
+
+      this.tableDataBackups = rows;
+      this.isTableLoading = false;
+      // Tip 这个放最后
+      this.serverSearchForm.isFirstSearch = false;
+    },
+    /**
+     * 补充 categoryName
+     */
+    setServerSearchForm(rows, count) {
+      rows.forEach(item => {
+        item.categoryGroupConcat = item.categoryId && this.categoryIdToName[item.categoryId] || '未分类'
+      })
+
+      this.serverSearchForm.articlePublishStatusText = this.constantCollection.allArticlePublishStatus
+          .filter(item => this.serverSearchForm.articlePublishStatus.indexOf(item.value) > -1)
+          .map(item => item.text);
+
+      const conditions = [];
+      if (this.serverSearchForm.articleTitle) {
+        conditions.push(`标题包含【${this.serverSearchForm.articleTitle}】`);
+      }
+      if (this.serverSearchForm.categoryName) {
+        conditions.push(`分类为【${this.serverSearchForm.categoryName}】`);
+      }
+      if (this.serverSearchForm.articlePublishStatusText) {
+        conditions.push(`状态为【${this.serverSearchForm.articlePublishStatusText}】`);
+      }
+      if (this.serverSearchForm.isFirstSearch && this.serverSearchForm.categoryId === 'all') {
+        this.serverSearchForm.searchSummary = conditions.join('，') + `，首次仅查询最新的200条，共${count}条记录`;
+      } else {
+        this.serverSearchForm.searchSummary = conditions.join('，') + `，共${count}条记录`;
+      }
+    },
+    /**
+     * 获取分类数据
+     */
+    async getCategoryData() {
+      const {rows} = (await window.jianghuAxios({
+        data: {
+          appData: {
+            pageId: 'articleManagement',
+            actionId: 'selectCategoryList',
+            actionData: {},
+            whereIn: {categoryPublishStatus: ['public', 'login']},
+            orderBy: [{column: 'categoryGroup', order: 'asc'}, {column: 'categoryGroupSort', order: 'asc'}]
+          }
+        }
+      })).data.appData.resultData;
+      this.setCategorySelectOptionList(rows)
+    },
+    /**
+     * 设置分类下拉框的选项列表
+     */
+    setCategorySelectOptionList(rows) {
+      rows.forEach(item => {
+        const text = `${item.categoryGroupConcat || ''}${item.categoryName} [共${item.count}篇]`;
+        this.constantCollection.category.push({text, value: `${item.categoryId}`});
+        this.categoryIdToName[item.categoryId] = `${item.categoryGroupConcat || ''}${item.categoryName}`;
+      })
+      this.serverSearchForm.categoryName = this.categoryIdToName[this.serverSearchForm.categoryId];
+    },
+    /**
+     * 删除数据
+     */
+    async deleteItem() {
+      await window.vtoast.loading("回收文章");
+      await window.jianghuAxios({
+        data: {
+          appData: {
+            pageId: 'articleEdit',
+            actionId: 'deletedArticle',
+            actionData: {
+              articleId: this.editItem.articleId
+            }
+          }
+        }
+      });
+    },
+    /**
+     * 文章恢复
+     * @returns {Promise<void>}
+     */
+    async restoreItem() {
+      await window.vtoast.loading("恢复文章");
+      await window.jianghuAxios({
+        data: {
+          appData: {
+            pageId: 'articleEdit',
+            actionId: 'restoreArticle',
+            actionData: {
+              articleId: this.editItem.articleId
+            }
+          }
+        }
+      });
+    },
+    /**
+     * 打开新页面
+     * @param item
+     */
+    openArticleViewerPage({articleId}) {
+      window.open(`/${window.appInfo.appId}/page/article/${articleId}`, '_blank');
+    },
+    openArticleCreatePage() {
+      window.open(`/${window.appInfo.appId}/page/articleEdit?title=未命名`, '_blank');
+    },
+    openArticleEditPage({articleId, articleTitle}) {
+      window.open(`/${window.appInfo.appId}/page/articleEdit?articleId=${articleId}&title=${articleTitle}`, '_blank');
+    },
+  }
+})
+</script>
+
+<style scoped>
+
+</style>
+{% endblock %}

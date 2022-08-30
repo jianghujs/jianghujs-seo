@@ -90,15 +90,6 @@ class ArticleService extends Service {
     })
   }
 
-  async articleHistoryRecordAfterHook() {
-    const {articleId} = this.ctx.request.body.appData.actionData;
-    if (articleId) {
-      // 保存新版本
-      const {id, ...history} = this.ctx.request.body.appData.actionData;
-      await this.app.jianghuKnex(tableEnum.article_history).insert(history);
-    }
-  }
-
   async deletedArticle() {
     const {jianghuKnex} = this.app;
     const actionData = this.ctx.request.body.appData.actionData;
