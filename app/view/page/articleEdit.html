@@ -743,15 +743,15 @@ new Vue({
     },
     editHandlerWhenUseMaterial(filename, downloadPath) {
       if(this.materialType === 'image') {
-        this.editor.insertValue(`\n![${filename}](/upload${downloadPath})`);
+        this.editor.insertValue(`\n![${filename}](/${window.appInfo.appId}/upload${downloadPath})`);
         return;
       }
       if(this.materialType === 'audio') {
-        this.editor.insertValue(`\n![=audio](/upload${downloadPath})`);
+        this.editor.insertValue(`\n![=audio](/${window.appInfo.appId}/upload${downloadPath})`);
         return;
       }
       if(this.materialType === 'video') {
-        this.editor.insertValue(`\n![=video](/upload${downloadPath})`);
+        this.editor.insertValue(`\n![=video](/${window.appInfo.appId}/upload${downloadPath})`);
       }
     },
     closePage() {
