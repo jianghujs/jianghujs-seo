@@ -50,7 +50,7 @@
 
       <!-- 文件列表 -->
       <v-card-text v-if="listItems.length" class="py-0 files-list-wrapper">
-        <v-list v-if="listItems.length">
+        <v-list v-if="listItems.length" style="height: 200px; overflow-y: scroll;">
           <v-list-item v-for="(file, index) in listItems" :key="index"
                        style="background-color: #f5f8fa;border-radius: 6px;" class="mb-2">
             <v-list-item-avatar>
